@@ -1,0 +1,10 @@
+{
+  "name": "music-mv-studio",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "create-song": "node scripts/create-song.mjs",
+    "validate:songs": "node scripts/validate-songs.mjs"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "music-creation-workbench",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "lint": "eslint src plugins",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@lucide/vue": "latest",
+    "@vitejs/plugin-vue": "latest",
+    "vite": "latest",
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.35.0",
+    "eslint-plugin-vue": "^10.4.0"
+  }
+}

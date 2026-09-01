@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 2,
+  "slug": "one-day-short-of-forever",
+  "title": "比永远差一天",
+  "date": "20260823",
+  "status": "MV 脚本已完成（03:55）",
+  "coreStatement": "写给与永远失之一步的人：一位年轻女性从最后一张合照理解爱情没有说谎，只是没能抵达，并记住‘我们离永远，只差最后一天’。",
+  "metadata": {
+    "genre": "电影感都市流行情歌 / 钢琴室内流行",
+    "mood": "成熟、克制、温柔遗憾",
+    "tempo": "64 BPM",
+    "key": "A Major / F# Minor colors",
+    "vocal": "年轻清透女声，近距离收音；气声、胸声与头声衔接、克制滑音、少量转音和窄幅颤音；两段主歌与三遍副歌小幅变化",
+    "duration": "03:55"
+  },
+  "prompts": [
+    {
+      "key": "mureka",
+      "label": "Mureka 专属风格与唱法提示词（中文 564 字符）",
+      "zh": "Mandarin Piano Ballad，64 BPM，6/8拍，温柔、成熟、遗憾；整体比常规慢歌更舒展，每小节只感受两个缓慢大拍，主唱略后于拍点，钢琴与鼓不要填满细分。每两行后留1–2拍空白，副歌用长音推进而非增加字密度。8小节Felt piano纯器乐前奏；第一遍副歌后留8小节钢琴与大提琴间奏；结尾短尾奏。年轻清透女声，近距离收音，咬字清楚，可听见呼吸；使用气声、胸声到头声的顺滑衔接、集中混声、克制滑音、少量转音与窄幅颤音。“，”为半拍停顿或换气，不要赶拍。第一段主歌低音区轻唱；预副歌缓慢上行。第一遍副歌进入中强度混声，“永远”轻抬，“那一年”的“年”延长三拍。第二段真声略增；第二遍副歌保持慢速主旋律，鼓、贝斯与薄和声加入，但维持半拍律动，“告别”短下滑。桥段撤掉鼓与贝斯。最终副歌前四句近乎清唱，从“你没有说谎”全编制进入：有力度的钢琴、完整但稀疏的鼓组、低音、宽阔弦乐与八度和声；不要加速。“换不回那一天”持续推高，随后升全音进入释放段。“如果爱过”强起，“时间”一次上行转音；“会照亮，没有你的明天”为最高点，“天”以集中混声延长四拍并加入受控颤音。最后“只比永远差一天”完整连唱，只延长末字“天”，随后骤然收回钢琴。高潮强烈、宽阔、催泪但不嘶吼；避免密集转音、连续颤音、快鼓花、摇滚吼唱、EDM和过度励志。",
+      "en": "Mandarin piano ballad, 64 BPM, 6/8, spacious and slow. Feel two broad pulses per bar; vocal behind beat. Leave 1–2 beats after every two lyric lines; sustain notes, never fill subdivisions. 8-bar piano intro, 8-bar piano/cello break after Chorus 1, short outro. Young female vocal: airy verse, clear diction, smooth chest/head shifts, focused mix, sparse slides/runs, narrow vibrato. Chorus 1: medium mix; lift ‘永远’, hold ‘年’ three beats. Verse 2 adds chest tone. Chorus 2 keeps slow melody with sparse drums, bass and thin harmony; short fall on ‘告别’. Strip rhythm in bridge. Final chorus starts near a cappella; from ‘你没有说谎’, add piano, sparse drums, bass, strings and octave harmony without speeding up. Build through ‘换不回那一天’, then modulate up a whole step. Peak at ‘会照亮，没有你的明天’: mixed-belt ‘天’ four beats with vibrato. Sing ‘只比永远差一天’ in one phrase; hold only final ‘天’, then cut to piano. Powerful, tearful, never screamed. Avoid busy fills, dense runs, rock shouting, EDM or forced triumph."
+    }
+  ],
+  "mvWorkflow": {
+    "storyStatus": "confirmed",
+    "durationConfirmed": true,
+    "durationConfirmedAt": "20260901",
+    "scriptStatus": "complete"
+  },
+  "production": {
+    "mvDirectory": "",
+    "keyframes": "not_started",
+    "video": "not_started",
+    "post": "not_started",
+    "delivery": "not_started"
+  },
+  "mvStory": {
+    "summary": "分手后的第一个纪念日，一位年轻女性独自回到两人每年合影的旧照相馆，在最后一张照片显影的过程中看懂爱情早已留下的距离，并在同一架相机前拍下第一张只有自己的照片。",
+    "opening": "冬日下午，女主拿着折旧的取件单独自进入旧照相馆。摄影师望向她空无一人的身后，她则在熟悉的拍摄区扶正两把椅子中的一把。",
+    "development": "等待显影时，固定机位的 4:3 回忆重现历年合照：两人从亲密自然到动作熟练、距离渐远。最后一次拍摄中，他坐得很近却望向窗外，仍真诚地在封套背面写下“明年见”。",
+    "turningPoint": "最后一张合照在暗房红光中浮现。女主看见照片里的距离和背面的“明年见”，终于理解这句话当时不是谎言，只是两个人后来没有抵达共同相信的明天。",
+    "climax": "女主将一把椅子移到中央，决定在同一架相机前独自拍照。最终副歌全编制进入时快门闪亮，历年双人合照叠化退白，新照片逐渐显出她独自直视镜头的脸。",
+    "ending": "她把旧合照装回封套，走入雨后冬日的一线光中。店内的新单人照片完成显影，背面保持空白；她眼里仍有泪，却不再躲开镜头。"
+  },
+  "sections": [
+    {
+      "id": "instrumentalIntro",
+      "label": "Instrumental Intro",
+      "time": "",
+      "lyrics": []
+    },
+    {
+      "id": "verse1",
+      "label": "Verse 1",
+      "time": "",
+      "lyrics": ["那年的光，", "落在相纸上", "两个人靠得很近", "未来，在镜头外发亮", "你写下“明年见”", "墨水还没有干", "我们把永远说得轻", "像一句，平常的晚安"]
+    },
+    {
+      "id": "pre1",
+      "label": "Pre-Chorus 1",
+      "time": "",
+      "lyrics": ["后来，时间", "一页一页翻", "笑容留在原地", "我们，走向两端"]
+    },
+    {
+      "id": "chorus1",
+      "label": "Chorus 1",
+      "time": "",
+      "lyrics": ["我们离永远，", "只差最后一天", "那一句明年见，", "还亮在照片背面", "你没有说谎", "我也没有食言", "只是时间，带走我们", "没带走那一年"]
+    },
+    {
+      "id": "instrumentalBreak",
+      "label": "Instrumental Break",
+      "time": "",
+      "lyrics": []
+    },
+    {
+      "id": "verse2",
+      "label": "Verse 2",
+      "time": "",
+      "lyrics": ["旧门铃响，", "我一个人进来", "最后一张合照", "从暗房，慢慢醒来", "你还在我的身边", "目光，却望向窗外"]
+    },
+    {
+      "id": "pre2",
+      "label": "Pre-Chorus 2",
+      "time": "",
+      "lyrics": ["我对着光，读完你的字", "那时的相信，依然诚实"]
+    },
+    {
+      "id": "chorus2",
+      "label": "Chorus 2",
+      "time": "",
+      "lyrics": ["我们离永远，", "只差最后一天", "日期困在那个冬天", "你还笑在我身边", "爱没有说谎", "承诺没有食言", "是我们走到终点", "才看清那场告别"]
+    },
+    {
+      "id": "bridge",
+      "label": "Bridge - Breakdown",
+      "time": "",
+      "lyrics": ["相纸留住了光", "却留不住明天", "若真心曾被看见", "何必向结局，道歉"]
+    },
+    {
+      "id": "final",
+      "label": "Final Chorus",
+      "time": "",
+      "lyrics": ["我们离永远，", "只差最后一天", "我把那句明年见", "留在照片背面", "你没有说谎", "我也没有食言", "我们用整个从前", "换不回那一天", "如果爱过，", "就不算输给时间", "你留给我的光", "会照亮，没有你的明天", "原来我们，", "只比永远差一天"]
+    },
+    {
+      "id": "outro",
+      "label": "Outro",
+      "time": "",
+      "lyrics": []
+    }
+  ],
+  "shots": [
+    {"id":"shot01","start":"00:00","end":"00:06","sectionId":"instrumentalIntro","storyBeat":"opening","shot":"旧街大全景","action":"女主从远处走近照相馆并停下","visual":"雨后湿路面、旧招牌、橱窗里的两把空椅子","camera":"16:9 平视，极慢横移后锁定","location":"照相馆外街道","transition":"冷蓝调，玻璃反光","soundFocus":"第一颗钢琴音建立独行与缺席"},
+    {"id":"shot02","start":"00:06","end":"00:11","sectionId":"instrumentalIntro","storyBeat":"opening","shot":"手部与倒影近景","action":"她攥着折旧取件单，倒影中只有她","visual":"店内两把椅子映在玻璃上","camera":"微距缓慢推近","location":"橱窗","transition":"焦点由纸条转向倒影","soundFocus":"两把椅子对应两人的缺席"},
+    {"id":"shot03","start":"00:11","end":"00:16","sectionId":"instrumentalIntro","storyBeat":"opening","shot":"门内中景","action":"她推门，摄影师抬头望向她身后，她放下取件单","visual":"门铃、柜台、暖色店内","camera":"跟入后停在柜台侧面","location":"照相馆门厅","transition":"门框遮挡切入暖色","soundFocus":"门铃落在前奏结束处，无对白"},
+    {"id":"shot04","start":"00:16","end":"00:23","sectionId":"verse1","storyBeat":"development","shot":"地面特写转全景","action":"女主看到磨淡的站位标记，扶正一把椅子","visual":"两处站位标记与旧背景布","camera":"从地面缓慢上摇","location":"拍摄区","transition":"现实16:9匹配切入回忆4:3","soundFocus":"手触椅背触发回忆"},
+    {"id":"shot05","start":"00:23","end":"00:30","sectionId":"verse1","storyBeat":"development","shot":"固定4:3全身肖像","action":"第一年两人挤进画面，笑得来不及准备","visual":"肩膀紧贴，同一双椅子","camera":"固定机位","location":"拍摄区回忆","transition":"胶片颗粒与轻微门幅抖动","soundFocus":"未经排练的亲密"},
+    {"id":"shot06","start":"00:30","end":"00:37","sectionId":"verse1","storyBeat":"development","shot":"固定4:3中景","action":"第二年他替她拢好头发，她替他整平衣袖","visual":"两人相视后看向镜头","camera":"固定机位","location":"拍摄区回忆","transition":"闪光白帧切换年份","soundFocus":"动作回应早期亲密记忆"},
+    {"id":"shot07","start":"00:37","end":"00:43","sectionId":"verse1","storyBeat":"development","shot":"固定4:3中景","action":"第三年两人熟练坐好，牵手但不再看彼此","visual":"笑容端正，距离尚未明显","camera":"固定机位","location":"拍摄区回忆","transition":"饱和度轻降","soundFocus":"亲密开始变成共同完成的仪式"},
+    {"id":"shot08","start":"00:43","end":"00:49","sectionId":"verse1","storyBeat":"development","shot":"现实近景","action":"女主从回忆抽离，手停在空椅背上后松开","visual":"空椅与她的手形成画面中心","camera":"轻微拉远","location":"拍摄区","transition":"4:3边框消失回16:9","soundFocus":"主歌尾部保留呼吸"},
+    {"id":"shot09","start":"00:49","end":"00:56","sectionId":"pre1","storyBeat":"development","shot":"相册俯拍特写","action":"她逐页翻过历年照片","visual":"服装变化、背景不变","camera":"俯拍缓移","location":"柜台","transition":"翻页作自然擦拭","soundFocus":"时间以实体页面推进"},
+    {"id":"shot10","start":"00:56","end":"01:03","sectionId":"pre1","storyBeat":"development","shot":"4:3固定双人中景组接","action":"三个年份连续匹配切，肩膀缝隙逐渐扩大","visual":"笑容保持一致，距离越来越清楚","camera":"固定机位匹配切","location":"拍摄区回忆","transition":"三次短叠化","soundFocus":"副歌前建立关系变化"},
+    {"id":"shot11","start":"01:03","end":"01:11","sectionId":"chorus1","storyBeat":"development","shot":"最后一年4:3双人中景","action":"女主看镜头，男方在快门前将目光移向窗外","visual":"两人坐得很近却看向不同方向","camera":"固定机位，轻微慢动作","location":"拍摄区回忆","transition":"闪光定格","soundFocus":"Hook第一次出现时呈现距离"},
+    {"id":"shot12","start":"01:11","end":"01:19","sectionId":"chorus1","storyBeat":"development","shot":"笔尖与封套特写","action":"男方在封套背面写下“明年见”","visual":"落笔自然，没有迟疑","camera":"缓慢推近笔迹","location":"拍摄区回忆","transition":"墨迹微反光","soundFocus":"承诺当时真实"},
+    {"id":"shot13","start":"01:19","end":"01:27","sectionId":"chorus1","storyBeat":"development","shot":"双层景深中景","action":"女主背身穿外套，男方写完抬头看她又低头看字","visual":"两人同框却没有对话","camera":"固定后轻微侧移","location":"拍摄区回忆","transition":"暖光逐渐偏冷","soundFocus":"无争吵，只有未说出口的迟疑"},
+    {"id":"shot14","start":"01:27","end":"01:34","sectionId":"chorus1","storyBeat":"development","shot":"照片空夹近景","action":"回忆中的封套放下，切到当前柜台空取件夹","visual":"空夹占据原本放照片的位置","camera":"微拉远","location":"柜台","transition":"时间匹配切","soundFocus":"副歌结束回到现在"},
+    {"id":"shot15","start":"01:34","end":"01:42","sectionId":"instrumentalBreak","storyBeat":"development","shot":"暗房门口侧后方中景","action":"摄影师关白灯、开红灯，把相纸放入显影盘","visual":"红光切开暖黄空间","camera":"稳定跟随","location":"暗房","transition":"暖黄转暗红","soundFocus":"大提琴进入，显影开始"},
+    {"id":"shot16","start":"01:42","end":"01:49","sectionId":"instrumentalBreak","storyBeat":"development","shot":"拍摄区宽景","action":"女主站在两椅之间，听见液体晃动但没有坐下","visual":"双椅与她的距离","camera":"极慢环绕四分之一圈","location":"拍摄区","transition":"环境压暗，椅子留暖光","soundFocus":"器乐留白延长等待"},
+    {"id":"shot17","start":"01:49","end":"01:57","sectionId":"verse2","storyBeat":"turningPoint","shot":"暗房半开门框中景","action":"女主走到门口停下，红光照亮半张脸","visual":"她的眼睛第一次进入暗房深处","camera":"从背后缓慢靠近","location":"暗房门口","transition":"门框画中画","soundFocus":"第二段更贴近现实"},
+    {"id":"shot18","start":"01:57","end":"02:05","sectionId":"verse2","storyBeat":"turningPoint","shot":"显影盘俯拍特写","action":"空白相纸先出现两把椅子，再浮出两人轮廓","visual":"影像从白色液面中自然显出","camera":"固定机位","location":"暗房","transition":"实拍或后期渐显","soundFocus":"显影即理解发生"},
+    {"id":"shot19","start":"02:05","end":"02:12","sectionId":"verse2","storyBeat":"turningPoint","shot":"照片极近特写","action":"女主手指触碰照片中两人之间的空隙","visual":"女方面向镜头，男方望向窗外","camera":"微距缓推","location":"暗房","transition":"红光局部锐化","soundFocus":"照片比记忆诚实"},
+    {"id":"shot20","start":"02:12","end":"02:20","sectionId":"pre2","storyBeat":"turningPoint","shot":"手与脸交替近景","action":"照片翻到背面，“明年见”出现；她收紧手指又抬眼回想","visual":"笔迹与落笔时的平静神情交替","camera":"两次缓慢焦点转换","location":"暗房","transition":"短插镜12落笔画面","soundFocus":"刺痛转向理解"},
+    {"id":"shot21","start":"02:20","end":"02:28","sectionId":"chorus2","storyBeat":"turningPoint","shot":"现实与照片同框中近景","action":"她把照片举到眼前，照片中的两人覆盖现实中独自的她","visual":"过去与现在在同一构图重合","camera":"极慢推近","location":"暗房门口","transition":"低透明度对位叠化","soundFocus":"两种真实共存"},
+    {"id":"shot22","start":"02:28","end":"02:36","sectionId":"chorus2","storyBeat":"turningPoint","shot":"最后拍摄回忆侧面中景","action":"男方写完日期与“明年见”，停顿后将封套递给她","visual":"他认真而平静，没有戏剧性动作","camera":"固定侧机位","location":"拍摄区回忆","transition":"取消浪漫柔焦","soundFocus":"重新观看记忆，意义改变"},
+    {"id":"shot23","start":"02:36","end":"02:43","sectionId":"chorus2","storyBeat":"turningPoint","shot":"女主脸部近景","action":"眼泪落下，她不擦；手指从紧握变为松开","visual":"照片恢复平整","camera":"完全固定","location":"暗房门口","transition":"保留泪光真实反射","soundFocus":"眼泪是承认，不是控诉"},
+    {"id":"shot24","start":"02:43","end":"02:50","sectionId":"chorus2","storyBeat":"turningPoint","shot":"关系中景","action":"摄影师安静站远处，女主点头并收回照片","visual":"无安慰对白，动作简洁","camera":"缓慢拉远","location":"照相馆柜台","transition":"红光退回暖黄","soundFocus":"女主开始主动选择"},
+    {"id":"shot25","start":"02:50","end":"02:58","sectionId":"bridge","storyBeat":"climax","shot":"拍摄区全景","action":"女主把右侧椅子移出画面，将左椅推到中央","visual":"旧构图被她亲手改变","camera":"固定宽景","location":"拍摄区","transition":"椅脚声点在稀疏节拍","soundFocus":"桥段抽空，动作成为选择"},
+    {"id":"shot26","start":"02:58","end":"03:05","sectionId":"bridge","storyBeat":"climax","shot":"正面中景","action":"她坐好，先摆出端正笑容，再放下笑容直视镜头","visual":"真实疲惫、难过与平静同时留在脸上","camera":"极慢推近","location":"拍摄区","transition":"背景声场收窄","soundFocus":"完成独自拍照决定"},
+    {"id":"shot27","start":"03:05","end":"03:12","sectionId":"final","storyBeat":"climax","shot":"相机后方越肩中景","action":"摄影师开机测光，女主深呼吸并放松双手","visual":"她保持不修饰的表情","camera":"从摄影师肩后缓推","location":"拍摄区","transition":"近乎清唱，无特效","soundFocus":"最终副歌蓄势"},
+    {"id":"shot28","start":"03:12","end":"03:19","sectionId":"final","storyBeat":"climax","shot":"正面近景转纯白","action":"快门按下，女主直视镜头，闪光吞没画面","visual":"全片最明亮的一次曝光","camera":"快速推近后定格","location":"拍摄区","transition":"高亮白闪与残影","soundFocus":"全编制进入，同步闪光"},
+    {"id":"shot29","start":"03:19","end":"03:27","sectionId":"final","storyBeat":"climax","shot":"4:3历年合照蒙太奇","action":"第一年至最后一年依次叠化，距离由近变远","visual":"双椅与两人站位始终对齐","camera":"固定构图快速叠化","location":"拍摄区回忆","transition":"胶片曝光叠层","soundFocus":"全部从前回应歌词"},
+    {"id":"shot30","start":"03:27","end":"03:35","sectionId":"final","storyBeat":"climax","shot":"显影盘俯拍转正面中景","action":"新相纸中单椅和女主逐渐出现，匹配切到她现实中呼吸","visual":"单人照片完成显影","camera":"俯拍后匹配切","location":"暗房与拍摄区","transition":"升调点完成新旧接力","soundFocus":"独自出现不是胜利姿态"},
+    {"id":"shot31","start":"03:35","end":"03:42","sectionId":"final","storyBeat":"climax","shot":"窗边中近景","action":"女主把旧合照贴近胸前，云层裂开，光落在她脸上","visual":"泪光与冬日白光同在","camera":"缓慢侧移至逆光","location":"照相馆窗边","transition":"柔和真实过曝","soundFocus":"最高音期间让光停留"},
+    {"id":"shot32","start":"03:42","end":"03:49","sectionId":"final","storyBeat":"ending","shot":"门内向外全身背影","action":"她推门走入雨后街道，停一拍后继续前行","visual":"没有微笑、没有回头，封套握在手中","camera":"固定机位让人物离开","location":"照相馆门外","transition":"暖色室内与冷色街道自然交界","soundFocus":"歌名句完整连唱，动作不中断"},
+    {"id":"shot33","start":"03:49","end":"03:55","sectionId":"outro","storyBeat":"ending","shot":"新照片近景","action":"摄影师夹起新照片晾干，照片从空白背面转到女主直视镜头的正面","visual":"新照片背面保持空白，正面有泪光","camera":"极慢推近后静止","location":"暗房晾片区","transition":"画面褪为相纸白","soundFocus":"钢琴尾音与远处门铃结束全片"}
+  ]
+}

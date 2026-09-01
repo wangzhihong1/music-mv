@@ -2,9 +2,7 @@ node_modules/
 dist/
 .DS_Store
 
-# Local AI models and tool runtimes
-.models/
-.tools/
+# Prevent large model files from entering Git
 *.safetensors
 *.ckpt
 *.pth
