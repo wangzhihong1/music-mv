@@ -1,0 +1,19 @@
+{
+  "name": "music-creation-workbench",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "validate:songs": "node scripts/validate-song-data.mjs",
+    "build": "npm run validate:songs && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vitejs/plugin-vue": "latest",
+    "@lucide/vue": "latest",
+    "vite": "latest",
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {}
+}
