@@ -37,6 +37,7 @@ const emit = defineEmits(['copy', 'select-section'])
     </div>
 
     <div class="lyrics-content">
+      <p v-if="sections.length === 0" class="stage-empty">尚未填写歌词。</p>
       <button
         v-for="section in sections"
         :key="section.id"

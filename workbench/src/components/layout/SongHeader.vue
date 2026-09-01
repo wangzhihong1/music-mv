@@ -1,5 +1,5 @@
 <script setup>
-import { AlignJustify, Check, SlidersHorizontal } from '@lucide/vue'
+import { AlignJustify, Check, Film, SlidersHorizontal } from '@lucide/vue'
 import { VIEW_MODES } from '@/constants/navigation.js'
 
 defineProps({
@@ -18,6 +18,7 @@ const emit = defineEmits(['update:viewMode'])
 const viewIcons = {
   overview: SlidersHorizontal,
   align: AlignJustify,
+  production: Film,
 }
 </script>
 
@@ -29,7 +30,7 @@ const viewIcons = {
         <span class="cover-light"></span>
       </div>
       <div class="song-title-copy">
-        <div class="eyebrow">{{ song.date || '本地项目' }} · 单曲工作台</div>
+        <div class="eyebrow">{{ song.date || '本地项目' }} · {{ song.collectionId === 'production' ? '本机生成' : '单曲工作台' }}</div>
         <div class="title-row">
           <h1>{{ song.title }}</h1>
           <span class="status-badge"><Check :size="13" />{{ song.status }}</span>

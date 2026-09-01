@@ -6,15 +6,20 @@ import AppSidebar from '@/components/layout/AppSidebar.vue'
 import SongHeader from '@/components/layout/SongHeader.vue'
 import ArchivePanel from '@/components/workbench/ArchivePanel.vue'
 import AlignPanel from '@/components/workbench/AlignPanel.vue'
+import BriefPanel from '@/components/workbench/BriefPanel.vue'
 import LyricsPanel from '@/components/workbench/LyricsPanel.vue'
 import PipelineBoard from '@/components/workbench/PipelineBoard.vue'
+import ProductionPanel from '@/components/workbench/ProductionPanel.vue'
 import PromptsPanel from '@/components/workbench/PromptsPanel.vue'
 import ScriptPanel from '@/components/workbench/ScriptPanel.vue'
 import SongFacts from '@/components/workbench/SongFacts.vue'
+import StoryPanel from '@/components/workbench/StoryPanel.vue'
+import StylePanel from '@/components/workbench/StylePanel.vue'
 import IconButton from '@/components/common/IconButton.vue'
 import { useClipboard } from '@/composables/useClipboard.js'
 import { useWorkspace } from '@/composables/useWorkspace.js'
 import { METADATA_FIELDS } from '@/constants/song.js'
+import { HEADER_STAGE, SONG_NAVS, STAGE_VIEW_MODES } from '@/constants/navigation.js'
 import { joinLyrics, joinPrompts, metadataFacts, scriptSummary } from '@/utils/song-content.js'
 
 const {
@@ -30,11 +35,15 @@ const {
 const { copiedTarget, copyText } = useClipboard()
 
 const viewMode = ref('overview')
+const selectedStage = ref('')
 const promptLanguage = ref('zh')
 const activeSection = ref('')
 const activeShotId = ref('')
 const sidebarOpen = ref(false)
 const showingArchive = computed(() => ['inspiration', 'library'].includes(activeNav.value))
+const headerViewMode = computed(() => (
+  ['overview', 'align', 'production'].includes(viewMode.value) ? viewMode.value : ''
+))
 
 const prompts = computed(() => currentSong.value.prompts || [])
 const sections = computed(() => currentSong.value.sections || [])
@@ -54,6 +63,10 @@ watch(
   () => {
     activeSection.value = sections.value[0]?.id || ''
     activeShotId.value = shots.value[0]?.id || ''
+    if (currentSong.value.collectionId === 'production') {
+      viewMode.value = 'production'
+      selectedStage.value = 'delivery'
+    }
   },
   { immediate: true },
 )
@@ -61,11 +74,28 @@ watch(
 function onSelectNav(navId) {
   selectNav(navId)
   sidebarOpen.value = false
+  if (navId === 'production') {
+    viewMode.value = 'production'
+    selectedStage.value = 'delivery'
+  } else if (SONG_NAVS.includes(navId)) {
+    viewMode.value = 'overview'
+    selectedStage.value = ''
+  }
 }
 
 function onSelectSong(songId) {
   selectSong(songId)
   sidebarOpen.value = false
+}
+
+function onSelectStage(stageId) {
+  selectedStage.value = stageId
+  viewMode.value = STAGE_VIEW_MODES[stageId] || 'overview'
+}
+
+function onUpdateViewMode(mode) {
+  viewMode.value = mode
+  selectedStage.value = HEADER_STAGE[mode] ?? ''
 }
 
 function selectSection(sectionId) {
@@ -120,14 +150,18 @@ function copyPrompt(target) {
       <template v-else>
         <SongHeader
           :song="currentSong"
-          :view-mode="viewMode"
-          @update:view-mode="viewMode = $event"
+          :view-mode="headerViewMode"
+          @update:view-mode="onUpdateViewMode"
         />
 
         <p v-if="loadError" class="sync-error" role="alert">{{ loadError }}</p>
 
-        <PipelineBoard :song="currentSong" />
-        <SongFacts :facts="facts" />
+        <PipelineBoard
+          :song="currentSong"
+          :selected-stage="selectedStage"
+          @select-stage="onSelectStage"
+        />
+        <SongFacts v-if="viewMode === 'overview'" :facts="facts" />
 
         <div v-if="viewMode === 'overview'" class="workbench-grid">
           <LyricsPanel
@@ -155,12 +189,46 @@ function copyPrompt(target) {
           </div>
         </div>
 
+        <BriefPanel v-else-if="viewMode === 'brief'" :song="currentSong" />
+        <StylePanel v-else-if="viewMode === 'style'" :facts="facts" />
+        <LyricsPanel
+          v-else-if="viewMode === 'lyrics'"
+          class="stage-panel"
+          :sections="sections"
+          :active-section="activeSection"
+          :copied="copiedTarget === 'lyrics'"
+          @copy="copyText(allLyrics, 'lyrics')"
+          @select-section="selectSection"
+        />
+        <PromptsPanel
+          v-else-if="viewMode === 'prompts'"
+          class="stage-panel"
+          :prompts="prompts"
+          :language="promptLanguage"
+          :copied-target="copiedTarget"
+          @update:language="promptLanguage = $event"
+          @copy="copyPrompt"
+        />
+        <StoryPanel v-else-if="viewMode === 'story'" :story="currentSong.mvStory" />
+        <ScriptPanel
+          v-else-if="viewMode === 'script'"
+          class="stage-panel"
+          :shots="shots"
+          :active-shot-id="activeShotId"
+          :summary="currentScriptSummary"
+          @select-shot="selectShot"
+        />
         <AlignPanel
-          v-else
+          v-else-if="viewMode === 'align'"
           :shots="shots"
           :sections="sections"
           :active-shot-id="activeShotId"
           @select-shot="selectShot"
+        />
+        <ProductionPanel
+          v-else
+          :song="currentSong"
+          :focus-stage="selectedStage"
         />
       </template>
     </main>

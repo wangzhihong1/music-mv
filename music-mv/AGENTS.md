@@ -77,7 +77,7 @@
 ## 歌曲档案范围
 
 - `inspiration/`、`songs/in-progress/`、`songs/completed/`、`library/`、`templates/song/` 用于歌曲企划、歌词、提示词和结构化 `song.json`。
-- 歌曲资料沿用 `YYYYMMDD-slug/` 命名；进入本机 MV 素材生产后，专属音频、角色资产、分析、生成文件和成片放入 `mvs/YYYYMMDD-slug/`，不得放入 `workbench/`。
+- 歌曲资料沿用 `YYYYMMDD-slug/` 命名；进入本机 MV 素材生产后，专属音频、角色资产、分析、生成文件和成片放入 `mvs/YYYYMMDD-slug/`，不得放入 `workbench/`。工作台会扫描该目录并展示成品；可用 `production.mvDirectory` 绑定到对应歌曲，未绑定的生成目录会出现在「本机生成」。
 - 涉及真人 MV 的视觉、生成、目录和质量要求时，同时遵循本文件前述音乐 MV 创作规范。
 
 ## 音乐创作入口

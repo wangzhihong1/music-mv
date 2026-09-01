@@ -1,6 +1,7 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { fetchWorkspace } from '@/api/workspace'
 import { EMPTY_SONG } from '@/constants/song'
+import { SONG_NAVS } from '@/constants/navigation.js'
 
 export function useWorkspace() {
   const songs = ref([])
@@ -16,7 +17,7 @@ export function useWorkspace() {
   )
 
   const currentSong = computed(() => {
-    const pool = ['in-progress', 'completed'].includes(activeNav.value)
+    const pool = SONG_NAVS.includes(activeNav.value)
       ? collectionSongs.value
       : songs.value
     return pool.find((song) => song.id === selectedSongId.value) || pool[0] || EMPTY_SONG
@@ -44,7 +45,7 @@ export function useWorkspace() {
   }
 
   function ensureSelection() {
-    const visible = ['in-progress', 'completed'].includes(activeNav.value)
+    const visible = SONG_NAVS.includes(activeNav.value)
       ? songs.value.filter((song) => song.collectionId === activeNav.value)
       : songs.value
 

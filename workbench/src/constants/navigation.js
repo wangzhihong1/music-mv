@@ -1,13 +1,45 @@
 export const NAV_ITEMS = [
   { id: 'in-progress', label: '创作中', kind: 'collection' },
   { id: 'completed', label: '已完成', kind: 'collection' },
+  { id: 'production', label: '本机生成', kind: 'collection' },
   { id: 'inspiration', label: '灵感池', kind: 'archive' },
   { id: 'library', label: '公共素材', kind: 'archive' },
 ]
 
+export const SONG_NAVS = ['in-progress', 'completed', 'production']
+
+export const PRODUCTION_STAGES = ['keyframes', 'video', 'post', 'delivery']
+
+export const STAGE_VIEW_MODES = {
+  brief: 'brief',
+  style: 'style',
+  lyrics: 'lyrics',
+  prompts: 'prompts',
+  'mv-story': 'story',
+  'mv-script': 'script',
+  keyframes: 'production',
+  video: 'production',
+  post: 'production',
+  delivery: 'production',
+}
+
+export const HEADER_STAGE = {
+  overview: '',
+  align: 'mv-script',
+  production: 'delivery',
+}
+
+export const PRODUCTION_FOCUS = {
+  keyframes: ['scenes', 'characters', 'references'],
+  video: ['raw'],
+  post: ['intermediate'],
+  delivery: ['final'],
+}
+
 export const VIEW_MODES = [
   { id: 'overview', label: '创作总览' },
   { id: 'align', label: 'MV 对齐' },
+  { id: 'production', label: '本机成片' },
 ]
 
 export const ARCHIVE_COPY = {

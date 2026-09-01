@@ -30,7 +30,8 @@ const emit = defineEmits(['select-shot'])
       <span class="panel-count"><Film :size="14" />{{ summary }}</span>
     </div>
 
-    <div class="script-table" role="table" aria-label="MV脚本列表">
+    <p v-if="shots.length === 0" class="stage-empty">尚未编写 MV 脚本。</p>
+    <div v-else class="script-table" role="table" aria-label="MV脚本列表">
       <div class="script-table-head" role="row">
         <span role="columnheader">时间</span>
         <span role="columnheader">景别</span>

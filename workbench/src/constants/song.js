@@ -10,7 +10,15 @@ export const EMPTY_SONG = {
   shots: [],
   mvWorkflow: {},
   mvStory: {},
-  production: {},
+  production: {
+    mvDirectory: '',
+    keyframes: 'not_started',
+    video: 'not_started',
+    post: 'not_started',
+    delivery: 'not_started',
+    summary: '',
+    groups: [],
+  },
 }
 
 export const METADATA_FIELDS = [
@@ -20,4 +28,13 @@ export const METADATA_FIELDS = [
   ['调性', 'key'],
   ['演唱', 'vocal'],
   ['时长', 'duration'],
+]
+
+export const STORY_FIELDS = [
+  ['summary', '故事概要'],
+  ['opening', '开场'],
+  ['development', '发展'],
+  ['turningPoint', '转折'],
+  ['climax', '高潮'],
+  ['ending', '结尾'],
 ]

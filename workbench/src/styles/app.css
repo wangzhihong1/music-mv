@@ -139,8 +139,11 @@ button:focus-visible {
 
 .song-list {
   display: grid;
+  flex: 1;
   gap: 2px;
-  padding: 0 9px;
+  padding: 0 9px 12px;
+  overflow-y: auto;
+  align-content: start;
 }
 
 .song-item {

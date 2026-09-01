@@ -49,6 +49,7 @@ const emit = defineEmits(['update:language', 'copy'])
     </div>
 
     <div class="prompt-grid">
+      <p v-if="prompts.length === 0" class="stage-empty">尚未填写风格提示词。</p>
       <article v-for="prompt in prompts" :key="prompt.key" class="prompt-item">
         <div class="prompt-label-row">
           <span>{{ prompt.label }}</span>

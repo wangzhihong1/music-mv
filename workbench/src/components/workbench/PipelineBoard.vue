@@ -7,7 +7,13 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  selectedStage: {
+    type: String,
+    default: '',
+  },
 })
+
+const emit = defineEmits(['select-stage'])
 
 const STATUS_LABEL = {
   complete: '已完成',
@@ -22,18 +28,24 @@ const pipeline = computed(() => derivePipeline(props.song))
 
 <template>
   <section class="pipeline-board" aria-label="创作与制作流程">
-    <article
+    <button
       v-for="stage in pipeline.stages"
       :key="stage.id"
-      class="pipeline-step"
+      class="pipeline-step is-selectable"
       :class="[
         `is-${stage.status.replace('_', '-')}`,
-        { 'is-current': stage.id === pipeline.currentStage },
+        {
+          'is-current': stage.id === pipeline.currentStage,
+          'is-selected': stage.id === selectedStage,
+        },
       ]"
+      type="button"
+      :aria-pressed="stage.id === selectedStage"
+      @click="emit('select-stage', stage.id)"
     >
       <span>{{ stage.kicker }}</span>
       <strong>{{ stage.label }}</strong>
       <small>{{ STATUS_LABEL[stage.status] }}</small>
-    </article>
+    </button>
   </section>
 </template>
