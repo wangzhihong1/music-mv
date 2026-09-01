@@ -1,3 +1,28 @@
 node_modules/
 dist/
 .DS_Store
+
+# Local AI models and tool runtimes
+.models/
+.tools/
+*.safetensors
+*.ckpt
+*.pth
+
+# Song-specific generated media and analysis caches
+**/.analysis/
+**/generated/
+**/music/
+*.mp3
+*.wav
+*.mp4
+*.png
+*.jpg
+*.jpeg
+*.webp
+
+# Root-level working inputs and disposable QA directories
+wav2lip_input.png
+*_tmp/
+**/__pycache__/
+**/.discarded_*/

@@ -33,6 +33,7 @@ button:focus-visible {
   display: grid;
   grid-template-columns: 224px minmax(0, 1fr);
   min-height: 100vh;
+  overflow-x: clip;
 }
 
 .sidebar {
@@ -629,9 +630,15 @@ h1 {
 }
 
 .prompt-label-row span {
+  min-width: 0;
   color: #39704f;
   font-size: 11px;
   font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.prompt-label-row .inline-copy {
+  flex: 0 0 25px;
 }
 
 .prompt-item p {
