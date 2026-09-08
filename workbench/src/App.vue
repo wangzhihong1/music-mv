@@ -116,6 +116,10 @@ function copyPrompt(target) {
   const prompt = prompts.value.find((item) => item.key === target)
   copyText(prompt?.[promptLanguage.value] || '', `prompt-${target}`)
 }
+
+function copyShotPrompt(shot) {
+  copyText(shot.prompt || [shot.action, shot.visual, shot.camera].filter(Boolean).join('\n'), `shot-${shot.id}`)
+}
 </script>
 
 <template>
@@ -184,7 +188,9 @@ function copyPrompt(target) {
               :shots="shots"
               :active-shot-id="activeShotId"
               :summary="currentScriptSummary"
+              :copied-target="copiedTarget"
               @select-shot="selectShot"
+              @copy-prompt="copyShotPrompt"
             />
           </div>
         </div>
@@ -216,14 +222,18 @@ function copyPrompt(target) {
           :shots="shots"
           :active-shot-id="activeShotId"
           :summary="currentScriptSummary"
+          :copied-target="copiedTarget"
           @select-shot="selectShot"
+          @copy-prompt="copyShotPrompt"
         />
         <AlignPanel
           v-else-if="viewMode === 'align'"
           :shots="shots"
           :sections="sections"
           :active-shot-id="activeShotId"
+          :copied-target="copiedTarget"
           @select-shot="selectShot"
+          @copy-prompt="copyShotPrompt"
         />
         <ProductionPanel
           v-else
