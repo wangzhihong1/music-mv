@@ -39,8 +39,8 @@ const emit = defineEmits(['select-shot', 'copy-prompt'])
     <div v-else class="script-table" role="table" aria-label="MV脚本列表">
       <div class="script-table-head" role="row">
         <span role="columnheader">时间</span>
-        <span role="columnheader">景别</span>
-        <span role="columnheader">画面与动作</span>
+        <span role="columnheader">出镜 / 景别</span>
+        <span role="columnheader">视频动作</span>
         <span role="columnheader">运镜</span>
       </div>
       <article
@@ -65,7 +65,7 @@ const emit = defineEmits(['select-shot', 'copy-prompt'])
         </button>
         <div v-if="shot.prompt" class="script-prompt">
           <div class="script-prompt-head">
-            <span>文生视频提示词</span>
+            <span>角色参考视频提示词</span>
             <div class="script-prompt-copy">
               <CopyFeedback :visible="copiedTarget === `shot-${shot.id}`" />
               <button

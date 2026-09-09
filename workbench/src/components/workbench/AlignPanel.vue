@@ -71,7 +71,7 @@ function relatedSection(shot) {
         </button>
         <div v-if="shot.prompt" class="script-prompt align-prompt">
           <div class="script-prompt-head">
-            <span>文生视频提示词</span>
+            <span>角色参考视频提示词</span>
             <div class="script-prompt-copy">
               <CopyFeedback :visible="copiedTarget === `shot-${shot.id}`" />
               <button
