@@ -10,6 +10,18 @@ export function joinPrompts(prompts = [], language = 'zh') {
     .join('\n\n')
 }
 
+export function joinCharacterLooks(looks = [], language = 'zh') {
+  return looks
+    .map((look) => {
+      const positive = look[language] || ''
+      const negative = language === 'en' ? look.negativeEn || '' : look.negativeZh || ''
+      const blocks = [`${look.label}：${positive}`]
+      if (negative) blocks.push(`负向提示词：${negative}`)
+      return blocks.join('\n')
+    })
+    .join('\n\n')
+}
+
 export function metadataFacts(song, fields) {
   return fields
     .map(([label, key]) => [label, song.metadata?.[key]])

@@ -25,12 +25,13 @@
     "storyStatus": "paused",
     "durationConfirmed": false,
     "durationConfirmedAt": "",
-    "scriptStatus": "not_started"
+    "scriptStatus": "not_started",
+    "generationMethod": "characterReferenceVideo"
   },
   "production": {
     "mvDirectory": "",
-    "keyframes": "not_started",
-    "video": "not_started",
+    "characterReferences": "not_started",
+    "shotVideos": "not_started",
     "post": "not_started",
     "delivery": "not_started"
   },

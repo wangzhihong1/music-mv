@@ -32,11 +32,16 @@ const song = {
     { key: 'structure', label: '结构与动态', zh: '', en: '' },
     { key: 'avoid', label: '避免元素', zh: '', en: '' },
   ],
+  characterLooks: [
+    { id: 'femaleLead', label: '女主三视图共享提示词', zh: '', en: '', negativeZh: '', negativeEn: '' },
+    { id: 'maleLead', label: '男主三视图共享提示词', zh: '', en: '', negativeZh: '', negativeEn: '' },
+  ],
   mvWorkflow: {
     storyStatus: 'not_started',
     durationConfirmed: false,
     durationConfirmedAt: '',
     scriptStatus: 'not_started',
+    generationMethod: 'characterReferenceVideo',
   },
   mvStory: {
     summary: '',
@@ -48,8 +53,8 @@ const song = {
   },
   production: {
     mvDirectory: '',
-    keyframes: 'not_started',
-    video: 'not_started',
+    characterReferences: 'not_started',
+    shotVideos: 'not_started',
     post: 'not_started',
     delivery: 'not_started',
   },

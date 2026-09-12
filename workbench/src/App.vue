@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { PanelLeftClose, PanelLeftOpen } from '@lucide/vue'
 import { formatDuration, shotDuration } from '@/lib/time.js'
 import AppSidebar from '@/components/layout/AppSidebar.vue'
@@ -20,7 +20,7 @@ import { useClipboard } from '@/composables/useClipboard.js'
 import { useWorkspace } from '@/composables/useWorkspace.js'
 import { METADATA_FIELDS } from '@/constants/song.js'
 import { HEADER_STAGE, SONG_NAVS, STAGE_VIEW_MODES } from '@/constants/navigation.js'
-import { joinLyrics, joinPrompts, metadataFacts, scriptSummary } from '@/utils/song-content.js'
+import { joinCharacterLooks, joinLyrics, joinPrompts, metadataFacts, scriptSummary } from '@/utils/song-content.js'
 
 const {
   songs,
@@ -40,12 +40,14 @@ const promptLanguage = ref('zh')
 const activeSection = ref('')
 const activeShotId = ref('')
 const sidebarOpen = ref(false)
+const stageScroller = ref(null)
 const showingArchive = computed(() => ['inspiration', 'library'].includes(activeNav.value))
 const headerViewMode = computed(() => (
   ['overview', 'align', 'production'].includes(viewMode.value) ? viewMode.value : ''
 ))
 
 const prompts = computed(() => currentSong.value.prompts || [])
+const characterLooks = computed(() => currentSong.value.characterLooks || [])
 const sections = computed(() => currentSong.value.sections || [])
 const shots = computed(() => currentSong.value.shots || [])
 const facts = computed(() => metadataFacts(currentSong.value, METADATA_FIELDS))
@@ -69,6 +71,14 @@ watch(
     }
   },
   { immediate: true },
+)
+
+watch(
+  [viewMode, selectedStage, () => currentSong.value.id],
+  async () => {
+    await nextTick()
+    stageScroller.value?.scrollTo({ top: 0 })
+  },
 )
 
 function onSelectNav(navId) {
@@ -120,6 +130,24 @@ function copyPrompt(target) {
 function copyShotPrompt(shot) {
   copyText(shot.prompt || [shot.action, shot.visual, shot.camera].filter(Boolean).join('\n'), `shot-${shot.id}`)
 }
+
+function lookText(look, kind) {
+  if (kind === 'negative') {
+    return promptLanguage.value === 'en' ? look.negativeEn || '' : look.negativeZh || ''
+  }
+  return look[promptLanguage.value] || ''
+}
+
+function copyCharacterLook(target) {
+  if (target === 'all') {
+    copyText(joinCharacterLooks(characterLooks.value, promptLanguage.value), 'look-all')
+    return
+  }
+  const negative = target.endsWith('-negative')
+  const id = negative ? target.slice(0, -'-negative'.length) : target
+  const look = characterLooks.value.find((item) => item.id === id)
+  copyText(lookText(look || {}, negative ? 'negative' : 'positive'), `look-${target}`)
+}
 </script>
 
 <template>
@@ -145,11 +173,12 @@ function copyShotPrompt(shot) {
     />
 
     <main class="main-content">
-      <ArchivePanel
-        v-if="showingArchive"
-        :nav-id="activeNav"
-        :files="archives[activeNav]"
-      />
+      <div v-if="showingArchive" ref="stageScroller" class="main-stage">
+        <ArchivePanel
+          :nav-id="activeNav"
+          :files="archives[activeNav]"
+        />
+      </div>
 
       <template v-else>
         <SongHeader
@@ -165,81 +194,88 @@ function copyShotPrompt(shot) {
           :selected-stage="selectedStage"
           @select-stage="onSelectStage"
         />
-        <SongFacts v-if="viewMode === 'overview'" :facts="facts" />
 
-        <div v-if="viewMode === 'overview'" class="workbench-grid">
+        <div ref="stageScroller" class="main-stage">
+          <SongFacts v-if="viewMode === 'overview'" :facts="facts" />
+
+          <div v-if="viewMode === 'overview'" class="workbench-grid">
+            <LyricsPanel
+              :sections="sections"
+              :active-section="activeSection"
+              :copied="copiedTarget === 'lyrics'"
+              @copy="copyText(allLyrics, 'lyrics')"
+              @select-section="selectSection"
+            />
+
+            <div class="right-column">
+              <PromptsPanel
+                :prompts="prompts"
+                :language="promptLanguage"
+                :copied-target="copiedTarget"
+                @update:language="promptLanguage = $event"
+                @copy="copyPrompt"
+              />
+              <ScriptPanel
+                :shots="shots"
+                :active-shot-id="activeShotId"
+                :summary="currentScriptSummary"
+                :copied-target="copiedTarget"
+                @select-shot="selectShot"
+                @copy-prompt="copyShotPrompt"
+              />
+            </div>
+          </div>
+
+          <BriefPanel v-else-if="viewMode === 'brief'" :song="currentSong" />
+          <StylePanel v-else-if="viewMode === 'style'" :facts="facts" />
           <LyricsPanel
+            v-else-if="viewMode === 'lyrics'"
+            class="stage-panel"
             :sections="sections"
             :active-section="activeSection"
             :copied="copiedTarget === 'lyrics'"
             @copy="copyText(allLyrics, 'lyrics')"
             @select-section="selectSection"
           />
-
-          <div class="right-column">
-            <PromptsPanel
-              :prompts="prompts"
-              :language="promptLanguage"
-              :copied-target="copiedTarget"
-              @update:language="promptLanguage = $event"
-              @copy="copyPrompt"
-            />
-            <ScriptPanel
-              :shots="shots"
-              :active-shot-id="activeShotId"
-              :summary="currentScriptSummary"
-              :copied-target="copiedTarget"
-              @select-shot="selectShot"
-              @copy-prompt="copyShotPrompt"
-            />
-          </div>
+          <PromptsPanel
+            v-else-if="viewMode === 'prompts'"
+            class="stage-panel"
+            :prompts="prompts"
+            :language="promptLanguage"
+            :copied-target="copiedTarget"
+            @update:language="promptLanguage = $event"
+            @copy="copyPrompt"
+          />
+          <StoryPanel v-else-if="viewMode === 'story'" :story="currentSong.mvStory" />
+          <ScriptPanel
+            v-else-if="viewMode === 'script'"
+            class="stage-panel"
+            :shots="shots"
+            :active-shot-id="activeShotId"
+            :summary="currentScriptSummary"
+            :copied-target="copiedTarget"
+            @select-shot="selectShot"
+            @copy-prompt="copyShotPrompt"
+          />
+          <AlignPanel
+            v-else-if="viewMode === 'align'"
+            :shots="shots"
+            :sections="sections"
+            :active-shot-id="activeShotId"
+            :copied-target="copiedTarget"
+            @select-shot="selectShot"
+            @copy-prompt="copyShotPrompt"
+          />
+          <ProductionPanel
+            v-else
+            :song="currentSong"
+            :focus-stage="selectedStage"
+            :prompt-language="promptLanguage"
+            :copied-target="copiedTarget"
+            @update:prompt-language="promptLanguage = $event"
+            @copy-look="copyCharacterLook"
+          />
         </div>
-
-        <BriefPanel v-else-if="viewMode === 'brief'" :song="currentSong" />
-        <StylePanel v-else-if="viewMode === 'style'" :facts="facts" />
-        <LyricsPanel
-          v-else-if="viewMode === 'lyrics'"
-          class="stage-panel"
-          :sections="sections"
-          :active-section="activeSection"
-          :copied="copiedTarget === 'lyrics'"
-          @copy="copyText(allLyrics, 'lyrics')"
-          @select-section="selectSection"
-        />
-        <PromptsPanel
-          v-else-if="viewMode === 'prompts'"
-          class="stage-panel"
-          :prompts="prompts"
-          :language="promptLanguage"
-          :copied-target="copiedTarget"
-          @update:language="promptLanguage = $event"
-          @copy="copyPrompt"
-        />
-        <StoryPanel v-else-if="viewMode === 'story'" :story="currentSong.mvStory" />
-        <ScriptPanel
-          v-else-if="viewMode === 'script'"
-          class="stage-panel"
-          :shots="shots"
-          :active-shot-id="activeShotId"
-          :summary="currentScriptSummary"
-          :copied-target="copiedTarget"
-          @select-shot="selectShot"
-          @copy-prompt="copyShotPrompt"
-        />
-        <AlignPanel
-          v-else-if="viewMode === 'align'"
-          :shots="shots"
-          :sections="sections"
-          :active-shot-id="activeShotId"
-          :copied-target="copiedTarget"
-          @select-shot="selectShot"
-          @copy-prompt="copyShotPrompt"
-        />
-        <ProductionPanel
-          v-else
-          :song="currentSong"
-          :focus-stage="selectedStage"
-        />
       </template>
     </main>
 

@@ -18,5 +18,18 @@ export default defineConfig({
     fs: {
       allow: [workbenchRoot, studioRoot],
     },
+    watch: {
+      ignored: [
+        '**/*.png',
+        '**/*.jpg',
+        '**/*.jpeg',
+        '**/*.webp',
+        '**/*.mp4',
+        '**/*.mp3',
+        '**/*.wav',
+        '**/.analysis/**',
+        '**/generated/**',
+      ],
+    },
   },
 })

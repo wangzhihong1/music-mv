@@ -79,6 +79,32 @@ for (const collection of SONG_COLLECTIONS) {
       if (song.mvWorkflow?.durationConfirmed !== true) {
         errors.push(`${relativePath}: MV 脚本标记完成前，歌曲总时长必须由用户确认`)
       }
+      if (song.mvWorkflow?.generationMethod !== 'characterReferenceVideo') {
+        errors.push(`${relativePath}: 完整 MV 脚本必须使用角色参考图直接生成分镜视频`)
+      }
+
+      const outputs = new Set()
+      for (const [index, shot] of shots.entries()) {
+        const label = shot.id || `第 ${index + 1} 镜`
+        if (!Array.isArray(shot.subjects) || shot.subjects.length === 0) {
+          errors.push(`${relativePath}: ${label} 必须填写 subjects，声明使用的角色参考图`)
+        }
+        if (!['characterVideo', 'composite'].includes(shot.genMode)) {
+          errors.push(`${relativePath}: ${label} 的 genMode 必须为 characterVideo 或 composite`)
+        }
+        if (!String(shot.prompt || '').trim()) {
+          errors.push(`${relativePath}: ${label} 缺少可执行的 H3 参考图生视频提示词`)
+        }
+
+        const output = String(shot.output || '').replace(/\\/g, '/')
+        if (!/^generated\/video\/raw\/shot_\d+_[^/]+\.mp4$/i.test(output)) {
+          errors.push(`${relativePath}: ${label} 必须填写 generated/video/raw/ 下的独立 MP4 输出路径`)
+        } else if (outputs.has(output.toLowerCase())) {
+          errors.push(`${relativePath}: ${label} 的输出路径与其他分镜重复：${output}`)
+        } else {
+          outputs.add(output.toLowerCase())
+        }
+      }
 
       for (const field of ['summary', ...storyBeats]) {
         if (!String(song.mvStory?.[field] || '').trim()) {

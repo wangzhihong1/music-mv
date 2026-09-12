@@ -191,6 +191,7 @@ function shouldReloadProduction(filePath) {
   if (filePath.includes(`${path.sep}wav2lip_segments${path.sep}`)) return false
   if (filePath.includes(`${path.sep}.analysis${path.sep}`)) return false
   if (filePath.includes(`${path.sep}archive${path.sep}`)) return false
+  if (/\.(png|jpe?g|webp|mp4|mp3|wav)$/i.test(filePath)) return false
   return true
 }
 

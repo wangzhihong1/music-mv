@@ -24,7 +24,7 @@
 6. 正式启动时保留用户的原始描述，再提取主题、情绪、音乐风格、演唱语言、人声、场景、必要元素、避免元素和待确认信息。不要因为整理信息而改变用户原意。
 7. 歌名确定后，歌曲文件夹遵循 `music-mv/songs/in-progress/YYYYMMDD-slug/`；显示名写入 `song.json` 的 `title`。暂时没有歌名时可使用 `YYYYMMDD-untitled`。
 8. 每首歌曲文件夹中的 `song.json` 是工作台数据源。创建或修改歌曲企划、歌词、提示词、歌曲参数、状态或 MV 脚本时，必须在同一轮工作中同步更新 `song.json`。
-9. `song.json` 必须保持有效 JSON。歌词写入 `sections`；风格与演唱要求写入 `prompts` 的 `zh` 和 `en`；MV 分镜写入 `shots`。
+9. `song.json` 必须保持有效 JSON。歌词写入 `sections`；风格与演唱要求写入 `prompts` 的 `zh` 和 `en`；男/女主角定妆形象写入 `characterLooks`，英文必须可直接粘贴到 ComfyUI `01_character_three_views` 的 Shared Character Prompt；MV 分镜写入 `shots`。
 
 ## 歌词完成后的强制流程
 

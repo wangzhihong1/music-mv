@@ -5,8 +5,8 @@ export const PIPELINE_STAGES = [
   { id: 'prompts', label: '提示词', kicker: '04 · Prompts' },
   { id: 'mv-story', label: 'MV 故事', kicker: '06 · Story' },
   { id: 'mv-script', label: 'MV 脚本', kicker: '07 · Script' },
-  { id: 'keyframes', label: '关键帧', kicker: 'Keyframes' },
-  { id: 'video', label: '镜头生成', kicker: 'H3 Video' },
+  { id: 'character-references', label: '主角图片', kicker: 'Character References' },
+  { id: 'shot-videos', label: '分镜视频', kicker: 'H3 Shots' },
   { id: 'post', label: '修复超分', kicker: 'Post' },
   { id: 'delivery', label: '成片', kicker: 'Delivery' },
 ]
@@ -33,6 +33,7 @@ export function derivePipeline(song = {}) {
   const hasStyle = hasText(song.metadata?.genre)
   const hasLyrics = (song.sections || []).some((section) => (section.lyrics || []).length > 0)
   const hasPrompts = (song.prompts || []).some((item) => hasText(item.zh) || hasText(item.en))
+  const hasCharacterLooks = (song.characterLooks || []).some((item) => hasText(item.zh) || hasText(item.en))
   const production = song.production || {}
 
   const stages = PIPELINE_STAGES.map((stage) => {
@@ -59,11 +60,12 @@ export function derivePipeline(song = {}) {
         status = SCRIPT_STATUS[song.mvWorkflow?.scriptStatus] || 'not_started'
         if (status === 'not_started' && (song.shots || []).length > 0) status = 'in_progress'
         break
-      case 'keyframes':
-        status = production.keyframes || 'not_started'
+      case 'character-references':
+        status = production.characterReferences || production.keyframes || 'not_started'
+        if (status === 'not_started' && hasCharacterLooks) status = 'in_progress'
         break
-      case 'video':
-        status = production.video || 'not_started'
+      case 'shot-videos':
+        status = production.shotVideos || production.video || 'not_started'
         break
       case 'post':
         status = production.post || 'not_started'

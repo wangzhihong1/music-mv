@@ -3,6 +3,11 @@ import { ClipboardCheck, Copy, Film } from '@lucide/vue'
 import CopyFeedback from '@/components/common/CopyFeedback.vue'
 import { shotDuration } from '@/lib/time.js'
 
+const SUBJECT_LABELS = {
+  femaleLead: '女主',
+  maleLead: '男主',
+}
+
 defineProps({
   shots: {
     type: Array,
@@ -23,6 +28,10 @@ defineProps({
 })
 
 const emit = defineEmits(['select-shot', 'copy-prompt'])
+
+function subjectLabel(subject) {
+  return SUBJECT_LABELS[subject] || subject
+}
 </script>
 
 <template>
@@ -39,7 +48,7 @@ const emit = defineEmits(['select-shot', 'copy-prompt'])
     <div v-else class="script-table" role="table" aria-label="MV脚本列表">
       <div class="script-table-head" role="row">
         <span role="columnheader">时间</span>
-        <span role="columnheader">出镜 / 景别</span>
+        <span role="columnheader">标题</span>
         <span role="columnheader">视频动作</span>
         <span role="columnheader">运镜</span>
       </div>
@@ -65,7 +74,7 @@ const emit = defineEmits(['select-shot', 'copy-prompt'])
         </button>
         <div v-if="shot.prompt" class="script-prompt">
           <div class="script-prompt-head">
-            <span>角色参考视频提示词</span>
+            <span>{{ shot.genMode === 'composite' ? '剪辑说明（不要粘贴到 H3）' : 'H3 reference contract' }}</span>
             <div class="script-prompt-copy">
               <CopyFeedback :visible="copiedTarget === `shot-${shot.id}`" />
               <button
@@ -79,6 +88,11 @@ const emit = defineEmits(['select-shot', 'copy-prompt'])
                 <Copy v-else :size="14" />
               </button>
             </div>
+          </div>
+          <div v-if="shot.subjects?.length || shot.output" class="script-generation-meta">
+            <span v-if="shot.subjects?.length">参考角色：{{ shot.subjects.map(subjectLabel).join('、') }}</span>
+            <span v-if="shot.genMode">{{ shot.genMode === 'composite' ? '剪辑合成' : 'H3 角色参考视频' }}</span>
+            <span v-if="shot.output">输出：{{ shot.output }}</span>
           </div>
           <p>{{ shot.prompt }}</p>
         </div>

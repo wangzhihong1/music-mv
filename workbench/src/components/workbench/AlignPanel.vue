@@ -4,6 +4,11 @@ import CopyFeedback from '@/components/common/CopyFeedback.vue'
 import { shotDuration } from '@/lib/time.js'
 import { sectionForShot } from '@/utils/song-content.js'
 
+const SUBJECT_LABELS = {
+  femaleLead: '女主',
+  maleLead: '男主',
+}
+
 const props = defineProps({
   shots: {
     type: Array,
@@ -27,6 +32,10 @@ const emit = defineEmits(['select-shot', 'copy-prompt'])
 
 function relatedSection(shot) {
   return sectionForShot(props.sections, shot)
+}
+
+function subjectLabel(subject) {
+  return SUBJECT_LABELS[subject] || subject
 }
 </script>
 
@@ -71,7 +80,7 @@ function relatedSection(shot) {
         </button>
         <div v-if="shot.prompt" class="script-prompt align-prompt">
           <div class="script-prompt-head">
-            <span>角色参考视频提示词</span>
+            <span>{{ shot.genMode === 'composite' ? '剪辑说明（不要粘贴到 H3）' : 'H3 reference contract' }}</span>
             <div class="script-prompt-copy">
               <CopyFeedback :visible="copiedTarget === `shot-${shot.id}`" />
               <button
@@ -85,6 +94,11 @@ function relatedSection(shot) {
                 <Copy v-else :size="14" />
               </button>
             </div>
+          </div>
+          <div v-if="shot.subjects?.length || shot.output" class="script-generation-meta">
+            <span v-if="shot.subjects?.length">参考角色：{{ shot.subjects.map(subjectLabel).join('、') }}</span>
+            <span v-if="shot.genMode">{{ shot.genMode === 'composite' ? '剪辑合成' : 'H3 角色参考视频' }}</span>
+            <span v-if="shot.output">输出：{{ shot.output }}</span>
           </div>
           <p>{{ shot.prompt }}</p>
         </div>

@@ -9,7 +9,7 @@
 | `inspiration/` | 尚未正式立项的主题、句子、故事和声音想法 |
 | `songs/in-progress/` | 正在制作的歌曲 |
 | `songs/completed/` | 已定稿、已发布或暂时封存的歌曲 |
-| `library/` | 可复用的风格、歌词素材和提示词 |
+| `library/` | 可复用的风格、歌词素材、音乐提示词和 [H3 分镜提示词写法](library/h3-prompt-writing.md) |
 | `templates/song/` | 新歌立项时复制使用的标准文档 |
 | `mvs/` | 进入本机素材生产后的 MV 专属目录 |
 | `docs/` | 创作原则 |
