@@ -15,6 +15,7 @@ import ScriptPanel from '@/components/workbench/ScriptPanel.vue'
 import SongFacts from '@/components/workbench/SongFacts.vue'
 import StoryPanel from '@/components/workbench/StoryPanel.vue'
 import StylePanel from '@/components/workbench/StylePanel.vue'
+import ReleaseCopyPanel from '@/components/workbench/ReleaseCopyPanel.vue'
 import IconButton from '@/components/common/IconButton.vue'
 import { useClipboard } from '@/composables/useClipboard.js'
 import { useWorkspace } from '@/composables/useWorkspace.js'
@@ -148,6 +149,15 @@ function copyCharacterLook(target) {
   const look = characterLooks.value.find((item) => item.id === id)
   copyText(lookText(look || {}, negative ? 'negative' : 'positive'), `look-${target}`)
 }
+
+function copyRelease(target) {
+  const [platformId, field] = String(target).split('-')
+  const platform = currentSong.value.releaseCopy?.[platformId] || {}
+  const text = field === 'all'
+    ? [platform.title, platform.description].filter(Boolean).join('\n\n')
+    : platform[field] || ''
+  copyText(text, `release-${platformId}-${field}`)
+}
 </script>
 
 <template>
@@ -223,6 +233,11 @@ function copyCharacterLook(target) {
                 @select-shot="selectShot"
                 @copy-prompt="copyShotPrompt"
               />
+              <ReleaseCopyPanel
+                :release-copy="currentSong.releaseCopy"
+                :copied-target="copiedTarget"
+                @copy="copyRelease"
+              />
             </div>
           </div>
 
@@ -274,6 +289,7 @@ function copyCharacterLook(target) {
             :copied-target="copiedTarget"
             @update:prompt-language="promptLanguage = $event"
             @copy-look="copyCharacterLook"
+            @copy-release="copyRelease"
           />
         </div>
       </template>

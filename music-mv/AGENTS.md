@@ -96,7 +96,7 @@
 6. 正式启动时保留用户的原始描述，再提取主题、情绪、音乐风格、演唱语言、人声、场景、必要元素、避免元素和待确认信息。不要因为整理信息而改变用户原意，也不要重复询问已经提供的信息。只有缺失内容会实质改变作品方向时，才提出简短问题。
 7. 歌名确定后，歌曲文件夹继续遵循 `YYYYMMDD-slug`；显示名写入 `song.json` 的 `title`。暂时没有歌名时可使用 `YYYYMMDD-untitled`，确认歌名后再改名。
 8. 每首歌曲文件夹中的 `song.json` 是 Web 工作台的数据源。创建或修改歌曲企划、歌词、中英文提示词、歌曲参数、状态或 MV 脚本时，必须在同一轮工作中同步更新 `song.json`，确保页面内容与 Markdown 文档一致。
-9. `song.json` 必须保持有效 JSON。歌词按歌曲段落写入 `sections`；风格、情绪、乐器、演唱方式、结构与避免元素写入 `prompts`，并尽量同时维护 `zh` 和 `en`；男/女主角定妆形象写入 `characterLooks`。`characterLooks.en` 必须是可直接粘贴到 ComfyUI `01_character_three_views` 左上角 Shared Character Prompt 的英文全身共享词：单人、从头顶到鞋底、直立、双臂下垂、暖灰无缝棚拍；不要写正面/侧面/背面或半身裁切。`zh` 为对照译文。负向提示词对齐该工作流的 Front Negative，并补角色专属避免项。MV 分镜单独写入 `shots`。
+9. `song.json` 必须保持有效 JSON。歌词按歌曲段落写入 `sections`；风格、情绪、乐器、演唱方式、结构与避免元素写入 `prompts`，并尽量同时维护 `zh` 和 `en`；男/女主角定妆形象写入 `characterLooks`。`characterLooks.en` 必须是可直接粘贴到 ComfyUI `01_character_three_views` 左上角 Shared Character Prompt 的英文全身共享词：单人、从头顶到鞋底、直立、双臂下垂、暖灰无缝棚拍；不要写正面/侧面/背面或半身裁切。`zh` 为对照译文。负向提示词对齐该工作流的 Front Negative，并补角色专属避免项。MV 分镜单独写入 `shots`。YouTube 与抖音的标题、描述写入 `releaseCopy`。
 
 ## 歌曲核心原则
 

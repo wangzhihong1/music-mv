@@ -123,6 +123,7 @@
 | 20260912 | H3 3D 超分试跑 | 用户 / Agent | 用户同意先确认粗剪 v02，再装 3D 超分模型并用一条近景试跑。已下载 `minimax_h3_latent_upscaler_3d_fp16.safetensors` 到 ComfyUI `latent_upscale_models/`。新增 `MusicMV_tools/queue-h3-upscale.mjs`：在 `05_ref2va_4step_sla` 的 Sampler 之后、VAE 解码之前接入 `MMH3UltimateUpscale`（1920×1088、fp16、空间切块、2 步 denoise 0.3）。镜 26 试跑：5 秒 / 0.5MP / seed 61，未覆盖 raw。输出 `generated/video/intermediate/shot26_upscale_v01.mp4`（1920×1088、124 帧、5.167 秒）。本机约 7.4 分钟，未 OOM。身份和动作与 v03 同拍点一致，脸和头发更清晰；因同种子重跑 H3 后再超分，不是对已锁定 MP4 无损放大 | 待用户确认清晰度 | 用户接受后再决定是否批量超分其余 H3 镜 |
 | 20260912 | 镜 01 超分试跑 | 用户 / Agent | 用户决定不全部重跑，只超分模糊镜头，先看镜 01。同锁定参数 6 秒 / 0.8MP / seed 191，输出 `generated/video/intermediate/shot01_upscale_v01.mp4`，未覆盖 raw。约 11.6 分钟，未 OOM | 待用户确认 | 确认后再点名下一条模糊镜 |
 | 20260912 | 超分正片接入粗剪 v03 | 用户 / Agent | 用户确认先把已超分镜头接入正片。将镜 01、26 超分结果复制为 `shot_01_h3_v04.mp4`、`shot_26_h3_v04.mp4`，保留 v03 原片；按 03:51 重接 `generated/video/final/rough-cut_v03.mp4`。其余分镜仍用原 H3 片 | 待用户审阅 v03 | 用户点名下一条模糊镜后再超分 |
+| 20260913 | YouTube / 抖音发布文案 | Agent | 写入 `09-release.md` 与 `song.json.releaseCopy`：YouTube、抖音标题和描述，工作台成片页可复制 | 待发布时使用 | 发布时直接复制对应平台字段 |
 
 ## 最终版本
 

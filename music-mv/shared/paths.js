@@ -29,4 +29,5 @@ export const SONG_DOCUMENTS = [
   '06-mv-story.md',
   '07-mv-script.md',
   '08-checklist.md',
+  '09-release.md',
 ]

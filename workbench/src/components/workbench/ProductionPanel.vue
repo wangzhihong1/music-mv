@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import { Film, Image as ImageIcon, Music2, X } from '@lucide/vue'
 import CharacterLooksPanel from '@/components/workbench/CharacterLooksPanel.vue'
+import ReleaseCopyPanel from '@/components/workbench/ReleaseCopyPanel.vue'
 import { PRODUCTION_FOCUS } from '@/constants/navigation.js'
 
 const STAGE_COPY = {
@@ -37,7 +38,9 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['update:promptLanguage', 'copy-look'])
+const emit = defineEmits(['update:promptLanguage', 'copy-look', 'copy-release'])
+const releaseCopy = computed(() => props.song.releaseCopy || {})
+const showingRelease = computed(() => props.focusStage === 'delivery')
 
 const selectedImage = ref(null)
 const production = computed(() => props.song.production || {})
@@ -101,6 +104,13 @@ function closeImage() {
         · {{ fileCount }} 个文件
       </span>
     </div>
+
+    <ReleaseCopyPanel
+      v-if="showingRelease"
+      :release-copy="releaseCopy"
+      :copied-target="copiedTarget"
+      @copy="emit('copy-release', $event)"
+    />
 
     <CharacterLooksPanel
       v-if="showingLooks"

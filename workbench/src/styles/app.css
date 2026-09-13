@@ -690,6 +690,42 @@ h1 {
   line-height: 1.58;
 }
 
+.release-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.release-card {
+  min-width: 0;
+  padding: 13px 15px 16px;
+  border-bottom: 1px solid #e8ebe5;
+}
+
+.release-card:nth-child(odd) {
+  border-right: 1px solid #e8ebe5;
+}
+
+.release-copy-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.release-field {
+  margin-top: 12px;
+}
+
+.release-field p {
+  margin-top: 5px;
+  color: #535b53;
+  font-size: 12px;
+  line-height: 1.58;
+}
+
+.release-description {
+  white-space: pre-wrap;
+}
+
 .script-table {
   padding: 16px 12px 18px;
 }
@@ -1043,18 +1079,22 @@ h1 {
     justify-content: flex-end;
   }
 
-  .prompt-grid {
+  .prompt-grid,
+  .release-grid {
     grid-template-columns: 1fr;
   }
 
   .prompt-item,
   .prompt-item:nth-child(odd),
-  .prompt-item:nth-last-child(-n + 2) {
+  .prompt-item:nth-last-child(-n + 2),
+  .release-card,
+  .release-card:nth-child(odd) {
     border-right: 0;
     border-bottom: 1px solid #e8ebe5;
   }
 
-  .prompt-item:last-child {
+  .prompt-item:last-child,
+  .release-card:last-child {
     border-bottom: 0;
   }
 

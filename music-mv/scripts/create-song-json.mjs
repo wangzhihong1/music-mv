@@ -60,6 +60,10 @@ const song = {
   },
   sections: [],
   shots: [],
+  releaseCopy: {
+    youtube: { title: '', description: '' },
+    douyin: { title: '', description: '' },
+  },
 }
 
 await writeFile(outputPath, `${JSON.stringify(song, null, 2)}\n`, 'utf8')
