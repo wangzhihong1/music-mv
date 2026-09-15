@@ -4,21 +4,21 @@
   "title": "故乡",
   "date": "20260914",
   "status": "歌词修订中（正式歌名已确认）",
-  "coreStatement": "写给身在故乡的人：由低沉男声讲述被叫着小薇的人走在泥路和田埂上，被云、草、庄稼带回小时候，却发现那些场景一去不复返，并记住‘回得了故乡，走不进那天’。",
+  "coreStatement": "写给身在故乡的人：由低沉厚重的男声讲述被叫着小王的人走在泥路和田埂上，被云、草、庄稼带回小时候，却发现那些场景一去不复返，并记住‘回得了故乡，走不进那天’。",
   "metadata": {
-    "genre": "低沉男声叙事民谣 / 磨损木吉他",
-    "mood": "感慨、低沉、故事感、不该难过也高兴不起来",
-    "tempo": "68 BPM",
+    "genre": "低沉男声慢唱叙事民谣",
+    "mood": "感慨、极慢、字少拍多",
+    "tempo": "58 BPM",
     "key": "A Minor",
-    "vocal": "成年男声，低沉胸腔，干、近、有故事感；主歌近乎讲故事，副歌仍在胸声；回得了的「了」读三声 liǎo，不读轻声 le",
+    "vocal": "成年男声，低沉厚重，适合故事民谣；每一行唱满一小节，行尾留白；回得了的「了」读三声 liǎo 并拉长，不读轻声 le",
     "duration": ""
   },
   "prompts": [
     {
       "key": "mureka",
-      "label": "Mureka 专属风格提示词（428 字符）",
-      "zh": "Mandarin baritone story-folk，68 BPM，4/4拍，A小调，黄昏、低沉、叙事。成年男声，胸腔为主，干、近、低，像坐在院门口把一件往事慢慢讲完；不要女声，不要气声甜歌，不要少年音，不要流行亮嗓。磨损钢弦木吉他用拇指慢拨，低音贝斯，刷子极轻，可加极暗的大提琴长音，钢琴很少或不用。主唱明显后于拍点，主歌近乎说故事，音区低，咬字沉而清楚。“，”为半拍停顿。8小节低沉吉他前奏，不要标题句，不要港口或巷口。每一遍「回得了」的「了」必须读三声liǎo，表示能够，绝对不要读轻声le。“回得了故乡”平稳咬实liǎo；“走不进那天”的“天”延长两拍，仍在胸声，不要把男声送去高音。点点滴滴薄得像云，不要唱成说明句。第二段略增力度，仍像把话讲完。桥段更低更近，唱“明明不该难过，却也高兴不起来”，不要变成气声甜歌。最终副歌更满但不转调、不冲顶。结尾吉他空弦。避免嘶吼、假声飘高、明亮民谣、EDM、摇滚鼓、金黄怀旧、旅行归来和歌词出现“农村”。",
-      "en": "Mandarin baritone story-folk, 68 BPM, 4/4, A minor, dusk, low and narrative. Adult male voice, chest-dominant, dry, close and low, like telling a story at the courtyard gate at dusk; no female vocal, no breathy sweet pop, no boyish tone, no bright pop tenor. Worn steel-string guitar thumb-picked slowly, low bass, very light brushes, optional dark cello drone, little or no piano. Vocal sits behind the beat; verses almost spoken in a low register, diction heavy and clear. A comma is a half-beat pause. 8-bar low guitar intro; no title phrase, no port, no alley. Every ‘回得了’ must be huí dé liǎo: 了 is third-tone liǎo meaning able to, never the particle le. Keep ‘回得了故乡’ steady with a clear liǎo; hold ‘天’ in ‘走不进那天’ two beats, still in chest voice, never sent high. Sing 点点滴滴 as thin as cloud, never as explanation. Verse 2 a little stronger, still storytelling. Bridge even lower and closer on ‘明明不该难过，却也高兴不起来’, not breathy-sweet. Final chorus fuller but no modulation and no peak. End on open-string guitar. Avoid belting, falsetto float, bright folk-pop, EDM, rock drums, golden nostalgia, homecoming-arrival shots, and the word 农村."
+      "label": "Mureka 专属风格提示词（462 字符）",
+      "zh": "Mandarin bass-baritone slow story-folk，58 BPM，4/4拍，A小调，极慢、叙事。男声必须低沉厚重，声线有分量，很适合唱故事性民谣；胸腔共鸣足，像把往事压着讲完。不要薄、不要亮、不要男高音、不要少年音、不要女声、不要气声甜歌。关键：歌词唱得很慢，字少拍多，不要说话赶词，不要说唱。每一行唱满一整小节，行尾留一拍空；每两行后再留1–2拍。副歌用长音，不要把字塞进拍里。主唱明显后于拍点，拉元音，慢咬字，声音厚而稳。“，”为换气或把字拉开。磨损钢弦木吉他拇指慢拨，低音贝斯，刷子极轻，可加暗大提琴；钢琴很少或不用。8小节极慢吉他前奏，不要标题句。有人叫他小王。每一遍「回得了」的「了」读三声liǎo并拉长，不要读轻声le。“回得了，故乡”唱得很开，咬实liǎo；“走不进 / 那天”拆开唱，“天”延长两拍，仍在低沉胸声，不要往上送。点点滴滴每个字拉开。桥段更慢更厚。最终副歌更满但不加速、不转调、不冲顶。避免薄亮嗓、假声、赶词、说唱、明亮民谣、EDM、摇滚鼓、金黄怀旧、歌词出现“农村”。",
+      "en": "Mandarin bass-baritone slow story-folk, 58 BPM, 4/4, A minor, very slow and narrative. The male voice must be deep, thick and weighty, the kind that fits story-folk; full chest resonance, as if pressing a memory into speech. No thin tone, no bright tenor, no boyish voice, no female vocal, no breathy sweet pop. Lyrics sung slowly: few syllables, many beats; never spoken-rap. Each line fills one bar plus a beat rest; after every two lines leave 1–2 extra beats. Choruses move by sustained notes. Sit behind the beat; stretch vowels; keep the tone thick and steady. Worn steel guitar thumb-picked slowly, low bass, light brushes, optional dark cello; little or no piano. 8-bar very slow guitar intro. Someone still calls him 小王. Every 了 in 回得了 is third-tone liǎo and held, never le. Sing “回得了，故乡” spaciously; split “走不进 / 那天” and hold 天 two beats in low chest voice, never sent high. Space out 点点滴滴. Bridge even slower and heavier. Final chorus fuller but do not speed up, modulate, or belt. Avoid thin bright voice, falsetto, rushed diction, bright folk-pop, EDM, rock drums, golden nostalgia, and the word 农村."
     }
   ],
   "characterLooks": [
@@ -75,12 +75,18 @@
       "lyrics": [
         "泥路上的风，",
         "还是会拐那道弯",
-        "云从田那边过来",
-        "走得比我还慢",
-        "草长过了鞋面",
-        "像没剪完的夏天",
-        "我伸手去摸",
-        "摸到的是今天"
+        "云从田那边",
+        "过来",
+        "走得比我",
+        "还慢",
+        "草长过了",
+        "鞋面",
+        "像没剪完的",
+        "夏天",
+        "我伸手",
+        "去摸",
+        "摸到的",
+        "是今天"
       ]
     },
     {
@@ -88,10 +94,14 @@
       "label": "Pre-Chorus 1",
       "time": "",
       "lyrics": [
-        "有人还叫我小薇",
-        "院门还开着",
-        "我想应一声",
-        "到嘴边，又散了"
+        "有人还叫我",
+        "小王",
+        "院门",
+        "还开着",
+        "我想应",
+        "一声",
+        "到嘴边，",
+        "又散了"
       ]
     },
     {
@@ -99,13 +109,18 @@
       "label": "Chorus 1",
       "time": "",
       "lyrics": [
-        "回得了故乡",
-        "风还认那道弯",
-        "回得了故乡",
-        "走不进那天",
-        "那些点点滴滴",
-        "薄得像云",
-        "一吹就不在"
+        "回得了，故乡",
+        "风还认",
+        "那道弯",
+        "回得了，故乡",
+        "走不进",
+        "那天",
+        "那些",
+        "点点滴滴",
+        "薄得",
+        "像云",
+        "一吹",
+        "就不在"
       ]
     },
     {
@@ -113,14 +128,22 @@
       "label": "Verse 2",
       "time": "",
       "lyrics": [
-        "庄稼换了一季",
-        "还是熟悉的香",
-        "墙上那一截",
-        "还是我当年的身高",
-        "田里的风一过",
-        "草就低下来",
-        "我站在田埂上",
-        "像在等放学铃"
+        "庄稼",
+        "换了一季",
+        "还是",
+        "熟悉的香",
+        "墙上",
+        "那一截",
+        "还是我",
+        "当年的身高",
+        "田里的风",
+        "一过",
+        "草就",
+        "低下来",
+        "我站在",
+        "田埂上",
+        "像在等",
+        "放学铃"
       ]
     },
     {
@@ -128,10 +151,14 @@
       "label": "Pre-Chorus 2",
       "time": "",
       "lyrics": [
-        "没有谁把我赶走",
-        "也没有谁把我留下",
-        "我站在原来的地方",
-        "连自己都有点生"
+        "没有谁",
+        "把我赶走",
+        "也没有谁",
+        "把我留下",
+        "我站在",
+        "原来的地方",
+        "连自己",
+        "都有点生"
       ]
     },
     {
@@ -139,13 +166,18 @@
       "label": "Chorus 2",
       "time": "",
       "lyrics": [
-        "回得了故乡",
-        "泥路还发着烫",
-        "回得了故乡",
-        "走不进那天",
-        "那些点点滴滴",
-        "亮在草里面",
-        "一低头就不见"
+        "回得了，故乡",
+        "泥路还",
+        "发着烫",
+        "回得了，故乡",
+        "走不进",
+        "那天",
+        "那些",
+        "点点滴滴",
+        "还沾在",
+        "草上",
+        "一低头",
+        "就不见"
       ]
     },
     {
@@ -153,14 +185,22 @@
       "label": "Bridge",
       "time": "",
       "lyrics": [
-        "我不是想哭",
-        "也不是想逃",
-        "明明不该难过",
-        "却也高兴不起来",
-        "如果能留下一样",
-        "我想留下那时候的傍晚",
-        "把蝉声和院门",
-        "再过一遍"
+        "我不是",
+        "想哭",
+        "也不是",
+        "想逃",
+        "明明",
+        "不该难过",
+        "却也",
+        "高兴不起来",
+        "如果能留下",
+        "一样",
+        "我想留下",
+        "那时候的傍晚",
+        "把蝉声",
+        "和院门",
+        "再过",
+        "一遍"
       ]
     },
     {
@@ -168,14 +208,20 @@
       "label": "Final Chorus",
       "time": "",
       "lyrics": [
-        "回得了故乡",
-        "我还站在田埂上",
-        "回得了故乡",
-        "走不进那天",
-        "不用谁来安慰",
-        "这不是一场告别",
-        "风还是那年的风",
-        "人已经不是"
+        "回得了，故乡",
+        "我还站在",
+        "田埂上",
+        "回得了，故乡",
+        "走不进",
+        "那天",
+        "不用谁",
+        "来安慰",
+        "这不是",
+        "一场告别",
+        "风还是",
+        "那年的风",
+        "人已经",
+        "不是"
       ]
     },
     {
@@ -183,8 +229,10 @@
       "label": "Outro",
       "time": "",
       "lyrics": [
-        "云还停在田那边",
-        "我还站着发呆"
+        "云还停在",
+        "田那边",
+        "我还站着",
+        "发呆"
       ]
     }
   ],
