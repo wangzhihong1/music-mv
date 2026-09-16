@@ -89,8 +89,8 @@ for (const entry of entries) {
       const outputs = new Set()
       for (const [index, shot] of shots.entries()) {
         const label = shot.id || `第 ${index + 1} 镜`
-        if (!Array.isArray(shot.subjects) || shot.subjects.length === 0) {
-          errors.push(`${relativePath}: ${label} 必须填写 subjects，声明使用的角色参考图`)
+        if (!Array.isArray(shot.subjects)) {
+          errors.push(`${relativePath}: ${label} 的 subjects 必须是数组；空景可以是空数组，有人出镜时再填写角色参考图`)
         }
         if (!['characterVideo', 'composite'].includes(shot.genMode)) {
           errors.push(`${relativePath}: ${label} 的 genMode 必须为 characterVideo 或 composite`)
