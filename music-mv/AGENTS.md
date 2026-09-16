@@ -6,6 +6,7 @@
 
 - 一首音乐对应一支 MV。每首歌使用 `songs/YYYYMMDD-slug/` 作为唯一工作目录，例如 `songs/20260823-one-day-short-of-forever/`。
 - 企划、歌词、`song.json`、音频、角色与场景资产、分析缓存、生成文件和成片都放在该目录内，可按需要继续使用 `music/`、`assets/`、`generated/`、`.analysis/` 等子目录。
+- `assets/characters/` 中的主角参考图必须提交到 Git；分镜视频、超分、成片、原曲和分析缓存仍不入库。
 - 进度写入 `song.json`：`lifecycle` 为 `in-progress` 或 `completed`，`status` 为给人看的说明。完成后只改这两个字段，不要把文件夹搬到其他目录。
 - ComfyUI 文生图/图生图工作流属于公共模板，统一放在 `D:\ComfyUI\ComfyUI_windows_portable\ComfyUI\user\default\workflows\MusicMV\`，不得写入某支 MV 的目录，也不要在文件名和默认路径中绑定具体歌曲。
 - ComfyUI 自定义节点统一放在 `D:\ComfyUI\ComfyUI_windows_portable\ComfyUI\custom_nodes\`；ComfyUI 模型、运行配置、临时输入与输出也由 ComfyUI 自身目录管理，不在本项目中保留同步副本。
@@ -84,7 +85,7 @@
 ## 歌曲档案范围
 
 - `inspiration/`、`songs/`、`library/`、`templates/song/` 用于歌曲企划、歌词、提示词、结构化 `song.json` 以及该歌的本机成片。
-- 歌曲资料沿用 `YYYYMMDD-slug/` 命名。音频、角色资产、分析、生成文件和成片放入同一歌曲目录，不得放入 `workbench/`。工作台扫描 `songs/` 并按 `lifecycle` 分成「创作中 / 已完成」。
+- 歌曲资料沿用 `YYYYMMDD-slug/` 命名。音频、角色资产、分析、生成文件和成片放入同一歌曲目录，不得放入 `workbench/`。工作台扫描 `songs/` 并按 `lifecycle` 分成「创作中 / 已完成」。主角参考图放在 `assets/characters/` 并纳入 Git；其余媒体文件保持本地。
 - 涉及真人 MV 的视觉、生成、目录和质量要求时，同时遵循本文件前述音乐 MV 创作规范。
 
 ## 音乐创作入口

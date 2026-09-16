@@ -19,6 +19,10 @@ dist/
 *.jpeg
 *.webp
 
+# Character reference stills are tracked
+!**/assets/characters/
+!**/assets/characters/**
+
 # Root-level working inputs and disposable QA directories
 wav2lip_input.png
 *_tmp/
