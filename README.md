@@ -7,7 +7,7 @@
 | `music-mv/` | 音乐 MV 规范、歌曲档案、本机成片数据 | `music-mv/AGENTS.md` |
 | `workbench/` | 纯前端 Vue 工作台 | `workbench/AGENTS.md` |
 
-歌曲与 MV 以本地文件夹为真相源，不使用数据库。工作台只读取 `music-mv/` 中的 `song.json` 与文档。
+歌曲与 MV 以本地文件夹为真相源，不使用数据库。工作台读取 `music-mv/` 中的 `song.json` 与文档，并可在歌词页写回对应段落的歌词。
 
 ## 启动工作台
 

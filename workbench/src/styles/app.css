@@ -564,6 +564,48 @@ h1 {
   background: #edf1eb;
 }
 
+.text-button {
+  min-height: 26px;
+  padding: 0 9px;
+  border: 1px solid #d8dcd5;
+  border-radius: 5px;
+  color: #3e4a40;
+  background: #ffffff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.text-button:hover:not(:disabled) {
+  background: #edf1eb;
+}
+
+.text-button.is-primary {
+  color: #f5f7f3;
+  background: #294d38;
+  border-color: #294d38;
+}
+
+.text-button.is-primary:hover:not(:disabled) {
+  background: #234332;
+}
+
+.text-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.lyrics-dirty {
+  color: #8a6a32;
+  font-size: 12px;
+}
+
+.lyrics-save-error {
+  margin: 0;
+  padding: 8px 13px 0;
+  color: #9b3d32;
+  font-size: 12px;
+}
+
 [data-tooltip]::after {
   position: absolute;
   z-index: 50;
@@ -641,6 +683,36 @@ h1 {
   display: block;
   font-size: 13px;
   line-height: 1.7;
+}
+
+.lyric-section.is-editing {
+  cursor: default;
+}
+
+.lyric-editor {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid #d5dbd4;
+  border-radius: 5px;
+  color: inherit;
+  background: #fbfcf9;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.7;
+  resize: vertical;
+  min-height: 72px;
+}
+
+.lyric-editor:focus {
+  outline: 2px solid #3e7b58;
+  outline-offset: 1px;
+  background: #ffffff;
+}
+
+.lyric-editor:disabled {
+  opacity: 0.7;
 }
 
 .prompt-grid {

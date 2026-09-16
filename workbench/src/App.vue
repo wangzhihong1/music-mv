@@ -18,6 +18,7 @@ import StylePanel from '@/components/workbench/StylePanel.vue'
 import ReleaseCopyPanel from '@/components/workbench/ReleaseCopyPanel.vue'
 import IconButton from '@/components/common/IconButton.vue'
 import { useClipboard } from '@/composables/useClipboard.js'
+import { useLyricsEditor } from '@/composables/useLyricsEditor.js'
 import { useWorkspace } from '@/composables/useWorkspace.js'
 import { METADATA_FIELDS } from '@/constants/song.js'
 import { HEADER_STAGE, SONG_NAVS, STAGE_VIEW_MODES } from '@/constants/navigation.js'
@@ -32,8 +33,26 @@ const {
   loadError,
   selectNav,
   selectSong,
+  setRefreshPaused,
+  saveSongLyrics,
 } = useWorkspace()
 const { copiedTarget, copyText } = useClipboard()
+const {
+  editing: editingLyrics,
+  saving: savingLyrics,
+  saveError: lyricsSaveError,
+  drafts: lyricsDrafts,
+  editable: lyricsEditable,
+  isDirty: lyricsDirty,
+  startEdit: startLyricsEdit,
+  cancelEdit: cancelLyricsEdit,
+  saveEdit: saveLyricsEdit,
+  updateDraft: updateLyricsDraft,
+} = useLyricsEditor({
+  currentSong,
+  setRefreshPaused,
+  saveSongLyrics,
+})
 
 const viewMode = ref('overview')
 const selectedStage = ref('')
@@ -206,8 +225,18 @@ function copyRelease(target) {
               :sections="sections"
               :active-section="activeSection"
               :copied="copiedTarget === 'lyrics'"
+              :editing="editingLyrics"
+              :saving="savingLyrics"
+              :save-error="lyricsSaveError"
+              :drafts="lyricsDrafts"
+              :dirty="lyricsDirty"
+              :editable="lyricsEditable"
               @copy="copyText(allLyrics, 'lyrics')"
               @select-section="selectSection"
+              @start-edit="startLyricsEdit"
+              @cancel-edit="cancelLyricsEdit"
+              @save-edit="saveLyricsEdit"
+              @update-draft="updateLyricsDraft"
             />
 
             <div class="right-column">
@@ -242,8 +271,18 @@ function copyRelease(target) {
             :sections="sections"
             :active-section="activeSection"
             :copied="copiedTarget === 'lyrics'"
+            :editing="editingLyrics"
+            :saving="savingLyrics"
+            :save-error="lyricsSaveError"
+            :drafts="lyricsDrafts"
+            :dirty="lyricsDirty"
+            :editable="lyricsEditable"
             @copy="copyText(allLyrics, 'lyrics')"
             @select-section="selectSection"
+            @start-edit="startLyricsEdit"
+            @cancel-edit="cancelLyricsEdit"
+            @save-edit="saveLyricsEdit"
+            @update-draft="updateLyricsDraft"
           />
           <PromptsPanel
             v-else-if="viewMode === 'prompts'"

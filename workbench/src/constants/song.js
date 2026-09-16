@@ -1,5 +1,6 @@
 export const EMPTY_SONG = {
   id: '',
+  folder: '',
   title: '暂无歌曲',
   date: '',
   status: '等待创建',

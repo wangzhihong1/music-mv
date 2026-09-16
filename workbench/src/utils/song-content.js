@@ -1,6 +1,16 @@
+export function lyricsToText(lyrics = []) {
+  return (lyrics || []).join('\n')
+}
+
+export function textToLyrics(text = '') {
+  const normalized = String(text).replace(/\r\n/g, '\n').replace(/\r/g, '').replace(/\n+$/, '')
+  if (!normalized) return []
+  return normalized.split('\n')
+}
+
 export function joinLyrics(sections = []) {
   return sections
-    .map((section) => `[${section.label}]\n${(section.lyrics || []).join('\n')}`)
+    .map((section) => `[${section.label}]\n${lyricsToText(section.lyrics)}`)
     .join('\n\n')
 }
 

@@ -1,6 +1,8 @@
+import { Buffer } from 'node:buffer'
 import { createReadStream } from 'node:fs'
-import { readFile, readdir, stat } from 'node:fs/promises'
+import { readFile, readdir, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
+import { WORKSPACE_CHANGED_EVENT } from '../src/constants/workspace.js'
 import { attachProductions } from './studio-production.js'
 
 const SONGS_DIRECTORY = 'songs'
@@ -125,6 +127,135 @@ function sendJson(response, statusCode, payload) {
   response.end(JSON.stringify(payload))
 }
 
+const MAX_JSON_BODY_BYTES = 512 * 1024
+const LYRICS_ROUTE = /^\/api\/songs\/([^/]+)\/lyrics$/
+
+function isSafeFolderName(folderName) {
+  return Boolean(folderName)
+    && folderName !== '.'
+    && folderName !== '..'
+    && !folderName.includes('/')
+    && !folderName.includes('\\')
+    && !folderName.includes('\0')
+}
+
+function readJsonBody(request, maxBytes = MAX_JSON_BODY_BYTES) {
+  return new Promise((resolve, reject) => {
+    const chunks = []
+    let size = 0
+    let settled = false
+
+    function fail(error) {
+      if (settled) return
+      settled = true
+      reject(error)
+    }
+
+    request.on('data', (chunk) => {
+      size += chunk.length
+      if (size > maxBytes) {
+        const error = new Error('请求体过大')
+        error.statusCode = 413
+        fail(error)
+        request.destroy()
+        return
+      }
+      chunks.push(chunk)
+    })
+    request.on('end', () => {
+      if (settled) return
+      try {
+        const raw = Buffer.concat(chunks).toString('utf8')
+        settled = true
+        resolve(raw ? JSON.parse(raw) : {})
+      } catch {
+        const error = new Error('请求体不是有效 JSON')
+        error.statusCode = 400
+        fail(error)
+      }
+    })
+    request.on('error', fail)
+  })
+}
+
+function applySectionLyrics(song, updates) {
+  if (!Array.isArray(updates) || updates.length === 0) {
+    const error = new Error('没有要保存的段落')
+    error.statusCode = 400
+    throw error
+  }
+
+  const sections = Array.isArray(song.sections) ? song.sections : []
+  const byId = new Map(sections.map((section) => [section.id, section]))
+  const seen = new Set()
+
+  for (const update of updates) {
+    if (!update || typeof update.id !== 'string' || !update.id) {
+      const error = new Error('歌词段落编号无效')
+      error.statusCode = 400
+      throw error
+    }
+    if (seen.has(update.id)) {
+      const error = new Error(`歌词段落重复：${update.id}`)
+      error.statusCode = 400
+      throw error
+    }
+    seen.add(update.id)
+
+    const section = byId.get(update.id)
+    if (!section) {
+      const error = new Error(`找不到段落 ${update.id}`)
+      error.statusCode = 400
+      throw error
+    }
+    if (!Array.isArray(update.lyrics) || update.lyrics.some((line) => typeof line !== 'string')) {
+      const error = new Error(`段落 ${update.id} 的歌词必须是字符串数组`)
+      error.statusCode = 400
+      throw error
+    }
+
+    section.lyrics = update.lyrics.map((line) => line.replace(/\r/g, ''))
+  }
+}
+
+async function writeSongLyrics(studioRoot, request, response, folderName) {
+  const decodedFolder = decodeURIComponent(folderName)
+  if (!isSafeFolderName(decodedFolder)) {
+    sendJson(response, 400, { error: '歌曲目录无效' })
+    return
+  }
+
+  const dataPath = path.join(studioRoot, SONGS_DIRECTORY, decodedFolder, 'song.json')
+  if (!isInsideStudio(studioRoot, dataPath)) {
+    sendJson(response, 403, { error: '无权访问该文件' })
+    return
+  }
+
+  let source
+  try {
+    source = await readFile(dataPath, 'utf8')
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      sendJson(response, 404, { error: '歌曲不存在' })
+      return
+    }
+    throw error
+  }
+
+  let song
+  try {
+    song = JSON.parse(source)
+  } catch {
+    sendJson(response, 500, { error: '歌曲档案不是有效 JSON' })
+    return
+  }
+
+  const payload = await readJsonBody(request)
+  applySectionLyrics(song, payload.sections)
+  await writeFile(dataPath, `${JSON.stringify(song, null, 2)}\n`, 'utf8')
+  sendJson(response, 200, { ok: true })
+}
+
 async function sendStudioMedia(studioRoot, request, response) {
   const requestUrl = new URL(request.url, 'http://localhost')
   const relativePath = decodeURIComponent(requestUrl.pathname.replace(/^\/studio-media\//, ''))
@@ -212,6 +343,16 @@ function apiMiddleware(studioRoot) {
       return
     }
 
+    const lyricsMatch = requestUrl.pathname.match(LYRICS_ROUTE)
+    if (request.method === 'POST' && lyricsMatch) {
+      try {
+        await writeSongLyrics(studioRoot, request, response, lyricsMatch[1])
+      } catch (error) {
+        sendJson(response, error.statusCode || 500, { error: error.message })
+      }
+      return
+    }
+
     if (request.method !== 'GET' || !['/api/workspace', '/api/songs'].includes(requestUrl.pathname)) {
       next()
       return
@@ -249,7 +390,7 @@ export function songLibraryPlugin() {
           || filePath.endsWith('.md')
           || shouldReloadProduction(filePath)
         if (['add', 'change', 'unlink'].includes(eventName) && isWatched) {
-          server.ws.send({ type: 'full-reload' })
+          server.ws.send({ type: 'custom', event: WORKSPACE_CHANGED_EVENT })
         }
       })
       server.middlewares.use(apiMiddleware(studioRoot))

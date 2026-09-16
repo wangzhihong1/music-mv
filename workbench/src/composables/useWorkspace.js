@@ -1,7 +1,8 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { fetchWorkspace } from '@/api/workspace'
+import { fetchWorkspace, saveSongLyrics as persistSongLyrics } from '@/api/workspace'
 import { EMPTY_SONG } from '@/constants/song'
 import { SONG_NAVS } from '@/constants/navigation.js'
+import { WORKSPACE_CHANGED_EVENT } from '@/constants/workspace.js'
 
 export function useWorkspace() {
   const songs = ref([])
@@ -9,7 +10,7 @@ export function useWorkspace() {
   const selectedSongId = ref('')
   const activeNav = ref('in-progress')
   const loadError = ref('')
-  let refreshTimer
+  const refreshPaused = ref(false)
   let snapshot = ''
 
   const collectionSongs = computed(() =>
@@ -63,13 +64,32 @@ export function useWorkspace() {
     selectedSongId.value = songId
   }
 
+  function setRefreshPaused(paused) {
+    refreshPaused.value = paused
+  }
+
+  function onWorkspaceChanged() {
+    if (!refreshPaused.value) {
+      loadWorkspace({ silent: true })
+    }
+  }
+
+  async function saveSongLyrics(folder, sectionUpdates) {
+    await persistSongLyrics(folder, sectionUpdates)
+    await loadWorkspace({ silent: true })
+  }
+
   onMounted(() => {
     loadWorkspace()
-    refreshTimer = window.setInterval(() => loadWorkspace({ silent: true }), 4000)
+    if (import.meta.hot) {
+      import.meta.hot.on(WORKSPACE_CHANGED_EVENT, onWorkspaceChanged)
+    }
   })
 
   onBeforeUnmount(() => {
-    window.clearInterval(refreshTimer)
+    if (import.meta.hot) {
+      import.meta.hot.off(WORKSPACE_CHANGED_EVENT, onWorkspaceChanged)
+    }
   })
 
   return {
@@ -82,5 +102,7 @@ export function useWorkspace() {
     currentSong,
     selectNav,
     selectSong,
+    setRefreshPaused,
+    saveSongLyrics,
   }
 }
