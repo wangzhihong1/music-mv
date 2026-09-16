@@ -1,0 +1,297 @@
+{
+  "schemaVersion": 2,
+  "slug": "just-thinking-of-you",
+  "title": "只是想你了",
+  "date": "20260913",
+  "status": "创作中",
+  "lifecycle": "in-progress",
+  "coreStatement": "这是一首写给深夜独自到家、仍想着某个人却不打算打扰的人，关于没开灯的房间里那句不必抱歉的想念，希望听众感到克制也可以是温柔，并记住「只是想你了」。",
+  "metadata": {
+    "genre": "深夜都市抒情情歌",
+    "mood": "克制、安静、深夜思念、不道歉",
+    "tempo": "",
+    "key": "",
+    "vocal": "中文第一人称；本片沿用《比永远差一天》女主脸，录音棚戴耳机演唱第一段副歌",
+    "duration": "00:28"
+  },
+  "prompts": [
+    {
+      "key": "style",
+      "label": "风格",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "key": "mood",
+      "label": "情绪",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "key": "instruments",
+      "label": "乐器",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "key": "vocal",
+      "label": "演唱方式",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "key": "structure",
+      "label": "结构与动态",
+      "zh": "",
+      "en": ""
+    },
+    {
+      "key": "avoid",
+      "label": "避免元素",
+      "zh": "",
+      "en": ""
+    }
+  ],
+  "characterLooks": [
+    {
+      "id": "femaleLead",
+      "label": "女主定妆共享提示词",
+      "zh": "一位明确成年的中国女性，25岁。不透明米白贴身短袖罗纹上衣，圆领，衣身贴合，下摆略短露出一小截腰线，不透视、胸口无标志。中蓝牛仔短裤至大腿中段；白色低帮运动鞋。深棕色长发过肩至背中，自然微卷放下，不盘发不扎马尾，额前轻盈碎发，不是齐刘海。鹅蛋脸，深棕杏仁眼，鼻梁挺直，自然薄唇，暖东亚肤色，浅淡日常妆，神情安静克制。银色细耳圈。健康自然的成年身材，肩臂和腰有正常体量，不要过瘦、不要骨架感。挺胸直立，肩背打开，不驼背。仅一人，全身从头顶到鞋底完整可见。居中隔离棚拍定妆照，暖灰无缝背景，均匀柔和日光，50mm镜头，真人写实，真实皮肤、头发与布料质感，无文字无标志。",
+      "en": "one adult Chinese woman, 25 years old, (opaque fitted ivory ribbed short-sleeve crop top with a round neckline:1.45), small strip of midriff, body-hugging not boxy, not sheer, no logo, no graphic print, (medium-blue denim shorts to mid-thigh:1.4), (white low-top sneakers:1.25), (long dark brown hair to mid-back worn loose:1.45), hair down, no bun, no ponytail, no bob, airy forehead wisps, no blunt bangs, (healthy naturally proportioned adult figure:1.3), not skinny, not underweight, natural soft waist and arms, (chest lifted, shoulders back, upright stance, no hunched back:1.35), oval face, large deep-brown almond eyes, straight refined nose, natural lips, warm East Asian skin, light everyday makeup, quiet reserved expression, small silver hoop earrings, single person only, full body from head to shoes, standing upright, centered isolated studio casting photograph, plain warm-gray seamless background, soft even daylight, 50mm lens, photorealistic live-action, realistic skin hair and fabric texture, no text, no logo",
+      "negativeZh": "儿童，青少年，老人，侧面，三分之二侧面，背面，换人，裁掉头，裁掉脚，裁掉鞋，裁掉手臂，特写，半身，重复人物，多人，多余肢体，畸形手指，融合手，解剖错误，扭曲身体，塑料皮肤，动漫，插画，3D渲染，模糊脸，低分辨率，过曝，文字，水印，标志，短发，波波头，齐肩发，齐刘海，盘发，丸子头，马尾，高跟鞋，细跟，礼服裙，超短热裤，长裤，直筒裤，细肩带背心，透视上衣，高领，大衣，过瘦，骨架感，头巾裹脸，布料遮头，浓妆，西方面孔，半身裁切，16:9横构图，宽松棉T，胸口标志",
+      "negativeEn": "child, teenager, minor, elderly, side profile, three-quarter view, rear view, different person, cropped head, cropped feet, cropped shoes, cut-off arms, close-up, bust portrait, duplicate person, multiple people, extra limbs, extra fingers, fused hands, deformed anatomy, twisted body, plastic skin, anime, illustration, 3d render, blurry face, low resolution, overexposure, text, watermark, logo, short hair, bob haircut, chin-length hair, shoulder-length hair, blunt bangs, bun, updo, ponytail, high heels, stiletto, pumps, dress, mini skirt, hot pants, micro shorts, long trousers, straight-leg pants, camisole, spaghetti strap, sheer top, turtleneck, coat, skinny, underweight, bony, emaciated, tiny waist, scarf covering face, fabric wrapping head, veil, covered face, heavy makeup, western facial features, cropped torso, 16:9 widescreen crop",
+      "negativeExtraEn": "short hair, bob haircut, chin-length hair, bun, updo, ponytail, high heels, stiletto, pumps, dress, mini skirt, denim skirt, skirt, hot pants, micro shorts, long trousers, camisole, spaghetti strap, sheer top, turtleneck, coat, logo, graphic print, text on shirt, skinny, underweight, bony, emaciated, tiny waist, scarf covering face, fabric wrapping head, veil, covered face, blunt bangs, nude, naked, nsfw, topless, bare back, lingerie, looking over shoulder, flared shirt hem, rumpled waist, boxy oversized tee, crew-neck bulky cotton T-shirt, hunched back, rounded shoulders, slouching"
+    },
+    {
+      "id": "maleLead",
+      "label": "男主三视图共享提示词",
+      "zh": "",
+      "en": "",
+      "negativeZh": "",
+      "negativeEn": ""
+    }
+  ],
+  "mvWorkflow": {
+    "storyStatus": "confirmed",
+    "durationConfirmed": true,
+    "durationConfirmedAt": "20260913",
+    "scriptStatus": "complete",
+    "generationMethod": "characterReferenceVideo",
+    "aspectRatio": "9:16",
+    "scope": "chorus1_studio_lipsync",
+    "lipSyncPass": "musetalk"
+  },
+  "mvStory": {
+    "summary": "第一段副歌的竖屏短片：女主独自戴着耳机站在录音棚里，把「只是想你了」唱进麦克风，不发给任何人。",
+    "opening": "她已经戴好黑色头戴耳机，靠近银色电容麦，对着防喷罩唱出第一句「只是想你了」。",
+    "development": "同一棚内，右手轻触耳罩，把想念唱得更近，仍只有她一个人。",
+    "turningPoint": "「在这个无声的瞬间」，棚里安静下来，她把话留给麦克风，而不是留给对方的手机。",
+    "climax": "「不需要任何抱歉」时胸腔略打开，表情仍克制，不控诉、不求救。",
+    "ending": "最后一句「想你了」之后她不摘耳机、不离开麦克风，这句话停在棚里。"
+  },
+  "production": {
+    "characterReferences": "complete",
+    "shotVideos": "in_progress",
+    "post": "in_progress",
+    "delivery": "not_started"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "label": "前奏",
+      "time": "",
+      "lyrics": []
+    },
+    {
+      "id": "verse1",
+      "label": "Verse 1",
+      "time": "",
+      "lyrics": [
+        "车窗倒映着",
+        "几盏路灯的明灭",
+        "刚到家的外套",
+        "还带着一点 凌晨的冷冽"
+      ]
+    },
+    {
+      "id": "verse2",
+      "label": "Verse 2",
+      "time": "",
+      "lyrics": [
+        "草稿箱里的对话",
+        "删到只剩个标点",
+        "明明已经很晚了",
+        "我却还是 没有一点困意"
+      ]
+    },
+    {
+      "id": "chorus1",
+      "label": "Chorus 1",
+      "time": "",
+      "lyrics": [
+        "只是想你了",
+        "在没开灯的房间",
+        "只是想你了",
+        "在这个无声的瞬间",
+        "想你了",
+        "不需要任何抱歉",
+        "想你了"
+      ]
+    },
+    {
+      "id": "verse3",
+      "label": "Verse 3",
+      "time": "",
+      "lyrics": [
+        "水杯里的冰块",
+        "融化成浅浅的一圈",
+        "枕头旁边的手机",
+        "屏幕亮起 又熄灭"
+      ]
+    },
+    {
+      "id": "chorus2",
+      "label": "Chorus 2",
+      "time": "",
+      "lyrics": [
+        "只是想你了",
+        "在没开灯的房间",
+        "只是想你了",
+        "在这个无声的瞬间",
+        "想你了",
+        "不需要任何抱歉",
+        "想你了晚安",
+        "还没发的简讯",
+        "晚安",
+        "这就当是 我们在聊天"
+      ]
+    }
+  ],
+  "shots": [
+    {
+      "id": "shot01",
+      "output": "generated/video/raw/shot_01_h3_v10.mp4",
+      "start": "00:00",
+      "end": "00:06",
+      "sectionId": "chorus1",
+      "storyBeat": "opening",
+      "shot": "侧一点看见嘴和麦，嘴全程无遮挡",
+      "action": "女主已戴黑色头戴耳机，站在录音棚里。镜头略偏左侧，轻微三分之二侧面，双唇和银色电容麦同时可见。双唇、人中、下巴全程完全露在空气里，任何道具都不得碰到或挡住嘴。H3 闭唇，口型由后期 MuseTalk 生成。",
+      "visual": "9:16 中近景。镜头略偏她左侧，双眼睁开。银色电容麦在画面右侧。双唇全程无任何遮挡；防喷罩如出现只在胸口高度、低于下巴，绝不挡嘴。头基本不动。",
+      "camera": "9:16 平视中近景，镜头略偏左侧，holds a static shot。",
+      "location": "录音棚",
+      "transition": "暖琥珀光，无切镜",
+      "soundFocus": "第一句 Hook「只是想你了」入口型",
+      "prompt": "subject_definitions:\n<Subject 1> is the adult woman whose appearance comes from <Picture 1>. <Picture 2> and <Picture 3> are the same front still as <Picture 1>, used only to reinforce identity. Preserve her identity, face, long dark hair worn loose, body proportions, fitted ivory ribbed crop top, denim shorts and white sneakers. Do not invent a side or back view. Do not redesign her appearance with text.\n\nsummary:\n[reference generation] one continuous 6-second live-action 9:16 MV shot of <Subject 1> at a slight off-axis booth angle with her mouth fully uncovered and the silver microphone visible, with appearance taken only from <Picture 1>.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face stays the same person as <Picture 1> in every frame. <Picture 2> and <Picture 3> repeat the same front still and do not provide a side or back view; do not turn her into a hard 90-degree profile or a back view. Hair, body proportions and the exact reference outfit stay identical to <Picture 1>. Black over-ear studio headphones are only an added accessory over her hair. A silver condenser microphone belongs to the booth as a visible prop at her right, never covering her mouth. No second living person. The environment, lighting, action and camera movement are generated from this prompt.\n\ndetailed_description:\nThe target video is photoreal live-action, a restrained contemporary Chinese recording-booth look, warm amber practical light, dark acoustic panels, 9:16 vertical.\n[Shot 1] A 9:16 medium close-up at eye level. The camera sits slightly to her left, so we see a mild three-quarter of her face and also the silver condenser microphone on her right. Both eyes, eyelids, irises, pupils, nose, philtrum, both lips and chin stay fully readable. Never a 90-degree profile; the far left eye remains visible. Framed from the upper chest to a little space above the headphones. The camera holds a static shot. Her head stays locked: no turn, no nod, no sway, no lean. Exact fitted ivory ribbed crop top, black over-ear headphones added. Warm amber light on her face, especially the mouth. The silver microphone stands on the right side of the frame, clearly visible as a studio condenser, beside her shoulder and chest, not in front of her face. Keep a clear gap of empty air around both lips, the philtrum and the chin in every frame. Nothing touches or covers the mouth: no microphone body, no hand, no hair, no mesh. If a round pop filter appears, it sits low on the stand at chest height, entirely below her chin, never at lip height and never overlapping the face. Both lips stay fully uncovered in clear air. In the first two seconds she is already standing in the booth, shoulders settled, eyelids open, eyes looking toward the microphone. Then only a tiny chest lift, mouth softly closed for this generation pass, at most one slow natural blink. By the final second her gaze still holds on the mic, quiet and unapologetic. Stable faces and hands, smooth skin texture, coherent clothing, eyelids remain open, irises and pupils stay readable. No flickering eyes, no facial warping, no beauty-filter slim face, no extra limbs, no mesh covering the mouth, no pop filter at mouth height, no microphone covering the face, no on-screen text, no logos, no readable lyric sheet text.\n\noverall_soundscape:\nquiet booth room tone, faint headphone cable, no extra voices.\n\nnon_diegetic_music:\nN/A",
+      "lyricCue": "只是想你了 / 在没开灯的房间",
+      "subjects": [
+        "femaleLead"
+      ],
+      "genMode": "characterVideo",
+      "lipSync": true,
+      "aspectRatio": "9:16"
+    },
+    {
+      "id": "shot02",
+      "output": "generated/video/raw/shot_02_h3_v01.mp4",
+      "start": "00:06",
+      "end": "00:12",
+      "sectionId": "chorus1",
+      "storyBeat": "development",
+      "shot": "右手轻触耳罩，把想念唱进棚里",
+      "action": "同一机位略近。她右手轻轻按住右侧耳罩，眼神仍落在麦克风上，唱「只是想你了」。棚内只有她。H3 闭唇，后期 MuseTalk 对口型。",
+      "visual": "同一录音棚、同一耳机与麦克风；手指与耳罩的接触是本镜动作。",
+      "camera": "9:16 胸口高度中近景，holds a static shot 后极轻横移。",
+      "location": "录音棚",
+      "transition": "同棚连续，景别略近",
+      "soundFocus": "重复 Hook，动作落到耳机",
+      "prompt": "subject_definitions:\n<Subject 1> is the adult woman whose appearance comes from <Picture 1>. <Picture 2> and <Picture 3> are the same front still as <Picture 1>, used only to reinforce identity. Preserve her identity, face, long dark hair worn loose, body proportions, fitted ivory ribbed crop top, denim shorts and white sneakers. Do not invent a side or back view. Do not redesign her appearance with text.\n\nsummary:\n[reference generation] one continuous 6-second live-action 9:16 MV shot of <Subject 1> lightly touching her headphone cup at the studio microphone, with appearance taken only from <Picture 1>.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face stays the same person as <Picture 1> in every frame. <Picture 2> and <Picture 3> repeat the same front still and do not provide a side or back view; do not turn her into a hard 90-degree profile or a back view. Hair, body proportions and the exact reference outfit stay identical to <Picture 1>. Black over-ear studio headphones are only an added accessory over her hair. A silver condenser microphone and round black pop filter belong to the booth, not to her identity. No second living person. The environment, lighting, action and camera movement are generated from this prompt.\n\ndetailed_description:\nThe target video is photoreal live-action, a restrained contemporary Chinese recording-booth look, warm amber practical light, dark acoustic panels, 9:16 vertical.\n[Shot 1] A 9:16 chest-height medium close-up of <Subject 1> at the same recording booth. Exact reference outfit, black over-ear headphones added, silver microphone and black pop filter in the lower foreground. The camera holds a static shot, then trucks right with small amplitude at slow speed. In the first two seconds her right hand rises and rests two fingers on the right headphone cup. Then the hand stays, she does not fidget, and her eyes keep holding the microphone. By the final second her shoulders lower half an inch, still restrained, mouth softly closed for this generation pass. Keep her head large in the 9:16 frame so both eyes, eyelids, irises and pupils stay sharp. Body faces the camera with only a mild three-quarter turn. Gaze holds on the microphone. Brows stay level, breath is small, at most one slow natural blink. Lips remain softly closed in this H3 pass; do not open the mouth to sing. Keep the pop filter beside the microphone so both lips stay fully visible. Stable faces and hands, smooth skin texture, coherent clothing. No flickering eyes, no facial warping, no beauty-filter slim face, no extra limbs, no on-screen text, no logos, no readable lyric sheet text.\n\noverall_soundscape:\nquiet booth, faint headphone foam, no voices.\n\nnon_diegetic_music:\nN/A",
+      "lyricCue": "只是想你了",
+      "subjects": [
+        "femaleLead"
+      ],
+      "genMode": "characterVideo",
+      "lipSync": true,
+      "aspectRatio": "9:16"
+    },
+    {
+      "id": "shot03",
+      "output": "generated/video/raw/shot_03_h3_v01.mp4",
+      "start": "00:12",
+      "end": "00:18",
+      "sectionId": "chorus1",
+      "storyBeat": "turningPoint",
+      "shot": "无声的瞬间，棚里只剩她和麦",
+      "action": "镜头更近。她不再碰耳机，只对着麦克风把「在这个无声的瞬间」唱完，眼神持住，像把话留在棚里而不是发给对方。H3 闭唇，后期 MuseTalk 对口型。",
+      "visual": "麦克风与防喷罩占画面下沿，暖光更贴脸，背景吸音板虚成暗色。",
+      "camera": "9:16 近景，pushes in with small amplitude at slow speed。",
+      "location": "录音棚",
+      "transition": "推近，环境声更空",
+      "soundFocus": "「在这个无声的瞬间」",
+      "prompt": "subject_definitions:\n<Subject 1> is the adult woman whose appearance comes from <Picture 1>. <Picture 2> and <Picture 3> are the same front still as <Picture 1>, used only to reinforce identity. Preserve her identity, face, long dark hair worn loose, body proportions, fitted ivory ribbed crop top, denim shorts and white sneakers. Do not invent a side or back view. Do not redesign her appearance with text.\n\nsummary:\n[reference generation] one continuous 6-second live-action 9:16 MV shot of <Subject 1> in a tighter 9:16 close-up at the silent studio microphone, with appearance taken only from <Picture 1>.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face stays the same person as <Picture 1> in every frame. <Picture 2> and <Picture 3> repeat the same front still and do not provide a side or back view; do not turn her into a hard 90-degree profile or a back view. Hair, body proportions and the exact reference outfit stay identical to <Picture 1>. Black over-ear studio headphones are only an added accessory over her hair. A silver condenser microphone and round black pop filter belong to the booth, not to her identity. No second living person. The environment, lighting, action and camera movement are generated from this prompt.\n\ndetailed_description:\nThe target video is photoreal live-action, a restrained contemporary Chinese recording-booth look, warm amber practical light, dark acoustic panels, 9:16 vertical.\n[Shot 1] A 9:16 close-up at eye level keeps <Subject 1>'s face large, from upper chest to hair, with the silver microphone and round pop filter along the bottom of the frame. Same booth, same headphones, exact reference T-shirt. The camera pushes in with small amplitude at slow speed. In the first two seconds both hands are down, she is still, eyes on the mic as if the room has gone quiet. Then she holds that look without a second glance, inner brows tightening one millimeter. By the final second her mouth stays softly closed for this generation pass, no smile, no apology. Keep her head large in the 9:16 frame so both eyes, eyelids, irises and pupils stay sharp. Body faces the camera with only a mild three-quarter turn. Gaze holds on the microphone. Brows stay level, breath is small, at most one slow natural blink. Lips remain softly closed in this H3 pass; do not open the mouth to sing. Keep the pop filter beside the microphone so both lips stay fully visible. Stable faces and hands, smooth skin texture, coherent clothing. No flickering eyes, no facial warping, no beauty-filter slim face, no extra limbs, no on-screen text, no logos, no readable lyric sheet text.\n\noverall_soundscape:\nalmost empty booth tone, very faint breath, no voices.\n\nnon_diegetic_music:\nN/A",
+      "lyricCue": "在这个无声的瞬间 / 想你了",
+      "subjects": [
+        "femaleLead"
+      ],
+      "genMode": "characterVideo",
+      "lipSync": true,
+      "aspectRatio": "9:16"
+    },
+    {
+      "id": "shot04",
+      "output": "generated/video/raw/shot_04_h3_v04.mp4",
+      "start": "00:18",
+      "end": "00:23",
+      "sectionId": "chorus1",
+      "storyBeat": "climax",
+      "shot": "不需要任何抱歉",
+      "action": "最强一句。她仍克制，只把胸腔打开一点，对着麦克风唱「不需要任何抱歉」。不嘶吼、不笑、不哭。H3 闭唇，后期 MuseTalk 对口型。",
+      "visual": "9:16 中近景：头和上胸入画，脸够大但不满幅。麦和仅一块防喷罩在画面右下角，与嘴唇之间留空，双唇、人中、下巴全程无遮挡。头基本不动。",
+      "camera": "9:16 中近景，holds a static shot。",
+      "location": "录音棚",
+      "transition": "锁定近景",
+      "soundFocus": "「不需要任何抱歉」",
+      "prompt": "subject_definitions:\n<Subject 1> is the adult woman whose appearance comes from <Picture 1>. <Picture 2> and <Picture 3> are the same front still as <Picture 1>, used only to reinforce identity. Preserve her identity, face, long dark hair worn loose, body proportions, fitted ivory ribbed crop top, denim shorts and white sneakers. Do not invent a side or back view. Do not redesign her appearance with text.\n\nsummary:\n[reference generation] one continuous 5-second live-action 9:16 MV shot of <Subject 1> holding a restrained medium close-up on the line that needs no apology, with appearance taken only from <Picture 1>.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face stays the same person as <Picture 1> in every frame. <Picture 2> and <Picture 3> repeat the same front still and do not provide a side or back view; do not turn her into a hard 90-degree profile or a back view. Hair, body proportions and the exact reference outfit stay identical to <Picture 1>. Black over-ear studio headphones are only an added accessory over her hair. A silver condenser microphone and exactly one round black pop filter belong to the booth, not to her identity. No second living person. The environment, lighting, action and camera movement are generated from this prompt.\n\ndetailed_description:\nThe target video is photoreal live-action, a restrained contemporary Chinese recording-booth look, warm amber practical light, dark acoustic panels, 9:16 vertical.\n[Shot 1] A 9:16 medium close-up of <Subject 1> at the recording booth, framed from the upper chest to a little space above the headphones. Her head is large enough that both eyes, eyelids, irises, pupils, nose, philtrum and both lips stay fully readable, but the face does not fill the whole frame. Body faces the camera, almost frontal, only a mild three-quarter turn. The camera holds a static shot. Her head stays still: no turn, no nod, no sway. Same black over-ear headphones, same fitted ivory ribbed crop top. The silver condenser microphone and exactly one round black pop filter sit in the lower-right corner on a separate stand, clearly separated from her face. Leave empty space between the pop filter and her lips. The pop filter must not overlap her mouth, chin, cheeks or hair in any frame. Both lips, philtrum and chin stay fully uncovered; no mesh, no microphone body, no hand in front of the mouth. No second pop filter. Warm even light on her face, especially the mouth. In the first two seconds her chest lifts a little as if the vocal opens, but her expression stays restrained, not a grin, not a cry. Then she keeps her gaze toward the microphone, brows level, mouth softly closed for this generation pass. By the final second she is still, unapologetic, no extra gesture. Stable faces and hands, smooth skin texture, coherent clothing. No flickering eyes, no facial warping, no beauty-filter slim face, no extra limbs, no pop filter covering the mouth, no second pop filter, no extra mesh screen, no on-screen text, no logos, no readable lyric sheet text.\n\noverall_soundscape:\nintimate booth, close breath against the pop filter, no extra voices.\n\nnon_diegetic_music:\nN/A",
+      "lyricCue": "不需要任何抱歉",
+      "subjects": [
+        "femaleLead"
+      ],
+      "genMode": "characterVideo",
+      "lipSync": true,
+      "aspectRatio": "9:16"
+    },
+    {
+      "id": "shot05",
+      "output": "generated/video/raw/shot_05_h3_v01.mp4",
+      "start": "00:23",
+      "end": "00:28",
+      "sectionId": "chorus1",
+      "storyBeat": "ending",
+      "shot": "最后一句想你了，停在麦前",
+      "action": "唱完最后的「想你了」后她不离开麦克风，也不摘耳机，只把目光停在防喷罩上，像这句话已经说完、不会发到任何人手机里。H3 闭唇，后期 MuseTalk 对口型。",
+      "visual": "同一近景略收，暖光仍在，她和麦克风停在最后一帧。",
+      "camera": "9:16 中近景，holds a static shot。",
+      "location": "录音棚",
+      "transition": "停在麦前，不切出棚",
+      "soundFocus": "最后一句「想你了」后的留白",
+      "prompt": "subject_definitions:\n<Subject 1> is the adult woman whose appearance comes from <Picture 1>. <Picture 2> and <Picture 3> are the same front still as <Picture 1>, used only to reinforce identity. Preserve her identity, face, long dark hair worn loose, body proportions, fitted ivory ribbed crop top, denim shorts and white sneakers. Do not invent a side or back view. Do not redesign her appearance with text.\n\nsummary:\n[reference generation] one continuous 5-second live-action 9:16 MV shot of <Subject 1> finishing the last 想你了 and staying at the microphone, with appearance taken only from <Picture 1>.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face stays the same person as <Picture 1> in every frame. <Picture 2> and <Picture 3> repeat the same front still and do not provide a side or back view; do not turn her into a hard 90-degree profile or a back view. Hair, body proportions and the exact reference outfit stay identical to <Picture 1>. Black over-ear studio headphones are only an added accessory over her hair. A silver condenser microphone and round black pop filter belong to the booth, not to her identity. No second living person. The environment, lighting, action and camera movement are generated from this prompt.\n\ndetailed_description:\nThe target video is photoreal live-action, a restrained contemporary Chinese recording-booth look, warm amber practical light, dark acoustic panels, 9:16 vertical.\n[Shot 1] A 9:16 medium close-up of <Subject 1> still at the same recording booth, headphones on, microphone in the lower frame. The camera holds a static shot. In the first two seconds she is still performing toward the mic, mouth softly closed for this generation pass. Then the performance settles: shoulders drop a few millimeters, eyes stay on the pop filter, no smile. By the final second she does not remove the headphones and does not step away; she simply remains in the warm booth with the unsent feeling already sung. Keep her head large in the 9:16 frame so both eyes, eyelids, irises and pupils stay sharp. Body faces the camera with only a mild three-quarter turn. Gaze holds on the microphone. Brows stay level, breath is small, at most one slow natural blink. Lips remain softly closed in this H3 pass; do not open the mouth to sing. Keep the pop filter beside the microphone so both lips stay fully visible. Stable faces and hands, smooth skin texture, coherent clothing. No flickering eyes, no facial warping, no beauty-filter slim face, no extra limbs, no on-screen text, no logos, no readable lyric sheet text.\n\noverall_soundscape:\nquiet booth after the last syllable, faint headphone hiss, no voices.\n\nnon_diegetic_music:\nN/A",
+      "lyricCue": "想你了",
+      "subjects": [
+        "femaleLead"
+      ],
+      "genMode": "characterVideo",
+      "lipSync": true,
+      "aspectRatio": "9:16"
+    }
+  ],
+  "releaseCopy": {
+    "youtube": {
+      "title": "",
+      "description": ""
+    },
+    "douyin": {
+      "title": "",
+      "description": ""
+    }
+  }
+}

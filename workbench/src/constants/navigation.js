@@ -1,12 +1,11 @@
 export const NAV_ITEMS = [
   { id: 'in-progress', label: '创作中', kind: 'collection' },
   { id: 'completed', label: '已完成', kind: 'collection' },
-  { id: 'production', label: '本机生成', kind: 'collection' },
   { id: 'inspiration', label: '灵感池', kind: 'archive' },
   { id: 'library', label: '公共素材', kind: 'archive' },
 ]
 
-export const SONG_NAVS = ['in-progress', 'completed', 'production']
+export const SONG_NAVS = ['in-progress', 'completed']
 
 export const PRODUCTION_STAGES = ['character-references', 'shot-videos', 'post', 'delivery']
 

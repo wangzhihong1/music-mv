@@ -13,7 +13,7 @@ const STAGE_COPY = {
 }
 
 const EMPTY_COPY = {
-  'character-references': '形象提示词按 ComfyUI 01_character_three_views 书写。复制英文到工作流左上角 Shared Character Prompt 后排队；确认的正面、侧面、背面放入 mvs/YYYYMMDD-slug/assets/characters/。',
+  'character-references': '形象提示词按 ComfyUI 01_character_three_views 书写。复制英文到工作流左上角 Shared Character Prompt 后排队；确认的正面、侧面、背面放入本歌曲目录的 assets/characters/。',
   'shot-videos': '尚未生成分镜视频。确认主角参考图后，将 H3 输出放入 generated/video/raw/。',
   post: '尚未生成修复超分。合格分镜视频修复后放入 generated/video/intermediate/。',
   delivery: '尚未导出成片。剪辑完成后放入 generated/video/final/。',
@@ -100,7 +100,7 @@ function closeImage() {
         <h2>{{ stageCopy.title }}</h2>
       </div>
       <span class="panel-count">
-        {{ production.mvDirectory || '尚未绑定 mvs 目录' }}
+        {{ production.directory || '歌曲目录' }}
         · {{ fileCount }} 个文件
       </span>
     </div>
@@ -122,12 +122,11 @@ function closeImage() {
     />
 
     <div v-if="!hasVisibleMedia && !showingLooks" class="production-empty">
-      <p v-if="!production.mvDirectory">尚未进入本机生成。确认脚本后，将音频、主角图片、分镜视频和成片放入 <code>mvs/YYYYMMDD-slug/</code>。</p>
-      <p v-else>{{ EMPTY_COPY[focusStage] || '当前步骤还没有可预览的文件。' }}</p>
+      <p>{{ EMPTY_COPY[focusStage] || '当前步骤还没有可预览的文件。音频放入 music/，主角图片放入 assets/characters/，分镜视频放入 generated/video/raw/，成片放入 generated/video/final/。' }}</p>
     </div>
 
     <p v-else-if="!hasVisibleMedia && showingLooks" class="production-empty">
-      形象提示词按 ComfyUI <code>01_character_three_views</code> 书写。复制英文到工作流左上角 Shared Character Prompt 后排队；确认的正面、侧面、背面放入 <code>mvs/YYYYMMDD-slug/assets/characters/</code>。
+      形象提示词按 ComfyUI <code>01_character_three_views</code> 书写。复制英文到工作流左上角 Shared Character Prompt 后排队；确认的正面、侧面、背面放入本歌曲目录的 <code>assets/characters/</code>。
     </p>
 
     <div v-if="hasVisibleMedia" class="production-body">

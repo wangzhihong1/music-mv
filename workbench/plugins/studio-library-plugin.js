@@ -3,10 +3,11 @@ import { readFile, readdir, stat } from 'node:fs/promises'
 import path from 'node:path'
 import { attachProductions } from './studio-production.js'
 
-const COLLECTIONS = [
-  { id: 'in-progress', directory: 'songs/in-progress', labelZh: '创作中' },
-  { id: 'completed', directory: 'songs/completed', labelZh: '已完成' },
-]
+const SONGS_DIRECTORY = 'songs'
+const LIFECYCLE_LABELS = {
+  'in-progress': '创作中',
+  completed: '已完成',
+}
 
 const ARCHIVES = [
   { id: 'inspiration', directory: 'inspiration' },
@@ -50,8 +51,12 @@ async function listMarkdownFiles(studioRoot, directory) {
   }
 }
 
-async function readSong(studioRoot, collection, folderName) {
-  const dataPath = path.join(studioRoot, collection.directory, folderName, 'song.json')
+function songLifecycle(song) {
+  return song.lifecycle === 'completed' ? 'completed' : 'in-progress'
+}
+
+async function readSong(studioRoot, folderName) {
+  const dataPath = path.join(studioRoot, SONGS_DIRECTORY, folderName, 'song.json')
 
   try {
     const [source, fileStat] = await Promise.all([
@@ -59,14 +64,16 @@ async function readSong(studioRoot, collection, folderName) {
       stat(dataPath),
     ])
     const song = JSON.parse(source)
+    const lifecycle = songLifecycle(song)
 
     return {
       ...song,
-      id: `${collection.directory}/${folderName}`,
+      id: `${SONGS_DIRECTORY}/${folderName}`,
       slug: song.slug || folderName.replace(/^\d{8}-/, ''),
       folder: folderName,
-      collectionId: collection.id,
-      collection: collection.labelZh,
+      lifecycle,
+      collectionId: lifecycle,
+      collection: LIFECYCLE_LABELS[lifecycle],
       updatedAt: fileStat.mtime.toISOString(),
     }
   } catch (error) {
@@ -77,23 +84,20 @@ async function readSong(studioRoot, collection, folderName) {
 
 async function scanSongs(studioRoot) {
   const songs = []
+  const songsPath = path.join(studioRoot, SONGS_DIRECTORY)
+  let entries = []
 
-  for (const collection of COLLECTIONS) {
-    const collectionPath = path.join(studioRoot, collection.directory)
-    let entries = []
+  try {
+    entries = await readdir(songsPath, { withFileTypes: true })
+  } catch (error) {
+    if (error.code === 'ENOENT') return songs
+    throw error
+  }
 
-    try {
-      entries = await readdir(collectionPath, { withFileTypes: true })
-    } catch (error) {
-      if (error.code === 'ENOENT') continue
-      throw error
-    }
-
-    for (const entry of entries) {
-      if (!entry.isDirectory()) continue
-      const song = await readSong(studioRoot, collection, entry.name)
-      if (song) songs.push(song)
-    }
+  for (const entry of entries) {
+    if (!entry.isDirectory()) continue
+    const song = await readSong(studioRoot, entry.name)
+    if (song) songs.push(song)
   }
 
   return songs.sort((left, right) => {
@@ -187,7 +191,7 @@ async function sendStudioMedia(studioRoot, request, response) {
 }
 
 function shouldReloadProduction(filePath) {
-  if (!filePath.includes(`${path.sep}mvs${path.sep}`)) return false
+  if (!filePath.includes(`${path.sep}songs${path.sep}`)) return false
   if (filePath.includes(`${path.sep}wav2lip_segments${path.sep}`)) return false
   if (filePath.includes(`${path.sep}.analysis${path.sep}`)) return false
   if (filePath.includes(`${path.sep}archive${path.sep}`)) return false
@@ -236,9 +240,8 @@ export function songLibraryPlugin() {
     },
     configureServer(server) {
       const watchRoots = [
-        ...COLLECTIONS.map(({ directory }) => path.join(studioRoot, directory)),
+        path.join(studioRoot, SONGS_DIRECTORY),
         ...ARCHIVES.map(({ directory }) => path.join(studioRoot, directory)),
-        path.join(studioRoot, 'mvs'),
       ]
       server.watcher.add(watchRoots)
       server.watcher.on('all', (eventName, filePath) => {

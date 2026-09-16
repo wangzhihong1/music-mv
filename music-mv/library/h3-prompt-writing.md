@@ -144,7 +144,7 @@ Her gaze holds on the two empty chairs inside the window. Brows stay level, lips
 
 情绪用可见动作代替形容词：不要写 `she feels lonely`，写 `her mouth stays closed and her shoulders lower half an inch`。
 
-## 本机生成参数（RTX 3060 12GB）
+## 本机成片参数（RTX 3060 12GB）
 
 - 脸重要的镜头：约 0.8–1.0MP，4–6 秒先跑通，再试 6–8 秒。横版参考 1216×672 或 1280×720。
 - 冒烟可用 0.5MP，但不要把 0.5MP 4-step 当正式成片。

@@ -2,19 +2,17 @@ export const PATHS = {
   inspiration: 'inspiration',
   library: 'library',
   templates: 'templates/song',
-  mvs: 'mvs',
+  songs: 'songs',
 }
 
-export const SONG_COLLECTIONS = [
+export const SONG_LIFECYCLES = [
   {
     id: 'in-progress',
-    directory: 'songs/in-progress',
     label: 'In Progress',
     labelZh: '创作中',
   },
   {
     id: 'completed',
-    directory: 'songs/completed',
     label: 'Completed',
     labelZh: '已完成',
   },
@@ -31,3 +29,12 @@ export const SONG_DOCUMENTS = [
   '08-checklist.md',
   '09-release.md',
 ]
+
+export function songLifecycle(song) {
+  return song?.lifecycle === 'completed' ? 'completed' : 'in-progress'
+}
+
+export function songLifecycleLabel(song) {
+  const lifecycle = songLifecycle(song)
+  return SONG_LIFECYCLES.find((item) => item.id === lifecycle)?.labelZh || '创作中'
+}

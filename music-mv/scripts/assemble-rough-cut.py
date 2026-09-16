@@ -9,8 +9,9 @@ import av
 import cv2
 import numpy as np
 
-SONG_JSON = Path(__file__).resolve().parents[1] / "songs/in-progress/20260823-one-day-short-of-forever/song.json"
-MV_ROOT = Path(__file__).resolve().parents[1] / "mvs/20260823-one-day-short-of-forever"
+SONG_ROOT = Path(__file__).resolve().parents[1] / "songs/20260823-one-day-short-of-forever"
+SONG_JSON = SONG_ROOT / "song.json"
+MV_ROOT = SONG_ROOT
 RAW_DIR = MV_ROOT / "generated/video/raw"
 FINAL_DIR = MV_ROOT / "generated/video/final"
 MASTER_WAV = MV_ROOT / "music/one-day-short-of-forever_master_03m51s.wav"

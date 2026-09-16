@@ -3,7 +3,8 @@
   "slug": "one-day-short-of-forever",
   "title": "比永远差一天",
   "date": "20260823",
-  "status": "粗剪 v03 已接镜 01、26 超分正片；其余模糊镜待点名",
+  "status": "已完成",
+  "lifecycle": "completed",
   "coreStatement": "写给与永远失之一步的人：一位年轻女性从最后一张合照理解爱情没有说谎，只是没能抵达，并记住‘我们离永远，只差最后一天’。",
   "metadata": {
     "genre": "电影感都市流行情歌 / 钢琴室内流行",
@@ -49,11 +50,10 @@
     "generationMethod": "characterReferenceVideo"
   },
   "production": {
-    "mvDirectory": "mvs/20260823-one-day-short-of-forever",
     "characterReferences": "complete",
     "shotVideos": "complete",
-    "post": "in_progress",
-    "delivery": "in_progress"
+    "post": "complete",
+    "delivery": "complete"
   },
   "releaseCopy": {
     "youtube": {

@@ -1,4 +1,4 @@
-import { readdir, readFile, stat } from 'node:fs/promises'
+import { readdir, stat } from 'node:fs/promises'
 import path from 'node:path'
 
 const KIND_EXTENSIONS = {
@@ -114,21 +114,6 @@ function formatSize(bytes) {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
 }
 
-export async function listMvFolders(studioRoot) {
-  const mvsRoot = path.join(studioRoot, 'mvs')
-
-  try {
-    const entries = await readdir(mvsRoot, { withFileTypes: true })
-    return entries
-      .filter((entry) => entry.isDirectory() && !entry.name.startsWith('.'))
-      .map((entry) => entry.name)
-      .sort()
-  } catch (error) {
-    if (error.code === 'ENOENT') return []
-    throw error
-  }
-}
-
 async function listGroupFiles(folderPath, group) {
   const targetPath = path.join(folderPath, group.directory)
 
@@ -165,8 +150,8 @@ async function describeAsset(studioRoot, filePath, kind) {
   }
 }
 
-export async function scanMvAssets(studioRoot, folderName) {
-  const folderPath = path.join(studioRoot, 'mvs', folderName)
+export async function scanSongAssets(studioRoot, relativeDirectory) {
+  const folderPath = path.join(studioRoot, relativeDirectory)
   const groups = []
 
   for (const group of ASSET_GROUPS) {
@@ -239,108 +224,57 @@ export function productionSummary(groups) {
   return '尚未生成'
 }
 
-export function matchMvFolder(song, folders) {
-  const configured = String(song.production?.mvDirectory || '')
-    .replace(/\\/g, '/')
-    .replace(/^mvs\//, '')
-  if (configured && folders.includes(configured)) return configured
-
-  const exact = `${song.date || ''}-${song.slug || ''}`.replace(/^-|-$/g, '')
-  if (exact && folders.includes(exact)) return exact
-
-  if (song.slug) {
-    const bySlug = folders.find((folder) => folder.endsWith(`-${song.slug}`))
-    if (bySlug) return bySlug
-  }
-
-  return ''
-}
-
-async function readMvTitle(folderPath, folderName) {
-  try {
-    const source = await readFile(path.join(folderPath, 'mv-plan.md'), 'utf8')
-    const titled = source.match(/^#\s*《([^》]+)》/m)
-    if (titled) return titled[1].trim()
-    const heading = source.match(/^#\s+(.+)$/m)
-    if (heading) return heading[1].replace(/MV.*$/, '').trim()
-  } catch {
-    // Fall through to folder name.
-  }
-
-  return folderName.replace(/^\d{8}-/, '').replaceAll('-', ' ')
-}
-
-export async function buildProductionRecord(studioRoot, folderName, expectedShotCount = 0, shots = []) {
-  if (!folderName) {
+export async function buildProductionRecord(studioRoot, relativeDirectory, expectedShotCount = 0, shots = []) {
+  if (!relativeDirectory) {
     return {
-      mvDirectory: '',
+      directory: '',
       characterReferences: 'not_started',
       shotVideos: 'not_started',
       post: 'not_started',
       delivery: 'not_started',
-      summary: '尚未进入本机生成',
+      summary: '尚未进入本机成片',
       groups: [],
     }
   }
 
-  const groups = await scanMvAssets(studioRoot, folderName)
+  const groups = await scanSongAssets(studioRoot, relativeDirectory)
   annotateRawShotItems(groups, shots)
   const status = deriveProductionStatus(groups, expectedShotCount)
 
   return {
-    mvDirectory: `mvs/${folderName}`,
+    directory: relativeDirectory.replace(/\\/g, '/'),
     ...status,
     summary: productionSummary(groups),
     groups,
   }
 }
 
-export async function attachProductions(studioRoot, songs) {
-  const folders = await listMvFolders(studioRoot)
-  const linked = new Set()
+function mergeProductionRecord(declared = {}, derived = {}) {
+  const declaredRest = { ...declared }
+  delete declaredRest.mvDirectory
+  delete declaredRest.directory
+  const statusKeys = ['characterReferences', 'shotVideos', 'post', 'delivery']
+  const merged = { ...declaredRest, ...derived }
 
-  const decoratedSongs = await Promise.all(songs.map(async (song) => {
-    const folderName = matchMvFolder(song, folders)
-    if (folderName) linked.add(folderName)
-    const production = await buildProductionRecord(studioRoot, folderName, song.shots?.length || 0, song.shots || [])
-    return {
-      ...song,
-      production: {
-        ...song.production,
-        ...production,
-      },
-    }
-  }))
-
-  const standalone = []
-  for (const folderName of folders) {
-    if (linked.has(folderName)) continue
-    const folderPath = path.join(studioRoot, 'mvs', folderName)
-    const production = await buildProductionRecord(studioRoot, folderName)
-    const date = folderName.match(/^\d{8}/)?.[0] || ''
-    const title = await readMvTitle(folderPath, folderName)
-
-    standalone.push({
-      id: `mvs/${folderName}`,
-      slug: folderName.replace(/^\d{8}-/, ''),
-      title,
-      date,
-      status: production.summary,
-      coreStatement: `本机生成项目，素材位于 ${production.mvDirectory}。`,
-      metadata: {},
-      prompts: [],
-      characterLooks: [],
-      sections: [],
-      shots: [],
-      mvWorkflow: {},
-      mvStory: {},
-      folder: folderName,
-      collectionId: 'production',
-      collection: '本机生成',
-      production,
-      updatedAt: new Date().toISOString(),
-    })
+  for (const key of statusKeys) {
+    if (declared[key] === 'complete') merged[key] = 'complete'
   }
 
-  return [...decoratedSongs, ...standalone]
+  return merged
+}
+
+export async function attachProductions(studioRoot, songs) {
+  return Promise.all(songs.map(async (song) => {
+    const relativeDirectory = song.folder ? `songs/${song.folder}` : ''
+    const production = await buildProductionRecord(
+      studioRoot,
+      relativeDirectory,
+      song.shots?.length || 0,
+      song.shots || [],
+    )
+    return {
+      ...song,
+      production: mergeProductionRecord(song.production, production),
+    }
+  }))
 }

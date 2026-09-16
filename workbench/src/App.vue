@@ -66,10 +66,6 @@ watch(
   () => {
     activeSection.value = sections.value[0]?.id || ''
     activeShotId.value = shots.value[0]?.id || ''
-    if (currentSong.value.collectionId === 'production') {
-      viewMode.value = 'production'
-      selectedStage.value = 'delivery'
-    }
   },
   { immediate: true },
 )
@@ -85,10 +81,7 @@ watch(
 function onSelectNav(navId) {
   selectNav(navId)
   sidebarOpen.value = false
-  if (navId === 'production') {
-    viewMode.value = 'production'
-    selectedStage.value = 'delivery'
-  } else if (SONG_NAVS.includes(navId)) {
+  if (SONG_NAVS.includes(navId)) {
     viewMode.value = 'overview'
     selectedStage.value = ''
   }

@@ -15,6 +15,7 @@ const song = {
   title,
   date,
   status: '企划中',
+  lifecycle: 'in-progress',
   coreStatement: hasBrief ? brief : '',
   metadata: {
     genre: '',
@@ -52,7 +53,6 @@ const song = {
     ending: '',
   },
   production: {
-    mvDirectory: '',
     characterReferences: 'not_started',
     shotVideos: 'not_started',
     post: 'not_started',

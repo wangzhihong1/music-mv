@@ -1,7 +1,6 @@
 <script setup>
 import {
   Check,
-  Clapperboard,
   FileMusic,
   Library,
   ListMusic,
@@ -43,18 +42,12 @@ const emit = defineEmits(['select-nav', 'select-song'])
 const iconMap = {
   'in-progress': ListMusic,
   completed: Check,
-  production: Clapperboard,
   inspiration: Sparkles,
   library: Library,
 }
 
 const listHeading = {
   completed: '已完成歌曲',
-  production: '本机生成项目',
-}
-
-const emptyCopy = {
-  production: '此分类暂无本机生成项目',
 }
 
 function countFor(item) {
@@ -110,7 +103,7 @@ function countFor(item) {
           <small>{{ song.status }}</small>
         </span>
       </button>
-      <p v-if="visibleSongs.length === 0" class="song-list-empty">{{ emptyCopy[activeNav] || '此分类暂无歌曲' }}</p>
+      <p v-if="visibleSongs.length === 0" class="song-list-empty">此分类暂无歌曲</p>
     </div>
 
     <div class="sidebar-footer">

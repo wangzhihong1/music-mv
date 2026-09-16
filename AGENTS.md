@@ -2,14 +2,14 @@
 
 本仓库根目录只包含两个项目：
 
-1. `music-mv/`：音乐 MV 规范、歌曲档案、本机生成数据
+1. `music-mv/`：音乐 MV 规范、歌曲档案、本机成片数据
 2. `workbench/`：纯前端 Vue 工作台
 
 不要在仓库根目录新增歌曲、MV 目录或前端源码。所有代码、目录和档案文件名使用英文；`song.json` 的显示名可以使用中文。
 
 ## 任务分流
 
-- 写歌、改歌词、MV 故事/脚本、`song.json`、本机生成、ComfyUI / H3 / Wav2Lip：完整遵循 [`music-mv/AGENTS.md`](music-mv/AGENTS.md)。
+- 写歌、改歌词、MV 故事/脚本、`song.json`、本机成片、ComfyUI / H3 / Wav2Lip：完整遵循 [`music-mv/AGENTS.md`](music-mv/AGENTS.md)。
 - 改工作台页面、组件、样式、构建与预览：完整遵循 [`workbench/AGENTS.md`](workbench/AGENTS.md)。
 
 开始任何音乐创作任务前，必须先按 `music-mv/AGENTS.md` 执行。以下入口与 MV 流程始终生效。
@@ -22,7 +22,7 @@
 4. 当现有信息已经足够、Agent 判断可以进入创作时，必须主动询问：`方向已经比较清楚了。现在要开始写歌吗？` 在用户明确同意前继续保持讨论状态，不得自行启动。
 5. 不得要求用户必须先提供歌名。正式启动后，用户没有歌名时可以依据描述提供贴合方向的暂定歌名；在用户确认前明确标注为暂定。
 6. 正式启动时保留用户的原始描述，再提取主题、情绪、音乐风格、演唱语言、人声、场景、必要元素、避免元素和待确认信息。不要因为整理信息而改变用户原意。
-7. 歌名确定后，歌曲文件夹遵循 `music-mv/songs/in-progress/YYYYMMDD-slug/`；显示名写入 `song.json` 的 `title`。暂时没有歌名时可使用 `YYYYMMDD-untitled`。
+7. 歌名确定后，歌曲文件夹遵循 `music-mv/songs/YYYYMMDD-slug/`；显示名写入 `song.json` 的 `title`。暂时没有歌名时可使用 `YYYYMMDD-untitled`。完成后将 `lifecycle` 设为 `completed`，不要移动文件夹。
 8. 每首歌曲文件夹中的 `song.json` 是工作台数据源。创建或修改歌曲企划、歌词、提示词、歌曲参数、状态或 MV 脚本时，必须在同一轮工作中同步更新 `song.json`。
 9. `song.json` 必须保持有效 JSON。歌词写入 `sections`；风格与演唱要求写入 `prompts` 的 `zh` 和 `en`；男/女主角定妆形象写入 `characterLooks`，英文必须可直接粘贴到 ComfyUI `01_character_three_views` 的 Shared Character Prompt；MV 分镜写入 `shots`。
 

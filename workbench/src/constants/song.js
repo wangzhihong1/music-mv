@@ -12,7 +12,7 @@ export const EMPTY_SONG = {
   mvWorkflow: {},
   mvStory: {},
   production: {
-    mvDirectory: '',
+    directory: '',
     characterReferences: 'not_started',
     shotVideos: 'not_started',
     post: 'not_started',

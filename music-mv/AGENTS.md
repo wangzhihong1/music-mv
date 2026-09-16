@@ -1,16 +1,17 @@
 # 音乐 MV 创作规范
 
-本目录存放音乐 MV 的规范、歌曲档案与本机生成数据。所有脚本、分镜、生成提示词、场景方案与后期建议，均应遵循以下规范。前端工作台在仓库的 `workbench/`，不要把 Vue 源码写入本目录。
+本目录存放音乐 MV 的规范、歌曲档案与本机成片数据。所有脚本、分镜、生成提示词、场景方案与后期建议，均应遵循以下规范。前端工作台在仓库的 `workbench/`，不要把 Vue 源码写入本目录。
 
 ## 项目目录约定
 
-- 一首音乐对应一支 MV。每支 MV 使用 `mvs/YYYYMMDD-slug/` 作为独立目录，例如 `mvs/20260815-unrequited/`。
-- MV 专属内容（音乐文件、分析结果、角色与场景资产、废弃版本、脚本和成片）必须放在对应的 MV 目录内，可按需要继续使用 `music/`、`assets/`、`.analysis/` 等子目录。
+- 一首音乐对应一支 MV。每首歌使用 `songs/YYYYMMDD-slug/` 作为唯一工作目录，例如 `songs/20260823-one-day-short-of-forever/`。
+- 企划、歌词、`song.json`、音频、角色与场景资产、分析缓存、生成文件和成片都放在该目录内，可按需要继续使用 `music/`、`assets/`、`generated/`、`.analysis/` 等子目录。
+- 进度写入 `song.json`：`lifecycle` 为 `in-progress` 或 `completed`，`status` 为给人看的说明。完成后只改这两个字段，不要把文件夹搬到其他目录。
 - ComfyUI 文生图/图生图工作流属于公共模板，统一放在 `D:\ComfyUI\ComfyUI_windows_portable\ComfyUI\user\default\workflows\MusicMV\`，不得写入某支 MV 的目录，也不要在文件名和默认路径中绑定具体歌曲。
 - ComfyUI 自定义节点统一放在 `D:\ComfyUI\ComfyUI_windows_portable\ComfyUI\custom_nodes\`；ComfyUI 模型、运行配置、临时输入与输出也由 ComfyUI 自身目录管理，不在本项目中保留同步副本。
 - ComfyUI 工作流校验、格式转换脚本和安装包统一放在 `D:\ComfyUI\ComfyUI_windows_portable\MusicMV_tools\`。
-- 独立 Wav2Lip 运行时统一放在 `D:\Wav2Lip\`，公共 Whisper 模型统一放在 `D:\Models\Whisper\`；本项目不得重新创建 `.tools/` 或 `.models/` 保存运行时和大模型。
-- `music-mv/` 只保留规范、歌曲档案、公共素材、模板、脚本和 `mvs/`。所有代码、目录和档案文件名使用英文；`song.json` 的显示名可以使用中文。
+- 独立 Wav2Lip 运行时统一放在 `D:\Wav2Lip\`，独立 InfiniteTalk 运行时统一放在 `D:\InfiniteTalk\`，公共 Whisper 模型统一放在 `D:\Models\Whisper\`；本项目不得重新创建 `.tools/` 或 `.models/` 保存运行时和大模型。
+- `music-mv/` 只保留规范、歌曲工作目录、公共素材、模板和脚本。所有代码、目录和档案文件名使用英文；`song.json` 的显示名可以使用中文。
 
 ## 创作核心
 
@@ -54,7 +55,7 @@
 6. 演唱镜头插入位置与表演说明
 7. 如需 AI 生成，提供保持人物、服装、地点与光线连续性的中文提示词
 
-## 本机生成与高清输出规范
+## 本机成片与高清输出规范
 
 当前工作机配置：NVIDIA GeForce RTX 3060（12GB 显存）、Intel i5-12400F、16GB 内存；优先使用 D 盘作为模型、缓存、临时帧序列和成片的工作盘。
 
@@ -82,8 +83,8 @@
 
 ## 歌曲档案范围
 
-- `inspiration/`、`songs/in-progress/`、`songs/completed/`、`library/`、`templates/song/` 用于歌曲企划、歌词、提示词和结构化 `song.json`。
-- 歌曲资料沿用 `YYYYMMDD-slug/` 命名；进入本机 MV 素材生产后，专属音频、角色资产、分析、生成文件和成片放入 `mvs/YYYYMMDD-slug/`，不得放入 `workbench/`。工作台会扫描该目录并展示成品；可用 `production.mvDirectory` 绑定到对应歌曲，未绑定的生成目录会出现在「本机生成」。
+- `inspiration/`、`songs/`、`library/`、`templates/song/` 用于歌曲企划、歌词、提示词、结构化 `song.json` 以及该歌的本机成片。
+- 歌曲资料沿用 `YYYYMMDD-slug/` 命名。音频、角色资产、分析、生成文件和成片放入同一歌曲目录，不得放入 `workbench/`。工作台扫描 `songs/` 并按 `lifecycle` 分成「创作中 / 已完成」。
 - 涉及真人 MV 的视觉、生成、目录和质量要求时，同时遵循本文件前述音乐 MV 创作规范。
 
 ## 音乐创作入口
@@ -94,7 +95,7 @@
 4. 当现有信息已经足够、Agent 判断可以进入创作时，必须主动询问：`方向已经比较清楚了。现在要开始写歌吗？` 在用户明确同意前继续保持讨论状态，不得自行启动。
 5. 不得要求用户必须先提供歌名。正式启动后，用户没有歌名时可以依据描述提供贴合方向的暂定歌名；在用户确认前明确标注为暂定。
 6. 正式启动时保留用户的原始描述，再提取主题、情绪、音乐风格、演唱语言、人声、场景、必要元素、避免元素和待确认信息。不要因为整理信息而改变用户原意，也不要重复询问已经提供的信息。只有缺失内容会实质改变作品方向时，才提出简短问题。
-7. 歌名确定后，歌曲文件夹继续遵循 `YYYYMMDD-slug`；显示名写入 `song.json` 的 `title`。暂时没有歌名时可使用 `YYYYMMDD-untitled`，确认歌名后再改名。
+7. 歌名确定后，歌曲文件夹位于 `songs/YYYYMMDD-slug/`；显示名写入 `song.json` 的 `title`。暂时没有歌名时可使用 `YYYYMMDD-untitled`，确认歌名后再改名。`lifecycle` 默认为 `in-progress`；完成后改为 `completed`，不要移动文件夹。
 8. 每首歌曲文件夹中的 `song.json` 是 Web 工作台的数据源。创建或修改歌曲企划、歌词、中英文提示词、歌曲参数、状态或 MV 脚本时，必须在同一轮工作中同步更新 `song.json`，确保页面内容与 Markdown 文档一致。
 9. `song.json` 必须保持有效 JSON。歌词按歌曲段落写入 `sections`；风格、情绪、乐器、演唱方式、结构与避免元素写入 `prompts`，并尽量同时维护 `zh` 和 `en`；男/女主角定妆形象写入 `characterLooks`。`characterLooks.en` 必须是可直接粘贴到 ComfyUI `01_character_three_views` 左上角 Shared Character Prompt 的英文全身共享词：单人、从头顶到鞋底、直立、双臂下垂、暖灰无缝棚拍；不要写正面/侧面/背面或半身裁切。`zh` 为对照译文。负向提示词对齐该工作流的 Front Negative，并补角色专属避免项。MV 分镜单独写入 `shots`。YouTube 与抖音的标题、描述写入 `releaseCopy`。
 

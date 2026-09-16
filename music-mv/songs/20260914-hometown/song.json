@@ -4,6 +4,7 @@
   "title": "故乡",
   "date": "20260914",
   "status": "歌词修订中（正式歌名已确认）",
+  "lifecycle": "in-progress",
   "coreStatement": "写给身在故乡的人：由低沉厚重的男声讲述被叫着小王的人走在泥路和田埂上，被云、草、庄稼带回小时候，却发现那些场景一去不复返，并记住‘回得了故乡，走不进那天’。",
   "metadata": {
     "genre": "低沉男声慢唱叙事民谣",
@@ -55,7 +56,6 @@
     "ending": ""
   },
   "production": {
-    "mvDirectory": "",
     "characterReferences": "not_started",
     "shotVideos": "not_started",
     "post": "not_started",

@@ -124,10 +124,15 @@
 | 20260912 | 镜 01 超分试跑 | 用户 / Agent | 用户决定不全部重跑，只超分模糊镜头，先看镜 01。同锁定参数 6 秒 / 0.8MP / seed 191，输出 `generated/video/intermediate/shot01_upscale_v01.mp4`，未覆盖 raw。约 11.6 分钟，未 OOM | 待用户确认 | 确认后再点名下一条模糊镜 |
 | 20260912 | 超分正片接入粗剪 v03 | 用户 / Agent | 用户确认先把已超分镜头接入正片。将镜 01、26 超分结果复制为 `shot_01_h3_v04.mp4`、`shot_26_h3_v04.mp4`，保留 v03 原片；按 03:51 重接 `generated/video/final/rough-cut_v03.mp4`。其余分镜仍用原 H3 片 | 待用户审阅 v03 | 用户点名下一条模糊镜后再超分 |
 | 20260913 | YouTube / 抖音发布文案 | Agent | 写入 `09-release.md` 与 `song.json.releaseCopy`：YouTube、抖音标题和描述，工作台成片页可复制 | 待发布时使用 | 发布时直接复制对应平台字段 |
+| 20260913 | 归档完成 | 用户 / Agent | 用户确认整理本机数据并全部标记已完成。作废 raw 取次、旧粗剪 v01/v02、多余定妆版本与废弃关键帧移入 `.discarded/`；正片保留 `rough-cut_v03.mp4`。`production.post` / `delivery` 设为 complete，`lifecycle` 设为 `completed` | 已完成 | 后续如需补超分，从当前正片与 raw 锁定镜继续 |
+| 20260913 | 清理无用本机数据 | 用户 / Agent | 删除页面不展示的 `.discarded/`、`.analysis/` 和空目录 `assets/scenes/`；保留正片、33 条锁定 raw、超分中间件、主角图和原曲母带。未动本机成片中的两支早期测试 MV | 已清理 | 无需下一步 |
+| 20260913 | 只保留两首歌数据 | 用户 / Agent | 删除《凌晨三点》歌曲档案与《一厢情愿》本机 MV 目录。仓库歌曲/生成数据仅保留《比永远差一天》与《只是想你了》 | 已清理 | 无需下一步 |
+| 20260916 | 存储结构 | 用户 / Agent | 歌曲档案与本机成片合并到 `songs/20260823-one-day-short-of-forever/`。进度改由 `lifecycle` 表示，不再使用 `songs/in-progress`、`songs/completed` 或独立 `mvs/` | 已完成 | 无需下一步 |
 
 ## 最终版本
 
-- 最终音频：
-- 最终歌词版本：
-- 最终提示词版本：
-- 封面版本：
+- 最终音频：`music/one-day-short-of-forever_master_03m51s.wav`（源文件 `one-day-short-of-forever_source.mp3` 已保留）
+- 最终歌词版本：定稿（`song.json` `sections`）
+- 最终提示词版本：Mureka 专属风格与唱法提示词（`song.json` `prompts`）
+- 封面版本：女主正面定妆 `assets/characters/femaleLead_front.png`
+- 成片：`generated/video/final/rough-cut_v03.mp4`

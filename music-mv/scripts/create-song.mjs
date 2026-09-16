@@ -2,10 +2,10 @@ import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { spawn } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
-import { PATHS, SONG_COLLECTIONS, SONG_DOCUMENTS } from '../shared/paths.js'
+import { PATHS, SONG_DOCUMENTS } from '../shared/paths.js'
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const inProgressRoot = path.join(projectRoot, SONG_COLLECTIONS[0].directory)
+const songsRoot = path.join(projectRoot, PATHS.songs)
 const templateRoot = path.join(projectRoot, PATHS.templates)
 
 function printUsage(stream = process.stdout) {
@@ -141,7 +141,7 @@ try {
 
   const datePrefix = new Date().toISOString().slice(0, 10).replaceAll('-', '')
   let folderName = `${datePrefix}-${slug}`
-  let targetDir = path.join(inProgressRoot, folderName)
+  let targetDir = path.join(songsRoot, folderName)
 
   if (await pathExists(targetDir)) {
     if (!usingPlaceholder && slug !== 'untitled') {
@@ -152,7 +152,7 @@ try {
     while (await pathExists(targetDir)) {
       slug = `untitled-${String(serial).padStart(2, '0')}`
       folderName = `${datePrefix}-${slug}`
-      targetDir = path.join(inProgressRoot, folderName)
+      targetDir = path.join(songsRoot, folderName)
       serial += 1
     }
   }

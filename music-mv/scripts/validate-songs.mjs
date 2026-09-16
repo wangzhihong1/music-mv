@@ -1,41 +1,44 @@
 import { readFile, readdir } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { SONG_COLLECTIONS } from '../shared/paths.js'
+import { PATHS, SONG_LIFECYCLES } from '../shared/paths.js'
 import { timeToSeconds } from '../shared/time.js'
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+const songsRoot = path.join(projectRoot, PATHS.songs)
+const allowedLifecycles = new Set(SONG_LIFECYCLES.map((item) => item.id))
 const errors = []
 let checkedSongs = 0
 const storyBeats = ['opening', 'development', 'turningPoint', 'climax', 'ending']
 
-for (const collection of SONG_COLLECTIONS) {
-  const collectionPath = path.join(projectRoot, collection.directory)
-  let entries = []
+let entries = []
+try {
+  entries = await readdir(songsRoot, { withFileTypes: true })
+} catch (error) {
+  if (error.code !== 'ENOENT') throw error
+}
 
+for (const entry of entries) {
+  if (!entry.isDirectory()) continue
+  const relativePath = path.join(PATHS.songs, entry.name, 'song.json')
+
+  let song
   try {
-    entries = await readdir(collectionPath, { withFileTypes: true })
+    song = JSON.parse(await readFile(path.join(projectRoot, relativePath), 'utf8'))
   } catch (error) {
     if (error.code === 'ENOENT') continue
-    throw error
+    errors.push(`${relativePath}: JSON 无效，${error.message}`)
+    continue
   }
 
-  for (const entry of entries) {
-    if (!entry.isDirectory()) continue
-    const relativePath = path.join(collection.directory, entry.name, 'song.json')
+  checkedSongs += 1
 
-    let song
-    try {
-      song = JSON.parse(await readFile(path.join(projectRoot, relativePath), 'utf8'))
-    } catch (error) {
-      if (error.code === 'ENOENT') continue
-      errors.push(`${relativePath}: JSON 无效，${error.message}`)
-      continue
-    }
+  if (!allowedLifecycles.has(song.lifecycle)) {
+    errors.push(`${relativePath}: lifecycle 必须为 in-progress 或 completed`)
+  }
 
-    checkedSongs += 1
-    const shots = Array.isArray(song.shots) ? song.shots : []
-    if (shots.length === 0) continue
+  const shots = Array.isArray(song.shots) ? song.shots : []
+  if (shots.length === 0) continue
 
     const songDuration = timeToSeconds(song.metadata?.duration)
     if (songDuration === null) {
@@ -137,7 +140,6 @@ for (const collection of SONG_COLLECTIONS) {
         }
       }
     }
-  }
 }
 
 if (errors.length > 0) {
