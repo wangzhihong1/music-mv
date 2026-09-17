@@ -82,24 +82,31 @@ non_diegetic_music:
 这是模型真正执行的时间轴。
 
 1. **先写 1–2 句风格**，再写 `[Shot 1]`。不要一上来就 `[Shot 1]`。
-2. 本项目一条提示词 = 一条连续镜头。不要写 `[Shot 2]`、`the camera cuts to`、叠化、匹配切。
-3. `[Shot 1]` 不加时间码。时段变化写在同一镜里，用 `In the first two seconds... Then... By the final second...`，不要用 `0.0-3.5s:` 这种清单。
-4. 运镜写进句子，用官方三维：**类型 + 幅度 + 速度**。
+2. **人脸镜 = 一条连续镜头。** 画面里有脸、手、脚、可辨认的背影或路人，一律不写 `[Shot 2]`、`the camera cuts to`、叠化、匹配切。时段变化用 `In the first two seconds... Then... By the final second...`。
+3. **空景可以切。** 画面里没有活人时，允许在同一条 H3 里写 `[Shot 2] At MM:SS.mmm, the camera cuts to ...`。`[Shot 1]` 不加时间码；切点必须落在本镜时长内、严格递增。一条空景最多切一次。切必须换到另一块空间（路/草、黑路/灯），不要切「更近的同一摊云」或「同一条路再近一点」——H3 会重画天气、光比和屋脊，看起来像延时、房子在长高。要同一小时连续，就一条镜头拍完。已经有推、拉、移的空景，不要再叠切。叠化、淡入淡出默认不用。
+4. `[Shot 1]` 不加时间码。人脸镜或空景不切时，不要用 `0.0-3.5s:` 这种清单。
+5. 运镜写进句子，用官方三维：**类型 + 幅度 + 速度**。写成句内动作，不要堆在句尾当标签。幅度和速度只在需要时写；中等、常速可省略。一条提示词只留一种运镜。
 
-| 类型 | 写法 |
-| --- | --- |
-| 推近/拉远（机身动） | `pushes in` / `pulls out` |
-| 变焦 | `zooms in` / `zooms out` |
-| 横摇/横移 | `pans left/right` / `trucks left/right` |
-| 固定 | `holds a static shot` |
-| 幅度 | `with small amplitude` / `with large amplitude` |
-| 速度 | `at slow speed` / `at fast speed` |
+| 类型 | 写法 | 何时用 |
+| --- | --- | --- |
+| 推近/拉远（机身动） | `pushes in` / `pulls out` | 靠近或离开主体；人脸默认小幅度慢推/慢拉 |
+| 变焦 | `zooms in` / `zooms out` | 机身不动、焦距变。与推拉观感不同，不要混写 |
+| 横摇 | `pans left` / `pans right` | 机位不动、镜头水平扫过空间 |
+| 横移 | `trucks left` / `trucks right` | 机身平移。要换视点用横移，不要写成横摇 |
+| 纵摇 | `tilts up` / `tilts down` | 机位不动、镜头垂直扫（田→云、草→天） |
+| 升降 | `pedestals up` / `pedestals down` | 机身整体升高/降低 |
+| 环绕 | `arcs around` | 围着主体走弧。人脸镜禁用 |
+| 跟随 | `follows` / tracking | 只跟背影或远人；不要跟成正脸特写 |
+| 固定 | `holds a static shot` | 人穿过画框、需要停住的呼吸、空景内切的两侧 |
+| 晃/滚 | `shakes slightly` / `rolls` | 本项目写实 MV 默认不用 |
 
 例：`The camera pushes in with small amplitude at slow speed toward her face.`
+例：`The camera pans right with small amplitude at slow speed, revealing the tiled roofs along the fields.`
+例：`The camera holds a static shot as the boy runs through and exits.`
 
-5. 生成任务官方建议 350–500 英文词。我们禁止切镜，单镜 5–8 秒写 **250–400 词** 即可：构图、人物位置、环境、光、一个动作、一个表情持住、运镜、声音。不要为凑字数堆 `cinematic` / `beautiful`。
-6. 主体第一次清楚入画时，用标签复述身份特征；之后只复用 `<Subject 1>`，不要每句重写五官。
-7. 质量约束写具体可见物，不要写抽象情绪词。社区有效短语：
+6. 生成任务官方建议 350–500 英文词。人脸连续镜、空景单切镜，单段 5–8 秒写 **250–400 词** 即可：构图、环境、光、一个动作（人脸再加一个表情持住）、运镜或一次切、声音。不要为凑字数堆 `cinematic` / `beautiful`。
+7. 主体第一次清楚入画时，用标签复述身份特征；之后只复用 `<Subject 1>`，不要每句重写五官。
+8. 质量约束写具体可见物，不要写抽象情绪词。社区有效短语：
 
 ```text
 stable faces and hands, smooth skin texture, coherent clothing,
@@ -107,6 +114,8 @@ eyelids remain open, irises and pupils stay readable,
 no flickering eyes, no facial warping, no beauty-filter slim face,
 no extra limbs, no on-screen text, no logos
 ```
+
+9. **不要点名你禁止的天气。** 写 `no fog`、`no traveling clouds`、`no mist`，H3 常把雾和跑云做出来。开场若只要地，就只写泥路、庄稼、山；天空留给下一镜。水面大面积入画也容易生雾，不需要水就不要写水。
 
 ## 脸与眼神：可以写什么
 
@@ -149,9 +158,11 @@ Her gaze holds on the two empty chairs inside the window. Brows stay level, lips
 - 脸重要的镜头：约 0.8–1.0MP，4–6 秒先跑通，再试 6–8 秒。横版参考 1216×672 或 1280×720。
 - 冒烟可用 0.5MP，但不要把 0.5MP 4-step 当正式成片。
 - 一次只跑一条 H3。显存不够先减时长，再减分辨率；不要先摘掉参考图。
-- 4-step SLA 会放大提示词冲突。动作只留一件主事，运镜只留一种。
+- 4-step SLA 会放大提示词冲突。人脸镜动作只留一件主事，运镜只留一种。空景若切，两边都固定，不要再叠加运镜。人脸禁用环绕、滚转、晃动、大幅度、快速。
 
 ## 可粘贴骨架
+
+人脸镜（连续镜头，禁止内切）：
 
 ```text
 subject_definitions:
@@ -174,11 +185,36 @@ non_diegetic_music:
 N/A
 ```
 
+空景（最多一刀，切到另一块空间，不要切更近的同一摊云）：
+
+```text
+subject_definitions:
+<Subject 1> is the rural Chinese landscape in this prompt. No living person.
+
+summary:
+one 7-second live-action 16:9 MV clip of <Subject 1>: an empty mud path, then a cut to grass at the verge. No living person.
+
+retention_analysis:
+<Subject 1> (appears in [Shot 1] and [Shot 2]): fully_preserved - the same ground, crops, dirt, sky and light stay consistent. No living person.
+
+detailed_description:
+The target video is photoreal live-action in real time, a late-summer Chinese countryside, natural light, no golden nostalgia filter, no time-lapse, no city streets, no cars.
+[Shot 1] A 16:9 slightly high medium-wide of a packed mud path along the crops. The camera holds a static shot. The empty path runs toward the fields. No living person.
+[Shot 2] At 00:04.000, the camera cuts to a 16:9 low close of mixed wild grass at the path edge. The camera holds a static shot. The blades lean into the packed mud. No hand and no person.
+Stable earth and sky, real crop texture, no living person, no extra limbs, no on-screen text, no logos, no readable Chinese characters.
+
+overall_soundscape:
+dry wind along the path, then grass rustle, no footsteps
+
+non_diegetic_music:
+N/A
+```
+
 ## 写完自检
 
 - [ ] 六段齐全，标签前后一致
 - [ ] 风格句在 `[Shot 1]` 之前
-- [ ] 只有一条连续镜头，没有切镜时间码
+- [ ] 人脸镜只有一条连续镜头；空景若切，最多一次，且 `[Shot 2]` 带递增时间码
 - [ ] 运镜写了类型，必要时写了幅度和速度
 - [ ] 没有用文字重画五官
 - [ ] 眼神是持住，不是左右扫

@@ -71,7 +71,7 @@
 - 输出视频：`generated/video/raw/shot_01_h3_v01.mp4`
 - H3 参考图生视频提示词：
 
-必须粘贴 `05_ref2va_4step_sla` 的 reference contract，格式见 [`library/h3-prompt-writing.md`](../../library/h3-prompt-writing.md)：`subject_definitions`（`<Subject 1>` 绑定 `<Picture 1/2/3>`；双人镜加 `<Subject 2>` 与 `<Picture 4/5/6>`）、`summary`、`retention_analysis`、`detailed_description`、`overall_soundscape`、`non_diegetic_music: N/A`。`detailed_description` 先写风格句再写 `[Shot 1]`；一条连续镜头，不写剪辑、匹配切、可读文字。运镜写类型+幅度+速度。剪辑镜 `genMode: composite`，提示词不要送进 H3。
+必须粘贴 `05_ref2va_4step_sla` 的 reference contract，格式见 [`library/h3-prompt-writing.md`](../../library/h3-prompt-writing.md)：`subject_definitions`（`<Subject 1>` 绑定 `<Picture 1/2/3>`；双人镜加 `<Subject 2>` 与 `<Picture 4/5/6>`）、`summary`、`retention_analysis`、`detailed_description`、`overall_soundscape`、`non_diegetic_music: N/A`。`detailed_description` 先写风格句再写 `[Shot 1]`。人脸镜一条连续镜头；空景最多一次 `[Shot 2] At MM:SS.mmm, the camera cuts to ...`。运镜写类型+幅度+速度。剪辑镜 `genMode: composite`，提示词不要送进 H3。
 
 ## 拍摄清单
 

@@ -67,7 +67,7 @@
 - 静帧只用于角色定妆和必要的场景基准，不作为每镜必经工序。推荐交付链路：角色参考图 → H3 中高分辨率参考视频 → 挑选合格镜头 → 人脸/手部局部修复 → 视频超分至 1920×1080（或竖版 1080×1920）→ 剪辑、调色并以原始音乐母带合成。
 - 原生音频只作预览，不用于正式 MV；成片音轨必须使用用户提供或确认的音乐版本。
 - 保存三个版本：原始生成文件、修复/超分中间文件、最终剪辑成片。清理缓存前先确认成片已备份；大文件优先写入 D 盘。
-- H3 分镜必须使用官方 Ref2VA 六段：`subject_definitions`、`summary`、`retention_analysis`、`detailed_description`、`overall_soundscape`、`non_diegetic_music: N/A`。`detailed_description` 先写 1–2 句风格再写 `[Shot 1]`；一条提示词只写一条连续镜头；运镜用 `pushes in with small amplitude at slow speed` 这类类型+幅度+速度。
+- H3 分镜必须使用官方 Ref2VA 六段：`subject_definitions`、`summary`、`retention_analysis`、`detailed_description`、`overall_soundscape`、`non_diegetic_music: N/A`。`detailed_description` 先写 1–2 句风格再写 `[Shot 1]`。人脸、手、脚、背影镜只写一条连续镜头。空景允许最多一次硬切，写法为 `[Shot 2] At MM:SS.mmm, the camera cuts to ...`；切点必须换空间信息，不得只为换景别。运镜用 `pushes in with small amplitude at slow speed` 这类类型+幅度+速度。
 - H3 对「头在画面里的占比」敏感，大全景即使提高分辨率也会糊脸。表情戏用中景或中近景；需要环境时用中全景，不要用大全景演脸。禁止正侧 90° 或无必要的背面转头。
 - `detailed_description` 必须包含微表情，并与该镜 `action` 及故事情绪一致。眼神写持住，最多一次视线移动、最多一次自然眨眼；眼皮保持睁开，虹膜和瞳孔可读。禁止空脸、假笑、张嘴演唱、突然大哭，也禁止 `soft focus on the face`、`smeared eyes`、`glances around` 这类会抹眼或闪眼的词。
 - 在任何批量生成前，先用同一角色和同一场景完成 2–3 个短镜头测试，确认清晰度、脸部一致性、服装连续性和显存稳定性后再扩展到全片。
