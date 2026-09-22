@@ -160,6 +160,7 @@
   color: #353b35;
   font-size: 13px;
   line-height: 1.7;
+  white-space: pre-wrap;
 }
 
 .production-group.is-focused {

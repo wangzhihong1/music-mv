@@ -55,13 +55,13 @@ for (const entry of entries) {
       const end = timeToSeconds(shot.end)
 
       if (start === null || end === null) {
-        errors.push(`${relativePath}: ${label} 的 start/end 必须使用 MM:SS`)
+        errors.push(`${relativePath}: ${label} 的 start/end 必须使用 MM:SS，半秒写作 MM:SS.S`)
         continue
       }
 
-      const duration = end - start
-      if (duration < 1 || duration > 10) {
-        errors.push(`${relativePath}: ${label} 时长为 ${duration} 秒，必须在 1–10 秒内`)
+      const duration = Math.round((end - start) * 10) / 10
+      if (duration < 0.5 || duration > 15) {
+        errors.push(`${relativePath}: ${label} 时长为 ${duration} 秒，必须在 0.5–15 秒内`)
       }
       if (end > songDuration) {
         errors.push(`${relativePath}: ${label} 结束于 ${shot.end}，超过歌曲时长 ${song.metadata.duration}`)

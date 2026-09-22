@@ -1,7 +1,7 @@
 export function timeToSeconds(value) {
-  if (typeof value !== 'string' || !/^\d{2,}:\d{2}$/.test(value)) return null
+  if (typeof value !== 'string' || !/^\d{2,}:\d{2}(\.\d)?$/.test(value)) return null
   const [minutes, seconds] = value.split(':').map(Number)
-  if (Number.isNaN(minutes) || Number.isNaN(seconds) || seconds > 59) return null
+  if (Number.isNaN(minutes) || Number.isNaN(seconds) || seconds >= 60) return null
   return minutes * 60 + seconds
 }
 

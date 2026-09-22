@@ -12,8 +12,8 @@
 - 视觉章节：空的地方立住 → 日子被不同的人过、并切回空景 → 熟路和田埂对不上那天 → 副歌用空与众人并置落下 Hook → 一盏灯、黑路、云停着。
 - 爆点窗口：Chorus 2 与 Bridge（约 02:38–03:28）对准「回得了故乡 / 走不进那天」和「不该难过」。
 - 母题：开场先把脚底下的田和泥路立住；云放到下一镜。结尾云停在田那边。不设唯一主角，不挂男女主三视图，不对口型。
-- 空景内切：只在空景里切，一条最多一刀。本片切 03 路→草、09 空田→云、12 脚印→前方空路、16 田→淡云、21 热碗→空门口、22 熟路→更远处仍空、26 空田→空路、31 擦黑→一盏窗、33 黑路→远处灯、36 空田→停云。镜 01 开场不切、不演天空。有人脸、手、脚、背影的镜头不切；已有推拉移的空景也不切。
-- 运镜总谱：内切镜两边锁死。有动机才动——01 低机位沿泥路慢推进入田、10 背跟、13 慢摇山水田、14 横移弯道、15 慢推脸、18 横移空埂、23 拉空埂、24 低机位沿路推、27 仰到淡云、28 横移空泥路、29 慢推坐着的人、32 拉背影、34 升起看地方。人穿过画框（08、11）和草的近景锁死。慢歌全程 small + slow，不用环绕、滚转、手持晃。
+- 空景内切：只在空景里切，一条最多一刀。本片切 03 路→草、09 空田→云、12 脚印→前方空路、16 田→淡云、21 热碗→空门口、22 熟路→更远处仍空、26 空田→空路、31 擦黑→一盏窗。镜 01 开场不切、不演天空。镜 33、36 不再内切。有人脸、手、脚、背影的镜头不切；已有推拉移的空景也不切。
+- 运镜总谱：内切镜两边锁死。有动机才动——01 低机位沿泥路慢推进入田、10 背跟、13 慢摇山水田、14 横移弯道、15 慢推脸、18 横移空埂、23 拉空埂、24 低机位沿路推、27 仰到淡云、28 从墙脚草慢仰到风里的旧衣、29 慢推坐着的人、32 拉背影、33 沿黑路慢横移、34 贴地升起看空田、35 沿空埂慢横移、36 从稻叶慢仰到停住的云。人穿过画框（08、11）和草的近景锁死。32 到 36 机位各只动一种，画面里必须有同一阵左向右的风：野花、细草、稻叶分层动，不能只运镜或收成固定帧。36 的云停在田那边，停的是云，不是整幅画面。慢歌全程 small + slow，不用环绕、滚转、手持晃。
 
 ## 制作设定
 
@@ -74,15 +74,15 @@
 | 25 | 02:45 | 02:52 | 7 秒 | 高潮 | 回得了，故乡 | 无（空景或路人） | characterVideo | 16:9 平视中全景，holds a static shot。 | 院边左前景的中年妇女收起搪瓷盆并向门口走两步，右后景戴草帽的男人在田边停一下后继续整理锄头；两人各过各的，不看镜头、不对口型。 | 16:9 平视中全景，holds a static shot。 | 院与田边 | 空路切到众人 | 回得了故乡，人各自在 | generated/video/raw/shot_25_h3_v03.mp4 |
 | 26 | 02:52 | 02:59 | 7 秒 | 高潮 | 走不进 / 那天 | 无（空景或路人） | characterVideo | 16:9 平视中全景，一条连续固定镜头，holds a static shot for all seven seconds。 | 镜25同一院边已经无人：木凳上只留搪瓷盆刚放过的湿圆痕，锄头靠在旧墙边；菜叶、玉米叶和晾布仍随风，门口没有人再出来。 | 16:9 平视中全景，一条连续固定镜头，holds a static shot for all seven seconds。 | 院与田边 | 众人切回空 | 走不进那天 | generated/video/raw/shot_26_h3_v03.mp4 |
 | 27 | 02:59 | 03:06 | 7 秒 | 高潮 | 点点滴滴 / 就散了 | 无（空景或路人） | characterVideo | 16:9 略高机位近景，向下约25度，一条连续固定镜头，holds a static shot for all seven seconds。 | 承接镜26，同一院落木凳旁的旧竹筛里只余一小撮干稻壳；一阵轻风从左向右经过，稻壳分几次越过筛沿，最后只留近乎空的筛面，没有人回来。 | 16:9 略高机位近景，向下约25度，一条连续固定镜头，holds a static shot for all seven seconds。 | 院边木凳旁 | 同院落由中全景切近景，副歌2收在被风带走的零碎稻壳 | 点点滴滴就散了 | generated/video/raw/shot_27_h3_v03.mp4 |
-| 28 | 03:06 | 03:13 | 7 秒 | 高潮 | 明明不该难过 | 无（空景或路人） | characterVideo | 16:9 平视中近景，trucks right with small amplitude at slow speed，一条连续镜头。 | 镜头贴着旧土墙缓慢向右平移，掠过一扇敞开的旧木门；薄门帘和墙脚草轻动，门内只有空院，没有人进出。 | 16:9 平视中近景，trucks right with small amplitude at slow speed，一条连续镜头。 | 院外旧土墙与门口 | 竹筛清空后切至空门，桥段节奏放慢，并引向下一镜院边人物 | 明明不该难过 | generated/video/raw/shot_28_h3_v03.mp4 |
+| 28 | 03:06 | 03:13 | 7 秒 | 高潮 | 明明不该难过 | 无（空景或路人） | characterVideo | 16:9 平视中近景，一条连续镜头，tilts up with small amplitude at slow speed。不固定。 | 竹筛清空后，同一院里两根木桩之间晾着一件褪色旧衣。镜头从墙脚被风压弯的草慢慢仰到这件衣服；衣摆和袖口持续掀动，草和一片菜叶不静止。没有人来收。 | 16:9 平视中近景，一条连续镜头，tilts up with small amplitude at slow speed。不固定。 | 院内晾衣绳 | 空筛切到还在过的日子，再交给门里坐着的人 | 明明不该难过 | generated/video/raw/shot_28_h3_v04.mp4 |
 | 29 | 03:13 | 03:21 | 8 秒 | 高潮 | 却也高兴不起来 | 无（空景或路人） | characterVideo | 16:9 平视中近景，pushes in with small amplitude at slow speed。 | 一位约45岁的村妇坐在旧木门内，目光始终停在院里同一点；她闭唇、不哭不笑，末段只在缓慢呼气时让肩膀落下一点。 | 16:9 平视中近景，pushes in with small amplitude at slow speed。 | 旧木门内侧 | 镜28空门切到同一类门内的人，空间由空转有人 | 却也高兴不起来 | generated/video/raw/shot_29_h3_v03.mp4 |
 | 30 | 03:21 | 03:28 | 7 秒 | 高潮 | 想留下，那时候 | 无（空景或路人） | characterVideo | 16:9 低机位近景，向下约15度，一条连续固定镜头，holds a static shot for all seven seconds。 | 贴近田边浅沟，前景细草先被一阵风压向右侧，半秒后后景稻叶跟着倾斜；风减弱时两层植物以不同速度回弹，整镜没有人。 | 16:9 低机位近景，向下约15度，一条连续固定镜头，holds a static shot for all seven seconds。 | 田边浅沟 | 从脸回到风 | 想留下，那时候 | generated/video/raw/shot_30_h3_v02.mp4 |
 | 31 | 03:28 | 03:36 | 8 秒 | 结尾 | 回得了，故乡 | 无（空景或路人） | characterVideo | 16:9 平视中景，一条连续固定镜头，holds a static shot for all eight seconds。 | 一扇旧木窗在暮色土墙上保持全暗，约四秒时屋内暖灯一次性亮起并稳定下来；窗外一枝竹叶仍在风里轻动，没有人出现。 | 16:9 平视中景，一条连续固定镜头，holds a static shot for all eight seconds。 | 旧屋外墙与木窗 | 镜30的暗绿风动切到静止旧墙，灯亮在最终副歌进入时发生，不切镜 | 回得了故乡，日子不告别 | generated/video/raw/shot_31_h3_v02.mp4 |
-| 32 | 03:36 | 03:44 | 8 秒 | 结尾 | 我还站在田埂上 | 无（空景或路人） | characterVideo | 16:9 平视中景，pulls out with small amplitude at slow speed，机位始终低于人物肩线。 | 一个只见背面的成年人站在旧田埂上，双手自然垂下，不回头；镜头从腰上至膝上的中景小幅度慢拉，人物仍清楚，低矮稻田和风动草沟逐渐露出。 | 16:9 平视中景，pulls out with small amplitude at slow speed，机位始终低于人物肩线。 | 旧田埂与低矮稻田之间 | 灯到人的背影 | 我还站在田埂上 | generated/video/raw/shot_32_h3_v01.mp4 |
-| 33 | 03:44 | 03:52 | 8 秒 | 结尾 | 走不进 / 那天 | 无（空景或路人） | composite | 16:9 平视中全景固定；00:04.500 硬切到远处灯，仍固定。 | 先没灯的泥路。四点五秒后切到远处那一点暖光，走不近。 | 16:9 平视中全景固定；00:04.500 硬切到远处灯，仍固定。 | 泥路 | 背影切回黑路 | 走不进那天 | generated/video/raw/shot_33_h3_v02.mp4 |
-| 34 | 03:52 | 04:00 | 8 秒 | 结尾 | 人已经，不是 | 无（空景或路人） | composite | 16:9 平视大全景，pedestals up with small amplitude at slow speed。 | 镜头小幅度升起，看见更多空田、路和那一点灯。不需要脸。 | 16:9 平视大全景，pedestals up with small amplitude at slow speed。 | 田与村 | 最终副歌收 | 人已经，不是 | generated/video/raw/shot_34_h3_v03.mp4 |
-| 35 | 04:00 | 04:08 | 8 秒 | 结尾 | Outro | 无（空景或路人） | characterVideo | 16:9 平视中全景，holds a static shot。 | 尾奏。田埂上空着。 | 16:9 平视中全景，holds a static shot。 | 田埂 | outro | 编曲收回 | generated/video/raw/shot_35_h3_v01.mp4 |
-| 36 | 04:08 | 04:17 | 9 秒 | 结尾 | 云还停在 / 田那边 | 无（空景或路人） | characterVideo | 16:9 平视大全景固定；00:05 硬切到田那边停着的云，仍固定。 | 先空田。五秒后切到停住的云，停在最后一帧。 | 16:9 平视大全景固定；00:05 硬切到田那边停着的云，仍固定。 | 田与天 | 淡出或停住 | 云还停在田那边 | generated/video/raw/shot_36_h3_v01.mp4 |
+| 32 | 03:36 | 03:44 | 8 秒 | 结尾 | 我还站在田埂上 | 无（空景或路人） | characterVideo | 16:9 平视中景，pulls out with small amplitude at slow speed，机位始终低于人物肩线。运镜只把稻田带进来；活的是风。 | 一个只见背面的成年人站在旧田埂上，不回头、不走开。同一阵从左向右的风先掀起衣摆和裤脚，再压过田埂边的野花和细草，约半秒后低矮稻叶跟着倾斜；衣料和植物全程不静止。镜头只做小幅度慢拉。 | 16:9 平视中景，pulls out with small amplitude at slow speed，机位始终低于人物肩线。运镜只把稻田带进来；活的是风。 | 旧田埂与低矮稻田之间 | 灯到人的背影 | 我还站在田埂上 | generated/video/raw/shot_32_h3_v02.mp4 |
+| 33 | 03:44 | 03:52 | 8 秒 | 结尾 | 走不进 / 那天 | 无（空景或路人） | characterVideo | 16:9 平视中全景，一条连续镜头，trucks right with small amplitude at slow speed。不固定，不内切。 | 沿仍旧发黑的泥路贴地慢横移，不朝灯走。路肩野花和细草从第一秒起被同一阵左向右的风压弯，后景庄稼叶晚半秒跟着动，全程不静止。远处那一点暖光大小和距离保持不变，没有人走上这条路。 | 16:9 平视中全景，一条连续镜头，trucks right with small amplitude at slow speed。不固定，不内切。 | 泥路 | 背影交给仍旧发黑的路，风不断 | 走不进那天 | generated/video/raw/shot_33_h3_v03.mp4 |
+| 34 | 03:52 | 04:00 | 8 秒 | 结尾 | 人已经，不是 | 无（空景或路人） | characterVideo | 16:9 贴地平视中全景，pedestals up with small amplitude at slow speed。不是大全景航拍，不是固定帧。 | 人已经不在。贴地中全景里，野花、细草和稻叶被同一阵风持续吹动；镜头只小幅度缓慢升起，多看见同一片空田、泥路和那一点仍旧很远的灯。不起飞，不拉成航拍。 | 16:9 贴地平视中全景，pedestals up with small amplitude at slow speed。不是大全景航拍，不是固定帧。 | 空田与泥路 | 横移交给升起，人已经不在 | 人已经，不是 | generated/video/raw/shot_34_h3_v04.mp4 |
+| 35 | 04:00 | 04:08 | 8 秒 | 结尾 | Outro | 无（空景或路人） | characterVideo | 16:9 平视中全景，一条连续镜头，trucks left with small amplitude at slow speed。不固定。 | 尾奏。空田埂上没有人回来。镜头贴着田埂缓慢向左横移。野花和细草先被同一阵左向右的风压弯，稻叶晚半秒跟着动，全程不静止。 | 16:9 平视中全景，一条连续镜头，trucks left with small amplitude at slow speed。不固定。 | 田埂 | 升起交给横移，田埂仍空着 | 编曲收回 | generated/video/raw/shot_35_h3_v01.mp4 |
+| 36 | 04:08 | 04:17 | 9 秒 | 结尾 | 云还停在 / 田那边 | 无（空景或路人） | characterVideo | 16:9 平视中全景，一条连续镜头，tilts up with small amplitude at slow speed。不固定，不内切。 | 镜头从被风吹动的稻叶和野花慢慢仰起，看见田那边停着的一朵云。云保持位置，几乎不跑；下面的花草和稻叶继续动。没有人走进来。 | 16:9 平视中全景，一条连续镜头，tilts up with small amplitude at slow speed。不固定，不内切。 | 田与天 | 横移交到仰看停云 | 云还停在田那边 | generated/video/raw/shot_36_h3_v01.mp4 |
 
 ## 逐镜 H3 提示词
 
@@ -1020,31 +1020,31 @@ N/A
 
 - 出镜参考：不挂三视图。空景按环境生成；路人仅用提示词，不锁唯一主角
 - 生成类型：H3 文生视频 / 无角色参考槽
-- 输出视频：`generated/video/raw/shot_28_h3_v03.mp4`
-- 景别：桥段：旧土墙与空门
-- 运镜：16:9 平视中近景，trucks right with small amplitude at slow speed，一条连续镜头。
-- 场景/道具：院外旧土墙与门口
-- 人物动作：镜头贴着旧土墙缓慢向右平移，掠过一扇敞开的旧木门；薄门帘和墙脚草轻动，门内只有空院，没有人进出。
-- 转场/特效：竹筛清空后切至空门，桥段节奏放慢，并引向下一镜院边人物
+- 输出视频：`generated/video/raw/shot_28_h3_v04.mp4`
+- 景别：桥段：风里的一件旧衣
+- 运镜：16:9 平视中近景，一条连续镜头，tilts up with small amplitude at slow speed。不固定。
+- 场景/道具：院内晾衣绳
+- 人物动作：竹筛清空后，同一院里两根木桩之间晾着一件褪色旧衣。镜头从墙脚被风压弯的草慢慢仰到这件衣服；衣摆和袖口持续掀动，草和一片菜叶不静止。没有人来收。
+- 转场/特效：空筛切到还在过的日子，再交给门里坐着的人
 - 声画重点：明明不该难过
 - H3 提示词：
 
 ```text
 subject_definitions:
-<Subject 1> is one short section of weathered earthen farmhouse wall with natural cracks, one old plain wooden door standing open in its frame, one thin unpatterned cloth curtain just inside, sparse short grass at the wall base, and a dim enclosed empty courtyard beyond. No living person appears.
+<Subject 1> is one faded indigo work shirt hanging from a short rope between two rough wooden posts in an enclosed farmhouse yard, with thin wild grass and one broad vegetable leaf at the wall base below it, and a weathered earthen wall directly behind the posts. No living person appears.
 
 summary:
-one continuous 7-second photoreal live-action 16:9 MV shot of <Subject 1>, slowly moving along the old wall to reveal an open but empty doorway at dusk.
+one continuous 7-second photoreal live-action 16:9 MV shot of <Subject 1>, where the camera looks up from wind-bent grass to the shirt that keeps moving and nobody comes to take it down.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - the same earthen wall, cracks, single wooden doorway, plain curtain, base grass and enclosed empty courtyard remain coherent. No living person.
+<Subject 1> (appears in [Shot 1]): fully_preserved - the same shirt, rope, two posts, grass, vegetable leaf and earthen wall remain coherent as the camera tilts. No living person.
 
 detailed_description:
-The target video is photoreal live-action in real time, restrained rural observation at late-summer dusk. Muted neutral earth colors and softly cooling natural light replace scenic sunset color. The old wall and doorway fill the frame and block all distant scenery.
-[Shot 1] A 16:9 eye-level medium-close camera trucks right with small amplitude at slow speed in one continuous move parallel to the earthen wall. The shot begins on rough wall texture and short grass at its base. As the camera glides right, one plain old wooden doorway enters and settles near center; the door already stands open and never swings. A thin unpatterned cloth curtain just inside lifts a few centimeters and falls in a continuous light breeze, while the short grass bends softly in the same direction. Through the doorway only a dim enclosed patch of packed-earth courtyard and an empty low stool are visible. No person enters, exits, passes behind the curtain or casts a moving shadow. The camera never turns toward a road, field or horizon. No visible sky, mountain, water, modern building, white house, utility pole, wire, vehicle, animal, readable writing, couplet, on-screen text or logo.
+The target video is photoreal live-action in real time, restrained rural observation in the same enclosed late-summer farmhouse yard. Muted earth and faded indigo. The wall behind the posts fills the background and blocks every distant view. The hour does not change.
+[Shot 1] A 16:9 eye-level medium-close begins low, so wind-bent grass and one vegetable leaf fill the lower frame and the shirt hem is only partly visible. The camera tilts up with small amplitude at slow speed for all seven seconds, settling on the same hanging shirt without becoming a wide view. From the first frame a moderate breeze runs left to right and never stops: the grass and leaf bend first, then the shirt hem and one sleeve lift and fall in uneven pulses through the final second. The rope and posts stay fixed. No person enters, reaches for the shirt, or casts a moving shadow. No cut. No open door, sky, mountain, water, road, modern building, utility pole, wire, vehicle, readable writing, on-screen text or logo.
 
 overall_soundscape:
-soft curtain movement, short grass rustle, dusk insects, no footsteps, no voices
+cloth flutter, grass and leaf rustle, dusk insects, no footsteps, no voices
 
 non_diegetic_music:
 N/A
@@ -1156,31 +1156,31 @@ N/A
 
 - 出镜参考：不挂三视图。空景按环境生成；路人仅用提示词，不锁唯一主角
 - 生成类型：H3 文生视频 / 无角色参考槽
-- 输出视频：`generated/video/raw/shot_32_h3_v01.mp4`
+- 输出视频：`generated/video/raw/shot_32_h3_v02.mp4`
 - 景别：旧田埂上的背影中景
-- 运镜：16:9 平视中景，pulls out with small amplitude at slow speed，机位始终低于人物肩线。
+- 运镜：16:9 平视中景，pulls out with small amplitude at slow speed，机位始终低于人物肩线。运镜只把稻田带进来；活的是风。
 - 场景/道具：旧田埂与低矮稻田之间
-- 人物动作：一个只见背面的成年人站在旧田埂上，双手自然垂下，不回头；镜头从腰上至膝上的中景小幅度慢拉，人物仍清楚，低矮稻田和风动草沟逐渐露出。
+- 人物动作：一个只见背面的成年人站在旧田埂上，不回头、不走开。同一阵从左向右的风先掀起衣摆和裤脚，再压过田埂边的野花和细草，约半秒后低矮稻叶跟着倾斜；衣料和植物全程不静止。镜头只做小幅度慢拉。
 - 转场/特效：灯到人的背影
 - 声画重点：我还站在田埂上
 - H3 提示词：
 
 ```text
 subject_definitions:
-<Subject 1> is one adult figure seen only from behind, already standing on a narrow old packed-earth field ridge between low rice plots. The figure wears a plain dark indigo shirt and loose dark trousers; the face is never visible. Dedicated back view. Appearance comes from this text only; there is no reference picture. No second living person.
+<Subject 1> is one adult figure seen only from behind, already standing on a narrow old packed-earth field ridge between low rice plots, with thin wild grass and a few small pale wildflowers at the ridge edge. The figure wears a plain dark indigo shirt and loose dark trousers; the face is never visible. Dedicated back view. Appearance comes from this text only; there is no reference picture. No second living person.
 
 summary:
-one continuous 8-second photoreal live-action 16:9 MV shot of <Subject 1> standing quietly on the familiar ridge after one warm village window has come on, not a farewell portrait.
+one continuous 8-second photoreal live-action 16:9 MV shot of <Subject 1> standing on the ridge while one steady breeze moves the clothes, wildflowers, grass and rice. The camera only pulls out a little.
 
 retention_analysis:
 <Subject 1> (appears in [Shot 1]): fully_preserved - the same back, dark shirt, trousers, posture and ridge position remain coherent as the camera moves. No second living person.
 
 detailed_description:
-The target video is photoreal live-action in real time, restrained rural dusk continuing the previous warm-window mood. Muted blue-green and earth tones, no scenic sunset, no distant panorama. The frame is enclosed by the old ridge, low rice, short grass and one tiny far warm window partly screened by vegetation.
-[Shot 1] A 16:9 eye-level medium shot begins from the figure's waist to knees, keeping the back large enough to read as one person while never showing the face. The figure is already standing on the ridge facing away from camera, arms hanging naturally, shoulders quiet. The camera pulls out with small amplitude at slow speed for all eight seconds, revealing more of the same ridge, shallow field groove and low rice leaves. The figure does not turn, wave, walk, sing or speak; their posture remains upright with one small natural weight shift only. Rice leaves and short grass move continuously in a light breeze, while the packed ridge and figure remain stable. No front face, profile, second person, duplicate body, visible sky, mountain panorama, water surface, road, modern building, utility pole, wire, vehicle, readable writing, on-screen text or logo.
+The target video is photoreal live-action in real time, restrained rural dusk. Muted blue-green and earth tones. The frame stays enclosed by the ridge, low rice, short grass and a few small wildflowers. One tiny far warm window stays partly screened by plants. Real time only; the hour does not change.
+[Shot 1] A 16:9 eye-level medium shot begins around the figure's waist to knees, back toward camera, face never visible. The figure is already standing, arms hanging, and does not turn, walk, wave, sing or speak. From the first second a moderate breeze runs left to right and never stops: the shirt hem and loose trouser cuffs lift and fall, wildflowers and thin grass at the ridge edge bend first, and about half a second later the low rice leaves tilt the same way. Cloth and plants keep recovering at different speeds through the final second and never freeze into a still frame. The camera pulls out with small amplitude at slow speed, revealing more of the same ridge and rice while the figure stays large enough to read as one person. The packed earth stays fixed. No front face, profile, second person, visible sky, mountain panorama, water surface, road, house, modern building, utility pole, wire, vehicle, readable writing, on-screen text or logo.
 
 overall_soundscape:
-soft rice and grass rustle, distant village room tone, no footsteps, no singing, no voices
+shirt cloth flutter, grass and wildflower hiss, rice-leaf rustle, distant village room tone, no footsteps, no singing, no voices
 
 non_diegetic_music:
 N/A
@@ -1190,35 +1190,31 @@ N/A
 
 - 出镜参考：不挂三视图。空景按环境生成；路人仅用提示词，不锁唯一主角
 - 生成类型：H3 文生视频 / 无角色参考槽
-- 输出视频：`generated/video/raw/shot_33_h3_v02.mp4`
+- 输出视频：`generated/video/raw/shot_33_h3_v03.mp4`
 - 景别：一段路仍然黑着
-- 运镜：16:9 平视中全景固定；00:04.500 硬切到远处灯，仍固定。
+- 运镜：16:9 平视中全景，一条连续镜头，trucks right with small amplitude at slow speed。不固定，不内切。
 - 场景/道具：泥路
-- 人物动作：先没灯的泥路。四点五秒后切到远处那一点暖光，走不近。
-- 转场/特效：背影切回黑路
+- 人物动作：沿仍旧发黑的泥路贴地慢横移，不朝灯走。路肩野花和细草从第一秒起被同一阵左向右的风压弯，后景庄稼叶晚半秒跟着动，全程不静止。远处那一点暖光大小和距离保持不变，没有人走上这条路。
+- 转场/特效：背影交给仍旧发黑的路，风不断
 - 声画重点：走不进那天
 - H3 提示词：
 
-  实际执行为两个空景源片段逐个生成后组接：前 4.5 秒固定暗路，后 3.5 秒固定远处暖点；最终硬切点为 00:04.500。最终文件保持 1216×672、24 fps、8.000 秒。
-
 ```text
 subject_definitions:
-<Subject 1> is the rural Chinese countryside in this prompt: mountains, water, fields, mud paths, at most one old farmhouse far away. No living person. Not a town.
+<Subject 1> is one dark packed-earth mud path between low late-summer crops, with thin wild grass and small pale wildflowers rooted along the near verge, and one distant warm window speck far ahead, partly hidden by plants. No living person appears.
 
 summary:
-one 8-second live-action 16:9 MV clip of <Subject 1>: a dark empty mud path, then a cut to a distant warm light that stays far. No living person.
+one continuous 8-second photoreal live-action 16:9 MV shot of <Subject 1>, where the camera travels beside the still-dark path and the verge plants keep moving in the wind, while the far light never comes closer.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1] and [Shot 2]): fully_preserved - the same ground, crops, dirt, sky, rural materials and light stay consistent. No living person.
+<Subject 1> (appears in [Shot 1]): fully_preserved - the same dark path, verge grass, wildflowers, crops and distant warm speck remain spatially coherent. No living person.
 
 detailed_description:
-The target video is photoreal live-action in real time, a beautiful late-summer Chinese countryside with distant mountains and water (river, pond or paddy), mud paths and fields. Scenic and rural, not a town. Natural daylight, no golden nostalgia filter, no time-lapse, no hyperlapse, no accelerated weather, no city, no town street, no dense new housing rows, no suburban villas, no cars.
-[Shot 1] A 16:9 eye-level medium-wide of the mud path in shadow. The camera holds a static shot. The path is dark and empty.
-[Shot 2] At 00:04.500, the camera cuts to a 16:9 eye-level medium-wide looking toward a distant warm speck of light. The camera holds a static shot. The light stays far. Nobody walks the path.
-Stable earth and sky, real crop texture, no living person, no extra limbs, no on-screen text, no logos, no readable Chinese characters.
+The target video is photoreal live-action in real time, restrained rural dusk, the same hour as the previous ridge. Cool dark earth, muted green, one small warm point far away. The hour does not change, and the frame stays enclosed by the path and crops.
+[Shot 1] A 16:9 eye-level medium-wide looks along an empty dark mud path. The camera trucks right with small amplitude at slow speed for all eight seconds, sliding beside the path rather than toward the light. Thin grass and small wildflowers fill the near verge and bend left to right in a continuous moderate breeze from the first frame; heavier crop leaves behind them follow a half-second later and recover more slowly. The plants never become still, and loose bits of grass keep a visible irregular flutter through the final second. The warm speck stays the same size and the same distance, screened by vegetation, and does not brighten, flicker or approach. Nobody walks the path. No cut. No visible sky, mountain, water surface, second light, modern building, utility pole, wire, vehicle, readable writing, on-screen text or logo.
 
 overall_soundscape:
-quiet dark path, distant village, no footsteps
+wind in grass and wildflowers, soft crop rustle, no footsteps, no voices
 
 non_diegetic_music:
 N/A
@@ -1228,31 +1224,31 @@ N/A
 
 - 出镜参考：不挂三视图。空景按环境生成；路人仅用提示词，不锁唯一主角
 - 生成类型：H3 文生视频 / 无角色参考槽
-- 输出视频：`generated/video/raw/shot_34_h3_v01.mp4`
+- 输出视频：`generated/video/raw/shot_34_h3_v04.mp4`
 - 景别：人已经不是
-- 运镜：16:9 平视大全景，pedestals up with small amplitude at slow speed。
-- 场景/道具：田与村
-- 人物动作：镜头小幅度升起，看见更多空田、路和那一点灯。不需要脸。
-- 转场/特效：最终副歌收
+- 运镜：16:9 贴地平视中全景，pedestals up with small amplitude at slow speed。不是大全景航拍，不是固定帧。
+- 场景/道具：空田与泥路
+- 人物动作：人已经不在。贴地中全景里，野花、细草和稻叶被同一阵风持续吹动；镜头只小幅度缓慢升起，多看见同一片空田、泥路和那一点仍旧很远的灯。不起飞，不拉成航拍。
+- 转场/特效：横移交给升起，人已经不在
 - 声画重点：人已经，不是
 - H3 提示词：
 
 ```text
 subject_definitions:
-<Subject 1> is the rural Chinese countryside in this prompt: mountains, water, fields, mud paths, at most one old farmhouse far away. No living person. Not a town.
+<Subject 1> is a grounded stretch of empty late-summer rice beside a narrow mud path, with wild grass and small pale wildflowers in the near field, and one distant warm window speck that stays far. No living person appears.
 
 summary:
-one continuous 8-second live-action 16:9 MV shot of <Subject 1>, fields, path and one light, no face required for the last line
+one continuous 8-second photoreal live-action 16:9 MV shot of <Subject 1>, where the camera rises only a little while the crops keep moving in the wind and the place stays empty of a person.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - the same ground, crops, dirt, sky and light stay consistent. No living person.
+<Subject 1> (appears in [Shot 1]): fully_preserved - the same rice, path, wildflowers, dusk and distant warm speck remain coherent as the camera rises slightly. No living person.
 
 detailed_description:
-The target video is photoreal live-action in real time, a beautiful late-summer Chinese countryside with distant mountains and water (river, pond or paddy), mud paths and fields. Scenic and rural, not a town. Natural daylight, no golden nostalgia filter, no time-lapse, no hyperlapse, no accelerated weather, no city, no town street, no dense new housing rows, no suburban villas, no cars.
-[Shot 1] A 16:9 eye-level very wide. The camera pedestals up with small amplitude at slow speed. In the first two seconds the countryside edge sits between day and night. Then more empty fields, the path and the one light enter the frame. By the final second the frame stays empty of a close person. Stable earth and sky, real crop texture, no living person, no extra limbs, no on-screen text, no logos, no readable Chinese characters.
+The target video is photoreal live-action in real time, the same restrained rural dusk, cool earth and muted green, one far warm speck. The camera stays near the ground. The hour does not change, and the sky does not enter the frame.
+[Shot 1] A 16:9 eye-level medium-wide begins low among the rice, about knee height, so wildflowers and grass occupy the lower frame and the empty path sits in the middle distance. The camera pedestals up with small amplitude at slow speed, only enough to show a little more of the same empty field and the same far warm speck. It stays below a standing person's eye line, does not become an aerial view, and does not pull backward. For all eight seconds a moderate breeze runs left to right: foreground wildflowers and thin grass bend first, rice leaves follow and recover more slowly, and the vegetation never freezes. No person enters. The warm speck stays far and steady. No cut, lake, utility pole, wire, modern building, vehicle, readable writing, on-screen text or logo.
 
 overall_soundscape:
-open nightfall, no voices
+open field wind, rice and wildflower rustle, no footsteps, no voices
 
 non_diegetic_music:
 N/A
@@ -1264,29 +1260,30 @@ N/A
 - 生成类型：H3 文生视频 / 无角色参考槽
 - 输出视频：`generated/video/raw/shot_35_h3_v01.mp4`
 - 景别：空田埂
-- 运镜：16:9 平视中全景，holds a static shot。
+- 运镜：16:9 平视中全景，一条连续镜头，trucks left with small amplitude at slow speed。不固定。
 - 场景/道具：田埂
-- 人物动作：尾奏。田埂上空着。
-- 转场/特效：outro
+- 人物动作：尾奏。空田埂上没有人回来。镜头贴着田埂缓慢向左横移。野花和细草先被同一阵左向右的风压弯，稻叶晚半秒跟着动，全程不静止。
+- 转场/特效：升起交给横移，田埂仍空着
 - 声画重点：编曲收回
 - H3 提示词：
 
 ```text
+
 subject_definitions:
-<Subject 1> is the rural Chinese countryside in this prompt: mountains, water, fields, mud paths, at most one old farmhouse far away. No living person. Not a town.
+<Subject 1> is one empty packed-earth field ridge between low late-summer rice, with thin wild grass and small pale wildflowers rooted along the near edge. No living person appears.
 
 summary:
-one continuous 8-second live-action 16:9 MV shot of <Subject 1>, the empty ridge in the last guitar
+one continuous 8-second photoreal live-action 16:9 MV shot of <Subject 1>, where the camera travels along the empty ridge and the plants keep moving in the wind. Nobody returns.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - the same ground, crops, dirt, sky and light stay consistent. No living person.
+<Subject 1> (appears in [Shot 1]): fully_preserved - the same ridge, rice, wild grass and wildflowers remain spatially coherent. No living person.
 
 detailed_description:
-The target video is photoreal live-action in real time, a beautiful late-summer Chinese countryside with distant mountains and water (river, pond or paddy), mud paths and fields. Scenic and rural, not a town. Natural daylight, no golden nostalgia filter, no time-lapse, no hyperlapse, no accelerated weather, no city, no town street, no dense new housing rows, no suburban villas, no cars.
-[Shot 1] A 16:9 eye-level medium-wide of the ridge as a dark line between crops. The camera holds a static shot. In the first two seconds it is empty. Then it stays empty. By the final second no person returns. Stable earth and sky, real crop texture, no living person, no extra limbs, no on-screen text, no logos, no readable Chinese characters.
+The target video is photoreal live-action in real time, the same restrained rural dusk as the previous field. Cool earth and muted green. The frame stays enclosed by the ridge and crops. The hour does not change.
+[Shot 1] A 16:9 eye-level medium-wide looks along the empty ridge. The camera trucks left with small amplitude at slow speed for all eight seconds, staying near the ground and sliding beside the ridge. From the first frame a moderate breeze runs left to right and never stops: wildflowers and thin grass on the near edge bend first, and about half a second later the rice leaves tilt the same way and recover more slowly. The plants never freeze. No person enters, stands, or walks through. No cut. No visible sky, mountain, water surface, utility pole, wire, modern building, vehicle, readable writing, on-screen text or logo.
 
 overall_soundscape:
-very quiet field, fading insects
+wind in grass and wildflowers, soft rice rustle, fading insects, no footsteps, no voices
 
 non_diegetic_music:
 N/A
@@ -1298,31 +1295,30 @@ N/A
 - 生成类型：H3 文生视频 / 无角色参考槽
 - 输出视频：`generated/video/raw/shot_36_h3_v01.mp4`
 - 景别：云停在田那边
-- 运镜：16:9 平视大全景固定；00:05 硬切到田那边停着的云，仍固定。
+- 运镜：16:9 平视中全景，一条连续镜头，tilts up with small amplitude at slow speed。不固定，不内切。
 - 场景/道具：田与天
-- 人物动作：先空田。五秒后切到停住的云，停在最后一帧。
-- 转场/特效：淡出或停住
+- 人物动作：镜头从被风吹动的稻叶和野花慢慢仰起，看见田那边停着的一朵云。云保持位置，几乎不跑；下面的花草和稻叶继续动。没有人走进来。
+- 转场/特效：横移交到仰看停云
 - 声画重点：云还停在田那边
 - H3 提示词：
 
 ```text
+
 subject_definitions:
-<Subject 1> is the rural Chinese countryside in this prompt: mountains, water, fields, mud paths, at most one old farmhouse far away. No living person. Not a town.
+<Subject 1> is a grounded stretch of late-summer rice with thin wild grass and small pale wildflowers in front, and one soft pale cloud holding still above the far field. No living person appears.
 
 summary:
-one 9-second live-action 16:9 MV clip of <Subject 1>: empty fields, then a cut to the cloud stopped over the fields as the last image. No living person.
+one continuous 9-second photoreal live-action 16:9 MV shot of <Subject 1>, where the camera looks up from wind-moved crops to the cloud that stays parked over the fields.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1] and [Shot 2]): fully_preserved - the same ground, crops, dirt, sky, rural materials and light stay consistent. No living person.
+<Subject 1> (appears in [Shot 1]): fully_preserved - the same rice, wildflowers, field and one cloud remain coherent as the camera tilts. No living person.
 
 detailed_description:
-The target video is photoreal live-action in real time, a beautiful late-summer Chinese countryside with distant mountains and water (river, pond or paddy), mud paths and fields. Scenic and rural, not a town. Natural daylight, no golden nostalgia filter, no time-lapse, no hyperlapse, no accelerated weather, no city, no town street, no dense new housing rows, no suburban villas, no cars.
-[Shot 1] A 16:9 eye-level very wide of the fields. The camera holds a static shot. The land is empty of people.
-[Shot 2] At 00:05.000, the camera cuts to a 16:9 eye-level medium-wide of the far cloud. The camera holds a static shot. The cloud remains still. This is the last frame the viewer should keep. No living person.
-Stable earth and sky, real crop texture, no living person, no extra limbs, no on-screen text, no logos, no readable Chinese characters.
+The target video is photoreal live-action in real time, the same restrained rural dusk. Muted green below, a pale dusk sky only in the upper frame. The hour does not change. One cloud keeps its place.
+[Shot 1] A 16:9 eye-level medium-wide begins low among the rice, so wildflowers and grass fill the lower frame. The camera tilts up with small amplitude at slow speed across all nine seconds, revealing the same far field and one soft cloud already stopped above it. The cloud does not race, multiply, or change shape into a new weather system; it holds over the fields through the final frame. For the whole shot a moderate breeze runs left to right through the crops: wildflowers and thin grass bend first, rice leaves follow and recover more slowly, and the vegetation never freezes. No person enters. No cut. No lake, utility pole, wire, modern building, vehicle, readable writing, on-screen text or logo.
 
 overall_soundscape:
-almost no air, a last distant insect, no voices
+rice and wildflower rustle under a quiet sky, one last distant insect, no footsteps, no voices
 
 non_diegetic_music:
 N/A

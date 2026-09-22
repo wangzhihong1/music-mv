@@ -34,6 +34,7 @@ export const METADATA_FIELDS = [
 
 export const STORY_FIELDS = [
   ['summary', '故事概要'],
+  ['narrative', '完整叙事'],
   ['opening', '开场'],
   ['development', '发展'],
   ['turningPoint', '转折'],

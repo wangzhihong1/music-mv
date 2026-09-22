@@ -37,13 +37,14 @@
 
 1. 当一首歌的歌词生成并完成后，主动询问用户：`歌词已经完成。需要我继续创作一个与这首歌贴切的 MV 故事吗？`
 2. 用户不需要 MV 故事时，停止 MV 流程，不自行继续。
-3. 用户需要 MV 故事时，遵循 [`.cursor/skills/mv-story-from-song/SKILL.md`](.cursor/skills/mv-story-from-song/SKILL.md)。写故事时你就是一个编剧大师。只需要拿歌的主题去发展故事，场景中不一定有人，也不一定只有一个主角，都是多元化的。故事必须服务于当前歌曲，不能套用无关的通用剧情，不能按歌词一对一还原。
+3. 用户需要 MV 故事时，遵循 [`.cursor/skills/mv-story-from-song/SKILL.md`](.cursor/skills/mv-story-from-song/SKILL.md)。写故事时你就是一个编剧大师。只需要拿歌的主题去发展故事，场景中不一定有人，也不一定只有一个主角，都是多元化的。故事必须服务于当前歌曲，不能套用无关的通用剧情，不能按歌词一对一还原。正文必须是一篇完整叙事；概要和五段只是设定。
 4. 提交故事后等待用户审阅。只有用户明确表示确认、定稿或满意时，才将故事标记为已确认。
 5. 故事确认后，主动询问用户：`这个 MV 故事已经确认。需要我继续把它拆分为可执行的 MV 脚本吗？`
 6. 用户明确需要 MV 脚本后，不得立即编写分镜；必须先主动询问最终总时长（MM:SS）。
 7. 必须等待用户明确提供或确认歌曲总时长。确认后将时长写入 `metadata.duration`，并将 `mvWorkflow.durationConfirmed` 设为 `true`。
-8. 只有同时满足“故事已确认、用户需要脚本、歌曲总时长已确认”三个条件，才可开始编写 MV 脚本。拆分时遵循 [`.cursor/skills/mv-script-from-story/SKILL.md`](.cursor/skills/mv-script-from-story/SKILL.md)。写分镜时你就是一个编导大导演。
-9. 每个 MV 分镜必须填写明确的 `start` 和 `end`，格式为 `MM:SS`；单镜时长必须在 1–10 秒内。
+8. 只有同时满足“故事已确认、用户需要脚本、歌曲总时长已确认”三个条件，才可开始编写 MV 脚本。拆分时遵循 [`.cursor/skills/mv-script-from-story/SKILL.md`](.cursor/skills/mv-script-from-story/SKILL.md)。写分镜时你就是一个编导大导演。分镜按已确认故事的事件发展来排，核心不变即可，不要按歌词逐句对应。
+9. 每个 MV 分镜必须填写明确的 `start` 和 `end`。整秒写作 `MM:SS`，半秒写作 `MM:SS.S`。单镜时长由导演决定，范围 0.5–15 秒，禁止整片默认成同一种秒数。
 10. 完整脚本必须从 `00:00` 连续覆盖至用户确认的歌曲结束时间，不留空档、不重叠；累计时长必须等于歌曲总时长。
 11. 脚本必须覆盖开场、发展、转折、高潮、结尾五个阶段。
 12. 完成脚本后，将 `mvWorkflow.scriptStatus` 设为 `complete`，并在 `music-mv/` 运行 `npm run validate:songs`。
+13. 大部分镜头必须有观众能读懂的镜头语言。同一场景再次出现时，地形、材料、路向、光线和关键道具保持一致。细则见 `music-mv/AGENTS.md` 的导演要求。
