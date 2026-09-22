@@ -39,10 +39,8 @@
   color: #2f6948;
 }
 
-.pipeline-step.is-in-progress,
-.pipeline-step.is-current {
-  border-color: #3f7656;
-  box-shadow: inset 0 0 0 1px #3f7656;
+.pipeline-step.is-in-progress small {
+  color: #3f7656;
 }
 
 .pipeline-step.is-paused {
@@ -64,7 +62,8 @@
   background: #f7f8f5;
 }
 
-.pipeline-step.is-selected {
+.pipeline-step.is-selected,
+.pipeline-step.is-selectable.is-selected:hover {
   border-color: #3f7656;
   background: #ffffff;
   box-shadow: inset 0 0 0 2px #3f7656;

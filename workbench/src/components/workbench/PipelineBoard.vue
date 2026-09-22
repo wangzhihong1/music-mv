@@ -24,6 +24,7 @@ const STATUS_LABEL = {
 }
 
 const pipeline = computed(() => derivePipeline(props.song))
+const selectedId = computed(() => props.selectedStage || pipeline.value.currentStage)
 </script>
 
 <template>
@@ -34,13 +35,10 @@ const pipeline = computed(() => derivePipeline(props.song))
       class="pipeline-step is-selectable"
       :class="[
         `is-${stage.status.replace('_', '-')}`,
-        {
-          'is-current': stage.id === pipeline.currentStage,
-          'is-selected': stage.id === selectedStage,
-        },
+        { 'is-selected': stage.id === selectedId },
       ]"
       type="button"
-      :aria-pressed="stage.id === selectedStage"
+      :aria-pressed="stage.id === selectedId"
       @click="emit('select-stage', stage.id)"
     >
       <span>{{ stage.kicker }}</span>
