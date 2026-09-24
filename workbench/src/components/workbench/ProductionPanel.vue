@@ -13,7 +13,7 @@ const STAGE_COPY = {
 }
 
 const EMPTY_COPY = {
-  'character-references': '形象提示词按 ComfyUI 01_character_three_views 书写。复制英文到工作流左上角 Shared Character Prompt 后排队；确认的正面、侧面、背面放入本歌曲目录的 assets/characters/。',
+  'character-references': '形象提示词按 ComfyUI 01_人物三视图 书写。复制英文到工作流左上角 Shared Character Prompt 后排队；确认的正面、侧面、背面放入本歌曲目录的 assets/characters/。',
   'shot-videos': '尚未生成分镜视频。确认主角参考图后，将 H3 输出放入 generated/video/raw/。',
   post: '尚未生成修复超分。合格分镜视频修复后放入 generated/video/intermediate/。',
   delivery: '尚未导出成片。剪辑完成后放入 generated/video/final/。',
@@ -126,7 +126,7 @@ function closeImage() {
     </div>
 
     <p v-else-if="!hasVisibleMedia && showingLooks" class="production-empty">
-      形象提示词按 ComfyUI <code>01_character_three_views</code> 书写。复制英文到工作流左上角 Shared Character Prompt 后排队；确认的正面、侧面、背面放入本歌曲目录的 <code>assets/characters/</code>。
+      形象提示词按 ComfyUI <code>01_人物三视图</code> 书写。复制英文到工作流左上角 Shared Character Prompt 后排队；确认的正面、侧面、背面放入本歌曲目录的 <code>assets/characters/</code>。
     </p>
 
     <div v-if="hasVisibleMedia" class="production-body">

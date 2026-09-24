@@ -15,7 +15,7 @@
 - 画幅：生成统一 16:9；回忆段落可在后期裁成 4:3 画框，不单独生成静帧肖像
 - 视觉风格：现实为缓慢、克制的电影感观察；回忆为同一照相馆拍摄区的连续表演，带胶片质感，人物保持呼吸与微动作
 - 色彩与光线：现实外景低饱和蓝灰；照相馆钨丝暖黄；暗房克制红光；高潮使用一次高亮白色闪光
-- 拍摄方式：以已确认的女主三视图、男主正面与侧面驱动 `05_ref2va_4step_sla`。单人镜挂 3 张图；双人镜需扩到 6 张图。禁止先做逐镜分镜静帧再图生视频
+- 拍摄方式：以已确认的女主三视图、男主正面与侧面驱动 `05_H3参考图生视频_4步_SLA`。单人镜挂 3 张图；双人镜需扩到 6 张图。禁止先做逐镜分镜静帧再图生视频
 - 主要场景：雨后旧街、照相馆门厅与柜台、拍摄区、暗房
 - 主要人物：年轻女主、回忆中的前任；摄影师只以画外、无头肩背或手出现，不以第三张参考图锁定
 - 表演与口型需求：纯叙事表演，无对嘴演唱；情绪依靠微表情、呼吸、视线、手部动作和姿态变化表达；全程闭唇，除非镜头明确要求微笑。每镜必须按时段写清眼神、眉、唇与呼吸，并符合该镜情绪。
@@ -23,7 +23,7 @@
 
 ## 主角形象提示词
 
-用于 ComfyUI `01_character_three_views`。只改工作流左上角 Shared Character Prompt；英文可直接粘贴。不要写正面/侧面/背面、半身或 16:9，机位由工作流自动拼接。全身必须从头顶到鞋底，单人、直立、双臂自然下垂，暖灰无缝棚拍。H3 分镜提示词不再用文字重新设计人物。
+用于 ComfyUI `01_人物三视图`。只改工作流左上角 Shared Character Prompt；英文可直接粘贴。不要写正面/侧面/背面、半身或 16:9，机位由工作流自动拼接。全身必须从头顶到鞋底，单人、直立、双臂自然下垂，暖灰无缝棚拍。H3 分镜提示词不再用文字重新设计人物。
 
 ### 女主三视图共享提示词
 
@@ -41,7 +41,7 @@
 
 ## 角色参考与生成规则
 
-本脚本按「角色参考图 → `05_ref2va_4step_sla` 直接生成每个分镜视频」执行。工作台复制按钮复制的就是完整 reference contract，单人镜可直接粘贴。
+本脚本按「角色参考图 → `05_H3参考图生视频_4步_SLA` 直接生成每个分镜视频」执行。工作台复制按钮复制的就是完整 reference contract，单人镜可直接粘贴。
 
 - 女主身份以已确认三视图为准；男主以已确认正面与侧面为准。提示词不再用年龄、国籍、脸型、发型或服饰文字重新设计人物。
 - 全片固定为 2020 年代中期的现代中国城市。现实线连续发生在同一个雨后冬日傍晚至入夜；回忆线使用同一套参考服装，以保证身份锁定。
@@ -51,7 +51,7 @@
 - 现实线若需要冬装，只允许在参考服装外加一件深色羊毛大衣；脱大衣后必须回到参考图原服装。不得用文字改发型或换一套衣服。
 - 摄影师不是锁定角色：只允许画外、过肩无头、或画面边缘的手/袖口，禁止正脸和完整第三人。
 - 不要让 H3 生成可读汉字。`明年见` 手写字在后期贴到封套上，或用实拍手写道具替换。
-- 镜 10、29 为剪辑镜，提示词是剪辑说明，不要送进 `05_ref2va_4step_sla`。
+- 镜 10、29 为剪辑镜，提示词是剪辑说明，不要送进 `05_H3参考图生视频_4步_SLA`。
 - 每条 H3 提示词都是一条连续镜头：不写匹配切、叠化、4:3 边框或引用其他镜号。回忆构图只要求人物居中留出 4:3 安全区，成片再裁。
 - 人物表演克制自然，闭唇，不说话、不唱歌、不对口型。
 - 微表情管理：每条 H3 提示词必须在 `detailed_description` 里写清眉、唇、呼吸与**一个持住的眼神**，并与该镜情绪一致。最多一次视线移动、最多一次自然眨眼。禁止空脸、假笑、张嘴演唱、突然大哭，或把后段释然提前到等待/承认之前。禁止 `soft focus on the face`、抹眼、左右扫视。完整写法见 `music-mv/library/h3-prompt-writing.md`。
@@ -109,7 +109,7 @@
 - 人物动作：女主沿湿人行道走来，在照相馆橱窗前停下，侧身像要离开，又停住，看向店内。
 - 转场/特效：冷蓝调，玻璃反光
 - 声画重点：第一颗钢琴音建立独行与缺席
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -140,7 +140,7 @@ non_diegetic_music: N/A
 - 人物动作：她从口袋抽出折旧取件单攥紧，几乎侧身离开，又停住；焦点转到玻璃倒影，倒影里只有她，店内映出两把椅子。
 - 转场/特效：焦点由纸条转向倒影
 - 声画重点：两把椅子对应两人的缺席
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -171,7 +171,7 @@ non_diegetic_music: N/A
 - 人物动作：她从门外湿街道推门进屋，门向店内开，铜铃轻晃；她穿过门框走进暖色门厅，把取件单平放在柜台上。画面边缘只见摄影师肩背，不上前。
 - 转场/特效：门框遮挡切入暖色
 - 声画重点：门铃落在前奏结束处，无对白
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -202,7 +202,7 @@ non_diegetic_music: N/A
 - 人物动作：先看见两处磨淡的站位标记，右标记几乎消失；女主走到右椅旁，右手轻轻扶正椅背，掌心停在木头上，没有坐下。
 - 转场/特效：暖黄钨丝光，无剪辑
 - 声画重点：手触椅背触发回忆
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -233,7 +233,7 @@ non_diegetic_music: N/A
 - 人物动作：两人从画面两侧最后一步挤到中间，从头顶到鞋都在画内。肩膀紧贴，来不及摆姿势就闭唇笑出，她抓着他袖口，笑点不同步；牙齿不露。
 - 转场/特效：胶片颗粒
 - 声画重点：未经排练的亲密
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -265,7 +265,7 @@ non_diegetic_music: N/A
 - 人物动作：第一帧两人已并站入画，头顶可见。他侧身用右手把她耳侧碎发拢到耳后；她低头替他拉平左衣袖；两人短暂对视后一起看向镜头。闭唇、牙齿不露，笑容比第一年更收。结尾一次闪光白帧。
 - 转场/特效：一次自然闪光白帧
 - 声画重点：动作回应早期亲密记忆
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -297,7 +297,7 @@ non_diegetic_music: N/A
 - 人物动作：两人已坐在双椅上，脊背挺直，肩与肩之间留一条细缝，不再转头看对方。微表情：同时给出很小的闭唇端正笑，牙齿不露，眼睛看镜头不看对方；笑容保持仪式感，不要灿烂。双手在膝间交握。
 - 转场/特效：饱和度轻降
 - 声画重点：亲密开始变成共同完成的仪式
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -329,7 +329,7 @@ non_diegetic_music: N/A
 - 人物动作：女主手仍停在空着的右椅椅背上，手指慢慢松开，掌心离开木头，视线落到空座位。
 - 转场/特效：回到现实，无边框
 - 声画重点：主歌尾部保留呼吸
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -360,7 +360,7 @@ non_diegetic_music: N/A
 - 人物动作：女主在柜台缓慢翻一页旧相册。左右页必须是两张不同的双人合照，各坐一把椅，不能同一张复制。翻页后换成新合照，间距从肩贴到礼貌一拳。相纸五官锐利，男主眼睛不糊。
 - 转场/特效：翻页作自然擦拭
 - 声画重点：时间以实体页面推进
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -394,7 +394,7 @@ non_diegetic_music: N/A
 - 声画重点：副歌前建立关系变化
 - 剪辑说明（不要粘贴到 H3）：
 
-COMPOSITE ONLY. Do not paste into 05_ref2va_4step_sla.
+COMPOSITE ONLY. Do not paste into 05_H3参考图生视频_4步_SLA.
 
 sources:
 - generated/video/raw/shot_05_h3_v01.mp4
@@ -419,7 +419,7 @@ generated/video/raw/shot_10_h3_v02.mp4
 - 人物动作：第一帧已并坐入画，头顶可见，膝盖几乎相碰。女主看镜头，只保持很小的闭唇微笑，嘴角微抬，牙齿始终不露，不张嘴、不大笑。男主先看镜头，快门前把目光移向右侧窗外。两人不再对视。结尾一次闪光。
 - 转场/特效：结尾一次闪光
 - 声画重点：Hook第一次出现时呈现距离
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -451,7 +451,7 @@ non_diegetic_music: N/A
 - 人物动作：第一帧就是右手特写：黑色钢笔已落在米黄色封套背面，从容连写，五指完整。字迹始终失焦不可读，不生成汉字、英文或数字。
 - 转场/特效：墨迹微反光
 - 声画重点：承诺当时真实
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult man shown from the front in <Picture 1> and <Picture 3>, and from the side in <Picture 2>. There is no rear-view reference. Preserve his identity, face, hair, body proportions and clothing. Do not redesign his appearance with text.
@@ -482,7 +482,7 @@ non_diegetic_music: N/A
 - 人物动作：第一帧前景已是女主背影，后景男主已停笔。她低头把深色羊毛大衣罩在定妆夏装外并扣扣子；他抬头看她的背影，闭唇不笑，再低头看封套。不拥抱、不说话、不张嘴。
 - 转场/特效：暖光逐渐偏冷
 - 声画重点：无争吵，只有未说出口的迟疑
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -514,7 +514,7 @@ non_diegetic_music: N/A
 - 人物动作：现在同一柜台只剩一只空着的米黄色取件文件夹，封面打开，里面没有照片。画面里始终只有一个女主，站在柜台右侧，双手停在边缘没有去碰文件夹。镜头先给空文件夹特写，再微拉远带出暗房门。
 - 转场/特效：现实连续镜头，无匹配切
 - 声画重点：副歌结束回到现在
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Those three pictures are three views of ONE person, not three people. Preserve her identity, face, hair, body proportions and clothing. Do not redesign her appearance with text. Do not instantiate her twice.
@@ -551,7 +551,7 @@ non_diegetic_music: N/A
 - 人物动作：女主侧站在暗房门口向里看，白灯熄灭，红色安全灯亮起；画面内只见操作者的手和夹钳把相纸放入显影盘。
 - 转场/特效：暖黄转暗红
 - 声画重点：大提琴进入，显影开始
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -582,7 +582,7 @@ non_diegetic_music: N/A
 - 人物动作：女主独自站在两把椅子正中间，不坐下、不迈步。微表情贴合器乐留白里的等待与收着的不安：0–2秒目光落在两椅之间的空隙，闭唇，面部空而克制；2–4秒一次极慢眨眼，眉心收一毫米，视线抬向暗房门；4–7秒头转几度朝向暗房门后停住听门内液体，浅呼吸落在肩上。不笑、不哭、不张嘴。
 - 转场/特效：环境压暗，椅子留暖光
 - 声画重点：器乐留白延长等待
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -613,7 +613,7 @@ non_diegetic_music: N/A
 - 人物动作：女主走到半开的暗房门口。微表情仍是克制等待：0–3秒走到门口停住，目光平视门缝，唇闭，眉放松；3–5秒侧目看店门时眼神一闪即收，不惊讶；5–8秒向里看，一次慢眨眼，眉心轻收，不哭不笑。红光只照亮半张脸和一侧耳圈。
 - 转场/特效：门框画中画
 - 声画重点：第二段更贴近现实
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -642,7 +642,7 @@ non_diegetic_music: N/A
 - 人物动作：从女主侧脸连续下摇到显影盘。空白相纸先浮出两把深色木椅，再显出男女主最后一张合照：两人坐得很近，她看镜头，他目光略偏开。相纸上的人有完整五官，不是没脸的影子。
 - 转场/特效：实拍渐显，无剪辑
 - 声画重点：显影即理解发生
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Those three pictures are three views of ONE person. Preserve her identity, face, hair, body proportions and clothing. Do not redesign her appearance with text.
@@ -678,7 +678,7 @@ non_diegetic_music: N/A
 - 人物动作：女主右手食指轻触合照里两人之间的空档。合照是干的棚拍：女主穿扣好的深色不透明大衣，男主穿不透明白T，各坐一把木椅，中间一拳空隙。液体只在盘边，不打湿衣服。
 - 转场/特效：红光局部锐化
 - 声画重点：照片比记忆诚实
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Those three pictures are three views of ONE person. Preserve her identity, face, hair, body proportions and clothing. Do not redesign her appearance with text.
@@ -712,7 +712,7 @@ non_diegetic_music: N/A
 - 人物动作：女主把已经干燥的照片翻到背面，手指逐渐收紧，随后抬眼；背面字迹保持失焦不可读，焦点落在她的表情。
 - 转场/特效：焦点从手转到脸
 - 声画重点：刺痛转向理解
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -743,7 +743,7 @@ non_diegetic_music: N/A
 - 人物动作：女主独自站在照相馆拍摄区的玻璃门前，不举手中照片。画面里只有她一个实体人；玻璃里只反射出她自己和两把空着的深色木椅，椅上没人，走廊里也不再出现第二个她。
 - 转场/特效：可后期低透明度叠入镜11
 - 声画重点：两种真实共存
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Those three pictures are three views of ONE person, not three people. Preserve her identity, face, hair, body proportions and clothing. Do not redesign her appearance with text. Do not instantiate her twice.
@@ -778,7 +778,7 @@ non_diegetic_music: N/A
 - 人物动作：这一镜开始前字已经写完。0–2.5秒闭唇垂眼看手里的封套，笔放在一边，不写。2.5–4秒停住，喉结轻动，仍然闭唇。4–8秒抬眼看向画外，把封套递出去；嘴唇全程闭合，不说话、不唱歌、不张嘴。没有歉意也没有得意。
 - 转场/特效：取消浪漫柔焦
 - 声画重点：重新观看记忆，意义改变
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult man shown from the front in <Picture 1> and <Picture 3>, and from the side in <Picture 2>. There is no rear-view reference. Preserve his identity, face, hair, body proportions and clothing. Do not redesign his appearance with text.
@@ -809,7 +809,7 @@ non_diegetic_music: N/A
 - 人物动作：眉心先紧、抿唇；一滴细泪沿左脸颊缓慢滑下，她不擦；攥照片的手指渐渐松开，照片恢复平整。
 - 转场/特效：保留泪光真实反射
 - 声画重点：眼泪是承认，不是控诉
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -840,7 +840,7 @@ non_diegetic_music: N/A
 - 人物动作：女主独自站在旧照相馆木柜台前，把男女主坐着的棚拍合照连同封套放到柜面上后松手。柜台上只有旧相机、取件夹和这张照片，没有咖啡机、杯子和酒瓶。
 - 转场/特效：红光退回暖黄
 - 声画重点：女主开始主动选择
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Those three pictures are three views of ONE person. Preserve her identity. Do not instantiate her twice. She has one torso and one dark coat.
@@ -876,7 +876,7 @@ non_diegetic_music: N/A
 - 人物动作：女主独自站在拍摄区两把空木椅之间。她把右侧空椅拖到画面一侧，自己从头到脚始终留在画里；再把剩下那把椅子推到灰色背景布中央对齐。全程只有她一个人。
 - 转场/特效：椅脚声点在稀疏节拍
 - 声画重点：桥段抽空，动作成为选择
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Those three pictures are three views of ONE person. Preserve her identity. Do not instantiate her twice. She has one body and one dark coat.
@@ -909,7 +909,7 @@ non_diegetic_music: N/A
 - 人物动作：开场已坐在中央单椅上。0–2秒把大衣从肩上褪下搭到画外，唇闭不笑。2–3秒嘴角只抬一两毫米，牙齿不露，眼睛保持圆形、不弯。3–7秒这点嘴角在剩余时间里连续往回收，每一瞬间都比前一瞬更少一点笑意，直到疲惫、难过与平静；禁止从笑脸突然切到不笑。
 - 转场/特效：背景变静
 - 声画重点：完成独自拍照决定
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -940,7 +940,7 @@ non_diegetic_music: N/A
 - 人物动作：第一帧已坐在中央单椅，头顶入画；前景只有胶片相机后背和一只出画、无头的肩。不穿大衣。微表情：0–3秒吸气后肩落下，目光定在镜头，唇闭，不笑；3–7秒双手从交叉改为放在膝上，表情不修饰，眉眼保持承认后的平静，不哭不唱。
 - 转场/特效：无特效
 - 声画重点：最终副歌蓄势
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -971,7 +971,7 @@ non_diegetic_music: N/A
 - 人物动作：她直视镜头，闭唇；快门按下，闪光灯爆亮，白色吞没画面，短暂残影后定格她的脸。
 - 转场/特效：高亮白闪与残影
 - 声画重点：全编制进入，同步闪光
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -1004,7 +1004,7 @@ non_diegetic_music: N/A
 - 声画重点：全部从前回应歌词
 - 剪辑说明（不要粘贴到 H3）：
 
-COMPOSITE ONLY. Do not paste into 05_ref2va_4step_sla.
+COMPOSITE ONLY. Do not paste into 05_H3参考图生视频_4步_SLA.
 
 sources:
 - generated/video/raw/shot_05_h3_v01.mp4
@@ -1030,7 +1030,7 @@ generated/video/raw/shot_29_h3_v02.mp4
 - 人物动作：显影盘里先出现单椅，再浮出女主独自坐着的轮廓；人脸逐渐可辨但保持相纸质感，全程不切到拍摄区。
 - 转场/特效：显影渐显，无匹配切
 - 声画重点：独自出现不是胜利姿态
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -1061,7 +1061,7 @@ non_diegetic_music: N/A
 - 人物动作：她把旧合照放回封套，双手把封套贴在胸口；窗外云层裂开一道窄光，白光落在她脸上，泪光还在但她不躲。
 - 转场/特效：柔和真实过曝
 - 声画重点：最高音期间让光停留
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -1092,7 +1092,7 @@ non_diegetic_music: N/A
 - 人物动作：女主已穿好深色大衣，右手握封套，从照相馆门厅内部背对镜头走向敞开的店门，穿过门框走到雨后湿街上，不回头、不微笑，继续向前走远离开画面。
 - 转场/特效：暖色室内与冷色街道自然交界
 - 声画重点：歌名句完整连唱，动作不中断
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Those three pictures are three views of ONE person. Preserve her identity. Do not instantiate her twice.
@@ -1131,7 +1131,7 @@ non_diegetic_music: N/A
 - 人物动作：晾片线上的新照片已正面朝向镜头，女主含泪直视；背面若可见则保持空白，画面缓慢褪为相纸白。
 - 转场/特效：画面褪为相纸白
 - 声画重点：钢琴尾音与远处门铃结束全片
-- H3 reference contract（可直接复制到 `05_ref2va_4step_sla`）：
+- H3 reference contract（可直接复制到 `05_H3参考图生视频_4步_SLA`）：
 
 subject_definitions:
 <Subject 1> is the same adult woman shown from the front in <Picture 1>, from the side in <Picture 2>, and from the back in <Picture 3>. Preserve her identity, face, hair, body proportions and clothing across all views. Do not redesign her appearance with text.
@@ -1195,6 +1195,6 @@ non_diegetic_music: N/A
 - [x] 高潮画面与歌曲高潮同步
 - [x] 结尾落实歌曲和故事的共同主题
 - [x] 每镜可凭男女主角参考图直接生成视频，不依赖逐镜分镜静帧
-- [x] H3 提示词使用 `05_ref2va_4step_sla` 的 reference contract
+- [x] H3 提示词使用 `05_H3参考图生视频_4步_SLA` 的 reference contract
 - [x] 剪辑镜未写入 H3 生成提示词
 - [x] 从镜 16 起，H3 提示词含分时段微表情并符合该镜情绪

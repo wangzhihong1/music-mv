@@ -2,17 +2,16 @@
   display: grid;
   flex-shrink: 0;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 8px;
-  max-width: 1500px;
+  gap: 6px;
   width: 100%;
-  margin: 16px auto 0;
+  margin: 10px 0 0;
 }
 
 .pipeline-step {
   display: grid;
-  gap: 4px;
-  min-height: 72px;
-  padding: 10px 11px;
+  gap: 1px;
+  min-height: 0;
+  padding: 5px 9px;
   border: 1px solid #dce0d9;
   border-radius: 7px;
   background: #ffffff;
@@ -21,13 +20,15 @@
 .pipeline-step span,
 .pipeline-step small {
   color: #7b827a;
-  font-size: 12px;
+  font-size: 11px;
+  line-height: 1.3;
 }
 
 .pipeline-step strong {
   color: #2b302b;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
+  line-height: 1.3;
 }
 
 .pipeline-step.is-complete {
@@ -70,8 +71,7 @@
 }
 
 .stage-panel {
-  max-width: 1500px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .stage-body,
@@ -101,6 +101,14 @@
   color: #353b35;
   font-size: 15px;
   line-height: 1.75;
+}
+
+.style-player {
+  padding: 14px 18px 0;
+}
+
+.style-player .stage-empty {
+  padding: 4px 0 16px;
 }
 
 .style-list {
@@ -170,8 +178,7 @@
 }
 
 .production-panel {
-  max-width: 1500px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .character-looks {
@@ -263,7 +270,7 @@
 }
 
 .production-grid.is-video {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .production-grid.is-image {
@@ -424,8 +431,7 @@
 }
 
 .archive-panel {
-  max-width: 1500px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .archive-body {

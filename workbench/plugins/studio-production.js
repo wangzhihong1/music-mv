@@ -25,6 +25,12 @@ function padShotNumber(number) {
   return String(number).padStart(2, '0')
 }
 
+function shotDisplayName(label) {
+  return String(label || '')
+    .replace(/(?:[\s\u3000]+v\d+【作废】)+$/i, '')
+    .trim()
+}
+
 function shotNumberFromName(name) {
   const match = String(name).match(/shot[_-]?0*(\d+)/i)
   return match ? Number(match[1]) : null
@@ -32,6 +38,11 @@ function shotNumberFromName(name) {
 
 function shotIdFromNumber(number) {
   return `shot${padShotNumber(number)}`
+}
+
+function shotByNumber(byId, number) {
+  const padded = padShotNumber(number)
+  return byId.get(padded) || byId.get(shotIdFromNumber(number)) || byId.get(String(number)) || null
 }
 
 function isPresentAsset(item) {
@@ -62,15 +73,16 @@ export function annotateRawShotItems(groups, shots = []) {
 
   for (const item of group.items) {
     const number = shotNumberFromName(item.name)
-    const shot = number ? byId.get(shotIdFromNumber(number)) : null
+    const shot = number ? shotByNumber(byId, number) : null
     const isCurrent = currentOutputs.has(item.name)
     item.shotNumber = number
     item.voided = Boolean(shot && !isCurrent)
     item.missing = false
+    const displayName = shot ? shotDisplayName(shot.shot) : ''
     if (shot && isCurrent) {
-      item.title = `${padShotNumber(number)} · ${shot.shot}`
+      item.title = `${padShotNumber(number)} · ${displayName}`
     } else if (shot) {
-      item.title = `【作废】${padShotNumber(number)} · ${shot.shot}`
+      item.title = `【作废】${padShotNumber(number)} · ${displayName}`
     } else {
       item.title = item.name
     }
@@ -88,7 +100,7 @@ export function annotateRawShotItems(groups, shots = []) {
       size: 0,
       sizeLabel: shot.genMode === 'composite' ? '剪辑镜，尚未合成' : '尚未生成',
       updatedAt: '',
-      title: `${padShotNumber(number)} · ${shot.shot}`,
+      title: `${padShotNumber(number)} · ${shotDisplayName(shot.shot)}`,
       shotNumber: number,
       voided: false,
       missing: true,

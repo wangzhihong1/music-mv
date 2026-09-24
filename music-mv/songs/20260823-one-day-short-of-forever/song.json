@@ -411,7 +411,7 @@
       "location": "拍摄区回忆",
       "transition": "三次短叠化",
       "soundFocus": "副歌前建立关系变化",
-      "prompt": "COMPOSITE ONLY. Do not paste into 05_ref2va_4step_sla.\n\nsources:\n- generated/video/raw/shot_05_h3_v01.mp4\n- generated/video/raw/shot_06_h3_v01.mp4\n- generated/video/raw/shot_07_h3_v01.mp4\n\nedit:\nAlign both wooden chairs, the gray backdrop, and eyeline. Center-crop the same 4:3 safe area inside 16:9. Over 7 seconds, make three short dissolves: shot 05 (shoulders touching) to shot 06 (tender adjustment) to shot 07 (polite gap). Do not generate new faces, flashes, or captions.\n\noutput:\ngenerated/video/raw/shot_10_h3_v01.mp4",
+      "prompt": "COMPOSITE ONLY. Do not paste into 05_H3参考图生视频_4步_SLA.\n\nsources:\n- generated/video/raw/shot_05_h3_v01.mp4\n- generated/video/raw/shot_06_h3_v01.mp4\n- generated/video/raw/shot_07_h3_v01.mp4\n\nedit:\nAlign both wooden chairs, the gray backdrop, and eyeline. Center-crop the same 4:3 safe area inside 16:9. Over 7 seconds, make three short dissolves: shot 05 (shoulders touching) to shot 06 (tender adjustment) to shot 07 (polite gap). Do not generate new faces, flashes, or captions.\n\noutput:\ngenerated/video/raw/shot_10_h3_v01.mp4",
       "lyricCue": "“我们，走向两端”",
       "subjects": [
         "femaleLead",
@@ -816,7 +816,7 @@
       "location": "拍摄区回忆",
       "transition": "胶片曝光叠层后退白",
       "soundFocus": "全部从前回应歌词",
-      "prompt": "COMPOSITE ONLY. Do not paste into 05_ref2va_4step_sla.\n\nsources:\n- generated/video/raw/shot_05_h3_v01.mp4\n- generated/video/raw/shot_06_h3_v01.mp4\n- generated/video/raw/shot_07_h3_v01.mp4\n- generated/video/raw/shot_11_h3_v02.mp4\n\nedit:\nAlign both chairs, standing marks, and the gray backdrop. Center-crop the same 4:3 safe area. Over 8 seconds, rapidly dissolve 05 to 06 to 07 to 11, then flash-fade to photopaper white. Do not generate a new H3 take, new faces, or quarrel footage.\n\noutput:\ngenerated/video/raw/shot_29_h3_v01.mp4",
+      "prompt": "COMPOSITE ONLY. Do not paste into 05_H3参考图生视频_4步_SLA.\n\nsources:\n- generated/video/raw/shot_05_h3_v01.mp4\n- generated/video/raw/shot_06_h3_v01.mp4\n- generated/video/raw/shot_07_h3_v01.mp4\n- generated/video/raw/shot_11_h3_v02.mp4\n\nedit:\nAlign both chairs, standing marks, and the gray backdrop. Center-crop the same 4:3 safe area. Over 8 seconds, rapidly dissolve 05 to 06 to 07 to 11, then flash-fade to photopaper white. Do not generate a new H3 take, new faces, or quarrel footage.\n\noutput:\ngenerated/video/raw/shot_29_h3_v01.mp4",
       "lyricCue": "“我们用整个从前”",
       "subjects": [
         "femaleLead",

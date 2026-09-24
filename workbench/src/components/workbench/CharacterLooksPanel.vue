@@ -57,7 +57,7 @@ function negativeText(look, language) {
     </div>
 
     <p class="look-hint">
-      英文可直接粘贴到 ComfyUI <code>01_character_three_views</code> 左上角 Shared Character Prompt。不要写正面、侧面或背面，工作流会自动拼接三视图。
+      英文可直接粘贴到 ComfyUI <code>01_人物三视图</code> 左上角 Shared Character Prompt。不要写正面、侧面或背面，工作流会自动拼接三视图。
     </p>
 
     <p v-if="looks.length === 0" class="stage-empty">尚未填写男/女主角形象提示词。</p>

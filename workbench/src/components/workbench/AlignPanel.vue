@@ -1,13 +1,7 @@
 <script setup>
-import { ClipboardCheck, Copy } from '@lucide/vue'
-import CopyFeedback from '@/components/common/CopyFeedback.vue'
+import ShotPromptBlock from '@/components/workbench/ShotPromptBlock.vue'
 import { shotDuration } from '@/lib/time.js'
 import { sectionForShot } from '@/utils/song-content.js'
-
-const SUBJECT_LABELS = {
-  femaleLead: '女主',
-  maleLead: '男主',
-}
 
 const props = defineProps({
   shots: {
@@ -34,8 +28,8 @@ function relatedSection(shot) {
   return sectionForShot(props.sections, shot)
 }
 
-function subjectLabel(subject) {
-  return SUBJECT_LABELS[subject] || subject
+function copyPrompt(shot, language) {
+  emit('copy-prompt', shot, language)
 }
 </script>
 
@@ -78,30 +72,12 @@ function subjectLabel(subject) {
             <small>{{ shot.camera }}</small>
           </span>
         </button>
-        <div v-if="shot.prompt" class="script-prompt align-prompt">
-          <div class="script-prompt-head">
-            <span>{{ shot.genMode === 'composite' ? '剪辑说明（不要粘贴到 H3）' : 'H3 reference contract' }}</span>
-            <div class="script-prompt-copy">
-              <CopyFeedback :visible="copiedTarget === `shot-${shot.id}`" />
-              <button
-                class="inline-copy"
-                type="button"
-                :aria-label="`复制${shot.shot}提示词`"
-                :data-tooltip="`复制提示词`"
-                @click="emit('copy-prompt', shot)"
-              >
-                <ClipboardCheck v-if="copiedTarget === `shot-${shot.id}`" :size="14" />
-                <Copy v-else :size="14" />
-              </button>
-            </div>
-          </div>
-          <div v-if="shot.subjects?.length || shot.output" class="script-generation-meta">
-            <span v-if="shot.subjects?.length">参考角色：{{ shot.subjects.map(subjectLabel).join('、') }}</span>
-            <span v-if="shot.genMode">{{ shot.genMode === 'composite' ? '剪辑合成' : 'H3 角色参考视频' }}</span>
-            <span v-if="shot.output">输出：{{ shot.output }}</span>
-          </div>
-          <p>{{ shot.prompt }}</p>
-        </div>
+        <ShotPromptBlock
+          class="align-prompt"
+          :shot="shot"
+          :copied-target="copiedTarget"
+          @copy-prompt="copyPrompt"
+        />
       </article>
     </div>
   </section>

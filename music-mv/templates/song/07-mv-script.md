@@ -30,7 +30,7 @@
 
 ## 主角形象提示词
 
-写入 `song.json` 的 `characterLooks`，必须适配 ComfyUI `01_character_three_views`：英文是左上角 Shared Character Prompt 的可粘贴原文；中文为对照。不要写正面/侧面/背面、半身或 16:9。必须包含单人、全身从头顶到鞋底、直立放松、双臂下垂、暖灰无缝棚拍。机位由工作流拼接。H3 分镜提示词不再用文字重新设计人物。
+写入 `song.json` 的 `characterLooks`，必须适配 ComfyUI `01_人物三视图`：英文是左上角 Shared Character Prompt 的可粘贴原文；中文为对照。不要写正面/侧面/背面、半身或 16:9。必须包含单人、全身从头顶到鞋底、直立放松、双臂下垂、暖灰无缝棚拍。机位由工作流拼接。H3 分镜提示词不再用文字重新设计人物。
 
 ### 女主三视图共享提示词
 
@@ -53,7 +53,7 @@
 - `genMode` 使用 `characterVideo`（H3 直接生成）或 `composite`（已有分镜视频剪辑/合成）。
 - 不为每个分镜预制关键帧。场景、动作、表演、运镜、光线与连续性直接写入 H3 提示词。
 - 每个 H3 分镜的 `action` 与 `detailed_description` 必须写微表情（眉、眼、唇、呼吸），并符合该镜在故事中的情绪；禁止空脸、假笑、张嘴唱、突然大哭。眼神写持住，最多一次视线移动、最多一次自然眨眼；不要写 `soft focus on the face`、抹眼或左右扫视。
-- H3 提示词按 [`library/h3-prompt-writing.md`](../../library/h3-prompt-writing.md) 的 Ref2VA 六段写。表情戏用中景或中近景，不要用大全景演脸。
+- H3 英文提示词按 [`library/h3-prompt-writing.md`](../../library/h3-prompt-writing.md) 的 Ref2VA 六段写，并为每镜提供逐项对应的完整中文对照。英文写入 `shots[].prompt` 供 H3 使用，中文写入 `shots[].promptZh` 供工作台审阅；中文不能只写摘要。表情戏用中景或中近景，不要用大全景演脸。
 - 每个分镜必须导出一条独立、可用于剪辑的 MV 视频，统一保存为 `generated/video/raw/shot_XX_h3_v01.mp4`；剪辑/合成镜也必须输出对应文件。
 
 ## 电影摄影执行卡（每镜必填）
@@ -79,9 +79,13 @@
 - 出镜参考：女主
 - 生成类型：H3 角色参考图生视频
 - 输出视频：`generated/video/raw/shot_01_h3_v01.mp4`
-- H3 参考图生视频提示词：
+- H3 英文参考图生视频提示词（写入 `prompt`）：
 
-必须粘贴 `05_ref2va_4step_sla` 的 reference contract，格式见 [`library/h3-prompt-writing.md`](../../library/h3-prompt-writing.md)：`subject_definitions`（`<Subject 1>` 绑定 `<Picture 1/2/3>`；双人镜加 `<Subject 2>` 与 `<Picture 4/5/6>`）、`summary`、`retention_analysis`、`detailed_description`、`overall_soundscape`、`non_diegetic_music: N/A`。`detailed_description` 先写风格句再写 `[Shot 1]`。人脸镜一条连续镜头；空景最多一次 `[Shot 2] At MM:SS.mmm, the camera cuts to ...`。运镜写类型+幅度+速度。剪辑镜 `genMode: composite`，提示词不要送进 H3。
+必须粘贴 `05_H3参考图生视频_4步_SLA` 的 reference contract，格式见 [`library/h3-prompt-writing.md`](../../library/h3-prompt-writing.md)：`subject_definitions`（`<Subject 1>` 绑定 `<Picture 1/2/3>`；双人镜加 `<Subject 2>` 与 `<Picture 4/5/6>`）、`summary`、`retention_analysis`、`detailed_description`、`overall_soundscape`、`non_diegetic_music: N/A`。`detailed_description` 先写风格句再写 `[Shot 1]`。人脸镜一条连续镜头；空景最多一次 `[Shot 2] At MM:SS.mmm, the camera cuts to ...`。运镜写类型+幅度+速度。剪辑镜 `genMode: composite`，提示词不要送进 H3。
+
+- 中文对照提示词（写入 `promptZh`）：
+
+逐项翻译上面的六段英文提示词，保留主体编号、图片编号、镜头编号、时间码和 `N/A`，供工作台展示与用户审阅。
 
 ## 拍摄清单
 
@@ -116,7 +120,7 @@
 - [ ] 情节与已确认故事一致
 - [ ] 人物、服装、道具和时间线连续
 - [ ] 已登记主角正面、侧面、背面参考图，且每镜 `subjects` 与出镜人物一致
-- [ ] 每镜均有 `genMode`、可执行的 H3 提示词和唯一输出视频路径
+- [ ] 每镜均有 `genMode`、可执行的英文 H3 `prompt`、完整中文 `promptZh` 和唯一输出视频路径
 - [ ] 不依赖逐镜关键帧；剪辑/合成镜也导出为独立分镜视频
 - [ ] 高潮画面与歌曲高潮同步
 - [ ] 结尾落实歌曲和故事的共同主题

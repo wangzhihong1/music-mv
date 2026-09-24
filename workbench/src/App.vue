@@ -12,7 +12,6 @@ import PipelineBoard from '@/components/workbench/PipelineBoard.vue'
 import ProductionPanel from '@/components/workbench/ProductionPanel.vue'
 import PromptsPanel from '@/components/workbench/PromptsPanel.vue'
 import ScriptPanel from '@/components/workbench/ScriptPanel.vue'
-import SongFacts from '@/components/workbench/SongFacts.vue'
 import StoryPanel from '@/components/workbench/StoryPanel.vue'
 import StylePanel from '@/components/workbench/StylePanel.vue'
 import ReleaseCopyPanel from '@/components/workbench/ReleaseCopyPanel.vue'
@@ -54,8 +53,8 @@ const {
   saveSongLyrics,
 })
 
-const viewMode = ref('overview')
-const selectedStage = ref('')
+const viewMode = ref('brief')
+const selectedStage = ref('brief')
 const promptLanguage = ref('zh')
 const activeSection = ref('')
 const activeShotId = ref('')
@@ -71,6 +70,10 @@ const characterLooks = computed(() => currentSong.value.characterLooks || [])
 const sections = computed(() => currentSong.value.sections || [])
 const shots = computed(() => currentSong.value.shots || [])
 const facts = computed(() => metadataFacts(currentSong.value, METADATA_FIELDS))
+const musicTracks = computed(() => {
+  const groups = currentSong.value.production?.groups || []
+  return (groups.find((group) => group.id === 'music')?.items || []).filter((item) => item.url)
+})
 const allLyrics = computed(() => joinLyrics(sections.value))
 const fullPrompt = computed(() => joinPrompts(prompts.value, promptLanguage.value))
 const totalShotDuration = computed(() =>
@@ -101,14 +104,16 @@ function onSelectNav(navId) {
   selectNav(navId)
   sidebarOpen.value = false
   if (SONG_NAVS.includes(navId)) {
-    viewMode.value = 'overview'
-    selectedStage.value = ''
+    viewMode.value = 'brief'
+    selectedStage.value = 'brief'
   }
 }
 
 function onSelectSong(songId) {
   selectSong(songId)
   sidebarOpen.value = false
+  viewMode.value = 'brief'
+  selectedStage.value = 'brief'
 }
 
 function onSelectStage(stageId) {
@@ -140,8 +145,10 @@ function copyPrompt(target) {
   copyText(prompt?.[promptLanguage.value] || '', `prompt-${target}`)
 }
 
-function copyShotPrompt(shot) {
-  copyText(shot.prompt || [shot.action, shot.visual, shot.camera].filter(Boolean).join('\n'), `shot-${shot.id}`)
+function copyShotPrompt(shot, language = 'en') {
+  const fallback = [shot.action, shot.visual, shot.camera].filter(Boolean).join('\n')
+  const prompt = language === 'zh' ? shot.promptZh : shot.prompt
+  copyText(prompt || fallback, `shot-${shot.id}-${language}`)
 }
 
 function lookText(look, kind) {
@@ -218,8 +225,6 @@ function copyRelease(target) {
         />
 
         <div ref="stageScroller" class="main-stage">
-          <SongFacts v-if="viewMode === 'overview'" :facts="facts" />
-
           <div v-if="viewMode === 'overview'" class="workbench-grid">
             <LyricsPanel
               :sections="sections"
@@ -264,7 +269,7 @@ function copyRelease(target) {
           </div>
 
           <BriefPanel v-else-if="viewMode === 'brief'" :song="currentSong" />
-          <StylePanel v-else-if="viewMode === 'style'" :facts="facts" />
+          <StylePanel v-else-if="viewMode === 'style'" :facts="facts" :tracks="musicTracks" />
           <LyricsPanel
             v-else-if="viewMode === 'lyrics'"
             class="stage-panel"
@@ -297,6 +302,7 @@ function copyRelease(target) {
           <ScriptPanel
             v-else-if="viewMode === 'script'"
             class="stage-panel"
+            outline
             :shots="shots"
             :active-shot-id="activeShotId"
             :summary="currentScriptSummary"

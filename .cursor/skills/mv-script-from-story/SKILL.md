@@ -76,7 +76,7 @@ description: >-
 - `id`、`start`、`end`、`sectionId`、`storyBeat`（`opening` / `development` / `turningPoint` / `climax` / `ending`）
 - `shot`、`action`、`visual`、`camera`、`location`、`transition`、`soundFocus`、`lyricCue`
 - `visual` / `camera` 中必须可读出景别、机位角度、焦段倾向、景深/对焦、构图、主体调度、运镜方向/幅度/速度与运镜动机；`transition` / `soundFocus` 中必须可读出剪辑交接、环境声/动作声和音乐落点
-- `subjects`、`genMode`（`characterVideo` 或 `composite`）、`prompt`、`output`（`generated/video/raw/shot_XX_h3_v01.mp4`）
+- `subjects`、`genMode`（`characterVideo` 或 `composite`）、英文 H3 六段 `prompt`、与英文逐项对应的完整中文 `promptZh`、`output`（`generated/video/raw/shot_XX_h3_v01.mp4`）。工作台用 `promptZh` 给用户审阅，不能只存中文摘要
 
 时间线从 `00:00` 连续覆盖至确认时长，无空档、无重叠，累计等于总时长。五段故事功能都必须有对应分镜，不得为了短镜头删掉因果、动机、转折或结局。
 
@@ -98,4 +98,4 @@ description: >-
 - [ ] 全片只有少数几个相连地点，大部分镜头观众认得出还是那些地方
 - [ ] 再现的场景与第一次锁定一致
 - [ ] 微表情与故事情绪一致；无空脸、假笑、张嘴唱、突然大哭
-- [ ] `shots` 与 Markdown 一致，校验通过
+- [ ] 每镜英文 `prompt` 与中文 `promptZh` 完整对应，`shots` 与 Markdown 一致，校验通过
