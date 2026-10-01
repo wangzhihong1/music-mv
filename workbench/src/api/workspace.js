@@ -20,3 +20,32 @@ export async function saveSongLyrics(folder, sections) {
   })
   return readJson(response, `歌词保存失败（${response.status}）`)
 }
+
+export async function deleteSceneImage(folder, fileName) {
+  const response = await fetch(
+    `/api/songs/${encodeURIComponent(folder)}/scenes/${encodeURIComponent(fileName)}`,
+    { method: 'DELETE', cache: 'no-store' },
+  )
+  return readJson(response, `场景图片删除失败（${response.status}）`)
+}
+
+export async function deleteVoidedShot(folder, fileName) {
+  const response = await fetch(
+    `/api/songs/${encodeURIComponent(folder)}/raw-shots/${encodeURIComponent(fileName)}`,
+    { method: 'DELETE', cache: 'no-store' },
+  )
+  return readJson(response, `作废分镜视频删除失败（${response.status}）`)
+}
+
+export async function confirmSceneReference(folder, payload) {
+  const response = await fetch(
+    `/api/songs/${encodeURIComponent(folder)}/scenes/confirm`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      cache: 'no-store',
+      body: JSON.stringify(payload),
+    },
+  )
+  return readJson(response, `场景基准确认失败（${response.status}）`)
+}

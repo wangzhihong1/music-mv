@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1344" height="768" viewBox="0 0 1344 768">
+  <defs>
+    <pattern id="field-lines" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M0 27H28" fill="none" stroke="#bdc7a6" stroke-width="1"/>
+    </pattern>
+    <pattern id="brick" width="20" height="12" patternUnits="userSpaceOnUse">
+      <path d="M0 0H20M0 12H20M10 0V6M0 6H20M5 6V12" fill="none" stroke="#884f44" stroke-width="1" opacity="0.55"/>
+    </pattern>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0L12 6L0 12Z" fill="#3e5f50"/>
+    </marker>
+    <marker id="camera-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0L12 6L0 12Z" fill="#a24f3c"/>
+    </marker>
+    <style>
+      .label { font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #202622; font-size: 20px; }
+      .small { font-size: 16px; }
+      .tiny { font-size: 14px; }
+      .title { font-size: 30px; font-weight: 700; }
+      .sub { fill: #56615a; font-size: 16px; }
+      .outline { stroke: #3c463f; stroke-width: 3; }
+      .guide { stroke: #66736a; stroke-width: 2; stroke-dasharray: 8 7; fill: none; }
+    </style>
+  </defs>
+
+  <rect width="1344" height="768" fill="#eef1ea"/>
+  <text x="52" y="48" class="label title">《故乡》场景总平面布局草图</text>
+  <text x="52" y="76" class="label sub">仅锁定空间拓扑，不代表最终画面材质与摄影风格</text>
+
+  <path d="M0 172 Q120 92 246 156 Q355 78 485 154 Q625 88 760 155 Q925 84 1080 152 Q1200 102 1344 164 L1344 218 L0 218Z" fill="#78906f"/>
+  <path d="M0 186 Q150 128 285 180 Q430 116 570 182 Q735 122 900 181 Q1110 120 1344 184 L1344 230 L0 230Z" fill="#9aab88" opacity="0.9"/>
+  <text x="602" y="140" class="label small">北侧低矮青山</text>
+
+  <rect x="34" y="218" width="1276" height="478" rx="8" fill="#dce3c9" class="outline"/>
+  <rect x="390" y="236" width="470" height="145" fill="#cbd8a9"/>
+  <rect x="390" y="236" width="470" height="145" fill="url(#field-lines)"/>
+  <text x="563" y="274" class="label small">玉米与普通菜畦</text>
+
+  <rect x="66" y="258" width="286" height="270" rx="6" fill="#c9b899" class="outline"/>
+  <rect x="84" y="276" width="250" height="76" fill="#9a5547" class="outline"/>
+  <rect x="84" y="276" width="250" height="76" fill="url(#brick)"/>
+  <path d="M75 278L209 236L343 278Z" fill="#545b59" class="outline"/>
+  <rect x="188" y="321" width="42" height="31" fill="#3e352f"/>
+  <text x="111" y="308" class="label small" fill="#fff">堂屋：门朝南</text>
+  <rect x="84" y="370" width="250" height="132" rx="4" fill="#b8a889" stroke="#776953" stroke-width="2"/>
+  <path d="M104 390H314M104 428H314M104 466H314" stroke="#a29376" stroke-width="2"/>
+  <text x="136" y="441" class="label">压实土院子</text>
+  <rect x="326" y="407" width="26" height="62" fill="#6f553d" stroke="#3c463f" stroke-width="3"/>
+  <text x="250" y="492" class="label small">东侧窄木门</text>
+
+  <path d="M352 421 C520 411 690 430 900 421 L900 474 C690 482 520 460 352 469Z" fill="#b4a37f" class="outline"/>
+  <path d="M376 437 C540 431 700 449 876 440" fill="none" stroke="#8e7f64" stroke-width="4" stroke-dasharray="18 18"/>
+  <line x1="438" y1="401" x2="808" y2="401" stroke="#3e5f50" stroke-width="4" marker-end="url(#arrow)"/>
+  <text x="552" y="390" class="label">唯一土路，向东，无岔路</text>
+  <text x="558" y="505" class="label small">家门口看不见豆架：中间保留明确步行距离</text>
+
+  <rect x="908" y="250" width="364" height="362" rx="5" fill="#c5d0aa" class="outline"/>
+  <text x="1030" y="284" class="label">菜地西头</text>
+  <line x1="944" y1="344" x2="1228" y2="344" stroke="#6e7854" stroke-width="9" stroke-dasharray="32 23"/>
+  <line x1="952" y1="327" x2="952" y2="361" stroke="#725845" stroke-width="5"/>
+  <line x1="1020" y1="327" x2="1020" y2="361" stroke="#725845" stroke-width="5"/>
+  <line x1="1090" y1="327" x2="1090" y2="361" stroke="#725845" stroke-width="5"/>
+  <line x1="1160" y1="327" x2="1160" y2="361" stroke="#725845" stroke-width="5"/>
+  <line x1="1228" y1="327" x2="1228" y2="361" stroke="#725845" stroke-width="5"/>
+  <text x="958" y="318" class="label small">左手行：靠路、稀疏、留种</text>
+
+  <line x1="944" y1="500" x2="1228" y2="500" stroke="#53734d" stroke-width="14"/>
+  <line x1="952" y1="477" x2="952" y2="523" stroke="#725845" stroke-width="6"/>
+  <line x1="1005" y1="477" x2="1005" y2="523" stroke="#725845" stroke-width="6"/>
+  <line x1="1058" y1="477" x2="1058" y2="523" stroke="#725845" stroke-width="6"/>
+  <line x1="1111" y1="477" x2="1111" y2="523" stroke="#725845" stroke-width="6"/>
+  <line x1="1164" y1="477" x2="1164" y2="523" stroke="#725845" stroke-width="6"/>
+  <line x1="1217" y1="477" x2="1217" y2="523" stroke="#725845" stroke-width="6"/>
+  <text x="958" y="468" class="label small">右手行：靠田、茂密、当菜</text>
+
+  <ellipse cx="930" cy="370" rx="19" ry="11" fill="#e5e1d1" stroke="#6b6c63" stroke-width="3"/>
+  <text x="958" y="383" class="label tiny">浅色搪瓷种盆固定点</text>
+  <rect x="922" y="398" width="62" height="49" fill="none" stroke="#a24f3c" stroke-width="2" stroke-dasharray="7 5"/>
+  <text x="994" y="429" class="label tiny">地头空土：竹匾后续才出现</text>
+
+  <path d="M45 660 C300 642 540 676 790 654 C1005 636 1170 666 1298 650" fill="none" stroke="#5d94a1" stroke-width="18"/>
+  <path d="M45 660 C300 642 540 676 790 654 C1005 636 1170 666 1298 650" fill="none" stroke="#a7d0d7" stroke-width="5"/>
+  <text x="570" y="631" class="label small">南侧窄水渠</text>
+
+  <path d="M70 706L118 684L139 719Z" fill="#a24f3c"/>
+  <line x1="127" y1="690" x2="260" y2="579" stroke="#a24f3c" stroke-width="4" marker-end="url(#camera-arrow)"/>
+  <text x="156" y="716" class="label small">航拍机位：西南看东北，保留地平线</text>
+
+  <g transform="translate(1233 82)">
+    <circle cx="0" cy="0" r="35" fill="#ffffff" stroke="#3c463f" stroke-width="2"/>
+    <path d="M0 -27L8 -5H-8Z" fill="#3e5f50"/>
+    <text x="-7" y="17" class="label small">北</text>
+  </g>
+
+  <rect x="52" y="94" width="380" height="72" rx="6" fill="#ffffff" opacity="0.9" stroke="#a9b2ab" stroke-width="2"/>
+  <text x="70" y="121" class="label small">固定关系：住宅在西，菜地在东</text>
+  <text x="70" y="149" class="label small">所有后续机位必须服从这一张总图</text>
+</svg>

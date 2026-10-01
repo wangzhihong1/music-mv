@@ -26,6 +26,7 @@ export const SONG_DOCUMENTS = [
   '05-production-log.md',
   '06-mv-story.md',
   '07-mv-script.md',
+  '08-mv-prompts.md',
   '08-checklist.md',
   '09-release.md',
 ]

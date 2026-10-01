@@ -1,8 +1,8 @@
 ---
 name: mv-script-from-story
 description: >-
-  Directs a confirmed MV story into a timed, shootable shot list and H3-ready script.
-  Use when the user asks for MV 脚本, 分镜, shot list, storyboard, or after the MV story is confirmed and they agree to split it into a script. Do not use to invent a new story, write lyrics, or generate video files.
+  Directs a confirmed MV story into a timed, shootable script skeleton without final generation prompts.
+  Use when the user asks for MV 脚本骨架, 分镜, shot list, storyboard, or after the MV story is confirmed and they agree to split it into a script. Do not use to write final H3 prompts, create reference images, invent a new story, write lyrics, or generate video files.
 ---
 
 # MV 分镜编导
@@ -11,9 +11,9 @@ description: >-
 
 你的工作是把**已确认故事**排到歌曲时间轴上，让每一镜有职责、有交接、有反差。不要重写故事，也不要先写炫技 prompt。故事若是空景或多人，分镜就保持空景或多人，不要强行加唯一男女主跟拍。
 
-本技能只借公开技能里的**方法**（先全片总谱、镜头职责轮换、相邻镜反差、口型克制），不搬别人的默认段长、逐镜关键帧、Seedance/Kling 语法或整份 EDL 工具链。本仓库的 0.5–15 秒、H3 角色参考图直出视频、以及 `validate:songs` 优先。时长由导演按每一刀决定，禁止整片默认成同一种秒数。
+本技能只借公开技能里的**方法**（先全片总谱、镜头职责轮换、相邻镜反差、口型克制），不搬别人的默认段长、逐镜关键帧、Seedance/Kling 语法或整份 EDL 工具链。本仓库的 0.5–8 秒、H3 角色参考图直出视频、以及 `validate:songs` 优先。时长由导演按每一刀决定，禁止整片默认成同一种秒数。
 
-动手前读 [craft.md](craft.md)。写 H3 六段提示词前再读 `music-mv/library/h3-prompt-writing.md`。
+动手前读 [craft.md](craft.md)。本阶段不读写 H3 六段提示词；最终提示词由 `mv-prompts-from-references` 在视觉基准确认后完成。
 
 ## 启动门槛
 
@@ -58,11 +58,11 @@ description: >-
 
 ### 3. 按本机可生成性设计镜头
 
-- 单镜 0.5–15 秒，由这一刀的分量决定：重音、惊觉、一闪而过可以是 0.5 秒或 1 秒；一个动作需要看完，可以到 15 秒。整片必须有长短变化，禁止大部分镜头落在同一种秒数。一镜一个主动作、一种运镜、一种持住的情绪。运镜必须有动机，固定也算运镜。人脸只用小幅度慢推/慢拉/固定。脚本时长是剪辑时长；短于一次生成所需要的镜头，可以生成后再剪到该时长，不要为了好生成把所有镜头拉成一样长。
+- 单镜 0.5–8 秒，由这一刀的分量决定：重音、惊觉、一闪而过可以是 0.5 秒或 1 秒；一个动作需要看完，最长 8 秒。禁止超过 8 秒。整片必须有长短变化，禁止大部分镜头落在同一种秒数。一镜一个主动作、一种运镜、一种持住的情绪。运镜必须有动机，固定也算运镜。人脸只用小幅度慢推/慢拉/固定。脚本时长是剪辑时长；短于一次生成所需要的镜头，可以生成后再剪到该时长，不要为了好生成把所有镜头拉成一样长。
 - 大部分镜头必须是观众能读懂的镜头语言。写每一镜前先用一句话写出观众会懂的意思：在看谁、看见或挡住了什么、关系近了还是远了、这个地方还认不认识。景别、机位、构图、运镜都为这一句服务。只是风景好看、镜头在动，观众不知道这一刀在说什么，就重写。
 - 拆镜前先写全片地点：少数几个彼此相连的地方，以及观众怎么从一处走到另一处。大部分镜头必须落在这些地点里。新的一镜是同一地方的另一角度、另一距离或另一个时刻，观众要认得出还是那个地方。每一镜各换一座风景，整片就会看起来各是各的。
 - 同一地点再次出现时，沿用第一次锁定的场景：地形、房屋材料、路的走向、光线时段、关键道具和左右关系。分镜前先写场景锁定，后镜引用，不得每次重新发明一座村子。
-- 空景允许在同一条 H3 里最多硬切一次；有人脸、手、脚或可辨认背影的镜头禁止内切。切不切由编导判断：只在新空间信息值得单独一刀时切，已经有推拉移的空景不要再切
+- 空景若设计镜内硬切，最多一次；有人脸、手、脚或可辨认背影的镜头禁止镜内切。切不切由编导判断：只在新空间信息值得单独一刀时切，已经有推拉移的空景不要再切
 - 表情戏用中景或中近景；需要环境用中全景，不用大全景演脸
 - 禁止正侧 90° 和无必要的背面转头；背影单独做背影镜
 - 微表情写眉、眼、唇、呼吸；眼神持住，最多一次视线移动、最多一次自然眨眼
@@ -76,15 +76,16 @@ description: >-
 - `id`、`start`、`end`、`sectionId`、`storyBeat`（`opening` / `development` / `turningPoint` / `climax` / `ending`）
 - `shot`、`action`、`visual`、`camera`、`location`、`transition`、`soundFocus`、`lyricCue`
 - `visual` / `camera` 中必须可读出景别、机位角度、焦段倾向、景深/对焦、构图、主体调度、运镜方向/幅度/速度与运镜动机；`transition` / `soundFocus` 中必须可读出剪辑交接、环境声/动作声和音乐落点
-- `subjects`、`genMode`（`characterVideo` 或 `composite`）、英文 H3 六段 `prompt`、与英文逐项对应的完整中文 `promptZh`、`output`（`generated/video/raw/shot_XX_h3_v01.mp4`）。工作台用 `promptZh` 给用户审阅，不能只存中文摘要
+- `subjects`：列出本镜需要的人物参考 ID；空景使用空数组。通过 `location` 和画面描述写清需要锁定的场景，不在此阶段填写最终 `sceneReferenceIds`
+- 不新增或改写 `genMode`、`prompt`、`promptZh`、`output`；已有旧提示词可以保留，但不作为脚本骨架的完成条件
 
 时间线从 `00:00` 连续覆盖至确认时长，无空档、无重叠，累计等于总时长。五段故事功能都必须有对应分镜，不得为了短镜头删掉因果、动机、转折或结局。
 
-`mvWorkflow.generationMethod` 设为 `characterReferenceVideo`；完成后 `scriptStatus` 为 `complete`。在 `music-mv/` 运行 `npm run validate:songs`，不通过不算完成。
+完成后将 `mvWorkflow.scriptSkeletonStatus` 设为 `complete`；`visualReferencesStatus` 与 `promptStatus` 不得因此自动完成。在 `music-mv/` 运行 `npm run validate:songs`，不通过不算完成。
 
 ## 停住
 
-分镜是给用户审的导演本。提示词服务于已锁定的动作与机位。用户改故事时先回 `mv-story-from-song`，不要在分镜里偷偷改结局。
+分镜骨架是给用户审的导演本。提交后停在人物/场景基准图之前，不生成参考图，不写最终提示词。用户改故事时先回 `mv-story-from-song`，不要在分镜里偷偷改结局。
 
 ## 自检
 
@@ -93,9 +94,11 @@ description: >-
 - [ ] 相邻镜有反差和交接，不是同一演唱姿态换形容词
 - [ ] 运镜有动机；相邻镜换了轴向或动静；该锁死的锁死
 - [ ] 每镜都有导演意图、摄影执行和音乐叙事功能；焦段/景深、构图、光色、声音与剪辑可执行
-- [ ] 每镜 0.5–15 秒，长短由导演决定，整片不是同一种秒数；表情戏脸够大
+- [ ] 每镜 0.5–8 秒，长短由导演决定，整片不是同一种秒数；表情戏脸够大
 - [ ] 大部分镜头观众能读懂在说什么；分镜跟着故事正文，不跟歌词行
 - [ ] 全片只有少数几个相连地点，大部分镜头观众认得出还是那些地方
 - [ ] 再现的场景与第一次锁定一致
 - [ ] 微表情与故事情绪一致；无空脸、假笑、张嘴唱、突然大哭
-- [ ] 每镜英文 `prompt` 与中文 `promptZh` 完整对应，`shots` 与 Markdown 一致，校验通过
+- [ ] 每镜 `subjects` 与出镜人物一致，需要锁定的场景已在 `location` / `visual` 中写清
+- [ ] 没有把 `prompt`、`promptZh` 或视觉基准状态当作骨架完成条件
+- [ ] `shots` 与 Markdown 一致，`scriptSkeletonStatus` 为 `complete`，校验通过

@@ -7,16 +7,16 @@ export const NAV_ITEMS = [
 
 export const SONG_NAVS = ['in-progress', 'completed']
 
-export const PRODUCTION_STAGES = ['character-references', 'shot-videos', 'post', 'delivery']
+export const PRODUCTION_STAGES = ['visual-references', 'shot-videos', 'post', 'delivery']
 
 export const STAGE_VIEW_MODES = {
-  brief: 'brief',
-  style: 'style',
+  'brief-style': 'brief-style',
   lyrics: 'lyrics',
   prompts: 'prompts',
   'mv-story': 'story',
   'mv-script': 'script',
-  'character-references': 'production',
+  'visual-references': 'production',
+  'mv-prompts': 'shot-prompts',
   'shot-videos': 'production',
   post: 'production',
   delivery: 'production',
@@ -29,7 +29,7 @@ export const HEADER_STAGE = {
 }
 
 export const PRODUCTION_FOCUS = {
-  'character-references': ['characters'],
+  'visual-references': ['characters', 'scenes'],
   'shot-videos': ['raw'],
   post: ['intermediate'],
   delivery: ['final'],

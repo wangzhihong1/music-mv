@@ -34,6 +34,9 @@ const {
   selectSong,
   setRefreshPaused,
   saveSongLyrics,
+  deleteSceneImage,
+  deleteVoidedShot,
+  confirmSceneReference,
 } = useWorkspace()
 const { copiedTarget, copyText } = useClipboard()
 const {
@@ -53,8 +56,8 @@ const {
   saveSongLyrics,
 })
 
-const viewMode = ref('brief')
-const selectedStage = ref('brief')
+const viewMode = ref('brief-style')
+const selectedStage = ref('brief-style')
 const promptLanguage = ref('zh')
 const activeSection = ref('')
 const activeShotId = ref('')
@@ -104,16 +107,16 @@ function onSelectNav(navId) {
   selectNav(navId)
   sidebarOpen.value = false
   if (SONG_NAVS.includes(navId)) {
-    viewMode.value = 'brief'
-    selectedStage.value = 'brief'
+    viewMode.value = 'brief-style'
+    selectedStage.value = 'brief-style'
   }
 }
 
 function onSelectSong(songId) {
   selectSong(songId)
   sidebarOpen.value = false
-  viewMode.value = 'brief'
-  selectedStage.value = 'brief'
+  viewMode.value = 'brief-style'
+  selectedStage.value = 'brief-style'
 }
 
 function onSelectStage(stageId) {
@@ -268,8 +271,10 @@ function copyRelease(target) {
             </div>
           </div>
 
-          <BriefPanel v-else-if="viewMode === 'brief'" :song="currentSong" />
-          <StylePanel v-else-if="viewMode === 'style'" :facts="facts" :tracks="musicTracks" />
+          <div v-else-if="viewMode === 'brief-style'" class="brief-style-stack">
+            <BriefPanel :song="currentSong" />
+            <StylePanel :facts="facts" :tracks="musicTracks" />
+          </div>
           <LyricsPanel
             v-else-if="viewMode === 'lyrics'"
             class="stage-panel"
@@ -310,6 +315,21 @@ function copyRelease(target) {
             @select-shot="selectShot"
             @copy-prompt="copyShotPrompt"
           />
+          <ScriptPanel
+            v-else-if="viewMode === 'shot-prompts'"
+            class="stage-panel"
+            outline
+            show-prompts
+            kicker="08 · H3 Prompts"
+            title="最终分镜提示词"
+            empty-copy="人物与场景基准图确认后，才能生成最终分镜提示词。"
+            :shots="shots"
+            :active-shot-id="activeShotId"
+            :summary="currentScriptSummary"
+            :copied-target="copiedTarget"
+            @select-shot="selectShot"
+            @copy-prompt="copyShotPrompt"
+          />
           <AlignPanel
             v-else-if="viewMode === 'align'"
             :shots="shots"
@@ -325,6 +345,9 @@ function copyRelease(target) {
             :focus-stage="selectedStage"
             :prompt-language="promptLanguage"
             :copied-target="copiedTarget"
+            :delete-scene-image="deleteSceneImage"
+            :delete-voided-shot="deleteVoidedShot"
+            :confirm-scene-reference="confirmSceneReference"
             @update:prompt-language="promptLanguage = $event"
             @copy-look="copyCharacterLook"
             @copy-release="copyRelease"

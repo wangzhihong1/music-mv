@@ -1,19 +1,20 @@
 <script setup>
 import { computed, ref } from 'vue'
-import { Film, Image as ImageIcon, Music2, X } from '@lucide/vue'
+import { Film, Image as ImageIcon, Music2, Trash2, X } from '@lucide/vue'
 import CharacterLooksPanel from '@/components/workbench/CharacterLooksPanel.vue'
+import SceneReferenceAudit from '@/components/workbench/SceneReferenceAudit.vue'
 import ReleaseCopyPanel from '@/components/workbench/ReleaseCopyPanel.vue'
 import { PRODUCTION_FOCUS } from '@/constants/navigation.js'
 
 const STAGE_COPY = {
-  'character-references': { kicker: 'Character References', title: '主角图片' },
+  'visual-references': { kicker: 'Visual References', title: '人物与场景基准图' },
   'shot-videos': { kicker: 'H3 Shots', title: '分镜视频' },
   post: { kicker: 'Post', title: '修复超分' },
   delivery: { kicker: 'Delivery', title: '成片' },
 }
 
 const EMPTY_COPY = {
-  'character-references': '形象提示词按 ComfyUI 01_人物三视图 书写。复制英文到工作流左上角 Shared Character Prompt 后排队；确认的正面、侧面、背面放入本歌曲目录的 assets/characters/。',
+  'visual-references': '人物三视图放入 assets/characters/，确认的场景基准图放入 assets/scenes/。两类图片会共同显示在这里。',
   'shot-videos': '尚未生成分镜视频。确认主角参考图后，将 H3 输出放入 generated/video/raw/。',
   post: '尚未生成修复超分。合格分镜视频修复后放入 generated/video/intermediate/。',
   delivery: '尚未导出成片。剪辑完成后放入 generated/video/final/。',
@@ -36,6 +37,18 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  deleteSceneImage: {
+    type: Function,
+    default: null,
+  },
+  deleteVoidedShot: {
+    type: Function,
+    default: null,
+  },
+  confirmSceneReference: {
+    type: Function,
+    default: null,
+  },
 })
 
 const emit = defineEmits(['update:promptLanguage', 'copy-look', 'copy-release'])
@@ -43,10 +56,15 @@ const releaseCopy = computed(() => props.song.releaseCopy || {})
 const showingRelease = computed(() => props.focusStage === 'delivery')
 
 const selectedImage = ref(null)
+const pendingDelete = ref(null)
+const deleting = ref(false)
+const deleteError = ref('')
 const production = computed(() => props.song.production || {})
 const groups = computed(() => production.value.groups || [])
 const characterLooks = computed(() => props.song.characterLooks || [])
-const showingLooks = computed(() => props.focusStage === 'character-references')
+const sceneItems = computed(() => groups.value.find((group) => group.id === 'scenes')?.items || [])
+const characterItems = computed(() => groups.value.find((group) => group.id === 'characters')?.items || [])
+const showingLooks = computed(() => props.focusStage === 'visual-references')
 const stageCopy = computed(() => STAGE_COPY[props.focusStage] || {
   kicker: 'Local Production',
   title: '本机成片',
@@ -54,7 +72,7 @@ const stageCopy = computed(() => STAGE_COPY[props.focusStage] || {
 const focusGroups = computed(() => PRODUCTION_FOCUS[props.focusStage] || [])
 const visibleGroups = computed(() => {
   if (!focusGroups.value.length) return groups.value
-  return groups.value.filter((group) => focusGroups.value.includes(group.id))
+  return groups.value.filter((group) => focusGroups.value.includes(group.id) && !(showingLooks.value && ['characters', 'scenes'].includes(group.id)))
 })
 const featured = computed(() => visibleGroups.value.find((group) => group.id === 'final'))
 const restGroups = computed(() => visibleGroups.value.filter((group) => group.id !== 'final'))
@@ -90,6 +108,36 @@ function openImage(item) {
 function closeImage() {
   selectedImage.value = null
 }
+
+function askDelete(item, kind = 'scene') {
+  pendingDelete.value = { item, kind }
+  deleteError.value = ''
+}
+
+function cancelDelete() {
+  if (deleting.value) return
+  pendingDelete.value = null
+  deleteError.value = ''
+}
+
+async function confirmDelete() {
+  if (!pendingDelete.value || deleting.value) return
+  const remove = pendingDelete.value.kind === 'shot'
+    ? props.deleteVoidedShot
+    : props.deleteSceneImage
+  if (!remove) return
+  deleting.value = true
+  deleteError.value = ''
+  try {
+    await remove(props.song.folder, pendingDelete.value.item.name)
+    pendingDelete.value = null
+    selectedImage.value = null
+  } catch (error) {
+    deleteError.value = error.message
+  } finally {
+    deleting.value = false
+  }
+}
 </script>
 
 <template>
@@ -112,21 +160,63 @@ function closeImage() {
       @copy="emit('copy-release', $event)"
     />
 
-    <CharacterLooksPanel
-      v-if="showingLooks"
-      :looks="characterLooks"
-      :language="promptLanguage"
-      :copied-target="copiedTarget"
-      @update:language="emit('update:promptLanguage', $event)"
-      @copy="emit('copy-look', $event)"
-    />
+    <section v-if="showingLooks" class="visual-reference-modules">
+      <div class="visual-reference-module character-module">
+        <div class="visual-reference-module-heading">
+          <div>
+            <span class="panel-kicker">Character References</span>
+            <h3>人物主角图</h3>
+          </div>
+          <span>{{ characterItems.length }} 张</span>
+        </div>
+        <CharacterLooksPanel
+          :looks="characterLooks"
+          :language="promptLanguage"
+          :copied-target="copiedTarget"
+          @update:language="emit('update:promptLanguage', $event)"
+          @copy="emit('copy-look', $event)"
+        />
+        <div v-if="characterItems.length" class="character-image-grid">
+          <button
+            v-for="item in characterItems"
+            :key="item.path"
+            class="media-card is-image"
+            type="button"
+            :aria-label="`查看 ${itemLabel(item)}`"
+            @click="openImage(item)"
+          >
+            <img :src="item.url" :alt="itemLabel(item)">
+            <span class="media-meta">
+              <strong>{{ itemLabel(item) }}</strong>
+              <small>{{ itemCaption(item) }}</small>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <div class="visual-reference-module scene-module">
+        <div class="visual-reference-module-heading scene-module-heading">
+          <div>
+            <span class="panel-kicker">Scene References</span>
+            <h3>场景基准图</h3>
+          </div>
+          <span>{{ sceneItems.length }} 张候选图</span>
+        </div>
+        <SceneReferenceAudit
+          :song="song"
+          :scenes="sceneItems"
+          :delete-scene-image="deleteSceneImage"
+          :confirm-scene-reference="confirmSceneReference"
+        />
+      </div>
+    </section>
 
     <div v-if="!hasVisibleMedia && !showingLooks" class="production-empty">
-      <p>{{ EMPTY_COPY[focusStage] || '当前步骤还没有可预览的文件。音频放入 music/，主角图片放入 assets/characters/，分镜视频放入 generated/video/raw/，成片放入 generated/video/final/。' }}</p>
+      <p>{{ EMPTY_COPY[focusStage] || '当前步骤还没有可预览的文件。音频放入 music/，人物图片放入 assets/characters/，场景基准图放入 assets/scenes/，分镜视频放入 generated/video/raw/，成片放入 generated/video/final/。' }}</p>
     </div>
 
     <p v-else-if="!hasVisibleMedia && showingLooks" class="production-empty">
-      形象提示词按 ComfyUI <code>01_人物三视图</code> 书写。复制英文到工作流左上角 Shared Character Prompt 后排队；确认的正面、侧面、背面放入本歌曲目录的 <code>assets/characters/</code>。
+      人物三视图放入 <code>assets/characters/</code>，确认的场景基准图放入 <code>assets/scenes/</code>。
     </p>
 
     <div v-if="hasVisibleMedia" class="production-body">
@@ -157,13 +247,13 @@ function closeImage() {
         :id="`production-${group.id}`"
         :key="group.id"
         class="production-group"
-        :class="{ 'is-focused': isFocused(group.id) }"
+        :class="[`is-${group.id}`, { 'is-focused': isFocused(group.id) }]"
       >
         <header>
           <Film v-if="group.kind === 'video'" :size="15" />
           <ImageIcon v-else-if="group.kind === 'image'" :size="15" />
           <Music2 v-else :size="15" />
-          <h3>{{ group.label }}</h3>
+          <h3>{{ group.id === 'characters' ? '人物主角图' : group.id === 'scenes' ? '场景基准图' : group.label }}</h3>
           <small>{{ group.items.length }}</small>
         </header>
 
@@ -172,14 +262,27 @@ function closeImage() {
             v-for="item in group.items"
             :key="item.path"
             class="media-card is-image"
+            :class="{ 'is-scene-image': group.id === 'scenes', 'is-voided': item.voided }"
             type="button"
             :aria-label="`查看 ${itemLabel(item)}`"
             @click="openImage(item)"
           >
             <img :src="item.url" :alt="itemLabel(item)">
             <span class="media-meta">
-              <strong>{{ itemLabel(item) }}</strong>
+              <strong :class="{ 'is-voided-name': item.voided }">{{ itemLabel(item) }}</strong>
               <small>{{ itemCaption(item) }}</small>
+            </span>
+            <span v-if="group.id === 'scenes'" class="scene-card-actions">
+              <span v-if="item.voided" class="scene-voided-label">作废</span>
+              <span
+                class="scene-delete-button"
+                role="button"
+                tabindex="0"
+                aria-label="删除场景图"
+                @click.stop="askDelete(item)"
+                @keydown.enter.stop="askDelete(item)"
+                @keydown.space.prevent.stop="askDelete(item)"
+              ><Trash2 :size="14" /></span>
             </span>
           </button>
         </div>
@@ -196,6 +299,17 @@ function closeImage() {
             <div class="media-meta">
               <strong>{{ itemLabel(item) }}</strong>
               <small>{{ itemCaption(item) }}</small>
+            </div>
+            <div v-if="group.id === 'raw' && item.voided" class="voided-media-actions">
+              <span class="scene-voided-label">作废</span>
+              <button
+                type="button"
+                class="scene-delete-button"
+                aria-label="删除作废分镜视频"
+                @click="askDelete(item, 'shot')"
+              >
+                <Trash2 :size="14" />
+              </button>
             </div>
           </article>
         </div>
@@ -226,5 +340,17 @@ function closeImage() {
     </button>
     <img :src="selectedImage.url" :alt="selectedImage.name" @click.stop>
     <p>{{ selectedImage.name }}</p>
+  </div>
+
+  <div v-if="pendingDelete" class="confirm-backdrop" role="presentation" @click.self="cancelDelete">
+    <section class="confirm-dialog" role="alertdialog" aria-modal="true" aria-labelledby="delete-media-title">
+      <h3 id="delete-media-title">确认删除{{ pendingDelete.kind === 'shot' ? '作废分镜视频' : '场景图' }}？</h3>
+      <p>将永久删除“{{ pendingDelete.item.name }}”，此操作无法撤销。</p>
+      <p v-if="deleteError" class="confirm-error" role="alert">{{ deleteError }}</p>
+      <div class="confirm-actions">
+        <button type="button" class="button-secondary" :disabled="deleting" @click="cancelDelete">取消</button>
+        <button type="button" class="button-danger" :disabled="deleting" @click="confirmDelete">{{ deleting ? '删除中…' : '确认删除' }}</button>
+      </div>
+    </section>
   </div>
 </template>

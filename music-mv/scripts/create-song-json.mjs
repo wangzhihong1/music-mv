@@ -41,7 +41,9 @@ const song = {
     storyStatus: 'not_started',
     durationConfirmed: false,
     durationConfirmedAt: '',
-    scriptStatus: 'not_started',
+    scriptSkeletonStatus: 'not_started',
+    visualReferencesStatus: 'not_started',
+    promptStatus: 'not_started',
     generationMethod: 'characterReferenceVideo',
   },
   mvStory: {
@@ -52,6 +54,7 @@ const song = {
     climax: '',
     ending: '',
   },
+  sceneReferences: [],
   production: {
     characterReferences: 'not_started',
     shotVideos: 'not_started',

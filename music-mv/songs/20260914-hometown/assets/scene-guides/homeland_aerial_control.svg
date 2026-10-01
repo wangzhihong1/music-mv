@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1344" height="768" viewBox="0 0 1344 768">
+  <defs>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eeeeee"/>
+      <stop offset="1" stop-color="#d8d8d8"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1344" height="768" fill="#ffffff"/>
+
+  <!-- Low northern hills and visible horizon. -->
+  <path d="M0 196 Q122 122 250 186 Q382 112 522 184 Q668 120 812 188 Q972 118 1118 184 Q1230 138 1344 180 L1344 236 L0 236Z"
+        fill="#c8c8c8" stroke="#1a1a1a" stroke-width="5"/>
+  <path d="M0 220 Q170 164 322 218 Q490 164 650 222 Q824 166 1000 220 Q1180 170 1344 212"
+        fill="none" stroke="#4a4a4a" stroke-width="3"/>
+
+  <!-- Continuous farmland plane. -->
+  <path d="M0 236 L1344 236 L1344 704 L0 704Z" fill="url(#ground)" stroke="#1a1a1a" stroke-width="4"/>
+  <path d="M385 250 L776 250 L858 378 L430 405Z" fill="#d0d0d0" stroke="#4a4a4a" stroke-width="3"/>
+  <path d="M420 272L786 272M427 300L804 300M435 330L824 330M443 360L842 360" fill="none" stroke="#777" stroke-width="2"/>
+
+  <!-- Small western farmhouse and packed-earth courtyard. -->
+  <path d="M74 355 L240 287 L390 340 L216 414Z" fill="#8f8f8f" stroke="#111" stroke-width="6"/>
+  <path d="M94 358 L216 414 L216 532 L94 470Z" fill="#b8b8b8" stroke="#111" stroke-width="5"/>
+  <path d="M216 414 L370 348 L370 466 L216 532Z" fill="#a9a9a9" stroke="#111" stroke-width="5"/>
+  <path d="M228 414 L265 398 L265 493 L228 508Z" fill="#4b4b4b" stroke="#111" stroke-width="4"/>
+  <path d="M106 382L205 425M106 404L205 447M106 426L205 469M106 448L205 491" stroke="#777" stroke-width="2"/>
+  <path d="M92 484 L215 546 L406 472 L370 442 L216 510Z" fill="#d0d0d0" stroke="#111" stroke-width="5"/>
+  <path d="M370 405 L406 391 L406 472 L370 486Z" fill="#585858" stroke="#111" stroke-width="5"/>
+
+  <!-- One road only: east gate to the field, with no branches. -->
+  <path d="M402 414 C580 370 735 351 922 344 L965 400 C758 414 584 447 404 486Z"
+        fill="#b0b0b0" stroke="#111" stroke-width="6"/>
+  <path d="M430 440 C600 402 752 382 936 374" fill="none" stroke="#696969" stroke-width="4" stroke-dasharray="24 18"/>
+  <path d="M442 463 C612 424 762 405 947 397" fill="none" stroke="#696969" stroke-width="4" stroke-dasharray="24 18"/>
+
+  <!-- Fields bordering the single road. -->
+  <path d="M395 505 L664 448 L878 421 L805 650 L360 650Z" fill="#d5d5d5" stroke="#444" stroke-width="3"/>
+  <path d="M421 512L392 638M470 500L444 646M522 489L500 648M580 477L562 650M640 463L626 650M704 451L692 650M770 438L756 650" stroke="#808080" stroke-width="2"/>
+
+  <!-- Eastern bean field: exactly two rows, west ends aligned to the road. -->
+  <path d="M924 300 L1278 260 L1298 574 L970 565Z" fill="#d2d2d2" stroke="#111" stroke-width="5"/>
+  <path d="M967 342 C1050 326 1155 314 1249 306" fill="none" stroke="#555" stroke-width="12" stroke-dasharray="28 20"/>
+  <path d="M982 455 C1060 441 1161 429 1262 420" fill="none" stroke="#3b3b3b" stroke-width="18"/>
+  <g stroke="#111" stroke-width="5">
+    <path d="M984 323L984 363M1050 316L1052 354M1120 308L1122 347M1190 300L1193 340M1250 294L1253 333"/>
+    <path d="M995 432L997 477M1060 424L1063 467M1130 416L1133 460M1200 408L1204 453M1262 400L1265 446"/>
+  </g>
+  <ellipse cx="944" cy="375" rx="22" ry="12" fill="#efefef" stroke="#111" stroke-width="5"/>
+  <rect x="952" y="402" width="70" height="48" fill="none" stroke="#555" stroke-width="3" stroke-dasharray="9 7"/>
+
+  <!-- Southern irrigation canal in the foreground. -->
+  <path d="M0 686 C245 657 470 704 720 674 C970 644 1150 684 1344 657 L1344 700 C1150 724 966 687 720 716 C470 744 240 705 0 732Z"
+        fill="#bcbcbc" stroke="#111" stroke-width="6"/>
+  <path d="M0 706 C240 680 472 724 720 695 C968 666 1150 705 1344 680" fill="none" stroke="#575757" stroke-width="5"/>
+</svg>

@@ -47,7 +47,8 @@ export function sectionForShot(sections = [], shot) {
 }
 
 export function scriptSummary(song, shotCount, totalDurationLabel) {
-  if (song.mvWorkflow?.scriptStatus === 'complete') {
+  const status = song.mvWorkflow?.scriptSkeletonStatus || song.mvWorkflow?.scriptStatus
+  if (status === 'complete') {
     return `${shotCount} 镜 · 完整覆盖 ${song.metadata?.duration || ''}`
   }
   if (!song.mvWorkflow?.durationConfirmed) {

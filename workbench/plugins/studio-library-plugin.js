@@ -1,6 +1,6 @@
 import { Buffer } from 'node:buffer'
 import { createReadStream } from 'node:fs'
-import { readFile, readdir, stat, writeFile } from 'node:fs/promises'
+import { readFile, readdir, stat, unlink, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { WORKSPACE_CHANGED_EVENT } from '../src/constants/workspace.js'
 import { attachProductions } from './studio-production.js'
@@ -129,6 +129,9 @@ function sendJson(response, statusCode, payload) {
 
 const MAX_JSON_BODY_BYTES = 512 * 1024
 const LYRICS_ROUTE = /^\/api\/songs\/([^/]+)\/lyrics$/
+const SCENE_DELETE_ROUTE = /^\/api\/songs\/([^/]+)\/scenes\/([^/]+)$/
+const SCENE_CONFIRM_ROUTE = /^\/api\/songs\/([^/]+)\/scenes\/confirm$/
+const VOIDED_SHOT_DELETE_ROUTE = /^\/api\/songs\/([^/]+)\/raw-shots\/([^/]+)$/
 
 function isSafeFolderName(folderName) {
   return Boolean(folderName)
@@ -256,6 +259,189 @@ async function writeSongLyrics(studioRoot, request, response, folderName) {
   sendJson(response, 200, { ok: true })
 }
 
+async function deleteSceneImage(studioRoot, response, folderName, fileName) {
+  let decodedFolder
+  let decodedFile
+  try {
+    decodedFolder = decodeURIComponent(folderName)
+    decodedFile = decodeURIComponent(fileName)
+  } catch {
+    sendJson(response, 400, { error: '场景图片路径无效' })
+    return
+  }
+
+  if (!isSafeFolderName(decodedFolder) || !decodedFile || path.basename(decodedFile) !== decodedFile) {
+    sendJson(response, 400, { error: '场景图片路径无效' })
+    return
+  }
+  if (!/^\.(png|jpe?g|webp)$/i.test(path.extname(decodedFile))) {
+    sendJson(response, 400, { error: '只能删除场景图片' })
+    return
+  }
+
+  const targetPath = path.join(
+    studioRoot,
+    SONGS_DIRECTORY,
+    decodedFolder,
+    'assets',
+    'scenes',
+    decodedFile,
+  )
+  if (!isInsideStudio(studioRoot, targetPath)) {
+    sendJson(response, 403, { error: '无权访问该文件' })
+    return
+  }
+
+  const dataPath = path.join(studioRoot, SONGS_DIRECTORY, decodedFolder, 'song.json')
+
+  try {
+    await unlink(targetPath)
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      sendJson(response, 404, { error: '场景图片不存在' })
+      return
+    }
+    throw error
+  }
+
+  try {
+    const song = JSON.parse(await readFile(dataPath, 'utf8'))
+    const deletedPath = `assets/scenes/${decodedFile}`
+    song.sceneReferences = (song.sceneReferences || []).filter((reference) => {
+      const referencePath = String(reference.path || '').replace(/\\/g, '/')
+      return referencePath !== deletedPath && path.posix.basename(referencePath) !== decodedFile
+    })
+    const confirmedCount = song.sceneReferences.length
+    if (confirmedCount < 4 && song.mvWorkflow?.visualReferencesStatus === 'confirmed') {
+      song.mvWorkflow.visualReferencesStatus = 'in_progress'
+    }
+    await writeFile(dataPath, `${JSON.stringify(song, null, 2)}\n`, 'utf8')
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error
+  }
+  sendJson(response, 200, { ok: true })
+}
+
+function shotNumberFromFileName(fileName) {
+  const match = String(fileName).match(/^shot[_-]?0*(\d+)/i)
+  return match ? Number(match[1]) : null
+}
+
+async function deleteVoidedShot(studioRoot, response, folderName, fileName) {
+  let decodedFolder
+  let decodedFile
+  try {
+    decodedFolder = decodeURIComponent(folderName)
+    decodedFile = decodeURIComponent(fileName)
+  } catch {
+    sendJson(response, 400, { error: '分镜视频路径无效' })
+    return
+  }
+
+  if (!isSafeFolderName(decodedFolder) || !decodedFile || path.basename(decodedFile) !== decodedFile) {
+    sendJson(response, 400, { error: '分镜视频路径无效' })
+    return
+  }
+  if (!/^\.mp4$/i.test(path.extname(decodedFile))) {
+    sendJson(response, 400, { error: '只能删除 MP4 分镜视频' })
+    return
+  }
+
+  const dataPath = path.join(studioRoot, SONGS_DIRECTORY, decodedFolder, 'song.json')
+  const targetPath = path.join(studioRoot, SONGS_DIRECTORY, decodedFolder, 'generated', 'video', 'raw', decodedFile)
+  if (!isInsideStudio(studioRoot, dataPath) || !isInsideStudio(studioRoot, targetPath)) {
+    sendJson(response, 403, { error: '无权访问该文件' })
+    return
+  }
+
+  let song
+  try {
+    song = JSON.parse(await readFile(dataPath, 'utf8'))
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      sendJson(response, 404, { error: '歌曲不存在' })
+      return
+    }
+    sendJson(response, 500, { error: '歌曲档案不是有效 JSON' })
+    return
+  }
+
+  const currentOutputs = new Set(
+    (song.shots || [])
+      .map((shot) => path.posix.basename(String(shot.output || '').replace(/\\/g, '/')))
+      .filter(Boolean),
+  )
+  if (currentOutputs.has(decodedFile)) {
+    sendJson(response, 409, { error: '当前有效分镜视频不可删除，请先切换有效输出' })
+    return
+  }
+  const shotNumber = shotNumberFromFileName(decodedFile)
+  if (!shotNumber || !(song.shots || []).some((shot) => Number(String(shot.id || '').replace(/^shot/i, '')) === shotNumber)) {
+    sendJson(response, 400, { error: '只能删除已标记为作废的分镜视频' })
+    return
+  }
+
+  try {
+    await unlink(targetPath)
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      sendJson(response, 404, { error: '分镜视频不存在' })
+      return
+    }
+    throw error
+  }
+  sendJson(response, 200, { ok: true })
+}
+
+async function confirmSceneReference(studioRoot, request, response, folderName) {
+  const decodedFolder = decodeURIComponent(folderName)
+  if (!isSafeFolderName(decodedFolder)) {
+    sendJson(response, 400, { error: '歌曲目录无效' })
+    return
+  }
+  const payload = await readJsonBody(request)
+  const fileName = String(payload.fileName || '')
+  const planId = String(payload.planId || '')
+  const name = String(payload.name || '').trim()
+  const description = String(payload.description || '').trim()
+  if (!fileName || path.basename(fileName) !== fileName || !/^\.(png|jpe?g|webp)$/i.test(path.extname(fileName))) {
+    sendJson(response, 400, { error: '场景图片无效' })
+    return
+  }
+  const imagePath = path.join(studioRoot, SONGS_DIRECTORY, decodedFolder, 'assets', 'scenes', fileName)
+  const dataPath = path.join(studioRoot, SONGS_DIRECTORY, decodedFolder, 'song.json')
+  if (!isInsideStudio(studioRoot, imagePath) || !isInsideStudio(studioRoot, dataPath)) {
+    sendJson(response, 403, { error: '无权访问该文件' })
+    return
+  }
+  try {
+    await stat(imagePath)
+    const song = JSON.parse(await readFile(dataPath, 'utf8'))
+    const sceneReferences = Array.isArray(song.sceneReferences) ? song.sceneReferences : []
+    const id = planId || path.basename(fileName, path.extname(fileName))
+    const reference = {
+      id,
+      name: name || id,
+      path: `assets/scenes/${fileName}`,
+      status: 'confirmed',
+      description: description || name || id,
+    }
+    const nextReferences = sceneReferences.filter((item) => item.id !== id && item.path !== reference.path)
+    nextReferences.push(reference)
+    song.sceneReferences = nextReferences
+    if (!song.mvWorkflow) song.mvWorkflow = {}
+    song.mvWorkflow.visualReferencesStatus = nextReferences.length >= 4 ? 'confirmed' : 'in_progress'
+    await writeFile(dataPath, `${JSON.stringify(song, null, 2)}\n`, 'utf8')
+    sendJson(response, 200, { ok: true })
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      sendJson(response, 404, { error: '场景图片不存在' })
+      return
+    }
+    throw error
+  }
+}
+
 async function sendStudioMedia(studioRoot, request, response) {
   const requestUrl = new URL(request.url, 'http://localhost')
   const relativePath = decodeURIComponent(requestUrl.pathname.replace(/^\/studio-media\//, ''))
@@ -347,6 +533,36 @@ function apiMiddleware(studioRoot) {
     if (request.method === 'POST' && lyricsMatch) {
       try {
         await writeSongLyrics(studioRoot, request, response, lyricsMatch[1])
+      } catch (error) {
+        sendJson(response, error.statusCode || 500, { error: error.message })
+      }
+      return
+    }
+
+    const sceneDeleteMatch = requestUrl.pathname.match(SCENE_DELETE_ROUTE)
+    if (request.method === 'DELETE' && sceneDeleteMatch) {
+      try {
+        await deleteSceneImage(studioRoot, response, sceneDeleteMatch[1], sceneDeleteMatch[2])
+      } catch (error) {
+        sendJson(response, error.statusCode || 500, { error: error.message })
+      }
+      return
+    }
+
+    const voidedShotDeleteMatch = requestUrl.pathname.match(VOIDED_SHOT_DELETE_ROUTE)
+    if (request.method === 'DELETE' && voidedShotDeleteMatch) {
+      try {
+        await deleteVoidedShot(studioRoot, response, voidedShotDeleteMatch[1], voidedShotDeleteMatch[2])
+      } catch (error) {
+        sendJson(response, error.statusCode || 500, { error: error.message })
+      }
+      return
+    }
+
+    const sceneConfirmMatch = requestUrl.pathname.match(SCENE_CONFIRM_ROUTE)
+    if (request.method === 'POST' && sceneConfirmMatch) {
+      try {
+        await confirmSceneReference(studioRoot, request, response, sceneConfirmMatch[1])
       } catch (error) {
         sendJson(response, error.statusCode || 500, { error: error.message })
       }

@@ -772,7 +772,7 @@ h1 {
 
 .script-body.has-outline {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 200px;
+  grid-template-columns: minmax(0, 1fr) 240px;
   align-items: start;
   gap: 12px;
   padding-right: 12px;
@@ -801,7 +801,7 @@ h1 {
 
 .script-toc button {
   display: grid;
-  grid-template-columns: 42px minmax(0, 1fr);
+  grid-template-columns: 22px 62px minmax(0, 1fr);
   gap: 6px;
   width: 100%;
   padding: 5px 8px;
@@ -813,17 +813,22 @@ h1 {
   text-align: left;
 }
 
-.script-toc button time {
+.script-toc-duration {
   color: #7a8179;
   font-size: 12px;
+  white-space: nowrap;
 }
 
-.script-toc button span {
-  overflow: hidden;
+.script-toc-index {
+  color: #9aa199;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.script-toc-title {
   font-size: 12px;
   line-height: 1.4;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 
 .script-toc button:hover {
@@ -835,7 +840,11 @@ h1 {
   background: #e7f2eb;
 }
 
-.script-toc button.is-active time {
+.script-toc button.is-active .script-toc-duration {
+  color: #2f6948;
+}
+
+.script-toc button.is-active .script-toc-index {
   color: #2f6948;
 }
 

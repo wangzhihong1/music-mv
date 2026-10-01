@@ -1,5 +1,5 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { fetchWorkspace, saveSongLyrics as persistSongLyrics } from '@/api/workspace'
+import { confirmSceneReference as persistSceneReference, deleteSceneImage as removeSceneImage, deleteVoidedShot as removeVoidedShot, fetchWorkspace, saveSongLyrics as persistSongLyrics } from '@/api/workspace'
 import { EMPTY_SONG } from '@/constants/song'
 import { SONG_NAVS } from '@/constants/navigation.js'
 import { WORKSPACE_CHANGED_EVENT } from '@/constants/workspace.js'
@@ -79,6 +79,21 @@ export function useWorkspace() {
     await loadWorkspace({ silent: true })
   }
 
+  async function deleteSceneImage(folder, fileName) {
+    await removeSceneImage(folder, fileName)
+    await loadWorkspace({ silent: true })
+  }
+
+  async function deleteVoidedShot(folder, fileName) {
+    await removeVoidedShot(folder, fileName)
+    await loadWorkspace({ silent: true })
+  }
+
+  async function confirmSceneReference(folder, payload) {
+    await persistSceneReference(folder, payload)
+    await loadWorkspace({ silent: true })
+  }
+
   onMounted(() => {
     loadWorkspace()
     if (import.meta.hot) {
@@ -104,5 +119,9 @@ export function useWorkspace() {
     selectSong,
     setRefreshPaused,
     saveSongLyrics,
+    deleteSceneImage,
+    deleteVoidedShot,
+    confirmSceneReference,
+    loadWorkspace,
   }
 }

@@ -12,7 +12,7 @@ const ASSET_GROUPS = [
   { id: 'intermediate', label: '修复超分', directory: 'generated/video/intermediate', kind: 'video' },
   { id: 'raw', label: '分镜视频', directory: 'generated/video/raw', kind: 'video' },
   { id: 'characters', label: '主角图片', directory: 'assets/characters', kind: 'image' },
-  { id: 'scenes', label: '场景辅助图', directory: 'assets/scenes', kind: 'image' },
+  { id: 'scenes', label: '场景基准图', directory: 'assets/scenes', kind: 'image' },
   { id: 'references', label: '其他参考图', directory: 'assets', kind: 'image' },
   { id: 'music', label: '原曲母带', directory: 'music', kind: 'audio' },
 ]
@@ -120,6 +120,10 @@ function mediaUrl(relativePath) {
   return `/studio-media/${toPosix(relativePath)}`
 }
 
+function isVoidedScene(name) {
+  return /(?:作废|作廢|voided|obsolete|废弃|廢棄)/i.test(String(name))
+}
+
 function formatSize(bytes) {
   if (bytes < 1024) return `${bytes} B`
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
@@ -159,6 +163,9 @@ async function describeAsset(studioRoot, filePath, kind) {
     size: info.size,
     sizeLabel: formatSize(info.size),
     updatedAt: info.mtime.toISOString(),
+    voided: kind === 'image' && relativePath.split(path.sep).join('/').includes('/assets/scenes/')
+      ? isVoidedScene(path.basename(filePath))
+      : false,
   }
 }
 
@@ -232,7 +239,9 @@ export function productionSummary(groups) {
   if (count('final') > 0) return `成片 ${count('final')} 条`
   if (count('intermediate') > 0) return `超分中间件 ${count('intermediate')} 条`
   if (count('raw') > 0) return `分镜视频 ${count('raw')} 条`
-  if (count('characters') > 0) return `主角图片 ${count('characters')} 张`
+  if (count('characters') + count('scenes') > 0) {
+    return `视觉基准图 ${count('characters') + count('scenes')} 张`
+  }
   return '尚未生成'
 }
 
