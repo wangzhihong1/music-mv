@@ -2,6 +2,7 @@ export const NAV_ITEMS = [
   { id: 'in-progress', label: '创作中', kind: 'collection' },
   { id: 'completed', label: '已完成', kind: 'collection' },
   { id: 'inspiration', label: '灵感池', kind: 'archive' },
+  { id: 'lyric-bank', label: '词库', kind: 'archive' },
   { id: 'library', label: '公共素材', kind: 'archive' },
 ]
 

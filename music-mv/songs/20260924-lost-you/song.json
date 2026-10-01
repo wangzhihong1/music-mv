@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 2,
+  "slug": "lost-you",
+  "title": "失去了你",
+  "date": "20260924",
+  "status": "歌词 v08，华语慢伤心情歌，男中高音混声，待审阅",
+  "lifecycle": "in-progress",
+  "coreStatement": "这是一首写给分手时装得很稳的人、关于人已经不在之后流星、梦和爱的传说都失效的歌，希望听众感到剩下的都不算数，并记住「失去了你」。",
+  "metadata": {
+    "genre": "华语慢节拍伤心情歌",
+    "mood": "人已经不在，剩下的都不算数",
+    "tempo": "58 BPM",
+    "key": "B Minor",
+    "vocal": "男中高音。高音用混声，不克制、不嘶吼。第一段气声稍弱，第二段真声更强。多用尾音、窄颤、滑音和少量转音",
+    "duration": ""
+  },
+  "prompts": [
+    {
+      "key": "mureka",
+      "label": "Mureka 专属风格提示词（563 字符）",
+      "zh": "Mandarin sad pop ballad，58 BPM，4/4拍，B小调，慢节拍华语伤心情歌。编曲要慢，不要快鼓，不要流行摇滚，不要布鲁斯，不要加速。钢琴、贝斯、很轻的鼓、弦乐，第一段几乎只有钢琴，第二段鼓和贝斯才轻轻进来，仍然是慢拍。男中高音演唱，干净、温暖，中高音区舒服，全程同一个人。不要男低音，不要女声，不要沙哑破音。整首歌必须有起伏。第一段稍弱：主歌气声，贴着话筒唱“我装得很稳”。第二段情绪起来就强：主歌换成真声，更实，唱断联和“人已经不在了”。高音不要克制，也不要嘶吼，一律用混声唱。副歌“失去了你”“剩下的都不算数”“流星划过也是空的”走到高音时，用集中混声顶上去，声音亮、稳、有共鸣。第一遍副歌混声已经打开；第二遍同一条旋律，混声更满、更强，薄和声只垫钩子。最终副歌最满，高音继续混声，不退回弱唱，不升调。演唱多用技巧：句尾要有尾音，长音后半加窄颤；“你”“空”“灭”“不算”可轻滑或一次转音。技巧要好听，不要密集跑音，不要念白。4小节慢钢琴前奏，露出副歌轮廓，不唱标题。桥段收到钢琴，真声唱“人一消失，那些都灭了”，音量收回，下一句再打开。最后“你不在，它们就不算”用混声把“不算”送完再收。避免克制高音、全程气声、假声代替高音、嘶吼、快鼓、密集踩镲、吉他失真、升调、密集转音、EDM、说唱和四连问。",
+      "en": "Mandarin sad pop ballad, 58 BPM, 4/4, B minor. Slow heartbreak love song. Keep the arrangement slow: no fast drums, no pop rock, no blues, do not speed up. Piano, bass, very light drums, strings. First half almost piano only; drums and bass enter gently in the second half, still slow. Male mid-high voice, clean and warm, comfortable in the upper-middle range, the same person throughout. Not bass, not female, not raspy or broken. The whole song must rise and fall. First half softer: verse 1 breathy and close on 我装得很稳. Second half stronger: verse 2 in chest voice, more solid, on the lost contact and 人已经不在了. Do not hold back the high notes, and do not scream. All high notes are mixed voice. On 失去了你, 剩下的都不算数, and 流星划过也是空的, push the peaks with a focused mix: bright, steady, resonant. Chorus 1 already opens the mix. Chorus 2 is the same melody, fuller and stronger, thin harmony only under the hook. The final chorus is the fullest, high notes stay in mix, no drop back to a weak falsetto, no key change. Use vocal technique often: trailing endings, narrow vibrato on the second half of long notes, a light slide or one turn on 你, 空, 灭, and 不算. Technique should sound musical, not a dense run, not spoken. 4-bar slow piano intro outlines the chorus, no sung title. Bridge drops to piano, chest voice on 人一消失，那些都灭了, quieter, then opens again. On 你不在，它们就不算, finish 不算 in mix, then release. Avoid restrained high notes, all-breathy singing, falsetto instead of mix, shouting, fast drums, busy hi-hats, distorted guitar, modulation, dense runs, EDM, rap, and a chain of questions."
+    }
+  ],
+  "characterLooks": [
+    {
+      "id": "femaleLead",
+      "label": "女主三视图共享提示词",
+      "zh": "",
+      "en": "",
+      "negativeZh": "",
+      "negativeEn": ""
+    },
+    {
+      "id": "maleLead",
+      "label": "男主三视图共享提示词",
+      "zh": "",
+      "en": "",
+      "negativeZh": "",
+      "negativeEn": ""
+    }
+  ],
+  "mvWorkflow": {
+    "storyStatus": "not_started",
+    "durationConfirmed": false,
+    "durationConfirmedAt": "",
+    "scriptStatus": "not_started",
+    "generationMethod": "characterReferenceVideo"
+  },
+  "mvStory": {
+    "summary": "",
+    "opening": "",
+    "development": "",
+    "turningPoint": "",
+    "climax": "",
+    "ending": ""
+  },
+  "production": {
+    "characterReferences": "not_started",
+    "shotVideos": "not_started",
+    "post": "not_started",
+    "delivery": "not_started"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "label": "Intro",
+      "time": "",
+      "lyrics": []
+    },
+    {
+      "id": "verse1",
+      "label": "Verse 1",
+      "time": "",
+      "lyrics": [
+        "分开那天",
+        "像是若无其事的样子",
+        "淡定着",
+        "这件事会过去",
+        "以为",
+        "爱还是完整的",
+        "就在原地等"
+      ]
+    },
+    {
+      "id": "pre1",
+      "label": "Pre-Chorus",
+      "time": "",
+      "lyrics": [
+        "等着等着",
+        "变成冷战",
+        "话断在一半",
+        "谁也不肯先说"
+      ]
+    },
+    {
+      "id": "chorus1",
+      "label": "Chorus",
+      "time": "",
+      "lyrics": [
+        "失去了你",
+        "剩下的都不算数",
+        "失去了你",
+        "流星划过也是空的",
+        "梦还在做",
+        "传说还在讲",
+        "讲到你",
+        "就灭了"
+      ]
+    },
+    {
+      "id": "verse2",
+      "label": "Verse 2",
+      "time": "",
+      "lyrics": [
+        "简讯不再回",
+        "名字还亮着",
+        "我拨出去",
+        "那头已经空了",
+        "忽然连吵",
+        "也吵不成",
+        "街上那么多声音",
+        "你的却没有"
+      ]
+    },
+    {
+      "id": "pre2",
+      "label": "Pre-Chorus",
+      "time": "",
+      "lyrics": [
+        "我才知道",
+        "装稳的那几天",
+        "爱没有留在原地",
+        "人已经不在了"
+      ]
+    },
+    {
+      "id": "chorus2",
+      "label": "Chorus",
+      "time": "",
+      "lyrics": [
+        "失去了你",
+        "流星不算愿望",
+        "失去了你",
+        "梦醒了什么也不留",
+        "爱的传说",
+        "还在被人相信",
+        "我这里",
+        "已经不算数"
+      ]
+    },
+    {
+      "id": "bridge",
+      "label": "Bridge",
+      "time": "",
+      "lyrics": [
+        "分手那一下",
+        "我以为撑得住",
+        "撑住的不算",
+        "人一消失",
+        "那些都灭了"
+      ]
+    },
+    {
+      "id": "finalChorus",
+      "label": "Final Chorus",
+      "time": "",
+      "lyrics": [
+        "失去了你",
+        "剩下的都不算数",
+        "失去了你",
+        "流星、梦、传说",
+        "都要你在",
+        "才算一件事",
+        "你不在",
+        "它们就不算"
+      ]
+    },
+    {
+      "id": "outro",
+      "label": "Outro",
+      "time": "",
+      "lyrics": [
+        "失去了你"
+      ]
+    }
+  ],
+  "shots": [],
+  "releaseCopy": {
+    "youtube": {
+      "title": "",
+      "description": ""
+    },
+    "douyin": {
+      "title": "",
+      "description": ""
+    }
+  }
+}

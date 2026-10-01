@@ -26,12 +26,7 @@ const song = {
     duration: '',
   },
   prompts: [
-    { key: 'style', label: '风格', zh: '', en: '' },
-    { key: 'mood', label: '情绪', zh: '', en: '' },
-    { key: 'instruments', label: '乐器', zh: '', en: '' },
-    { key: 'vocal', label: '演唱方式', zh: '', en: '' },
-    { key: 'structure', label: '结构与动态', zh: '', en: '' },
-    { key: 'avoid', label: '避免元素', zh: '', en: '' },
+    { key: 'mureka', label: 'Mureka 专属风格提示词', zh: '', en: '' },
   ],
   characterLooks: [
     { id: 'femaleLead', label: '女主三视图共享提示词', zh: '', en: '', negativeZh: '', negativeEn: '' },

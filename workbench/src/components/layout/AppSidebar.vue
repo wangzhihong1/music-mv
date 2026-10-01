@@ -1,5 +1,6 @@
 <script setup>
 import {
+  BookOpen,
   Check,
   FileMusic,
   Library,
@@ -43,6 +44,7 @@ const iconMap = {
   'in-progress': ListMusic,
   completed: Check,
   inspiration: Sparkles,
+  'lyric-bank': BookOpen,
   library: Library,
 }
 

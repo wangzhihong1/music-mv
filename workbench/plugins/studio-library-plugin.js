@@ -109,15 +109,32 @@ async function scanSongs(studioRoot) {
   })
 }
 
+async function readLyricReferences(studioRoot) {
+  const dataPath = path.join(studioRoot, 'library', 'lyric-references.json')
+
+  try {
+    const source = await readFile(dataPath, 'utf8')
+    const entries = JSON.parse(source)
+    if (!Array.isArray(entries)) return []
+    return entries
+      .filter((entry) => entry && typeof entry.title === 'string')
+      .sort((left, right) => left.title.localeCompare(right.title, 'zh'))
+  } catch (error) {
+    if (error.code === 'ENOENT') return []
+    throw error
+  }
+}
+
 async function buildWorkspace(studioRoot) {
-  const [rawSongs, inspiration, library] = await Promise.all([
+  const [rawSongs, inspiration, library, lyricReferences] = await Promise.all([
     scanSongs(studioRoot),
     listMarkdownFiles(studioRoot, 'inspiration'),
     listMarkdownFiles(studioRoot, 'library'),
+    readLyricReferences(studioRoot),
   ])
   const songs = await attachProductions(studioRoot, rawSongs)
 
-  return { songs, inspiration, library }
+  return { songs, inspiration, library, lyricReferences }
 }
 
 function sendJson(response, statusCode, payload) {

@@ -5,6 +5,7 @@ import { formatDuration, shotDuration } from '@/lib/time.js'
 import AppSidebar from '@/components/layout/AppSidebar.vue'
 import SongHeader from '@/components/layout/SongHeader.vue'
 import ArchivePanel from '@/components/workbench/ArchivePanel.vue'
+import LyricBankPanel from '@/components/workbench/LyricBankPanel.vue'
 import AlignPanel from '@/components/workbench/AlignPanel.vue'
 import BriefPanel from '@/components/workbench/BriefPanel.vue'
 import LyricsPanel from '@/components/workbench/LyricsPanel.vue'
@@ -26,6 +27,7 @@ import { joinCharacterLooks, joinLyrics, joinPrompts, metadataFacts, scriptSumma
 const {
   songs,
   archives,
+  lyricReferences,
   currentSong,
   collectionSongs,
   activeNav,
@@ -63,7 +65,7 @@ const activeSection = ref('')
 const activeShotId = ref('')
 const sidebarOpen = ref(false)
 const stageScroller = ref(null)
-const showingArchive = computed(() => ['inspiration', 'library'].includes(activeNav.value))
+const showingArchive = computed(() => ['inspiration', 'library', 'lyric-bank'].includes(activeNav.value))
 const headerViewMode = computed(() => (
   ['overview', 'align', 'production'].includes(viewMode.value) ? viewMode.value : ''
 ))
@@ -206,7 +208,12 @@ function copyRelease(target) {
 
     <main class="main-content">
       <div v-if="showingArchive" ref="stageScroller" class="main-stage">
+        <LyricBankPanel
+          v-if="activeNav === 'lyric-bank'"
+          :entries="lyricReferences"
+        />
         <ArchivePanel
+          v-else
           :nav-id="activeNav"
           :files="archives[activeNav]"
         />
