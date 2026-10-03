@@ -22,8 +22,9 @@
 
 ## 图片编号规则
 
-- 单人镜：人物正面 / 侧面 / 背面依次占用 `<Picture 1/2/3>`，场景图从 `<Picture 4>` 顺延。
-- 双人镜：第一人物占用 `<Picture 1/2/3>`，第二人物占用 `<Picture 4/5/6>`，场景图从 `<Picture 7>` 顺延。
+- 图片编号以每镜实际上传文件顺序为准；一张人物三视图合图只占一个编号，不是三个。
+- 使用合图的单人镜：人物合图为 `<Picture 1>`，场景从 `<Picture 2>` 顺延；双人镜人物合图为 `<Picture 1/2>`，场景从 `<Picture 3>` 顺延。
+- 只有实际拆分上传正面、侧面、背面三个文件时，单个人物才占三个编号。优先核对每镜 `referenceImages` 与生成记录，不能把旧输出视为使用后来修正的编号生成。
 - 空景镜：场景图从 `<Picture 1>` 按 `sceneReferenceIds` 顺序连续编号。
 
 ## 01 · 00:00–00:08 · 山谷先被认出来
@@ -112,7 +113,7 @@ retention_analysis:
 
 detailed_description:
 The target video is photoreal live-action in real time, a working late-summer Chinese farm village seen from a slightly high camera. Natural afternoon light, muted greens, gray-yellow soil, corn and low bean trellises, a rutted dirt track. Clouds hold nearly still. Materials look used. No golden nostalgia grade and no tourism scenery.
-[Shot 1] A lower close view of the same dirt track holds static. Wheel ruts, the edge of a corn plot, low bean trellises, and a corner of plain brick with a simple low roof. No person.
+[Shot 1] A lower close view of the same dirt track makes an imperceptibly slow, continuous micro-push forward with no acceleration or sudden speed change. Keep the wheel ruts, the edge of a corn plot, low bean trellises, and a corner of plain brick with a simple low roof stable and readable. No person.
 
 overall_soundscape:
 silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
@@ -173,7 +174,7 @@ retention_analysis:
 
 detailed_description:
 The target video is photoreal live-action in real time, a working late-summer Chinese farm village seen from a slightly high camera. Natural afternoon light, muted greens, gray-yellow soil, corn and low bean trellises, plain brick walls and a low simple roof, a rutted dirt track. Clouds hold nearly still. Materials look used. No golden nostalgia grade and no tourism scenery.
-[Shot 1] A slightly high view makes an imperceptibly slow, continuous micro-push forward with no acceleration or sudden speed change. Keep the wheel ruts, the edge of a corn plot, low bean trellises, and a corner of plain brick with a simple low roof stable and readable. No person.
+[Shot 1] A slightly high view moves forward with small amplitude at slow speed along the same rutted dirt road, and the road stays near the center of the frame the whole time. Corn and low bean trellises stay on both sides. Ordinary self-built rural houses with a simple low roof stay beside the road. The camera does not descend onto a roof. No person.
 
 overall_soundscape:
 silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
@@ -1130,25 +1131,25 @@ N/A
 - 场景引用：field
 - 出镜人物：maleLead
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_52_h3_v01.mp4`
+- 输出：`generated/video/raw/shot_52_h3_v02.mp4`
 
 ### English H3 prompt
 
 ```text
 subject_definitions:
-<Subject 1> is the adult Chinese man whose appearance comes from <Picture 1> (front), <Picture 2> (side), and <Picture 3> (back). Keep the same clean-shaven youthful face, voluminous layered medium-short black hair, slim build, ivory-white short-sleeve collared shirt worn open over a plain white crew-neck T-shirt, loose light-blue full-length jeans, white-and-light-gray low-top sneakers, silver rectangular pendant, black watch on the left wrist, and thin bracelet on the right wrist.
-<Subject 2> is the environment anchored by <Picture 4> from assets/scenes/field_west_end_v11_candidate.png. The confirmed west-end bean-field reference, loaded as <Picture 4>. Preserve the two parallel bean rows, green bamboo stakes, dark open soil furrow, tree line and distant low ridge. The basin, round bamboo tray and the later sparse-versus-dense harvest state are shot-specific props and must be added only where the shot action calls for them.
+<Subject 1> is the adult Chinese man whose appearance comes from the single combined front/side/back character sheet in <Picture 1>. Keep the same clean-shaven youthful face, voluminous layered medium-short black hair, slim build, ivory-white short-sleeve collared shirt worn open over a plain white crew-neck T-shirt, loose light-blue full-length jeans, white-and-light-gray low-top sneakers, silver rectangular pendant, black watch on the left wrist, and thin bracelet on the right wrist.
+<Subject 2> is the environment anchored by <Picture 2> from assets/scenes/field_west_end_v11_candidate.png. The confirmed west-end bean-field reference, loaded as <Picture 2>. Preserve the two parallel bean rows, green bamboo stakes, dark open soil furrow, tree line and distant low ridge. The basin, round bamboo tray and the later sparse-versus-dense harvest state are shot-specific props and must be added only where the shot action calls for them.
 
 summary:
 [reference generation] one continuous 6-second photoreal live-action 16:9 MV shot of <Subject 1> and <Subject 2> at the established location, following the single action described below.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the three character references.
-<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 4>; add only the shot-specific action props described below.
+<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the combined character sheet.
+<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 2>; add only the shot-specific action props described below.
 
 detailed_description:
 The target video is photoreal live-action in real time, a restrained late-summer Chinese-village MV with natural afternoon light, muted greens, gray-yellow packed soil, plain brick and simple low roof. Materials look used. No golden nostalgia grade and no tourism scenery.
-[Shot 1] A slightly high close-up holds static on the hands. <Subject 1> releases two long green beans into the bamboo basket on the soil. He stays bent over the basket. Gaze on the basket, lips closed. The dense right-row trellis stays around the basket. The frame is filled by the hands, the long green beans, and the basket. Eyelids remain open, irises and pupils stay readable, with at most one slow natural blink. Stable faces and hands, coherent clothing, no flickering eyes, no facial warping, no extra limbs, no on-screen text, no logos.
+[Shot 1] Tight slightly overhead close-up filling the frame with a shallow rectangular woven bamboo basket mouth, green beans and two hands. The basket mouth occupies most of the image; the camera holds this tight crop unchanged for all six seconds. The surrounding field is only a narrow strip of blurred green leaves and soil. <Subject 1>'s left hand, with the black wristwatch visible, rests on the near rim and stays in exactly that supported position for the entire take. Only the two forearms and hands appear above the basket; the body remains bent outside the crop. The basket is low-sided, about eight centimeters deep, with tall arched handles extending above the cropped top edge. Its base stays flat on the soil. The right hand with the thin bracelet holds exactly two long slender green beans three centimeters over the pile. For the first two seconds both hands hold their positions. Then the right fingers gently open once and release the two beans, which settle onto the pile in the basket. The right hand remains hovering only a few centimeters above the beans afterward; the left hand continues resting on the rim through the last frame. The basket and both forearms keep the same positions and scale. Natural small finger motion and a slight rustle of nearby leaves make this a real-time moving shot. Stable weave, coherent hands, fixed focus on the beans and fingertips.
 
 overall_soundscape:
 silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
@@ -1161,19 +1162,19 @@ N/A
 
 ```text
 主体定义:
-<主体 1> 是成年中国男性小王，外观来自<图片 1>（正面）、<图片 2>（侧面）、<图片 3>（背面）。保持清秀无胡须的脸、蓬松有层次的中短黑发、瘦高身材、敞开的乳白色短袖翻领衬衫、纯白圆领T恤、浅蓝色宽松长牛仔裤、白灰低帮运动鞋、银色矩形吊坠、左腕黑表和右腕细手链。
-<主体 2> 是由<图片 4>（assets/scenes/field_west_end_v11_candidate.png）锁定的环境。已确认的“菜地西头与两行豆架”场景基准图，作为<图片 4>载入。保持两行平行豆架、绿色竹竿、深色裸土沟、树线和远处低山脊。搪瓷盆、圆竹匾以及后续“稀疏与浓密”的收获状态属于镜头道具，只在动作明确要求时加入。
+<主体 1> 是成年中国男性小王，外观来自<图片 1>（正面、侧面、背面合在同一张人物三视图中）。保持清秀无胡须的脸、蓬松有层次的中短黑发、瘦高身材、敞开的乳白色短袖翻领衬衫、纯白圆领T恤、浅蓝色宽松长牛仔裤、白灰低帮运动鞋、银色矩形吊坠、左腕黑表和右腕细手链。
+<主体 2> 是由<图片 2>（assets/scenes/field_west_end_v11_candidate.png）锁定的环境。已确认的“菜地西头与两行豆架”场景基准图，作为<图片 2>载入。保持两行平行豆架、绿色竹竿、深色裸土沟、树线和远处低山脊。搪瓷盆、圆竹匾以及后续“稀疏与浓密”的收获状态属于镜头道具，只在动作明确要求时加入。
 
 摘要:
 一条连续 6 秒、真人写实、16:9 的参考图生成 MV 镜头，<主体 1>和<主体 2>位于已锁定场景中，执行下述单一动作。
 
 保留分析:
-<主体 1>（出现在[镜头 1]）：完全保留——保持三张人物参考图中的脸、头发、身体、服装和身份。
-<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 4>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
+<主体 1>（出现在[镜头 1]）：完全保留——保持单张人物三视图合图中的脸、头发、身体、服装和身份。
+<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 2>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
 
 详细描述:
 目标视频为实时真人写实影像。自然下午光，低饱和绿色和灰黄土，不用金黄怀旧调色。
-[镜头 1] 略俯近景固定在手上。<主体 1>松开手，两根长豆角掉进土上的竹篮。他一直弯在篮子上方。目光在篮子上，闭唇。右侧浓密豆架包着篮子。画面里是手、长豆角和竹篮。 眼皮若在画内则保持睁开，虹膜与瞳孔可读，最多一次慢眨眼。不得脸部变形、多余肢体、画面文字或商标。
+[镜头 1] 紧取景略俯近景，浅长方竹篮口、青豆和双手填满画面，篮口占大部分画幅；摄影机六秒始终保持这个紧裁切。周围豆地只剩窄条虚化绿叶和泥土。<Subject 1>戴黑表的左手搭在近侧篮沿，整镜一直留在同一支撑位置。篮上方只露双前臂和手，身体在取景外保持弯着。篮壁约八厘米高，长拱提手伸到画面上沿外，篮底贴土不动。戴细手链的右手在豆堆上方三厘米捏着恰好两根细长青豆角。前两秒双手持住，随后右手指只张开一次，两根长豆落入篮中并搭在豆堆上落稳。右手随后仅悬停在豆上方几厘米，左手直到末帧仍搭着篮沿。篮和双前臂位置、大小保持不变。细微真实指动、边缘叶子轻动体现实时视频，竹纹和双手稳定，对焦豆与指尖。
 
 整体声音环境:
 静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
@@ -2270,31 +2271,29 @@ N/A
 
 ## 34 · 02:47–02:49 · 油面
 
-- 场景引用：house、kitchen
+- 场景引用：kitchen
 - 出镜人物：无
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_34_h3_v01.mp4`
+- 输出：`generated/video/raw/shot_34_h3_v03.mp4`
 
 ### English H3 prompt
 
 ```text
 subject_definitions:
-<Subject 1> is the environment anchored by <Picture 1> from assets/scenes/house_threshold_v29_candidate.png. The confirmed ordinary self-built house entrance reference, loaded as <Picture 1>. Preserve the faded beige plaster facade, the large closed blue-green double door on the left, the partly open green metal entrance door near center, its rough gray trim, the shallow concrete step and the narrow rubble strip along the wall. Keep the architecture modest and ordinary, without ornamental enlargement.
-<Subject 2> is the environment anchored by <Picture 2> from assets/scenes/main_room_stove_v01_candidate.png. The confirmed ordinary kitchen interior reference, loaded as <Picture 2>. Preserve the compact ordinary kitchen with cream walls, a red lower wall stripe, the pale L-shaped counter, the two-burner gas cooktop at the left foreground, metal pots and bowls, the wooden shelves and hanging utensils, and the wood-framed window looking onto green fields. Add a bowl, wok, bean bag or hand only when the shot action calls for it, while keeping this room layout fixed.
+<Subject 1> is the ordinary kitchen anchored by <Picture 1>: cream walls, red lower stripe, pale counter and metal gas cooktop. The cooking vessel is a small black carbon-steel wok with a long cylindrical brown wooden handle pointing toward screen right.
 
 summary:
-[reference generation] one continuous 2-second photoreal live-action 16:9 MV shot of <Subject 1> and <Subject 2> at the established location, following the single action described below.
+[reference generation] one continuous 2-second live-action close insert of a thin oil coating warming inside <Subject 1>'s stationary wok.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 1>; add only the shot-specific action props described below.
-<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 2>; add only the shot-specific action props described below.
+<Subject 1> (appears in [Shot 1]): fully_preserved - retain the kitchen counter and natural window illumination, framing only the cooking area.
 
 detailed_description:
-The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] A high close shot pushes in with small amplitude at slow speed on the hot oil in the same wok. The surface shivers. No hand enters yet. No beans yet.
+Photoreal live-action, normal speed, soft natural window light and realistic black seasoned steel.
+[Shot 1] A slightly elevated close view looks into the black wok sitting level on the gas burner. Its brown wooden stick handle extends to screen right. The camera pushes in with very small amplitude at slow speed. A tablespoon-sized puddle of pale clear oil thinly coats the dark base, letting the iron texture show through. Tiny slow surface ripples catch a small rectangular window reflection and settle; a steady low blue flame burns beneath the base. The pan and stove stay completely still. Only the cookware and its oil surface occupy the frame throughout this uninterrupted insert. The interior stays bare except for the thin oil film.
 
 overall_soundscape:
-silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
+silence
 
 non_diegetic_music:
 N/A
@@ -2304,22 +2303,20 @@ N/A
 
 ```text
 主体定义:
-<主体 1> 是由<图片 1>（assets/scenes/house_threshold_v29_candidate.png）锁定的环境。已确认的“普通自建房入口”场景基准图，作为<图片 1>载入。保持褪色米灰抹灰墙面、左侧关闭的蓝绿色双扇门、中央偏右半开的绿色金属入口门、粗糙灰色门框、浅水泥台阶和墙脚窄碎石带。建筑保持朴素普通，不做装饰性扩建。
-<主体 2> 是由<图片 2>（assets/scenes/main_room_stove_v01_candidate.png）锁定的环境。已确认的“普通厨房内景”场景基准图，作为<图片 2>载入。保持奶油色墙面、红色下墙裙、浅色L形操作台、左前景双眼燃气灶、金属锅盆、木层架和悬挂厨具，以及望向绿色田野的木框窗。只有镜头动作需要时才加入碗、锅、种袋或手，房间布局保持不变。
+<主体 1> 是<图片 1>的普通厨房：奶油墙、红墙裙、浅台面和金属燃气灶。使用带棕色圆柱长木柄的小黑铁锅，锅柄向画右。
 
 摘要:
-一条连续 2 秒、真人写实、16:9 的参考图生成 MV 镜头，<主体 1>和<主体 2>位于已锁定场景中，执行下述单一动作。
+一条连续2秒近景，固定黑锅内一层薄油受热。
 
 保留分析:
-<主体 1>（出现在[镜头 1]）：完全保留——保持<图片 1>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
-<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 2>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
+<主体 1>（出现在[镜头 1]）：完全保留——保持厨房台面与自然窗光，只拍灶台区域。
 
 详细描述:
-目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 俯近景对着同一口锅里的热油小幅度慢速推近。油面轻颤。还没有手，也还没有豆子。 保持场景几何和材质纹理稳定，不出现活人、画面文字或商标。
+真人写实、正常速度、柔和自然窗光，黑色养锅铁面纹理真实。
+[镜头 1] 稍俯近景看向平放在灶上的黑锅，棕色长木柄朝右。镜头极小幅慢推。锅底约一汤匙浅色清油薄薄铺开，能透过油看见铁面。细小缓慢波纹反射一块矩形窗光并逐渐平复，锅下稳定小蓝火。锅和灶固定不动，一镜到底，只见锅和油面，锅内除薄油膜外为空。
 
 整体声音环境:
-静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
+静音。
 
 非叙事音乐:
 N/A
@@ -2327,7 +2324,7 @@ N/A
 
 ## 35 · 02:49–02:56 · 饱豆下锅
 
-- 场景引用：house、kitchen
+- 场景引用：kitchen
 - 出镜人物：femaleLead
 - 生成类型：characterVideo
 - 输出：`generated/video/raw/shot_35_h3_v01.mp4`
@@ -2336,24 +2333,22 @@ N/A
 
 ```text
 subject_definitions:
-<Subject 1> is the adult rural Chinese woman whose appearance comes from <Picture 1> (front), <Picture 2> (side), and <Picture 3> (back). Keep the same mature face, blue-gray floral headscarf, black hair in a low ponytail, faded light-blue floral short-sleeve shirt, dark-blue cropped trousers, brown flat shoes, and sturdy working build.
-<Subject 2> is the environment anchored by <Picture 4> from assets/scenes/house_threshold_v29_candidate.png. The confirmed ordinary self-built house entrance reference, loaded as <Picture 4>. Preserve the faded beige plaster facade, the large closed blue-green double door on the left, the partly open green metal entrance door near center, its rough gray trim, the shallow concrete step and the narrow rubble strip along the wall. Keep the architecture modest and ordinary, without ornamental enlargement.
-<Subject 3> is the environment anchored by <Picture 5> from assets/scenes/main_room_stove_v01_candidate.png. The confirmed ordinary kitchen interior reference, loaded as <Picture 5>. Preserve the compact ordinary kitchen with cream walls, a red lower wall stripe, the pale L-shaped counter, the two-burner gas cooktop at the left foreground, metal pots and bowls, the wooden shelves and hanging utensils, and the wood-framed window looking onto green fields. Add a bowl, wok, bean bag or hand only when the shot action calls for it, while keeping this room layout fixed.
+<Subject 1> is the adult Chinese woman in the three-view sheet <Picture 1>. Retain her mature face, blue-gray headscarf, low ponytail, pale-blue floral shirt and dark-blue cropped trousers.
+<Subject 2> is the ordinary kitchen in <Picture 2>. Preserve the cream wall, red lower stripe, pale L-shaped counter, gas stove at left and wood-framed window. A black iron wok with a long brown wooden handle pointing right rests on the burner.
 
 summary:
-[reference generation] one continuous 7-second photoreal live-action 16:9 MV shot of <Subject 1> and <Subject 2> and <Subject 3> at the established location, following the single action described below.
+[reference generation] one continuous 7-second live-action medium close shot of <Subject 1> adding long green beans to the lightly oiled wok in <Subject 2>, then turning them once.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the three character references.
-<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 4>; add only the shot-specific action props described below.
-<Subject 3> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 5>; add only the shot-specific action props described below.
+<Subject 1> (appears in [Shot 1]): fully_preserved - preserve identity, reference outfit and two anatomically coherent arms.
+<Subject 2> (appears in [Shot 1]): fully_preserved - preserve room geometry, cooker, window light and pan position.
 
 detailed_description:
-The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] A slightly high medium close-up holds static. <Subject 1> tips long full beans into the oil and turns them once. No short seed beans enter. Her face stays at the top of frame, gaze in the pan, lips closed. Eyelids remain open, irises and pupils stay readable, with at most one slow natural blink. Stable faces and hands, coherent clothing, no flickering eyes, no facial warping, no extra limbs, no on-screen text, no logos.
+Photoreal live-action, natural real-time motion under steady soft afternoon window light. Everyday cooking in a modest household.
+[Shot 1] Slightly high medium close composition holds static. The woman stands at screen right; her face occupies the upper right, and the wok at lower left is fully readable. The wok begins with only a thin oil coating. Her left hand supports one brown metal bowl of long intact green beans above the rim. Her right hand holds one metal spatula. In the first three seconds she gently tips the bowl, allowing its beans to slide continuously into the wok under gravity. The bowl visibly empties while the pile in the wok grows. She keeps the emptied bowl still beside the pan in her left hand, while her right hand draws the spatula once under the beans and folds them across the oil. By the final second both hands settle, all beans resting in the pan. The wok stays on the burner, its wooden handle unchanged. Her gaze stays on the pan, brows level, mouth softly closed; one gentle breath and at most one natural blink. Continuous hands and utensils with distinct grips, stable anatomy and consistent bean quantity. One uninterrupted shot.
 
 overall_soundscape:
-silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
+silence
 
 non_diegetic_music:
 N/A
@@ -2363,24 +2358,22 @@ N/A
 
 ```text
 主体定义:
-<主体 1> 是成年中国农村女性嫂子，外观来自<图片 1>（正面）、<图片 2>（侧面）、<图片 3>（背面）。保持成熟面孔、蓝灰碎花头巾、低马尾、浅蓝碎花短袖衬衫、深蓝七分裤、棕色平底鞋和结实的劳作身材。
-<主体 2> 是由<图片 4>（assets/scenes/house_threshold_v29_candidate.png）锁定的环境。已确认的“普通自建房入口”场景基准图，作为<图片 4>载入。保持褪色米灰抹灰墙面、左侧关闭的蓝绿色双扇门、中央偏右半开的绿色金属入口门、粗糙灰色门框、浅水泥台阶和墙脚窄碎石带。建筑保持朴素普通，不做装饰性扩建。
-<主体 3> 是由<图片 5>（assets/scenes/main_room_stove_v01_candidate.png）锁定的环境。已确认的“普通厨房内景”场景基准图，作为<图片 5>载入。保持奶油色墙面、红色下墙裙、浅色L形操作台、左前景双眼燃气灶、金属锅盆、木层架和悬挂厨具，以及望向绿色田野的木框窗。只有镜头动作需要时才加入碗、锅、种袋或手，房间布局保持不变。
+<主体 1> 是<图片 1>三视图中的成年嫂子，保持成熟脸、蓝灰头巾、低马尾、浅蓝碎花衬衫、深蓝七分裤。
+<主体 2> 是<图片 2>的普通厨房，奶油墙、红墙裙、浅色L台面、左侧燃气灶和木框窗保持一致。黑铁锅落在灶上，棕色长木柄向右。
 
 摘要:
-一条连续 7 秒、真人写实、16:9 的参考图生成 MV 镜头，<主体 1>和<主体 2>和<主体 3>位于已锁定场景中，执行下述单一动作。
+连续7秒写实中近景，嫂子把长豆倒入薄油锅，再铲翻一次。
 
 保留分析:
-<主体 1>（出现在[镜头 1]）：完全保留——保持三张人物参考图中的脸、头发、身体、服装和身份。
-<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 4>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
-<主体 3>（出现在[镜头 1]）：完全保留——保持<图片 5>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
+<主体 1>（出现在[镜头 1]）：完全保留——身份、服装及正常双臂。
+<主体 2>（出现在[镜头 1]）：完全保留——房间结构、灶台、窗光与锅位置。
 
 详细描述:
-目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 略俯中近景固定。<主体 1>把长饱豆倒进油里，用铲翻一次。没有短种豆进锅。她的脸在画面上方，目光在锅里，闭唇。 眼皮若在画内则保持睁开，虹膜与瞳孔可读，最多一次慢眨眼。不得脸部变形、多余肢体、画面文字或商标。
+真人写实、正常速度、稳定柔和下午窗光，普通家庭做饭。
+[镜头 1] 略俯中近景固定。嫂子在画右，脸在右上，左下锅内清晰。开场锅里只有薄油层。左手托一只装满完整长绿豆的棕色金属碗，右手拿一把金属锅铲。前三秒缓慢倾碗，豆子顺重力连续滑入锅中，碗内减少、锅内增加。左手随后把倒空的碗持稳在锅边，右手锅铲从豆下铲起折翻一次。最后一秒双手停稳，豆子全部落锅。锅始终落灶，木柄不变。目光保持看锅，眉平、轻闭唇，一次轻呼吸，最多一次自然眨眼。手和器具的握持关系连贯，肢体和豆量稳定，一镜到底。
 
 整体声音环境:
-静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
+静音。
 
 非叙事音乐:
 N/A
@@ -2388,7 +2381,7 @@ N/A
 
 ## 36 · 02:56–02:57.5 · 锅里的长豆
 
-- 场景引用：house、kitchen
+- 场景引用：kitchen
 - 出镜人物：无
 - 生成类型：characterVideo
 - 输出：`generated/video/raw/shot_36_h3_v01.mp4`
@@ -2397,22 +2390,20 @@ N/A
 
 ```text
 subject_definitions:
-<Subject 1> is the environment anchored by <Picture 1> from assets/scenes/house_threshold_v29_candidate.png. The confirmed ordinary self-built house entrance reference, loaded as <Picture 1>. Preserve the faded beige plaster facade, the large closed blue-green double door on the left, the partly open green metal entrance door near center, its rough gray trim, the shallow concrete step and the narrow rubble strip along the wall. Keep the architecture modest and ordinary, without ornamental enlargement.
-<Subject 2> is the environment anchored by <Picture 2> from assets/scenes/main_room_stove_v01_candidate.png. The confirmed ordinary kitchen interior reference, loaded as <Picture 2>. Preserve the compact ordinary kitchen with cream walls, a red lower wall stripe, the pale L-shaped counter, the two-burner gas cooktop at the left foreground, metal pots and bowls, the wooden shelves and hanging utensils, and the wood-framed window looking onto green fields. Add a bowl, wok, bean bag or hand only when the shot action calls for it, while keeping this room layout fixed.
+<Subject 1> is the fixed black iron wok and gas burner in the ordinary kitchen shown in <Picture 1>. Preserve the brown wooden handle pointing to screen right, the silver stove, red wall stripe and pale counter.
 
 summary:
-[reference generation] one continuous 1.5-second photoreal live-action 16:9 MV shot of <Subject 1> and <Subject 2> at the established location, following the single action described below.
+[reference generation] one continuous 1.5-second photoreal close insert of long green beans settling in the same wok after one turn.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 1>; add only the shot-specific action props described below.
-<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 2>; add only the shot-specific action props described below.
+<Subject 1> (appears in [Shot 1]): fully_preserved - retain the same wok, wooden handle, burner, counter and kitchen light.
 
 detailed_description:
-The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] A high tight shot holds static on long green beans moving in hot oil inside a worn wok.
+Photoreal live-action at real-time speed, close food detail, stable warm daylight.
+[Shot 1] A tight slightly elevated close-up holds static on only the long intact green beans inside the same black wok. The beans make one small settling movement in the oil, then become still; a little heat shimmer rises. The brown wooden handle remains visible at the right edge and the blue flame flickers below the rim. No person, hand, arm, face, bowl, spatula, seed bean, short bean, new pan, new location, text or logo. The geometry, oil sheen and bean quantity remain stable for the entire uninterrupted shot.
 
 overall_soundscape:
-silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
+silence
 
 non_diegetic_music:
 N/A
@@ -2422,22 +2413,20 @@ N/A
 
 ```text
 主体定义:
-<主体 1> 是由<图片 1>（assets/scenes/house_threshold_v29_candidate.png）锁定的环境。已确认的“普通自建房入口”场景基准图，作为<图片 1>载入。保持褪色米灰抹灰墙面、左侧关闭的蓝绿色双扇门、中央偏右半开的绿色金属入口门、粗糙灰色门框、浅水泥台阶和墙脚窄碎石带。建筑保持朴素普通，不做装饰性扩建。
-<主体 2> 是由<图片 2>（assets/scenes/main_room_stove_v01_candidate.png）锁定的环境。已确认的“普通厨房内景”场景基准图，作为<图片 2>载入。保持奶油色墙面、红色下墙裙、浅色L形操作台、左前景双眼燃气灶、金属锅盆、木层架和悬挂厨具，以及望向绿色田野的木框窗。只有镜头动作需要时才加入碗、锅、种袋或手，房间布局保持不变。
+<主体 1> 是<图片 1>普通厨房里的固定黑铁锅和燃气灶。保持棕色长木柄向右、银色灶台、红墙裙和浅色台面。
 
 摘要:
-一条连续 1.5 秒、真人写实、16:9 的参考图生成 MV 镜头，<主体 1>和<主体 2>位于已锁定场景中，执行下述单一动作。
+一条连续1.5秒写实特写，翻动后的长豆在同一口锅里落稳。
 
 保留分析:
-<主体 1>（出现在[镜头 1]）：完全保留——保持<图片 1>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
-<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 2>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
+<主体 1>（出现在[镜头 1]）：完全保留——保持同一口锅、木柄、灶台、台面与厨房光线。
 
 详细描述:
-目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 俯特写固定在旧锅里、热油中滚动的长豆角上。 保持场景几何和材质纹理稳定，不出现活人、画面文字或商标。
+真人写实、正常速度、稳定暖色自然光。
+[镜头 1] 略俯紧特写固定，只看同一口黑锅里的完整长豆。长豆在油里轻轻落稳一次，随后静止，锅面上有少量热气。右边保留棕色长木柄，锅沿下方可见蓝火。不要人物、手臂、脸、碗、锅铲、种豆、短豆、新锅、新地点、文字或商标。锅的几何、油光和豆量全程稳定，一镜到底。
 
 整体声音环境:
-静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
+静音。
 
 非叙事音乐:
 N/A
@@ -2454,22 +2443,22 @@ N/A
 
 ```text
 subject_definitions:
-<Subject 1> is the adult Chinese man whose appearance comes from <Picture 1> (front), <Picture 2> (side), and <Picture 3> (back). Keep the same clean-shaven youthful face, voluminous layered medium-short black hair, slim build, ivory-white short-sleeve collared shirt worn open over a plain white crew-neck T-shirt, loose light-blue full-length jeans, white-and-light-gray low-top sneakers, silver rectangular pendant, black watch on the left wrist, and thin bracelet on the right wrist.
-<Subject 2> is the environment anchored by <Picture 4> from assets/scenes/house_threshold_v29_candidate.png. The confirmed ordinary self-built house entrance reference, loaded as <Picture 4>. Preserve the faded beige plaster facade, the large closed blue-green double door on the left, the partly open green metal entrance door near center, its rough gray trim, the shallow concrete step and the narrow rubble strip along the wall. Keep the architecture modest and ordinary, without ornamental enlargement.
+<Subject 1> is the same adult Chinese man from the three-view sheet <Picture 1>. Preserve his clean-shaven youthful face, layered medium-short black hair, ivory open short-sleeve collared shirt over a white crew-neck T-shirt, loose light-blue jeans, white-gray low-top sneakers, silver rectangular pendant, black watch on left wrist and thin bracelet on right wrist.
+<Subject 2> is the ordinary self-built house entrance anchored by <Picture 2>. Preserve the faded beige plaster, closed blue-green double door on the left, partly open green entrance door near center, rough gray trim, shallow concrete threshold and narrow rubble strip.
 
 summary:
-[reference generation] one continuous 4.5-second photoreal live-action 16:9 MV shot of <Subject 1> and <Subject 2> at the established location, following the single action described below.
+[reference generation] one continuous 4.5-second photoreal live-action medium-wide shot of <Subject 1> carrying a bowl of dry-fried long beans to the same threshold and sitting down.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the three character references.
-<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 4>; add only the shot-specific action props described below.
+<Subject 1> (appears in [Shot 1]): fully_preserved - retain identity, clothing, body proportions and one single person in every frame.
+<Subject 2> (appears in [Shot 1]): fully_preserved - retain the exact entrance geometry and door positions.
 
 detailed_description:
-The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] An eye-level medium-wide shot holds static. <Subject 1> sits on the south-facing threshold holding a bowl of dry-fried long beans. The partly open green entrance door and shallow concrete step remain behind him; the road direction stays off frame. Gaze on the bowl, lips closed. Eyelids remain open, irises and pupils stay readable, with at most one slow natural blink. Stable faces and hands, coherent clothing, no flickering eyes, no facial warping, no extra limbs, no on-screen text, no logos.
+Photoreal live-action in real time, late-afternoon muted natural light, modest lived-in house.
+[Shot 1] Eye-level medium-wide static shot. The single man enters from screen left holding one white ceramic bowl containing dry-fried long green beans with both hands at waist level. He takes two short steps to the shallow concrete threshold, turns only slightly toward the open green door, bends his knees and sits down once. The bowl stays level in both hands and remains clearly visible on his lap. After sitting, he remains seated through the final frame; he does not stand, walk away, pass the bowl, or change clothes. The closed blue-green double door remains on screen left and the partly open green door stays behind him. His gaze settles on the bowl, brows level, lips closed, with at most one slow natural blink. Stable face, hands, bowl and feet; no duplicate person, no child, no extra bowl, no road pasted into the doorway, no text or logo.
 
 overall_soundscape:
-silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
+silence
 
 non_diegetic_music:
 N/A
@@ -2479,22 +2468,22 @@ N/A
 
 ```text
 主体定义:
-<主体 1> 是成年中国男性小王，外观来自<图片 1>（正面）、<图片 2>（侧面）、<图片 3>（背面）。保持清秀无胡须的脸、蓬松有层次的中短黑发、瘦高身材、敞开的乳白色短袖翻领衬衫、纯白圆领T恤、浅蓝色宽松长牛仔裤、白灰低帮运动鞋、银色矩形吊坠、左腕黑表和右腕细手链。
-<主体 2> 是由<图片 4>（assets/scenes/house_threshold_v29_candidate.png）锁定的环境。已确认的“普通自建房入口”场景基准图，作为<图片 4>载入。保持褪色米灰抹灰墙面、左侧关闭的蓝绿色双扇门、中央偏右半开的绿色金属入口门、粗糙灰色门框、浅水泥台阶和墙脚窄碎石带。建筑保持朴素普通，不做装饰性扩建。
+<主体 1> 是<图片 1>三视图中的同一个成年小王。保持无胡须清秀脸、蓬松中短黑发、敞开的乳白短袖翻领衬衫、白T恤、浅蓝宽松牛仔裤、白灰低帮鞋、银色矩形吊坠、左腕黑表、右腕细手链。
+<主体 2> 是<图片 2>的普通自建房入口。保持褪色米灰墙、左侧关闭蓝绿色双扇门、中央偏右半开的绿色入口门、粗灰门框、浅水泥台阶与墙脚碎石带。
 
 摘要:
-一条连续 4.5 秒、真人写实、16:9 的参考图生成 MV 镜头，<主体 1>和<主体 2>位于已锁定场景中，执行下述单一动作。
+一条连续4.5秒写实中全景，小王端着干煸长豆角碗走到同一入口台阶并坐下。
 
 保留分析:
-<主体 1>（出现在[镜头 1]）：完全保留——保持三张人物参考图中的脸、头发、身体、服装和身份。
-<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 4>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
+<主体 1>（出现在[镜头 1]）：完全保留——身份、衣着、比例，全程只有一个人。
+<主体 2>（出现在[镜头 1]）：完全保留——入口结构和门的位置一致。
 
 详细描述:
-目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 平视中全景固定。<主体 1>端着干煸长豆角的碗，坐上朝南的入口台阶。身后的绿色入口门保持半开，浅水泥台阶留在他身下；道路方向留在画外。目光在碗上，闭唇。 眼皮若在画内则保持睁开，虹膜与瞳孔可读，最多一次慢眨眼。不得脸部变形、多余肢体、画面文字或商标。
+真人写实实时速度，低位午后自然光，普通有人住的房子。
+[镜头 1] 平视中全景固定。唯一的小王从画左端着一只白瓷碗入画，碗里是干煸长豆角，双手在腰间托稳。他走两小步到浅水泥台阶，朝半开的绿色门轻微转身，屈膝坐下。碗始终水平，坐下后清楚放在膝上。最后他保持坐姿，不站起、不离开、不递碗、不换衣服。左侧蓝绿色双扇门关闭，半开的绿色门在身后。目光落在碗上，眉平、闭唇，最多一次慢眨眼。脸、手、碗和鞋稳定；不得第二个小王、儿童、第二只碗、道路塞进门洞、文字或商标。
 
 整体声音环境:
-静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
+静音。
 
 非叙事音乐:
 N/A
@@ -2505,25 +2494,25 @@ N/A
 - 场景引用：house
 - 出镜人物：maleLead
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_38_h3_v01.mp4`
+- 输出：`generated/video/raw/shot_38_h3_v04.mp4`
 
 ### English H3 prompt
 
 ```text
 subject_definitions:
-<Subject 1> is the adult Chinese man whose appearance comes from <Picture 1> (front), <Picture 2> (side), and <Picture 3> (back). Keep the same clean-shaven youthful face, voluminous layered medium-short black hair, slim build, ivory-white short-sleeve collared shirt worn open over a plain white crew-neck T-shirt, loose light-blue full-length jeans, white-and-light-gray low-top sneakers, silver rectangular pendant, black watch on the left wrist, and thin bracelet on the right wrist.
-<Subject 2> is the environment anchored by <Picture 4> from assets/scenes/house_threshold_v29_candidate.png. The confirmed ordinary self-built house entrance reference, loaded as <Picture 4>. Preserve the faded beige plaster facade, the large closed blue-green double door on the left, the partly open green metal entrance door near center, its rough gray trim, the shallow concrete step and the narrow rubble strip along the wall. Keep the architecture modest and ordinary, without ornamental enlargement.
+<Subject 1> is the adult Chinese man whose appearance comes from the single combined front/side/back character sheet in <Picture 1>. Keep the same clean-shaven youthful face, voluminous layered medium-short black hair, slim build, ivory-white short-sleeve collared shirt worn open over a plain white crew-neck T-shirt, loose light-blue full-length jeans, white-and-light-gray low-top sneakers, silver rectangular pendant, black watch on the left wrist, and thin bracelet on the right wrist.
+<Subject 2> is the environment anchored by <Picture 2> from assets/scenes/house_threshold_v29_candidate.png. The confirmed ordinary self-built house entrance reference, loaded as <Picture 2>. Preserve the faded beige plaster facade, the large closed blue-green double door on the left, the partly open green metal entrance door near center, its rough gray trim, the shallow concrete step and the narrow rubble strip along the wall. Keep the architecture modest and ordinary, without ornamental enlargement.
 
 summary:
 [reference generation] one continuous 6-second photoreal live-action 16:9 MV shot of <Subject 1> and <Subject 2> at the established location, following the single action described below.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the three character references.
-<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 4>; add only the shot-specific action props described below.
+<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the combined character sheet.
+<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 2>; add only the shot-specific action props described below.
 
 detailed_description:
 The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] An eye-level medium close-up holds static. <Subject 1> lifts one dry-fried long bean to his mouth and eats it with a small closed-mouth chew. The chopsticks stay in his hand. Gaze stays in the bowl. Brows level, no smile, no tears. Eyelids remain open, irises and pupils stay readable, with at most one slow natural blink. Stable faces and hands, coherent clothing, no flickering eyes, no facial warping, no extra limbs, no on-screen text, no logos.
+[Shot 1] A fixed eye-level medium close-up shows <Subject 1> already seated on the shallow entrance step, green door and gray jamb immediately behind his shoulders. His left hand holds the plain small cream-white ceramic bowl above his lap with a few cooked green beans inside. At the first frame, his right hand holds parallel wooden chopsticks with one tiny two-centimeter cooked bean piece, already just one centimeter in front of his lips. In the first second he brings this small piece completely into his mouth and closes his lips. The empty chopstick tips immediately withdraw. During the second second his right hand lowers the empty chopsticks all the way to just above the bowl at lap level. From that moment through the last frame, the chopsticks stay low and still beside the bowl, held in his right hand. He gently chews with closed lips, eyes lowered toward the bowl, brows quiet and mouth corners level. His left hand, bowl and seated body keep their positions throughout. One small breath is visible as chewing settles. The image retains exactly the same medium close scale and soft late-afternoon exposure. Stable facial features, coherent hands and a fixed green doorway. The action is one small mouthful followed by a calm resting hold.
 
 overall_soundscape:
 silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
@@ -2536,19 +2525,25 @@ N/A
 
 ```text
 主体定义:
-<主体 1> 是成年中国男性小王，外观来自<图片 1>（正面）、<图片 2>（侧面）、<图片 3>（背面）。保持清秀无胡须的脸、蓬松有层次的中短黑发、瘦高身材、敞开的乳白色短袖翻领衬衫、纯白圆领T恤、浅蓝色宽松长牛仔裤、白灰低帮运动鞋、银色矩形吊坠、左腕黑表和右腕细手链。
-<主体 2> 是由<图片 4>（assets/scenes/house_threshold_v29_candidate.png）锁定的环境。已确认的“普通自建房入口”场景基准图，作为<图片 4>载入。保持褪色米灰抹灰墙面、左侧关闭的蓝绿色双扇门、中央偏右半开的绿色金属入口门、粗糙灰色门框、浅水泥台阶和墙脚窄碎石带。建筑保持朴素普通，不做装饰性扩建。
+<主体 1> 是成年中国男性小王，外观来自<图片 1>（正面、侧面、背面合在同一张人物三视图中）。保持清秀无胡须的脸、蓬松有层次的中短黑发、瘦高身材、敞开的乳白色短袖翻领衬衫、纯白圆领T恤、浅蓝色宽松长牛仔裤、白灰低帮运动鞋、银色矩形吊坠、左腕黑表和右腕细手链。
+<主体 2> 是由<图片 2>（assets/scenes/house_threshold_v29_candidate.png）锁定的环境。已确认的“普通自建房入口”场景基准图，作为<图片 2>载入。保持褪色米灰抹灰墙面、左侧关闭的蓝绿色双扇门、中央偏右半开的绿色金属入口门、粗糙灰色门框、浅水泥台阶和墙脚窄碎石带。建筑保持朴素普通，不做装饰性扩建。
 
 摘要:
 一条连续 6 秒、真人写实、16:9 的参考图生成 MV 镜头，<主体 1>和<主体 2>位于已锁定场景中，执行下述单一动作。
 
 保留分析:
-<主体 1>（出现在[镜头 1]）：完全保留——保持三张人物参考图中的脸、头发、身体、服装和身份。
-<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 4>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
+<主体 1>（出现在[镜头 1]）：完全保留——保持单张人物三视图合图中的脸、头发、身体、服装和身份。
+<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 2>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
 
 详细描述:
 目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 平视中近景固定。<主体 1>夹起一根干煸豆角送到嘴边，闭着嘴轻轻嚼。筷子还在手里。目光停在碗里。眉平稳，不笑，不流泪。 眼皮若在画内则保持睁开，虹膜与瞳孔可读，最多一次慢眨眼。不得脸部变形、多余肢体、画面文字或商标。
+[Shot 1] 从浅水泥入口台阶正前方拍固定平视中近景。<Subject 1>已经直接坐在这一级台阶上，绿色金属门和灰门框紧贴肩后，距离约一臂；臀部全程留在同一台阶上。左手在膝上端素色米白小瓷碗，里面有几段干煸豆角。右手木筷夹起一小段能一口吃完的熟豆角，完整送入唇间，闭嘴，再把空筷尖抽出放低到碗旁。闭唇缓慢咀嚼，视线落在碗上，眉平静、嘴角水平，肩膀放松，最多一次自然眨眼。正常实时吃一口。镜头固定，景别不变，手、碗、筷和门框形状稳定，傍晚自然光均匀。
+
+整体声音环境:
+静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
+
+非叙事音乐:
+N/[镜头 1] 固定平视中近景，<Subject 1>已坐在浅入口台阶上，绿门与灰门框紧贴肩后。左手在膝上托素色米白小瓷碗，碗内有几根熟豆角。首帧右手平行木筷夹一小段约两厘米熟豆，已在唇前一厘米处。第一秒把这小段完全送入口并闭唇，空筷尖随即抽出。第二秒右手把空筷子一直放低到膝上碗旁。此后直到末帧，右手握着筷子一直低停在碗旁不动。闭唇轻轻咀嚼，眼睛向下看碗，眉平静、嘴角水平。左手、碗和坐姿整镜保持原位，咀嚼落稳后只有一次小呼吸。中近景大小和傍晚曝光固定，脸、手与绿门稳定。这一镜仅一次小口入口，随后平静持住。
 
 整体声音环境:
 静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
@@ -2562,25 +2557,25 @@ N/A
 - 场景引用：house
 - 出镜人物：maleLead
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_55_h3_v02.mp4`
+- 输出：`generated/video/raw/shot_55_h3_v02_trim.mp4`
 
 ### English H3 prompt
 
 ```text
 subject_definitions:
-<Subject 1> is the adult Chinese man whose appearance comes from <Picture 1> (front), <Picture 2> (side), and <Picture 3> (back). Keep the same clean-shaven youthful face, voluminous layered medium-short black hair, slim build, ivory-white short-sleeve collared shirt worn open over a plain white crew-neck T-shirt, loose light-blue full-length jeans, white-and-light-gray low-top sneakers, silver rectangular pendant, black watch on the left wrist, and thin bracelet on the right wrist.
-<Subject 2> is the environment anchored by <Picture 4> from assets/scenes/house_threshold_v29_candidate.png. The confirmed ordinary self-built house entrance reference, loaded as <Picture 4>. Preserve the faded beige plaster facade, the large closed blue-green double door on the left, the partly open green metal entrance door near center, its rough gray trim, the shallow concrete step and the narrow rubble strip along the wall. Keep the architecture modest and ordinary, without ornamental enlargement.
+<Subject 1> is the adult Chinese man whose appearance comes from the single combined front/side/back character sheet in <Picture 1>. Keep the same clean-shaven youthful face, voluminous layered medium-short black hair, slim build, ivory-white short-sleeve collared shirt worn open over a plain white crew-neck T-shirt, loose light-blue full-length jeans, white-and-light-gray low-top sneakers, silver rectangular pendant, black watch on the left wrist, and thin bracelet on the right wrist.
+<Subject 2> is the environment anchored by <Picture 2> from assets/scenes/house_threshold_v29_candidate.png. The confirmed ordinary self-built house entrance reference, loaded as <Picture 2>. Preserve the faded beige plaster facade, the large closed blue-green double door on the left, the partly open green metal entrance door near center, its rough gray trim, the shallow concrete step and the narrow rubble strip along the wall. Keep the architecture modest and ordinary, without ornamental enlargement.
 
 summary:
 [reference generation] one continuous 6-second photoreal live-action 16:9 MV shot of <Subject 1> and <Subject 2> at the established location, following the single action described below.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the three character references.
-<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 4>; add only the shot-specific action props described below.
+<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the combined character sheet.
+<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 2>; add only the shot-specific action props described below.
 
 detailed_description:
 The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] An eye-level close-up holds static. <Subject 1> lowers the chopsticks onto the rim of the bowl. A few dry-fried long beans remain in the bowl. Gaze stays in the bowl, brows level, his mouth a flat closed line. The doorway threshold stays in the soft background. Eyelids remain open, irises and pupils stay readable, with at most one slow natural blink. Stable faces and hands, coherent clothing, no flickering eyes, no facial warping, no extra limbs, no on-screen text, no logos.
+[Shot 1] A fixed eye-level close shot of <Subject 1> seated directly on the shallow concrete step, the green metal door and gray jamb immediately behind his shoulders. His left hand supports the same plain cream-white ceramic bowl in his lap, with a few cooked green bean pieces still inside. His right hand holds a pair of wooden chopsticks parallel just above the bowl. At the beginning he has finished chewing, and his closed mouth is at rest. He lowers the pair together once and lays both chopsticks horizontally across the bowl rim. His right fingers release them, then the right hand rests quietly beside the bowl on his knee. The chopsticks remain supported across the rim and the left hand keeps the bowl steady. For the remainder of the six seconds he holds this position, looking down into the bowl, eyebrows level, lips gently closed with level corners and a small quiet breath. The camera holds a static shot throughout, keeping the bowl rim, hands and lower face clear, with the nearby doorway softly behind. Stable fingers, stable bowl, two coherent chopsticks, at most one natural blink.
 
 overall_soundscape:
 silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
@@ -2593,19 +2588,19 @@ N/A
 
 ```text
 主体定义:
-<主体 1> 是成年中国男性小王，外观来自<图片 1>（正面）、<图片 2>（侧面）、<图片 3>（背面）。保持清秀无胡须的脸、蓬松有层次的中短黑发、瘦高身材、敞开的乳白色短袖翻领衬衫、纯白圆领T恤、浅蓝色宽松长牛仔裤、白灰低帮运动鞋、银色矩形吊坠、左腕黑表和右腕细手链。
-<主体 2> 是由<图片 4>（assets/scenes/house_threshold_v29_candidate.png）锁定的环境。已确认的“普通自建房入口”场景基准图，作为<图片 4>载入。保持褪色米灰抹灰墙面、左侧关闭的蓝绿色双扇门、中央偏右半开的绿色金属入口门、粗糙灰色门框、浅水泥台阶和墙脚窄碎石带。建筑保持朴素普通，不做装饰性扩建。
+<主体 1> 是成年中国男性小王，外观来自<图片 1>（正面、侧面、背面合在同一张人物三视图中）。保持清秀无胡须的脸、蓬松有层次的中短黑发、瘦高身材、敞开的乳白色短袖翻领衬衫、纯白圆领T恤、浅蓝色宽松长牛仔裤、白灰低帮运动鞋、银色矩形吊坠、左腕黑表和右腕细手链。
+<主体 2> 是由<图片 2>（assets/scenes/house_threshold_v29_candidate.png）锁定的环境。已确认的“普通自建房入口”场景基准图，作为<图片 2>载入。保持褪色米灰抹灰墙面、左侧关闭的蓝绿色双扇门、中央偏右半开的绿色金属入口门、粗糙灰色门框、浅水泥台阶和墙脚窄碎石带。建筑保持朴素普通，不做装饰性扩建。
 
 摘要:
 一条连续 6 秒、真人写实、16:9 的参考图生成 MV 镜头，<主体 1>和<主体 2>位于已锁定场景中，执行下述单一动作。
 
 保留分析:
-<主体 1>（出现在[镜头 1]）：完全保留——保持三张人物参考图中的脸、头发、身体、服装和身份。
-<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 4>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
+<主体 1>（出现在[镜头 1]）：完全保留——保持单张人物三视图合图中的脸、头发、身体、服装和身份。
+<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 2>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
 
 详细描述:
 目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 平视近景固定。<主体 1>把筷子搁回碗沿。碗里还剩几根干煸豆角。目光停在碗里，眉平稳，嘴是一条闭着的平线。入口台阶在浅后景。 眼皮若在画内则保持睁开，虹膜与瞳孔可读，最多一次慢眨眼。不得脸部变形、多余肢体、画面文字或商标。
+[镜头 1] 固定平视近景，<Subject 1>直接坐在浅水泥台阶上，绿门与灰门框紧贴肩后。左手在膝上托同一只素色米白瓷碗，内有几段熟豆角；右手平行夹着一双木筷，停在碗上方。开始时已经咀嚼完，闭嘴平静。他只把两根筷子一起放下一次，横搁在碗沿，右指松开，右手随后静放碗旁的膝上。筷子由碗沿支撑不动，左手托碗稳定。余下时间保持该姿势，视线落在碗内，眉平、嘴轻合且嘴角水平，一口轻呼吸。六秒全程固定，碗沿、双手与下半张脸清楚，近处入口作柔和后景。手指、碗与两根木筷稳定，最多一次自然眨眼。
 
 整体声音环境:
 静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
@@ -2619,25 +2614,25 @@ N/A
 - 场景引用：house
 - 出镜人物：maleLead
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_39_h3_v01.mp4`
+- 输出：`generated/video/raw/shot_39_h3_v05.mp4`
 
 ### English H3 prompt
 
 ```text
 subject_definitions:
-<Subject 1> is the adult Chinese man whose appearance comes from <Picture 1> (front), <Picture 2> (side), and <Picture 3> (back). Keep the same clean-shaven youthful face, voluminous layered medium-short black hair, slim build, ivory-white short-sleeve collared shirt worn open over a plain white crew-neck T-shirt, loose light-blue full-length jeans, white-and-light-gray low-top sneakers, silver rectangular pendant, black watch on the left wrist, and thin bracelet on the right wrist.
-<Subject 2> is the environment anchored by <Picture 4> from assets/scenes/house_threshold_v29_candidate.png. The confirmed ordinary self-built house entrance reference, loaded as <Picture 4>. Preserve the faded beige plaster facade, the large closed blue-green double door on the left, the partly open green metal entrance door near center, its rough gray trim, the shallow concrete step and the narrow rubble strip along the wall. Keep the architecture modest and ordinary, without ornamental enlargement.
+<Subject 1> is the adult Chinese man whose appearance comes from the single combined front/side/back character sheet in <Picture 1>. Keep the same clean-shaven youthful face, voluminous layered medium-short black hair, slim build, ivory-white short-sleeve collared shirt worn open over a plain white crew-neck T-shirt, loose light-blue full-length jeans, white-and-light-gray low-top sneakers, silver rectangular pendant, black watch on the left wrist, and thin bracelet on the right wrist.
+<Subject 2> is the environment anchored by <Picture 2> from assets/scenes/house_threshold_v29_candidate.png. The confirmed ordinary self-built house entrance reference, loaded as <Picture 2>. Preserve the faded beige plaster facade, the large closed blue-green double door on the left, the partly open green metal entrance door near center, its rough gray trim, the shallow concrete step and the narrow rubble strip along the wall. Keep the architecture modest and ordinary, without ornamental enlargement.
 
 summary:
 [reference generation] one continuous 8-second photoreal live-action 16:9 MV shot of <Subject 1> and <Subject 2> at the established location, following the single action described below.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the three character references.
-<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 4>; add only the shot-specific action props described below.
+<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the combined character sheet.
+<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 2>; add only the shot-specific action props described below.
 
 detailed_description:
 The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] An eye-level medium close-up pushes in with small amplitude at slow speed. <Subject 1> has swallowed. His gaze holds on the bowl. Brows level, lips closed, mouth corners do not lift. His shoulders lower a little. No tears. Eyelids remain open, irises and pupils stay readable, with at most one slow natural blink. Stable faces and hands, coherent clothing, no flickering eyes, no facial warping, no extra limbs, no on-screen text, no logos.
+[Shot 1] A chest-up medium close-up starts with <Subject 1>'s face and shoulders filling the picture. His hair is near the upper edge, and the cream-white bowl rim lies at the lower edge. Behind his shoulders are only the same nearby green door panel and a slim gray jamb. He is still seated on the entrance step, his lower body outside the tight crop. His left hand steadies the plain cream-white bowl of cooked green bean pieces in his lap; two wooden chopsticks lie across the rim. His right hand remains on his knee outside the frame. His eyes rest on the bowl below, with a heavy, absorbed gaze. The inner eyebrows lower slightly; both mouth corners point subtly downward. His lips remain gently pressed together, cheeks relaxed, jaw still. During the middle of the shot he releases one shallow breath and lets his shoulders sink half an inch. The same tired downturned mouth and lowered gaze remain unchanged for the rest of the shot. The camera pushes in with extremely small amplitude at slow speed, a total of two centimeters over eight seconds; the face stays essentially the same size. Real skin texture, readable eyes, one natural blink at most. Steady late-afternoon light and restrained real-time performance.
 
 overall_soundscape:
 silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
@@ -2650,19 +2645,25 @@ N/A
 
 ```text
 主体定义:
-<主体 1> 是成年中国男性小王，外观来自<图片 1>（正面）、<图片 2>（侧面）、<图片 3>（背面）。保持清秀无胡须的脸、蓬松有层次的中短黑发、瘦高身材、敞开的乳白色短袖翻领衬衫、纯白圆领T恤、浅蓝色宽松长牛仔裤、白灰低帮运动鞋、银色矩形吊坠、左腕黑表和右腕细手链。
-<主体 2> 是由<图片 4>（assets/scenes/house_threshold_v29_candidate.png）锁定的环境。已确认的“普通自建房入口”场景基准图，作为<图片 4>载入。保持褪色米灰抹灰墙面、左侧关闭的蓝绿色双扇门、中央偏右半开的绿色金属入口门、粗糙灰色门框、浅水泥台阶和墙脚窄碎石带。建筑保持朴素普通，不做装饰性扩建。
+<主体 1> 是成年中国男性小王，外观来自<图片 1>（正面、侧面、背面合在同一张人物三视图中）。保持清秀无胡须的脸、蓬松有层次的中短黑发、瘦高身材、敞开的乳白色短袖翻领衬衫、纯白圆领T恤、浅蓝色宽松长牛仔裤、白灰低帮运动鞋、银色矩形吊坠、左腕黑表和右腕细手链。
+<主体 2> 是由<图片 2>（assets/scenes/house_threshold_v29_candidate.png）锁定的环境。已确认的“普通自建房入口”场景基准图，作为<图片 2>载入。保持褪色米灰抹灰墙面、左侧关闭的蓝绿色双扇门、中央偏右半开的绿色金属入口门、粗糙灰色门框、浅水泥台阶和墙脚窄碎石带。建筑保持朴素普通，不做装饰性扩建。
 
 摘要:
 一条连续 8 秒、真人写实、16:9 的参考图生成 MV 镜头，<主体 1>和<主体 2>位于已锁定场景中，执行下述单一动作。
 
 保留分析:
-<主体 1>（出现在[镜头 1]）：完全保留——保持三张人物参考图中的脸、头发、身体、服装和身份。
-<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 4>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
+<主体 1>（出现在[镜头 1]）：完全保留——保持单张人物三视图合图中的脸、头发、身体、服装和身份。
+<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 2>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
 
 详细描述:
 目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 平视中近景小幅度慢速推近。<主体 1>已经咽下。目光停在碗上。眉平稳，闭唇，嘴角不抬。肩略微落下。没有眼泪。 眼皮若在画内则保持睁开，虹膜与瞳孔可读，最多一次慢眨眼。不得脸部变形、多余肢体、画面文字或商标。
+[Shot 1] 平视中近景，<Subject 1>已经坐在同一级低水泥入口台阶上，身后紧贴半开的绿门与灰门框。首帧脸和肩已经足够大，碗处于画面下沿。他左手在膝上托同一只素色米白瓷碗，右手静放右膝，碗内有几根熟豆角，木筷横搁碗沿。左手托碗、右手留在右膝、臀部始终留在台阶。摄影机八秒内只前进几厘米，小幅慢推。视线始终向下落在碗里，眉略沉、嘴唇轻合且嘴角水平。中段一次轻呼气，肩略落下，随后保持到结束。嘴保持平静，不微笑。眼皮睁开、虹膜可读，最多一次自然眨眼。门紧贴身后，傍晚自然曝光稳定。
+
+整体声音环境:
+静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
+
+非叙事音乐:
+N/[镜头 1] 首帧即胸口以上的中近景，<Subject 1>的脸和双肩填满画面，发顶接近上沿，米白碗沿处于画面下缘。肩后只见近处绿门板和一窄条灰门框。他仍坐在入口台阶，紧取景之外是下半身。左手在膝上扶素色米白瓷碗，里面几段熟绿豆角，两根木筷横搁碗沿；右手留在画外的膝上。眼睛向下持住碗，目光沉静略疲惫，内眉稍压低，两侧嘴角微向下，嘴唇轻抿，脸颊松弛、下颌安静。中段一次浅呼气，肩膀下沉约一厘米半，此后疲惫的下垂嘴角和向下目光一直维持到末帧。摄影机八秒内总共只前进两厘米，极小幅慢推，脸的大小基本不变。真实皮肤、眼睛可读，最多一次自然眨眼，傍晚曝光稳定，克制实时表演。
 
 整体声音环境:
 静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
@@ -2676,25 +2677,25 @@ N/A
 - 场景引用：house
 - 出镜人物：maleLead
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_59_h3_v01.mp4`
+- 输出：`generated/video/raw/shot_59_h3_v03.mp4`
 
 ### English H3 prompt
 
 ```text
 subject_definitions:
-<Subject 1> is the adult Chinese man whose appearance comes from <Picture 1> (front), <Picture 2> (side), and <Picture 3> (back). Keep the same clean-shaven youthful face, voluminous layered medium-short black hair, slim build, ivory-white short-sleeve collared shirt worn open over a plain white crew-neck T-shirt, loose light-blue full-length jeans, white-and-light-gray low-top sneakers, silver rectangular pendant, black watch on the left wrist, and thin bracelet on the right wrist.
-<Subject 2> is the environment anchored by <Picture 4> from assets/scenes/house_threshold_v29_candidate.png. The confirmed ordinary self-built house entrance reference, loaded as <Picture 4>. Preserve the faded beige plaster facade, the large closed blue-green double door on the left, the partly open green metal entrance door near center, its rough gray trim, the shallow concrete step and the narrow rubble strip along the wall. Keep the architecture modest and ordinary, without ornamental enlargement.
+<Subject 1> is the adult Chinese man identified by the combined character sheet in <Picture 1>. Keep the same face, layered black hair, ivory short-sleeved overshirt and white T-shirt.
+<Subject 2> is the entrance from <Picture 2> (assets/scenes/house_threshold_v29_candidate.png), seen close behind the seated man. The green entrance door remains open inward on the right side of the image; the doorway on image left stays dark. A narrow gray concrete jamb divides these surfaces from the wall.
 
 summary:
-[reference generation] one continuous 2-second photoreal live-action 16:9 MV shot of <Subject 1> and <Subject 2> at the established location, following the single action described below.
+[reference generation] one continuous 2-second close portrait reaction of <Subject 1> at <Subject 2>, holding his already lowered head and quiet unsmiling gaze.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the three character references.
-<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 4>; add only the shot-specific action props described below.
+<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the combined character sheet.
+<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 2>; add only the shot-specific action props described below.
 
 detailed_description:
-The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] An eye-level medium close-up holds static. <Subject 1> stays with the bowl of dry-fried long beans. His shoulders are slightly down, gaze on the bowl, mouth a flat closed line. Eyelids remain open, irises and pupils stay readable, with at most one slow natural blink. Stable faces and hands, coherent clothing, no flickering eyes, no facial warping, no extra limbs, no on-screen text, no logos.
+Photoreal live-action, muted natural late-afternoon light, real-time restrained performance.
+[Shot 1] Static tight facial close-up. The frame includes the top of <Subject 1>'s black hair, his entire face, neck and only the upper shoulders of the ivory overshirt. His face fills half the image height. The bottom frame edge crosses his shirt collar; his chest and everything lower remain outside the picture. His chin is already lowered and his eyes already rest downward at the start. Both eyes remain readable beneath the lowered gaze. He holds this exact head position throughout. His lips remain closed with level corners, inner brows subtly knit. A single quiet breath slightly relaxes his already lowered shoulders; his head stays still. He remains seated just as before, with all props outside the close crop. Behind him, the open green door remains at image right and the dark doorway remains at image left. The camera holds a static shot with no change of scale or height. No lip movement, stable features and reference identity, constant exposure, at most one slow natural blink.
 
 overall_soundscape:
 silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
@@ -2707,19 +2708,19 @@ N/A
 
 ```text
 主体定义:
-<主体 1> 是成年中国男性小王，外观来自<图片 1>（正面）、<图片 2>（侧面）、<图片 3>（背面）。保持清秀无胡须的脸、蓬松有层次的中短黑发、瘦高身材、敞开的乳白色短袖翻领衬衫、纯白圆领T恤、浅蓝色宽松长牛仔裤、白灰低帮运动鞋、银色矩形吊坠、左腕黑表和右腕细手链。
-<主体 2> 是由<图片 4>（assets/scenes/house_threshold_v29_candidate.png）锁定的环境。已确认的“普通自建房入口”场景基准图，作为<图片 4>载入。保持褪色米灰抹灰墙面、左侧关闭的蓝绿色双扇门、中央偏右半开的绿色金属入口门、粗糙灰色门框、浅水泥台阶和墙脚窄碎石带。建筑保持朴素普通，不做装饰性扩建。
+<主体 1> 是<图片 1>合并人物三视图中的成年中国男性小王，保持同一张脸、有层次黑发、乳白短袖衬衫与白T恤。
+<主体 2> 是<图片 2>（assets/scenes/house_threshold_v29_candidate.png）里的入口，紧贴坐着的小王身后。绿色入口门仍向内开在画右，画左门洞保持黑暗；窄灰水泥门框连接墙面。
 
 摘要:
-一条连续 2 秒、真人写实、16:9 的参考图生成 MV 镜头，<主体 1>和<主体 2>位于已锁定场景中，执行下述单一动作。
+一条连续2秒的小王近景反应镜，位于已确认入口，保持已经低下的头与沉默不笑的视线。
 
 保留分析:
-<主体 1>（出现在[镜头 1]）：完全保留——保持三张人物参考图中的脸、头发、身体、服装和身份。
-<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 4>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
+<主体 1>（出现在[镜头 1]）：完全保留——保持单张人物三视图合图中的脸、头发、身体、服装和身份。
+<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 2>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
 
 详细描述:
-目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 平视中近景固定。他仍对着干煸长豆角的碗，肩略微落下，目光在碗上，嘴是一条闭着的平线。 眼皮若在画内则保持睁开，虹膜与瞳孔可读，最多一次慢眨眼。不得脸部变形、多余肢体、画面文字或商标。
+真人写实、低饱和午后自然光，实时而克制的表演。
+[镜头 1] 固定紧面部近景，包含<主体 1>黑发顶部、整张脸、脖子和乳白衬衫上肩，脸占画高一半。下边沿横过衣领，胸部及以下完全在画外。首帧下巴已经低下，眼睛已经向下凝住，双眼仍能辨认；全程保持这个头位。嘴轻闭且嘴角水平，眉间略收紧，一次安静呼吸使本就下沉的肩稍放松，头不动。他保持原来坐姿，道具全在紧构图外。身后画右是向内打开的绿门，画左是黑暗门洞。摄影机固定，大小高度不变；嘴不动、面部和身份稳定、曝光稳定，最多一次缓慢自然眨眼。
 
 整体声音环境:
 静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
@@ -2733,26 +2734,26 @@ N/A
 - 场景引用：field
 - 出镜人物：无
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_40_h3_v01.mp4`
+- 输出：`generated/video/raw/shot_40_h3_v04.mp4`
 
 ### English H3 prompt
 
 ```text
 subject_definitions:
-<Subject 1> is the environment anchored by <Picture 1> from assets/scenes/field_west_end_v11_candidate.png. The confirmed west-end bean-field reference, loaded as <Picture 1>. Preserve the two parallel bean rows, green bamboo stakes, dark open soil furrow, tree line and distant low ridge. The basin, round bamboo tray and the later sparse-versus-dense harvest state are shot-specific props and must be added only where the shot action calls for them.
+<Subject 1> is the bean field in <Picture 1>, retaining the parallel bamboo trellises, earth furrow, trees and distant ridge.
 
 summary:
-[reference generation] one continuous 4-second photoreal live-action 16:9 MV shot of <Subject 1> at the established location, following the single action described below.
+[reference generation] one continuous 4-second live-action empty landscape shot of <Subject 1>, with subtle leaf movement.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 1>; add only the shot-specific action props described below.
+<Subject 1> (appears in [Shot 1]): fully_preserved - the reference geography, earth and plants stay consistent.
 
 detailed_description:
-The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] A slightly high medium-wide shot looks east and holds static, matching the opening geography. The basin of short beans is still at the left row. The tray is empty. The right row is thinner. Lower light, same day. No person.
+Photoreal rural China, real-time late afternoon, restrained natural colors and stable exposure.
+[Shot 1] The camera holds a static shot from a slightly elevated position looking east along the two bean rows. The composition is established at the first frame and held until the last. In the left foreground, a small cream enamel basin with a dark blue rim and faded red exterior flowers rests on bare soil beside the left row. It contains short plump green seed pods, each approximately a thumb long. A single empty shallow round woven bamboo tray lies horizontally flat on the bare soil in the center-right foreground, its whole base in contact with the earth. The tray is seen as a low ellipse from this angle, its open top facing upward. The basin and tray are settled still-life objects. The left row has only scattered pods remaining, and the harvested right row is thinner. A gentle breeze flexes a few leaves slightly on their stems, then they settle. Earth, containers and bamboo stakes stay motionless in the locked composition. The field is unoccupied. Soft late-afternoon light stays even over four seconds.
 
 overall_soundscape:
-silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
+silence
 
 non_diegetic_music:
 N/A
@@ -2761,23 +2762,23 @@ N/A
 ### 中文对照提示词
 
 ```text
-主体定义:
-<主体 1> 是由<图片 1>（assets/scenes/field_west_end_v11_candidate.png）锁定的环境。已确认的“菜地西头与两行豆架”场景基准图，作为<图片 1>载入。保持两行平行豆架、绿色竹竿、深色裸土沟、树线和远处低山脊。搪瓷盆、圆竹匾以及后续“稀疏与浓密”的收获状态属于镜头道具，只在动作明确要求时加入。
+subject_definitions:
+<Subject 1> 是<Picture 1>中的豆地，保持平行竹架、土沟、树线和远山。
 
-摘要:
-一条连续 4 秒、真人写实、16:9 的参考图生成 MV 镜头，<主体 1>位于已锁定场景中，执行下述单一动作。
+summary:
+[reference generation] 一条连续4秒的<Subject 1>真人写实空景，只有细微叶动。
 
-保留分析:
-<主体 1>（出现在[镜头 1]）：完全保留——保持<图片 1>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
+retention_analysis:
+<Subject 1> (appears in [Shot 1]): fully_preserved - 保持参考图的地形、泥土与植被。
 
-详细描述:
-目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 略高中全景朝东固定，地理与开场一致。短豆的盆仍在左行。圆匾空了。右行稀了。光线更低，仍是同一天。没有人。 保持场景几何和材质纹理稳定，不出现活人、画面文字或商标。
+detailed_description:
+中国农村真人写实、实时傍晚、克制自然色彩和稳定曝光。
+[Shot 1] 略高机位朝东沿两行豆架拍摄，固定镜头从首帧保持到尾帧。左前景靠左行的裸土上，放着小号米白内壁、深蓝盆沿、外侧褪色红花的搪瓷盆，里面是约拇指长的短而饱满的绿色种豆。中右前景的裸土上，一只空的浅圆竹匾从首帧就水平平放，底面完整贴地，开口朝上；在这个角度呈低矮椭圆。盆与匾都是已经放稳的静物。左行只剩零星豆荚，收获后的右行较稀。微风轻弯少数叶片，随后落稳。土面、容器、竹竿在锁定构图中保持不动。豆地无人。四秒内傍晚柔光均匀稳定。
 
-整体声音环境:
-静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
+overall_soundscape:
+silence
 
-非叙事音乐:
+non_diegetic_music:
 N/A
 ```
 
@@ -2786,7 +2787,7 @@ N/A
 - 场景引用：field
 - 出镜人物：无
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_41_h3_v01.mp4`
+- 输出：`generated/video/raw/shot_41_h3_v03.mp4`
 
 ### English H3 prompt
 
@@ -2802,7 +2803,7 @@ retention_analysis:
 
 detailed_description:
 The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] A low close shot pushes in with small amplitude at slow speed. The same enamel basin sits on the soil and is filled with short, thick, stubby green beans.
+[Shot 1] A low close shot pushes in with small amplitude at slow speed. A single cream enamel basin with a dark blue rim and faded red exterior flowers sits on the soil, with a thin dirt mark on its rim. It is filled only with short, thick, stubby thumb-length green beans. This is an enamel basin, never a bamboo tray or woven basket; no long beans, no harvested pile, no second container, no person.
 
 overall_soundscape:
 silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
@@ -2825,7 +2826,7 @@ N/A
 
 详细描述:
 目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 低机位近景对着土上的同一只搪瓷盆小幅度慢速推近。盆里是短粗、拇指长的绿豆。 保持场景几何和材质纹理稳定，不出现活人、画面文字或商标。
+[镜头 1] 低机位近景对着土上的唯一一只米白内壁、深蓝盆沿、外侧褪色红花的搪瓷盆小幅度慢速推近，盆沿有一圈薄土痕。盆里只装短粗、拇指长的绿豆。必须是搪瓷盆，绝不是竹匾或编织篮；不得出现长豆、饱豆堆、第二只容器或人物。 保持场景几何和材质纹理稳定，不出现活人、画面文字或商标。
 
 整体声音环境:
 静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
@@ -2839,25 +2840,25 @@ N/A
 - 场景引用：road
 - 出镜人物：femaleLead
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_42_h3_v01.mp4`
+- 输出：`generated/video/raw/shot_42_h3_v02.mp4`
 
 ### English H3 prompt
 
 ```text
 subject_definitions:
-<Subject 1> is the adult rural Chinese woman whose appearance comes from <Picture 1> (front), <Picture 2> (side), and <Picture 3> (back). Keep the same mature face, blue-gray floral headscarf, black hair in a low ponytail, faded light-blue floral short-sleeve shirt, dark-blue cropped trousers, brown flat shoes, and sturdy working build.
-<Subject 2> is the environment anchored by <Picture 4> from assets/scenes/road_west_gate_v02.png. The confirmed eastbound rural lane reference, loaded as <Picture 4>. Preserve the same twin-track pale gravel and packed-earth lane, the grassy center and edges, the dark tree line, the modest building edge on the left and open crops on the right. The route continues east toward the field; do not turn it into a paved road or a city street.
+<Subject 1> is the adult rural Chinese woman whose appearance comes from the single combined front/side/back character sheet in <Picture 1>. Keep the same mature face, blue-gray floral headscarf, black hair in a low ponytail, faded light-blue floral short-sleeve shirt, dark-blue cropped trousers, brown flat shoes, and sturdy working build.
+<Subject 2> is the environment anchored by <Picture 2> from assets/scenes/road_west_gate_v02.png. The confirmed eastbound rural lane reference, loaded as <Picture 2>. Preserve the same twin-track pale gravel and packed-earth lane, the grassy center and edges, the dark tree line, the modest building edge on the left and open crops on the right. The route continues east toward the field; do not turn it into a paved road or a city street.
 
 summary:
 [reference generation] one continuous 8-second photoreal live-action 16:9 MV shot of <Subject 1> and <Subject 2> at the established location, following the single action described below.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the three character references.
-<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 4>; add only the shot-specific action props described below.
+<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the combined character sheet.
+<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 2>; add only the shot-specific action props described below.
 
 detailed_description:
 The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] Lower light, same day. An eye-level back view follows <Subject 1> with small amplitude at slow speed. She walks east with empty hands and does not turn. The road has no fork.
+[Shot 1] Lower light, same day. An eye-level back view follows <Subject 1> with small amplitude at slow speed. She walks east with empty hands and does not turn. She stays on the exact same twin-track packed-earth lane from the earlier road shots: two pale wheel ruts with a grassy center, dark tree line, modest building edge on the left and open crops on the right. It is not a narrow gravel footpath, not a new rural landscape, not a fork, and not a winding side road; the route continues straight east toward the field.
 
 overall_soundscape:
 silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
@@ -2870,19 +2871,19 @@ N/A
 
 ```text
 主体定义:
-<主体 1> 是成年中国农村女性嫂子，外观来自<图片 1>（正面）、<图片 2>（侧面）、<图片 3>（背面）。保持成熟面孔、蓝灰碎花头巾、低马尾、浅蓝碎花短袖衬衫、深蓝七分裤、棕色平底鞋和结实的劳作身材。
-<主体 2> 是由<图片 4>（assets/scenes/road_west_gate_v02.png）锁定的环境。已确认的“东门外向东土路”场景基准图，作为<图片 4>载入。保持浅色碎石与压实土组成的双车辙路、中央和两侧草带、深色树线、左侧朴素建筑边缘以及右侧开阔庄稼。道路继续向东通往菜地；不要变成柏油路或城市街道。
+<主体 1> 是成年中国农村女性嫂子，外观来自<图片 1>（正面、侧面、背面合在同一张人物三视图中）。保持成熟面孔、蓝灰碎花头巾、低马尾、浅蓝碎花短袖衬衫、深蓝七分裤、棕色平底鞋和结实的劳作身材。
+<主体 2> 是由<图片 2>（assets/scenes/road_west_gate_v02.png）锁定的环境。已确认的“东门外向东土路”场景基准图，作为<图片 2>载入。保持浅色碎石与压实土组成的双车辙路、中央和两侧草带、深色树线、左侧朴素建筑边缘以及右侧开阔庄稼。道路继续向东通往菜地；不要变成柏油路或城市街道。
 
 摘要:
 一条连续 8 秒、真人写实、16:9 的参考图生成 MV 镜头，<主体 1>和<主体 2>位于已锁定场景中，执行下述单一动作。
 
 保留分析:
-<主体 1>（出现在[镜头 1]）：完全保留——保持三张人物参考图中的脸、头发、身体、服装和身份。
-<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 4>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
+<主体 1>（出现在[镜头 1]）：完全保留——保持单张人物三视图合图中的脸、头发、身体、服装和身份。
+<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 2>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
 
 详细描述:
 目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 光线更低，仍是同一天。平视背影小幅度慢速跟随<主体 1>。她空手向东走，不转身。路没有岔路。 眼皮若在画内则保持睁开，虹膜与瞳孔可读，最多一次慢眨眼。不得脸部变形、多余肢体、画面文字或商标。
+[镜头 1] 光线更低，仍是同一天。平视背影小幅度慢速跟随<主体 1>。她空手向东走，不转身。她必须走前面镜头的同一条双车辙压实土路：两条浅色车辙、中间草带、左侧朴素建筑边缘、右侧开阔庄稼和深色树线。不是窄碎石小径、不是陌生田野、不是岔路或弯曲支路，道路继续向东通往菜地。 眼皮若在画内则保持睁开，虹膜与瞳孔可读，最多一次慢眨眼。不得脸部变形、多余肢体、画面文字或商标。
 
 整体声音环境:
 静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
@@ -2896,25 +2897,25 @@ N/A
 - 场景引用：road
 - 出镜人物：femaleLead
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_43_h3_v01.mp4`
+- 输出：`generated/video/raw/shot_43_h3_v02.mp4`
 
 ### English H3 prompt
 
 ```text
 subject_definitions:
-<Subject 1> is the adult rural Chinese woman whose appearance comes from <Picture 1> (front), <Picture 2> (side), and <Picture 3> (back). Keep the same mature face, blue-gray floral headscarf, black hair in a low ponytail, faded light-blue floral short-sleeve shirt, dark-blue cropped trousers, brown flat shoes, and sturdy working build.
-<Subject 2> is the environment anchored by <Picture 4> from assets/scenes/road_west_gate_v02.png. The confirmed eastbound rural lane reference, loaded as <Picture 4>. Preserve the same twin-track pale gravel and packed-earth lane, the grassy center and edges, the dark tree line, the modest building edge on the left and open crops on the right. The route continues east toward the field; do not turn it into a paved road or a city street.
+<Subject 1> is the adult rural Chinese woman whose appearance comes from the single combined front/side/back character sheet in <Picture 1>. Keep the same mature face, blue-gray floral headscarf, black hair in a low ponytail, faded light-blue floral short-sleeve shirt, dark-blue cropped trousers, brown flat shoes, and sturdy working build.
+<Subject 2> is the environment anchored by <Picture 2> from assets/scenes/road_west_gate_v02.png. The confirmed eastbound rural lane reference, loaded as <Picture 2>. Preserve the same twin-track pale gravel and packed-earth lane, the grassy center and edges, the dark tree line, the modest building edge on the left and open crops on the right. The route continues east toward the field; do not turn it into a paved road or a city street.
 
 summary:
 [reference generation] one continuous 2-second photoreal live-action 16:9 MV shot of <Subject 1> and <Subject 2> at the established location, following the single action described below.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the three character references.
-<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 4>; add only the shot-specific action props described below.
+<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the combined character sheet.
+<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 2>; add only the shot-specific action props described below.
 
 detailed_description:
 The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] A low close shot holds static on brown flat shoes and dark-blue trouser cuffs taking two slower steps toward screen right along the dirt road.
+[Shot 1] The camera holds a static low close shot immediately behind the woman's calves, aligned lengthwise along the right wheel rut of the road. Only her two lower legs below the knees and brown flat shoes appear. The heels face the camera, and the toes point away toward the road's distant vanishing point. She takes two unhurried forward steps away from the lens, placing both feet within the same right-hand rut. The grassy center strip stays on the left of her shoes, the outer grassy verge on their right. The legs recede gently into depth; the framing remains low and fixed throughout. Natural walking weight transfers smoothly from heel to toe, with coherent shoes and ankles.
 
 overall_soundscape:
 silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
@@ -2927,19 +2928,14 @@ N/A
 
 ```text
 主体定义:
-<主体 1> 是成年中国农村女性嫂子，外观来自<图片 1>（正面）、<图片 2>（侧面）、<图片 3>（背面）。保持成熟面孔、蓝灰碎花头巾、低马尾、浅蓝碎花短袖衬衫、深蓝七分裤、棕色平底鞋和结实的劳作身材。
-<主体 2> 是由<图片 4>（assets/scenes/road_west_gate_v02.png）锁定的环境。已确认的“东门外向东土路”场景基准图，作为<图片 4>载入。保持浅色碎石与压实土组成的双车辙路、中央和两侧草带、深色树线、左侧朴素建筑边缘以及右侧开阔庄稼。道路继续向东通往菜地；不要变成柏油路或城市街道。
+<主体 1> 是成年中国农村女性嫂子，外观来自<图片 1>（正面、侧面、背面合在同一张人物三视图中）。保持成熟面孔、蓝灰碎花头巾、低马尾、浅蓝碎花短袖衬衫、深蓝七分裤、棕色平底鞋和结实的劳作身材。
+<主体 2> 是由<图片 2>（assets/scenes/road_west_gate_v02.png）锁定的环境。已确认的“东门外向东土路”场景基准图，作为<图片 2>载入。保持浅色碎石与压实土组成的双车辙路、中央和两侧草带、深色树线、左侧朴素建筑边缘以及右侧开阔庄稼。道路继续向东通往菜地；不要变成柏油路或城市街道。
 
 摘要:
 一条连续 2 秒、真人写实、16:9 的参考图生成 MV 镜头，<主体 1>和<主体 2>位于已锁定场景中，执行下述单一动作。
 
 保留分析:
-<主体 1>（出现在[镜头 1]）：完全保留——保持三张人物参考图中的脸、头发、身体、服装和身份。
-<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 4>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
-
-详细描述:
-目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 低机位近景固定在棕色平底鞋和深蓝裤脚上，沿土路向画面右侧更慢地走两步。 眼皮若在画内则保持睁开，虹膜与瞳孔可读，最多一次慢眨眼。不得脸部变形、多余肢体、画面文字或商标。
+<主体 1>（出现在[镜头 1] 摄影机固定在嫂子小腿后方的低机位，沿右侧车辙纵向拍近景。全程仅露双膝以下和棕色平底鞋。鞋跟朝镜头、鞋尖朝道路远处消失点。她缓慢向前走两步，双脚始终落在同一条右侧车辙内，渐渐远离镜头；中央草带在鞋左侧，路边草在右侧。机位全程低而固定。真实步态重心由脚跟平顺转到脚尖，鞋与脚踝结构一致。
 
 整体声音环境:
 静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
@@ -2953,25 +2949,25 @@ N/A
 - 场景引用：field
 - 出镜人物：femaleLead
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_44_h3_v01.mp4`
+- 输出：`generated/video/raw/shot_44_h3_v03.mp4`
 
 ### English H3 prompt
 
 ```text
 subject_definitions:
-<Subject 1> is the adult rural Chinese woman whose appearance comes from <Picture 1> (front), <Picture 2> (side), and <Picture 3> (back). Keep the same mature face, blue-gray floral headscarf, black hair in a low ponytail, faded light-blue floral short-sleeve shirt, dark-blue cropped trousers, brown flat shoes, and sturdy working build.
-<Subject 2> is the environment anchored by <Picture 4> from assets/scenes/field_west_end_v11_candidate.png. The confirmed west-end bean-field reference, loaded as <Picture 4>. Preserve the two parallel bean rows, green bamboo stakes, dark open soil furrow, tree line and distant low ridge. The basin, round bamboo tray and the later sparse-versus-dense harvest state are shot-specific props and must be added only where the shot action calls for them.
+<Subject 1> is the adult rural Chinese woman whose appearance comes from the single combined front/side/back character sheet in <Picture 1>. Keep the same mature face, blue-gray floral headscarf, black hair in a low ponytail, faded light-blue floral short-sleeve shirt, dark-blue cropped trousers, brown flat shoes, and sturdy working build.
+<Subject 2> is the environment anchored by <Picture 2> from assets/scenes/field_west_end_v11_candidate.png. The confirmed west-end bean-field reference, loaded as <Picture 2>. Preserve the two parallel bean rows, green bamboo stakes, dark open soil furrow, tree line and distant low ridge. The basin, round bamboo tray and the later sparse-versus-dense harvest state are shot-specific props and must be added only where the shot action calls for them.
 
 summary:
 [reference generation] one continuous 6-second photoreal live-action 16:9 MV shot of <Subject 1> and <Subject 2> at the established location, following the single action described below.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the three character references.
-<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 4>; add only the shot-specific action props described below.
+<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the combined character sheet.
+<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 2>; add only the shot-specific action props described below.
 
 detailed_description:
 The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] An eye-level medium shot tilts up with small amplitude at slow speed as <Subject 1> lifts the basin off the soil with both hands. Short beans shift once inside. The empty tray stays down. Gaze on the basin, lips closed. Mild three-quarter. Eyelids remain open, irises and pupils stay readable, with at most one slow natural blink. Stable faces and hands, coherent clothing, no flickering eyes, no facial warping, no extra limbs, no on-screen text, no logos.
+[Shot 1] An eye-level medium shot tilts up with small amplitude at slow speed as <Subject 1> bends and lifts the single cream enamel basin with a dark blue rim and faded red exterior flowers filled with short thick beans off the soil with both hands. This is the enamel basin, not the bamboo tray. The one empty round bamboo tray stays flat on the soil and remains empty and completely still; it is never lifted, filled, duplicated, or moved. Short beans shift once inside the enamel basin. Gaze on the basin, lips closed. Mild three-quarter. Eyelids remain open, irises and pupils stay readable, with at most one slow natural blink. Stable faces and hands, coherent clothing, no flickering eyes, no facial warping, no extra limbs, no on-screen text, no logos.
 
 overall_soundscape:
 silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
@@ -2984,19 +2980,19 @@ N/A
 
 ```text
 主体定义:
-<主体 1> 是成年中国农村女性嫂子，外观来自<图片 1>（正面）、<图片 2>（侧面）、<图片 3>（背面）。保持成熟面孔、蓝灰碎花头巾、低马尾、浅蓝碎花短袖衬衫、深蓝七分裤、棕色平底鞋和结实的劳作身材。
-<主体 2> 是由<图片 4>（assets/scenes/field_west_end_v11_candidate.png）锁定的环境。已确认的“菜地西头与两行豆架”场景基准图，作为<图片 4>载入。保持两行平行豆架、绿色竹竿、深色裸土沟、树线和远处低山脊。搪瓷盆、圆竹匾以及后续“稀疏与浓密”的收获状态属于镜头道具，只在动作明确要求时加入。
+<主体 1> 是成年中国农村女性嫂子，外观来自<图片 1>（正面、侧面、背面合在同一张人物三视图中）。保持成熟面孔、蓝灰碎花头巾、低马尾、浅蓝碎花短袖衬衫、深蓝七分裤、棕色平底鞋和结实的劳作身材。
+<主体 2> 是由<图片 2>（assets/scenes/field_west_end_v11_candidate.png）锁定的环境。已确认的“菜地西头与两行豆架”场景基准图，作为<图片 2>载入。保持两行平行豆架、绿色竹竿、深色裸土沟、树线和远处低山脊。搪瓷盆、圆竹匾以及后续“稀疏与浓密”的收获状态属于镜头道具，只在动作明确要求时加入。
 
 摘要:
 一条连续 6 秒、真人写实、16:9 的参考图生成 MV 镜头，<主体 1>和<主体 2>位于已锁定场景中，执行下述单一动作。
 
 保留分析:
-<主体 1>（出现在[镜头 1]）：完全保留——保持三张人物参考图中的脸、头发、身体、服装和身份。
-<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 4>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
+<主体 1>（出现在[镜头 1]）：完全保留——保持单张人物三视图合图中的脸、头发、身体、服装和身份。
+<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 2>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
 
 详细描述:
 目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 平视中景小幅度慢速上摇，跟着<主体 1>双手把盆提离地面。里面的短豆动一下。空匾留在下面。目光在盆上，闭唇。轻微三分之二。 眼皮若在画内则保持睁开，虹膜与瞳孔可读，最多一次慢眨眼。不得脸部变形、多余肢体、画面文字或商标。
+[镜头 1] 平视中景小幅度慢速上摇，跟着<主体 1>弯腰用双手把装着短粗豆的唯一米白内壁、深蓝盆沿、外侧褪色红花的搪瓷盆提离土面。这是搪瓷盆，不是竹匾。唯一的空圆竹匾平放在土上，保持空且绝对不动；不得被提起、装豆、重复或移动。搪瓷盆里的短豆只轻微移动一次。目光在盆上，闭唇。轻微三分之二。 眼皮若在画内则保持睁开，虹膜与瞳孔可读，最多一次慢眨眼。不得脸部变形、多余肢体、画面文字或商标。
 
 整体声音环境:
 静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
@@ -3010,25 +3006,25 @@ N/A
 - 场景引用：field
 - 出镜人物：femaleLead
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_45_h3_v01.mp4`
+- 输出：`generated/video/raw/shot_45_h3_v02.mp4`
 
 ### English H3 prompt
 
 ```text
 subject_definitions:
-<Subject 1> is the adult rural Chinese woman whose appearance comes from <Picture 1> (front), <Picture 2> (side), and <Picture 3> (back). Keep the same mature face, blue-gray floral headscarf, black hair in a low ponytail, faded light-blue floral short-sleeve shirt, dark-blue cropped trousers, brown flat shoes, and sturdy working build.
-<Subject 2> is the environment anchored by <Picture 4> from assets/scenes/field_west_end_v11_candidate.png. The confirmed west-end bean-field reference, loaded as <Picture 4>. Preserve the two parallel bean rows, green bamboo stakes, dark open soil furrow, tree line and distant low ridge. The basin, round bamboo tray and the later sparse-versus-dense harvest state are shot-specific props and must be added only where the shot action calls for them.
+<Subject 1> is the adult rural Chinese woman whose appearance comes from the single combined front/side/back character sheet in <Picture 1>. Keep the same mature face, blue-gray floral headscarf, black hair in a low ponytail, faded light-blue floral short-sleeve shirt, dark-blue cropped trousers, brown flat shoes, and sturdy working build.
+<Subject 2> is the environment anchored by <Picture 2> from assets/scenes/field_west_end_v11_candidate.png. The confirmed west-end bean-field reference, loaded as <Picture 2>. Preserve the two parallel bean rows, green bamboo stakes, dark open soil furrow, tree line and distant low ridge. The basin, round bamboo tray and the later sparse-versus-dense harvest state are shot-specific props and must be added only where the shot action calls for them.
 
 summary:
 [reference generation] one continuous 1.5-second photoreal live-action 16:9 MV shot of <Subject 1> and <Subject 2> at the established location, following the single action described below.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the three character references.
-<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 4>; add only the shot-specific action props described below.
+<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the combined character sheet.
+<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 2>; add only the shot-specific action props described below.
 
 detailed_description:
 The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] A close shot holds static on the lifted enamel basin. Short, thick, stubby green beans, each only about a thumb long, shift once against the enamel. <Subject 1>'s two hands hold the rim. The frame is filled by the basin, the beans, and the hands.
+[Shot 1] Locked close-up at upper-thigh height, looking slightly down into the small cream enamel basin with a dark blue rim and faded red exterior flowers. The basin fills three quarters of the image from first to last frame. Two hands of <Subject 1> grip opposite sides of its rim. A narrow strip of her faded blue floral shirt is visible above the basin; the frame remains cropped to hands, basin and shirt. Her feet stay planted and she remains slightly bent forward, holding the lifted basin level near her upper thighs. Short plump green seed pods, approximately a thumb long, shift gently a few centimeters once as her grip settles, then rest inside the cream interior. The camera holds a static shot and the basin keeps the same size in the frame. The bean field is only a soft narrow background edge. Hands retain five fingers and remain attached to the same arms.
 
 overall_soundscape:
 silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
@@ -3041,19 +3037,19 @@ N/A
 
 ```text
 主体定义:
-<主体 1> 是成年中国农村女性嫂子，外观来自<图片 1>（正面）、<图片 2>（侧面）、<图片 3>（背面）。保持成熟面孔、蓝灰碎花头巾、低马尾、浅蓝碎花短袖衬衫、深蓝七分裤、棕色平底鞋和结实的劳作身材。
-<主体 2> 是由<图片 4>（assets/scenes/field_west_end_v11_candidate.png）锁定的环境。已确认的“菜地西头与两行豆架”场景基准图，作为<图片 4>载入。保持两行平行豆架、绿色竹竿、深色裸土沟、树线和远处低山脊。搪瓷盆、圆竹匾以及后续“稀疏与浓密”的收获状态属于镜头道具，只在动作明确要求时加入。
+<主体 1> 是成年中国农村女性嫂子，外观来自<图片 1>（正面、侧面、背面合在同一张人物三视图中）。保持成熟面孔、蓝灰碎花头巾、低马尾、浅蓝碎花短袖衬衫、深蓝七分裤、棕色平底鞋和结实的劳作身材。
+<主体 2> 是由<图片 2>（assets/scenes/field_west_end_v11_candidate.png）锁定的环境。已确认的“菜地西头与两行豆架”场景基准图，作为<图片 2>载入。保持两行平行豆架、绿色竹竿、深色裸土沟、树线和远处低山脊。搪瓷盆、圆竹匾以及后续“稀疏与浓密”的收获状态属于镜头道具，只在动作明确要求时加入。
 
 摘要:
 一条连续 1.5 秒、真人写实、16:9 的参考图生成 MV 镜头，<主体 1>和<主体 2>位于已锁定场景中，执行下述单一动作。
 
 保留分析:
-<主体 1>（出现在[镜头 1]）：完全保留——保持三张人物参考图中的脸、头发、身体、服装和身份。
-<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 4>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
+<主体 1>（出现在[镜头 1]）：完全保留——保持单张人物三视图合图中的脸、头发、身体、服装和身份。
+<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 2>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
 
 详细描述:
 目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 近景固定在被提起的搪瓷盆里。短而粗、只有拇指那么长的豆角往盆壁上碰一下。<主体 1>的两只手扶着盆沿。画面里是盆、豆子和手。 眼皮若在画内则保持睁开，虹膜与瞳孔可读，最多一次慢眨眼。不得脸部变形、多余肢体、画面文字或商标。
+[镜头 1] 大腿上段高度略俯的固定近景，米白内壁、深蓝边、外侧褪色红花的搪瓷盆从首帧到尾帧占画面四分之三。<主体 1>双手握着相对两侧的盆沿，盆上方只见窄条旧蓝碎花衫，始终裁切在手、盆与衣料。她双脚站稳在原地，仍略弯身，在大腿上段附近水平端着已离地的盆。拇指长、短而饱满的绿色种豆随着扶稳动作轻移几厘米一次，随后停在米白内壁内。镜头固定，盆在画面中的大小不变。豆地仅在边缘形成窄条柔和背景。双手各五指并始终连在同一双手臂上。
 
 整体声音环境:
 静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
@@ -3073,21 +3069,21 @@ N/A
 
 ```text
 subject_definitions:
-<Subject 1> is the adult rural Chinese woman whose appearance comes from <Picture 1> (front), <Picture 2> (side), and <Picture 3> (back). Keep the same mature face, blue-gray floral headscarf, black hair in a low ponytail, faded light-blue floral short-sleeve shirt, dark-blue cropped trousers, brown flat shoes, and sturdy working build.
-<Subject 2> is the environment anchored by <Picture 4> from assets/scenes/house_threshold_v29_candidate.png. The confirmed ordinary self-built house entrance reference, loaded as <Picture 4>. Preserve the faded beige plaster facade, the large closed blue-green double door on the left, the partly open green metal entrance door near center, its rough gray trim, the shallow concrete step and the narrow rubble strip along the wall. Keep the architecture modest and ordinary, without ornamental enlargement.
-<Subject 3> is the environment anchored by <Picture 5> from assets/scenes/main_room_stove_v01_candidate.png. The confirmed ordinary kitchen interior reference, loaded as <Picture 5>. Preserve the compact ordinary kitchen with cream walls, a red lower wall stripe, the pale L-shaped counter, the two-burner gas cooktop at the left foreground, metal pots and bowls, the wooden shelves and hanging utensils, and the wood-framed window looking onto green fields. Add a bowl, wok, bean bag or hand only when the shot action calls for it, while keeping this room layout fixed.
+<Subject 1> is the adult rural Chinese woman whose appearance comes from the single combined front/side/back character sheet in <Picture 1>. Keep the same mature face, blue-gray floral headscarf, black hair in a low ponytail, faded light-blue floral short-sleeve shirt, dark-blue cropped trousers, brown flat shoes, and sturdy working build.
+<Subject 2> is the environment anchored by <Picture 2> from assets/scenes/house_threshold_v29_candidate.png. The confirmed ordinary self-built house entrance reference, loaded as <Picture 2>. Preserve the faded beige plaster facade, the large closed blue-green double door on the left, the partly open green metal entrance door near center, its rough gray trim, the shallow concrete step and the narrow rubble strip along the wall. Keep the architecture modest and ordinary, without ornamental enlargement.
+<Subject 3> is the environment anchored by <Picture 3> from assets/scenes/main_room_stove_v01_candidate.png. The confirmed ordinary kitchen interior reference, loaded as <Picture 3>. Preserve the compact ordinary kitchen with cream walls, a red lower wall stripe, the pale L-shaped counter, the two-burner gas cooktop at the left foreground, metal pots and bowls, the wooden shelves and hanging utensils, and the wood-framed window looking onto green fields. Add a bowl, wok, bean bag or hand only when the shot action calls for it, while keeping this room layout fixed.
 
 summary:
 [reference generation] one continuous 7-second photoreal live-action 16:9 MV shot of <Subject 1> and <Subject 2> and <Subject 3> at the established location, following the single action described below.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the three character references.
-<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 4>; add only the shot-specific action props described below.
-<Subject 3> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 5>; add only the shot-specific action props described below.
+<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the combined character sheet.
+<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 2>; add only the shot-specific action props described below.
+<Subject 3> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 3>; add only the shot-specific action props described below.
 
 detailed_description:
 The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] An eye-level medium shot tilts down with small amplitude at slow speed. <Subject 1> pours short, thick, stubby green bean pods, each only about a thumb long, from the white enamel basin into a cloth bag held open in front of her. The same green pods fill the basin and fall into the bag. The covered wok rests on the ordinary kitchen counter in the left foreground, matching the confirmed kitchen layout. The bare wooden nail is on the interior wall away from the cooktop. Gaze on the bag mouth, lips closed. Eyelids remain open, irises and pupils stay readable, with at most one slow natural blink. Stable faces and hands, coherent clothing, no flickering eyes, no facial warping, no extra limbs, no on-screen text, no logos.
+[Shot 1] An eye-level medium shot just inside the ordinary green entrance frames <Subject 1> at mild three-quarter angle. The left interior wall holds one bare wooden peg. Through the opening to the right, the modest cream-and-red kitchen remains quiet, with a covered wok resting on its counter. In front of her, a small unbleached white cotton seed bag stands upright on a low wooden stool. Its wide mouth is folded outward and stays open by itself. Her two hands hold opposite sides of the same cream enamel basin with a dark blue rim and faded red exterior flowers, containing the short plump green pods collected from the field. Her eyes hold on the bag mouth, brows level, lips softly closed. She tips the basin once, slowly and continuously, and the green pods slide over its lower rim into the open bag. Both hands stay on the basin; the bag is supported by the stool. The camera tilts down with small amplitude at slow speed to keep the falling pods and bag mouth visible. The bag grows fuller, its bottom remains on the stool, and the basin becomes visibly empty. She gently returns the empty basin to level and holds it above the filled bag. The peg remains bare throughout this shot. Coherent hands, stable vessels and natural gravity, in one uninterrupted real-time take.
 
 overall_soundscape:
 silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
@@ -3100,21 +3096,21 @@ N/A
 
 ```text
 主体定义:
-<主体 1> 是成年中国农村女性嫂子，外观来自<图片 1>（正面）、<图片 2>（侧面）、<图片 3>（背面）。保持成熟面孔、蓝灰碎花头巾、低马尾、浅蓝碎花短袖衬衫、深蓝七分裤、棕色平底鞋和结实的劳作身材。
-<主体 2> 是由<图片 4>（assets/scenes/house_threshold_v29_candidate.png）锁定的环境。已确认的“普通自建房入口”场景基准图，作为<图片 4>载入。保持褪色米灰抹灰墙面、左侧关闭的蓝绿色双扇门、中央偏右半开的绿色金属入口门、粗糙灰色门框、浅水泥台阶和墙脚窄碎石带。建筑保持朴素普通，不做装饰性扩建。
-<主体 3> 是由<图片 5>（assets/scenes/main_room_stove_v01_candidate.png）锁定的环境。已确认的“普通厨房内景”场景基准图，作为<图片 5>载入。保持奶油色墙面、红色下墙裙、浅色L形操作台、左前景双眼燃气灶、金属锅盆、木层架和悬挂厨具，以及望向绿色田野的木框窗。只有镜头动作需要时才加入碗、锅、种袋或手，房间布局保持不变。
+<主体 1> 是成年中国农村女性嫂子，外观来自<图片 1>（正面、侧面、背面合在同一张人物三视图中）。保持成熟面孔、蓝灰碎花头巾、低马尾、浅蓝碎花短袖衬衫、深蓝七分裤、棕色平底鞋和结实的劳作身材。
+<主体 2> 是由<图片 2>（assets/scenes/house_threshold_v29_candidate.png）锁定的环境。已确认的“普通自建房入口”场景基准图，作为<图片 2>载入。保持褪色米灰抹灰墙面、左侧关闭的蓝绿色双扇门、中央偏右半开的绿色金属入口门、粗糙灰色门框、浅水泥台阶和墙脚窄碎石带。建筑保持朴素普通，不做装饰性扩建。
+<主体 3> 是由<图片 3>（assets/scenes/main_room_stove_v01_candidate.png）锁定的环境。已确认的“普通厨房内景”场景基准图，作为<图片 3>载入。保持奶油色墙面、红色下墙裙、浅色L形操作台、左前景双眼燃气灶、金属锅盆、木层架和悬挂厨具，以及望向绿色田野的木框窗。只有镜头动作需要时才加入碗、锅、种袋或手，房间布局保持不变。
 
 摘要:
 一条连续 7 秒、真人写实、16:9 的参考图生成 MV 镜头，<主体 1>和<主体 2>和<主体 3>位于已锁定场景中，执行下述单一动作。
 
 保留分析:
-<主体 1>（出现在[镜头 1]）：完全保留——保持三张人物参考图中的脸、头发、身体、服装和身份。
-<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 4>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
-<主体 3>（出现在[镜头 1]）：完全保留——保持<图片 5>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
+<主体 1>（出现在[镜头 1]）：完全保留——保持单张人物三视图合图中的脸、头发、身体、服装和身份。
+<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 2>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
+<主体 3>（出现在[镜头 1]）：完全保留——保持<图片 3>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
 
 详细描述:
 目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 平视中景小幅度慢速下摇。<主体 1>把白搪瓷盆里短而粗、只有拇指那么长的青豆角倒进身前张开的布袋。盆里和落下的都是同样的青豆角。盖着的锅放在左前景普通厨房操作台上，与已确认的厨房布局一致。光木钉在远离炉具的内墙上。目光在袋口，闭唇。 眼皮若在画内则保持睁开，虹膜与瞳孔可读，最多一次慢眨眼。不得脸部变形、多余肢体、画面文字或商标。
+[镜头 1] 普通绿色入口内侧的平视中景，<Subject 1>轻微三分之二角度。左侧内墙上一颗空木钉；画右开口可见安静的奶油色红墙裙普通厨房，盖好的锅留在操作台。她身前低木凳上，一只本白棉布种袋直立，宽袋口向外翻折并自行撑开。她双手握同一只米白内壁、蓝边、外侧褪色红花搪瓷盆的相对两侧，盆中是从地头取回的短而饱满的绿豆荚。目光持住袋口，眉平、嘴轻闭。她缓慢连续倾斜盆一次，豆荚沿低侧盆沿滑入袋口；双手始终在盆上，袋底由凳子支撑。镜头小幅慢速下摇，保持豆子落下和袋口可见。袋子渐满、袋底留在凳上，盆内明显倒空。她轻轻将空盆回正，端在装好的袋上方。木钉全程空着。单条实时连续镜头，手与容器稳定，豆子按重力落下。
 
 整体声音环境:
 静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
@@ -3128,7 +3124,7 @@ N/A
 - 场景引用：house、kitchen
 - 出镜人物：无
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_47_h3_v01.mp4`
+- 输出：`generated/video/raw/shot_47_h3_v01_trim.mp4`
 
 ### English H3 prompt
 
@@ -3146,7 +3142,7 @@ retention_analysis:
 
 detailed_description:
 The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] A close shot holds static on the open cloth bag. Short, thick, stubby green bean pods, each only about a thumb long, sit inside the mouth of the bag. The frame is filled by the cloth and the green pods.
+[Shot 1] The camera holds a static close shot slightly above the mouth of the same unbleached white cotton seed bag, standing on the low wooden stool just inside the green entrance. The bag is filled with short plump green pods, each about a thumb long. Its folded white cloth rim relaxes slightly inward and then settles, leaving the green pods visible through a partly open mouth. The bottom stays supported by the stool throughout. The cloth and pods occupy most of the frame. Only a narrow soft green door edge and gray entrance jamb appear behind; the kitchen is outside this tight crop. Gentle natural cloth settling is the sole motion. A quiet two-second insert showing the finished contents, with constant light, fixed framing and a stable amount of beans.
 
 overall_soundscape:
 silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
@@ -3171,7 +3167,7 @@ N/A
 
 详细描述:
 目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 近景固定在张开的布袋口。袋口里是短而粗、只有拇指那么长的青豆角。画面里是布和青豆角。 保持场景几何和材质纹理稳定，不出现活人、画面文字或商标。
+[镜头 1] 摄影机略高于袋口拍固定近景。同一只本白棉布种袋直立在绿门内侧的低木凳上，里面装着约拇指长、短而饱满的绿色豆荚。翻折的白布袋沿稍向内松落并停住，半开的袋口仍能看清绿豆荚，袋底全程由凳子支撑。布料与豆子占据大部分画面，后面只留窄条虚化绿门与灰色门框；厨房在紧取景之外。仅布料有轻微自然落稳动作。两秒只交代装好的结果，光线、构图、豆量保持稳定。
 
 整体声音环境:
 静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
@@ -3191,21 +3187,21 @@ N/A
 
 ```text
 subject_definitions:
-<Subject 1> is the adult rural Chinese woman whose appearance comes from <Picture 1> (front), <Picture 2> (side), and <Picture 3> (back). Keep the same mature face, blue-gray floral headscarf, black hair in a low ponytail, faded light-blue floral short-sleeve shirt, dark-blue cropped trousers, brown flat shoes, and sturdy working build.
-<Subject 2> is the environment anchored by <Picture 4> from assets/scenes/house_threshold_v29_candidate.png. The confirmed ordinary self-built house entrance reference, loaded as <Picture 4>. Preserve the faded beige plaster facade, the large closed blue-green double door on the left, the partly open green metal entrance door near center, its rough gray trim, the shallow concrete step and the narrow rubble strip along the wall. Keep the architecture modest and ordinary, without ornamental enlargement.
-<Subject 3> is the environment anchored by <Picture 5> from assets/scenes/main_room_stove_v01_candidate.png. The confirmed ordinary kitchen interior reference, loaded as <Picture 5>. Preserve the compact ordinary kitchen with cream walls, a red lower wall stripe, the pale L-shaped counter, the two-burner gas cooktop at the left foreground, metal pots and bowls, the wooden shelves and hanging utensils, and the wood-framed window looking onto green fields. Add a bowl, wok, bean bag or hand only when the shot action calls for it, while keeping this room layout fixed.
+<Subject 1> is the adult rural Chinese woman whose appearance comes from the single combined front/side/back character sheet in <Picture 1>. Keep the same mature face, blue-gray floral headscarf, black hair in a low ponytail, faded light-blue floral short-sleeve shirt, dark-blue cropped trousers, brown flat shoes, and sturdy working build.
+<Subject 2> is the environment anchored by <Picture 2> from assets/scenes/house_threshold_v29_candidate.png. The confirmed ordinary self-built house entrance reference, loaded as <Picture 2>. Preserve the faded beige plaster facade, the large closed blue-green double door on the left, the partly open green metal entrance door near center, its rough gray trim, the shallow concrete step and the narrow rubble strip along the wall. Keep the architecture modest and ordinary, without ornamental enlargement.
+<Subject 3> is the environment anchored by <Picture 3> from assets/scenes/main_room_stove_v01_candidate.png. The confirmed ordinary kitchen interior reference, loaded as <Picture 3>. Preserve the compact ordinary kitchen with cream walls, a red lower wall stripe, the pale L-shaped counter, the two-burner gas cooktop at the left foreground, metal pots and bowls, the wooden shelves and hanging utensils, and the wood-framed window looking onto green fields. Add a bowl, wok, bean bag or hand only when the shot action calls for it, while keeping this room layout fixed.
 
 summary:
 [reference generation] one continuous 5.5-second photoreal live-action 16:9 MV shot of <Subject 1> and <Subject 2> and <Subject 3> at the established location, following the single action described below.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the three character references.
-<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 4>; add only the shot-specific action props described below.
-<Subject 3> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 5>; add only the shot-specific action props described below.
+<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the combined character sheet.
+<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 2>; add only the shot-specific action props described below.
+<Subject 3> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 3>; add only the shot-specific action props described below.
 
 detailed_description:
 The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] An eye-level medium shot pushes in with small amplitude at slow speed. <Subject 1> lifts a white cloth sack by its cloth tie and sets that tie onto the small wooden nail on the interior wall at screen left of the doorway. She lowers her hand. The white cloth sack hangs from the nail, full and closed, the green pods inside the cloth. Mild three-quarter, mouth a flat closed line. Eyelids remain open, irises and pupils stay readable, with at most one slow natural blink. Stable faces and hands, coherent clothing, no flickering eyes, no facial warping, no extra limbs, no on-screen text, no logos.
+[Shot 1] An eye-level medium shot inside the same ordinary entrance shows <Subject 1> beside the pale interior wall on the left of the green doorway. A single exposed wooden peg projects from this pale wall at her shoulder height, separate from the utensils hanging on the green door. She already holds the same filled unbleached white cotton seed bag, its mouth gathered shut with one simple cloth drawstring loop. Her right hand holds the loop while her left hand supports the bag's rounded lower part. She raises the bag a short distance and places the loop over the exposed peg. The loop catches securely around the wood. She releases the right hand, then lowers the supporting left hand. The weight transfers naturally to the peg, and the bag hangs against the wall with one small settling sway. The camera pushes in with small amplitude at slow speed, only a few centimeters, keeping her face, both hands, peg and whole bag visible throughout. Her gaze holds on the loop and peg, brows calm, lips closed. She stays in a mild three-quarter orientation, with at most one natural blink. The quiet kitchen stays in the right background. One woman, coherent hands and stable cloth, real-time motion, stable late-afternoon exposure.
 
 overall_soundscape:
 silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
@@ -3218,21 +3214,21 @@ N/A
 
 ```text
 主体定义:
-<主体 1> 是成年中国农村女性嫂子，外观来自<图片 1>（正面）、<图片 2>（侧面）、<图片 3>（背面）。保持成熟面孔、蓝灰碎花头巾、低马尾、浅蓝碎花短袖衬衫、深蓝七分裤、棕色平底鞋和结实的劳作身材。
-<主体 2> 是由<图片 4>（assets/scenes/house_threshold_v29_candidate.png）锁定的环境。已确认的“普通自建房入口”场景基准图，作为<图片 4>载入。保持褪色米灰抹灰墙面、左侧关闭的蓝绿色双扇门、中央偏右半开的绿色金属入口门、粗糙灰色门框、浅水泥台阶和墙脚窄碎石带。建筑保持朴素普通，不做装饰性扩建。
-<主体 3> 是由<图片 5>（assets/scenes/main_room_stove_v01_candidate.png）锁定的环境。已确认的“普通厨房内景”场景基准图，作为<图片 5>载入。保持奶油色墙面、红色下墙裙、浅色L形操作台、左前景双眼燃气灶、金属锅盆、木层架和悬挂厨具，以及望向绿色田野的木框窗。只有镜头动作需要时才加入碗、锅、种袋或手，房间布局保持不变。
+<主体 1> 是成年中国农村女性嫂子，外观来自<图片 1>（正面、侧面、背面合在同一张人物三视图中）。保持成熟面孔、蓝灰碎花头巾、低马尾、浅蓝碎花短袖衬衫、深蓝七分裤、棕色平底鞋和结实的劳作身材。
+<主体 2> 是由<图片 2>（assets/scenes/house_threshold_v29_candidate.png）锁定的环境。已确认的“普通自建房入口”场景基准图，作为<图片 2>载入。保持褪色米灰抹灰墙面、左侧关闭的蓝绿色双扇门、中央偏右半开的绿色金属入口门、粗糙灰色门框、浅水泥台阶和墙脚窄碎石带。建筑保持朴素普通，不做装饰性扩建。
+<主体 3> 是由<图片 3>（assets/scenes/main_room_stove_v01_candidate.png）锁定的环境。已确认的“普通厨房内景”场景基准图，作为<图片 3>载入。保持奶油色墙面、红色下墙裙、浅色L形操作台、左前景双眼燃气灶、金属锅盆、木层架和悬挂厨具，以及望向绿色田野的木框窗。只有镜头动作需要时才加入碗、锅、种袋或手，房间布局保持不变。
 
 摘要:
 一条连续 5.5 秒、真人写实、16:9 的参考图生成 MV 镜头，<主体 1>和<主体 2>和<主体 3>位于已锁定场景中，执行下述单一动作。
 
 保留分析:
-<主体 1>（出现在[镜头 1]）：完全保留——保持三张人物参考图中的脸、头发、身体、服装和身份。
-<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 4>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
-<主体 3>（出现在[镜头 1]）：完全保留——保持<图片 5>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
+<主体 1>（出现在[镜头 1]）：完全保留——保持单张人物三视图合图中的脸、头发、身体、服装和身份。
+<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 2>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
+<主体 3>（出现在[镜头 1]）：完全保留——保持<图片 3>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
 
 详细描述:
 目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 平视中景小幅度慢速推近。<主体 1>提起一只已经装满的白布袋，把袋绳套上门内、画面左侧墙上的小木钉，然后放下手。白布袋挂在钉子上，袋口合着，青豆角在布里面。轻微三分之二，嘴是一条闭着的平线。 眼皮若在画内则保持睁开，虹膜与瞳孔可读，最多一次慢眨眼。不得脸部变形、多余肢体、画面文字或商标。
+[镜头 1] 同一普通入口内侧平视中景，<Subject 1>站在绿门左侧的浅色内墙旁。浅墙上在她肩高处伸出一颗空木钉，与绿门上挂厨具的位置分开。她已拿着同一只装满的本白棉布种袋，袋口用一根简单布绳收紧，留一个绳圈。右手提绳圈，左手托圆鼓袋底，向上抬一小段，将绳圈套上空木钉。绳圈挂稳后，先放开右手，再放下左侧托袋的手。重量自然交给木钉，袋子贴墙小摆一次落稳。镜头仅前进几厘米、小幅慢推，全程保持脸、双手、木钉和整袋可见。视线持住绳圈和钉子，眉平静、闭唇、轻微三分之二角度，最多一次自然眨眼。安静的厨房留在右后景。只有嫂子一人，双手与布料稳定，正常实时动作，傍晚曝光稳定。
 
 整体声音环境:
 静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
@@ -3264,7 +3260,7 @@ retention_analysis:
 
 detailed_description:
 The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] A close shot holds static on the white cloth sack hanging from the wooden nail on the interior wall. The sack is full, closed, and still. The frame is filled by the sack, the nail, and the wall.
+[Shot 1] The camera holds a static close shot of the same full unbleached white cotton seed bag hanging at the left side of the green doorway. Its gathered neck is tied shut, and a single doubled white cloth loop passes over a short horizontal round wooden peg projecting from the gray plastered inner door jamb. The loop is taut and supports the bag's weight. The bag has a softly triangular filled body and a nearly horizontal lower seam. At the first frame it is already hanging freely; it makes one tiny natural settling sway of less than a centimeter and rests. The gray plaster behind, the wood and a narrow green door edge stay fixed. Only the closed bag, loop, peg and plaster appear in this tight crop. The kitchen is beyond the cropped frame. Steady late-afternoon light, constant scale and coherent cloth texture.
 
 overall_soundscape:
 silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
@@ -3289,7 +3285,7 @@ N/A
 
 详细描述:
 目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 近景固定在门内墙上、挂在木钉上的白布袋。袋子是满的，口是合的，停着不动。画面里是布袋、钉子和墙。 保持场景几何和材质纹理稳定，不出现活人、画面文字或商标。
+[镜头 1] 固定近景拍绿门左侧挂着的同一只装满的本白棉布种袋。袋颈已收拢扎紧，一根折成双股的白布绳圈套在灰抹灰内门框上伸出的短圆木钉，绳圈绷紧承重。袋身饱满、柔和三角形，下缝近水平。首帧已经自由悬挂，只轻轻摆不到一厘米落稳。背后的灰墙、木钉和窄绿门边固定。紧取景里只有闭口袋、绳圈、木钉和灰墙，厨房在画外。傍晚光线稳定，比例与布纹连续。
 
 整体声音环境:
 静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
@@ -3303,7 +3299,7 @@ N/A
 - 场景引用：house、kitchen
 - 出镜人物：无
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_50_h3_v01.mp4`
+- 输出：`generated/video/raw/shot_50_h3_v01_trim.mp4`
 
 ### English H3 prompt
 
@@ -3321,7 +3317,7 @@ retention_analysis:
 
 detailed_description:
 The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] An eye-level close shot trucks right with small amplitude at slow speed across three used bowls gathered by the ordinary kitchen counter. One bowl is slightly larger. A few fried green bean pods remain in the bowls. The frame is filled by the bowls and the stove edge.
+[Shot 1] An eye-level close shot trucks right with small amplitude at slow speed across three used bowls gathered by the ordinary kitchen counter. One is the same plain cream-white ceramic bowl used by the seated man; a second family bowl is slightly larger. All three already rest together on the counter. A few fried green bean pods remain in the bowls. The frame is filled by the bowls and the stove edge.
 
 overall_soundscape:
 silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
@@ -3346,7 +3342,7 @@ N/A
 
 详细描述:
 目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 平视近景小幅度慢速右移，扫过普通厨房操作台旁放在一起的三只用过的碗。一只稍大。碗里还留着几根干煸过的青豆角。画面里是碗和普通厨房沿。 保持场景几何和材质纹理稳定，不出现活人、画面文字或商标。
+[镜头 1] 平视近景小幅度慢速右移，扫过普通厨房操作台旁放在一起的三只用过的碗。其中一只是小王用过的同一只素色米白瓷碗，另一只家用碗稍大；三只碗已经并排放好。碗里还留着几根干煸过的青豆角。画面里是碗和普通厨房沿。 保持场景几何和材质纹理稳定，不出现活人、画面文字或商标。
 
 整体声音环境:
 静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
@@ -3357,7 +3353,7 @@ N/A
 
 ## 51 · 04:07.5–04:12.5 · 他还坐在入口台阶上
 
-- 场景引用：road、house
+- 场景引用：house
 - 出镜人物：maleLead
 - 生成类型：characterVideo
 - 输出：`generated/video/raw/shot_51_h3_v01.mp4`
@@ -3366,24 +3362,22 @@ N/A
 
 ```text
 subject_definitions:
-<Subject 1> is the adult Chinese man whose appearance comes from <Picture 1> (front), <Picture 2> (side), and <Picture 3> (back). Keep the same clean-shaven youthful face, voluminous layered medium-short black hair, slim build, ivory-white short-sleeve collared shirt worn open over a plain white crew-neck T-shirt, loose light-blue full-length jeans, white-and-light-gray low-top sneakers, silver rectangular pendant, black watch on the left wrist, and thin bracelet on the right wrist.
-<Subject 2> is the environment anchored by <Picture 4> from assets/scenes/road_west_gate_v02.png. The confirmed eastbound rural lane reference, loaded as <Picture 4>. Preserve the same twin-track pale gravel and packed-earth lane, the grassy center and edges, the dark tree line, the modest building edge on the left and open crops on the right. The route continues east toward the field; do not turn it into a paved road or a city street.
-<Subject 3> is the environment anchored by <Picture 5> from assets/scenes/house_threshold_v29_candidate.png. The confirmed ordinary self-built house entrance reference, loaded as <Picture 5>. Preserve the faded beige plaster facade, the large closed blue-green double door on the left, the partly open green metal entrance door near center, its rough gray trim, the shallow concrete step and the narrow rubble strip along the wall. Keep the architecture modest and ordinary, without ornamental enlargement.
+<Subject 1> is the adult Chinese man in the combined three-view sheet <Picture 1>. Retain his face, hair, ivory open shirt over a white T-shirt, light-blue jeans, white-gray sneakers, silver pendant, black watch and thin bracelet.
+<Subject 2> is the ordinary entrance in <Picture 2>. Retain the faded beige plaster, closed blue-green double doors at left, partly open green metal entrance door, gray frame and shallow concrete step.
 
 summary:
-[reference generation] one continuous 5-second photoreal live-action 16:9 MV shot of <Subject 1> and <Subject 2> and <Subject 3> at the established location, following the single action described below.
+[reference generation] one continuous 5-second live-action shot of <Subject 1> remaining seated at <Subject 2>.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the three character references.
-<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 4>; add only the shot-specific action props described below.
-<Subject 3> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 5>; add only the shot-specific action props described below.
+<Subject 1> (appears in [Shot 1]): fully_preserved - retain identity, clothing and accessories from the single combined character sheet.
+<Subject 2> (appears in [Shot 1]): fully_preserved - retain the entrance architecture, materials, scale and left-right arrangement.
 
 detailed_description:
-The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] Lower light, not yet night. An eye-level medium-wide shot pulls out with small amplitude at slow speed. <Subject 1> stays seated on the threshold, empty hands resting on his knees. The seed bag hangs on the nail inside behind him. The partly open green entrance door stays behind him; the road reference defines the off-frame route and is not pasted into the doorway. His gaze holds on the yard. Brows level, lips closed. He stays seated for the whole shot. Eyelids remain open, irises and pupils stay readable, with at most one slow natural blink. Stable faces and hands, coherent clothing, no flickering eyes, no facial warping, no extra limbs, no on-screen text, no logos.
+Photoreal rural Chinese home late on the same afternoon, natural muted colors, quiet real-time human breathing.
+[Shot 1] An eye-level medium-wide shot begins with the seated man prominent in the entrance. <Subject 1> remains seated directly on the shallow concrete step immediately in front of the green metal door. His empty hands rest on his knees and his feet stay on the concrete below. Behind him, inside the narrow doorway, the same filled unbleached white cotton seed bag hangs by its gathered cloth loop on the left gray inner door jamb, separate from the green door. The seed bag is already hung and settled. The camera pulls out with small amplitude at slow speed, traveling only a few centimeters during the entire take. The slight widening gives the seated figure a little more breathing room while preserving his readable face. His gaze holds quietly on the yard in front of him, eyebrows level, lips closed with level corners. One small natural breath gently moves his chest; his hips stay on the step and his hands stay on his knees. He maintains the same seated pose through the true final frame. The green door stays partly open, the beige wall and left double doors stay fixed, and late-afternoon illumination is steady. Coherent hands, stable face, at most one natural blink. The distant field and travel route remain beyond the frame.
 
 overall_soundscape:
-silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
+silence
 
 non_diegetic_music:
 N/A
@@ -3392,59 +3386,55 @@ N/A
 ### 中文对照提示词
 
 ```text
-主体定义:
-<主体 1> 是成年中国男性小王，外观来自<图片 1>（正面）、<图片 2>（侧面）、<图片 3>（背面）。保持清秀无胡须的脸、蓬松有层次的中短黑发、瘦高身材、敞开的乳白色短袖翻领衬衫、纯白圆领T恤、浅蓝色宽松长牛仔裤、白灰低帮运动鞋、银色矩形吊坠、左腕黑表和右腕细手链。
-<主体 2> 是由<图片 4>（assets/scenes/road_west_gate_v02.png）锁定的环境。已确认的“东门外向东土路”场景基准图，作为<图片 4>载入。保持浅色碎石与压实土组成的双车辙路、中央和两侧草带、深色树线、左侧朴素建筑边缘以及右侧开阔庄稼。道路继续向东通往菜地；不要变成柏油路或城市街道。
-<主体 3> 是由<图片 5>（assets/scenes/house_threshold_v29_candidate.png）锁定的环境。已确认的“普通自建房入口”场景基准图，作为<图片 5>载入。保持褪色米灰抹灰墙面、左侧关闭的蓝绿色双扇门、中央偏右半开的绿色金属入口门、粗糙灰色门框、浅水泥台阶和墙脚窄碎石带。建筑保持朴素普通，不做装饰性扩建。
+subject_definitions:
+<Subject 1> 是<Picture 1>人物三视图合图中的成年中国男性小王，保持面孔、发型、白衬衫叠穿白T恤、浅蓝牛仔裤、白灰鞋、银吊坠、黑表与细手链。
+<Subject 2> 是<Picture 2>的普通入口，保持褪色米灰墙、左侧关闭的蓝绿双门、半开的绿色金属入口门、灰门框和浅水泥台阶。
 
-摘要:
-一条连续 5 秒、真人写实、16:9 的参考图生成 MV 镜头，<主体 1>和<主体 2>和<主体 3>位于已锁定场景中，执行下述单一动作。
+summary:
+[reference generation] 一条连续5秒真人写实镜头，<Subject 1>仍坐在<Subject 2>。
 
-保留分析:
-<主体 1>（出现在[镜头 1]）：完全保留——保持三张人物参考图中的脸、头发、身体、服装和身份。
-<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 4>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
-<主体 3>（出现在[镜头 1]）：完全保留——保持<图片 5>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
+retention_analysis:
+<Subject 1> (appears in [Shot 1]): fully_preserved - 保持单张人物合图中的身份、服装和配饰。
+<Subject 2> (appears in [Shot 1]): fully_preserved - 保持入口建筑、材质、尺度和左右关系。
 
-详细描述:
-目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 光线更低，天还没黑。平视中全景小幅度慢速拉远。<主体 1>仍坐在入口台阶上，双手空着放在膝上。身后门里，种袋挂在钉子上。身后的绿色入口门保持半开；道路基准图只用于锁定画外行进方向，不把道路硬塞进门洞。目光停在院子里。眉平稳，闭唇。他一直坐在入口台阶上。 眼皮若在画内则保持睁开，虹膜与瞳孔可读，最多一次慢眨眼。不得脸部变形、多余肢体、画面文字或商标。
+detailed_description:
+同一天下午更晚的中国农村真人写实，自然低饱和色彩，实时细微呼吸。
+[Shot 1] 平视中全景，起始让坐着的小王在入口中清楚可见。<Subject 1>始终直接坐在紧靠绿门的浅水泥台阶上，空手放双膝、双脚落在下方水泥地。身后窄门内，同一只装满的本白棉布种袋已用收紧的布绳圈挂在左侧灰色内门框旁，与绿色门板分开；袋子已经挂好并落稳。摄影机整镜只后退几厘米，小幅慢拉。轻微拉开给坐着的人留出一点环境，脸仍能看清。目光持住前方院子，眉平、闭唇且嘴角水平。一口自然呼吸轻动胸口，臀部留在台阶，双手留在膝上，坐姿持续到真实末帧。绿门保持半开，米灰墙与左侧双门固定，傍晚光照稳定。手和脸稳定，最多一次自然眨眼。远处豆地与出行路线都留在画外。
 
-整体声音环境:
-静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
+overall_soundscape:
+silence
 
-非叙事音乐:
+non_diegetic_music:
 N/A
 ```
 
 ## 60 · 04:12.5–04:17 · 入口台阶、种袋和东侧通道
 
-- 场景引用：road、house
+- 场景引用：house
 - 出镜人物：maleLead
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_60_h3_v01.mp4`
+- 输出：`generated/video/raw/shot_60_h3_v02_trim.mp4`
 
 ### English H3 prompt
 
 ```text
 subject_definitions:
-<Subject 1> is the adult Chinese man whose appearance comes from <Picture 1> (front), <Picture 2> (side), and <Picture 3> (back). Keep the same clean-shaven youthful face, voluminous layered medium-short black hair, slim build, ivory-white short-sleeve collared shirt worn open over a plain white crew-neck T-shirt, loose light-blue full-length jeans, white-and-light-gray low-top sneakers, silver rectangular pendant, black watch on the left wrist, and thin bracelet on the right wrist.
-<Subject 2> is the environment anchored by <Picture 4> from assets/scenes/road_west_gate_v02.png. The confirmed eastbound rural lane reference, loaded as <Picture 4>. Preserve the same twin-track pale gravel and packed-earth lane, the grassy center and edges, the dark tree line, the modest building edge on the left and open crops on the right. The route continues east toward the field; do not turn it into a paved road or a city street.
-<Subject 3> is the environment anchored by <Picture 5> from assets/scenes/house_threshold_v29_candidate.png. The confirmed ordinary self-built house entrance reference, loaded as <Picture 5>. Preserve the faded beige plaster facade, the large closed blue-green double door on the left, the partly open green metal entrance door near center, its rough gray trim, the shallow concrete step and the narrow rubble strip along the wall. Keep the architecture modest and ordinary, without ornamental enlargement.
+<Subject 1> is the adult Chinese man in the combined three-view sheet <Picture 1>. Retain his face, hair, ivory open shirt over a white T-shirt, light-blue jeans, white-gray sneakers, silver pendant, black watch and thin bracelet.
+<Subject 2> is the ordinary entrance in <Picture 2>. Retain the faded beige plaster, closed blue-green double doors at left, partly open green metal entrance door, gray frame and shallow concrete step.
 
 summary:
-[reference generation] one continuous 4.5-second photoreal live-action 16:9 MV shot of <Subject 1> and <Subject 2> and <Subject 3> at the established location, following the single action described below.
+[reference generation] one continuous 4.5-second live-action shot of <Subject 1> remaining seated at <Subject 2>.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the three character references.
-<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 4>; add only the shot-specific action props described below.
-<Subject 3> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 5>; add only the shot-specific action props described below.
+<Subject 1> (appears in [Shot 1]): fully_preserved - retain identity, clothing and accessories from the single combined character sheet.
+<Subject 2> (appears in [Shot 1]): fully_preserved - retain the entrance architecture, materials, scale and left-right arrangement.
 
 detailed_description:
-The target video is photoreal live-action in real time, the same late-summer Chinese village later the same day, with a lower sun, longer shadows and a pale sky that is not yet night. Colors stay muted. No golden nostalgia grade.
-[Shot 1] An eye-level medium-wide shot pulls out with small amplitude at slow speed. <Subject 1> remains seated on the threshold, empty hands on his knees. The white cloth seed sack hangs on the interior nail behind him, and the partly open green entrance door stays behind him; the road direction remains off frame. He stays seated. Mouth a flat closed line. Eyelids remain open, irises and pupils stay readable, with at most one slow natural blink. Stable faces and hands, coherent clothing, no flickering eyes, no facial warping, no extra limbs, no on-screen text, no logos.
+Photoreal rural Chinese home late on the same afternoon, natural muted colors, quiet real-time human breathing.
+[Shot 1] An establishing view of the whole modest house frontage is already present in the first frame. From across the yard, both complete door frames, the roof eave, the whole concrete base and the passage around the right corner all fit with comfortable margins. The seated man is a small figure near the lower center, his complete seated body and shoes only one quarter of image height. The shot stays at this wide scale throughout. <Subject 1> remains seated directly on the shallow concrete step immediately in front of the green metal door. His empty hands rest on his knees and his feet stay on the concrete below. Behind him, inside the narrow doorway, the same filled unbleached white cotton seed bag hangs by its gathered cloth loop on the left gray inner door jamb, separate from the green door. The seed bag is already hung and settled. The camera pulls out with small amplitude at slow speed, traveling only twenty centimeters during the entire take, keeping the entire house frontage in view from the first frame. The final composition keeps the man, step, hanging bag and narrow passage along the right exterior wall readable together. His gaze holds quietly on the yard in front of him, eyebrows level, lips closed with level corners. One small natural breath gently moves his chest; his hips stay on the step and his hands stay on his knees. He maintains the same seated pose through the true final frame. The green door stays partly open, the beige wall and left double doors stay fixed, and late-afternoon illumination is steady. Coherent hands, stable face, at most one natural blink. The distant field and travel route remain beyond the frame.
 
 overall_soundscape:
-silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
+silence
 
 non_diegetic_music:
 N/A
@@ -3453,27 +3443,25 @@ N/A
 ### 中文对照提示词
 
 ```text
-主体定义:
-<主体 1> 是成年中国男性小王，外观来自<图片 1>（正面）、<图片 2>（侧面）、<图片 3>（背面）。保持清秀无胡须的脸、蓬松有层次的中短黑发、瘦高身材、敞开的乳白色短袖翻领衬衫、纯白圆领T恤、浅蓝色宽松长牛仔裤、白灰低帮运动鞋、银色矩形吊坠、左腕黑表和右腕细手链。
-<主体 2> 是由<图片 4>（assets/scenes/road_west_gate_v02.png）锁定的环境。已确认的“东门外向东土路”场景基准图，作为<图片 4>载入。保持浅色碎石与压实土组成的双车辙路、中央和两侧草带、深色树线、左侧朴素建筑边缘以及右侧开阔庄稼。道路继续向东通往菜地；不要变成柏油路或城市街道。
-<主体 3> 是由<图片 5>（assets/scenes/house_threshold_v29_candidate.png）锁定的环境。已确认的“普通自建房入口”场景基准图，作为<图片 5>载入。保持褪色米灰抹灰墙面、左侧关闭的蓝绿色双扇门、中央偏右半开的绿色金属入口门、粗糙灰色门框、浅水泥台阶和墙脚窄碎石带。建筑保持朴素普通，不做装饰性扩建。
+subject_definitions:
+<Subject 1> 是<Picture 1>人物三视图合图中的成年中国男性小王，保持面孔、发型、白衬衫叠穿白T恤、浅蓝牛仔裤、白灰鞋、银吊坠、黑表与细手链。
+<Subject 2> 是<Picture 2>的普通入口，保持褪色米灰墙、左侧关闭的蓝绿双门、半开的绿色金属入口门、灰门框和浅水泥台阶。
 
-摘要:
-一条连续 4.5 秒、真人写实、16:9 的参考图生成 MV 镜头，<主体 1>和<主体 2>和<主体 3>位于已锁定场景中，执行下述单一动作。
+summary:
+[reference generation] 一条连续4.5秒真人写实镜头，<Subject 1>仍坐在<Subject 2>。
 
-保留分析:
-<主体 1>（出现在[镜头 1]）：完全保留——保持三张人物参考图中的脸、头发、身体、服装和身份。
-<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 4>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
-<主体 3>（出现在[镜头 1]）：完全保留——保持<图片 5>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
+retention_analysis:
+<Subject 1> (appears in [Shot 1]): fully_preserved - 保持单张人物合图中的身份、服装和配饰。
+<Subject 2> (appears in [Shot 1]): fully_preserved - 保持入口建筑、材质、尺度和左右关系。
 
-详细描述:
-目标视频为实时真人写实影像。同一天更晚，太阳更低，影子更长，天还没黑，色彩保持低饱和。
-[镜头 1] 平视中全景小幅度慢速拉开。他仍坐在入口台阶上，双手空着放在膝上。身后墙内钉子上挂着白布种袋，身后的绿色入口门保持半开，道路方向留在画外。他一直坐着。嘴是一条闭着的平线。 眼皮若在画内则保持睁开，虹膜与瞳孔可读，最多一次慢眨眼。不得脸部变形、多余肢体、画面文字或商标。
+detailed_description:
+同一天下午更晚的中国农村真人写实，自然低饱和色彩，实时细微呼吸。
+[Shot 1] 首帧已经是整个朴素屋前立面的交代画面。摄影机在院子另一侧，两处完整门框、上方屋檐、整条水泥基座和右侧绕屋角窄通道都完整入画并留余量。小王是下方中央的小人物，含鞋的坐姿全身只占画高四分之一，全程保持此宽构图。<Subject 1>始终直接坐在紧靠绿门的浅水泥台阶上，空手放双膝、双脚落在下方水泥地。身后窄门内，同一只装满的本白棉布种袋已用收紧的布绳圈挂在左侧灰色内门框旁，与绿色门板分开；袋子已经挂好并落稳。摄影机整镜只缓慢后退二十厘米，从首帧开始保持整个屋前立面可见，小幅慢拉。尾帧让人物、台阶、挂袋和外墙右侧窄通道一起可读。目光持住前方院子，眉平、闭唇且嘴角水平。一口自然呼吸轻动胸口，臀部留在台阶，双手留在膝上，坐姿持续到真实末帧。绿门保持半开，米灰墙与左侧双门固定，傍晚光照稳定。手和脸稳定，最多一次自然眨眼。远处豆地与出行路线都留在画外。
 
-整体声音环境:
-静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
+overall_soundscape:
+silence
 
-非叙事音乐:
+non_diegetic_music:
 N/A
 ```
 
