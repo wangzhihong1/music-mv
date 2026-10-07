@@ -38,6 +38,8 @@ const {
   saveSongLyrics,
   deleteSceneImage,
   deleteVoidedShot,
+  setRawShotStatus,
+  deleteUpscaleVideo,
   confirmSceneReference,
 } = useWorkspace()
 const { copiedTarget, copyText } = useClipboard()
@@ -354,6 +356,8 @@ function copyRelease(target) {
             :copied-target="copiedTarget"
             :delete-scene-image="deleteSceneImage"
             :delete-voided-shot="deleteVoidedShot"
+            :set-raw-shot-status="setRawShotStatus"
+            :delete-upscale-video="deleteUpscaleVideo"
             :confirm-scene-reference="confirmSceneReference"
             @update:prompt-language="promptLanguage = $event"
             @copy-look="copyCharacterLook"

@@ -1,5 +1,5 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { confirmSceneReference as persistSceneReference, deleteSceneImage as removeSceneImage, deleteVoidedShot as removeVoidedShot, fetchWorkspace, saveSongLyrics as persistSongLyrics } from '@/api/workspace'
+import { confirmSceneReference as persistSceneReference, deleteSceneImage as removeSceneImage, deleteUpscaleVideo as removeUpscaleVideo, deleteVoidedShot as removeVoidedShot, fetchWorkspace, saveSongLyrics as persistSongLyrics, setRawShotStatus as persistRawShotStatus } from '@/api/workspace'
 import { EMPTY_SONG } from '@/constants/song'
 import { SONG_NAVS } from '@/constants/navigation.js'
 import { WORKSPACE_CHANGED_EVENT } from '@/constants/workspace.js'
@@ -91,6 +91,16 @@ export function useWorkspace() {
     await loadWorkspace({ silent: true })
   }
 
+  async function setRawShotStatus(folder, fileName, action) {
+    await persistRawShotStatus(folder, fileName, action)
+    await loadWorkspace({ silent: true })
+  }
+
+  async function deleteUpscaleVideo(folder, fileName) {
+    await removeUpscaleVideo(folder, fileName)
+    await loadWorkspace({ silent: true })
+  }
+
   async function confirmSceneReference(folder, payload) {
     await persistSceneReference(folder, payload)
     await loadWorkspace({ silent: true })
@@ -124,6 +134,8 @@ export function useWorkspace() {
     saveSongLyrics,
     deleteSceneImage,
     deleteVoidedShot,
+    setRawShotStatus,
+    deleteUpscaleVideo,
     confirmSceneReference,
     loadWorkspace,
   }

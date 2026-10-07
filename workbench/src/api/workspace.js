@@ -37,6 +37,30 @@ export async function deleteVoidedShot(folder, fileName) {
   return readJson(response, `作废分镜视频删除失败（${response.status}）`)
 }
 
+export async function setRawShotStatus(folder, fileName, action) {
+  const response = await fetch(
+    `/api/songs/${encodeURIComponent(folder)}/raw-shots/${encodeURIComponent(fileName)}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      cache: 'no-store',
+      body: JSON.stringify({ action }),
+    },
+  )
+  const fallback = action === 'restore'
+    ? `分镜视频恢复失败（${response.status}）`
+    : `分镜视频作废失败（${response.status}）`
+  return readJson(response, fallback)
+}
+
+export async function deleteUpscaleVideo(folder, fileName) {
+  const response = await fetch(
+    `/api/songs/${encodeURIComponent(folder)}/intermediate/${encodeURIComponent(fileName)}`,
+    { method: 'DELETE', cache: 'no-store' },
+  )
+  return readJson(response, `超分视频删除失败（${response.status}）`)
+}
+
 export async function confirmSceneReference(folder, payload) {
   const response = await fetch(
     `/api/songs/${encodeURIComponent(folder)}/scenes/confirm`,

@@ -149,6 +149,7 @@ const LYRICS_ROUTE = /^\/api\/songs\/([^/]+)\/lyrics$/
 const SCENE_DELETE_ROUTE = /^\/api\/songs\/([^/]+)\/scenes\/([^/]+)$/
 const SCENE_CONFIRM_ROUTE = /^\/api\/songs\/([^/]+)\/scenes\/confirm$/
 const VOIDED_SHOT_DELETE_ROUTE = /^\/api\/songs\/([^/]+)\/raw-shots\/([^/]+)$/
+const UPSCALE_DELETE_ROUTE = /^\/api\/songs\/([^/]+)\/intermediate\/([^/]+)$/
 
 function isSafeFolderName(folderName) {
   return Boolean(folderName)
@@ -371,9 +372,11 @@ async function deleteVoidedShot(studioRoot, response, folderName, fileName) {
     return
   }
 
+  let source
   let song
   try {
-    song = JSON.parse(await readFile(dataPath, 'utf8'))
+    source = await readFile(dataPath, 'utf8')
+    song = JSON.parse(source)
   } catch (error) {
     if (error.code === 'ENOENT') {
       sendJson(response, 404, { error: '歌曲不存在' })
@@ -383,18 +386,13 @@ async function deleteVoidedShot(studioRoot, response, folderName, fileName) {
     return
   }
 
-  const currentOutputs = new Set(
-    (song.shots || [])
-      .map((shot) => path.posix.basename(String(shot.output || '').replace(/\\/g, '/')))
-      .filter(Boolean),
-  )
-  if (currentOutputs.has(decodedFile)) {
-    sendJson(response, 409, { error: '当前有效分镜视频不可删除，请先切换有效输出' })
+  const shot = findShotByFileName(song, decodedFile)
+  if (!shot) {
+    sendJson(response, 400, { error: '只能删除已标记为作废的分镜视频' })
     return
   }
-  const shotNumber = shotNumberFromFileName(decodedFile)
-  if (!shotNumber || !(song.shots || []).some((shot) => Number(String(shot.id || '').replace(/^shot/i, '')) === shotNumber)) {
-    sendJson(response, 400, { error: '只能删除已标记为作废的分镜视频' })
+  if (!isVoidedRawShot(song, shot, decodedFile)) {
+    sendJson(response, 409, { error: '当前有效分镜视频不可删除，请先作废' })
     return
   }
 
@@ -407,6 +405,232 @@ async function deleteVoidedShot(studioRoot, response, folderName, fileName) {
     }
     throw error
   }
+  const voidedNames = voidedShotFileNames(song).filter((name) => name !== decodedFile)
+  if (voidedNames.length !== voidedShotFileNames(song).length) {
+    writeVoidedShotFiles(song, voidedNames)
+    await writeFile(dataPath, patchSongArchive(source, {
+      voidedNames: voidedShotFileNames(song),
+    }), 'utf8')
+  }
+  sendJson(response, 200, { ok: true })
+}
+
+function shotIdNumber(shot) {
+  return Number(String(shot?.id || '').replace(/^shot/i, ''))
+}
+
+function findShotByFileName(song, fileName) {
+  const shotNumber = shotNumberFromFileName(fileName)
+  if (!shotNumber) return null
+  return (song.shots || []).find((shot) => shotIdNumber(shot) === shotNumber) || null
+}
+
+function voidedShotFileNames(song) {
+  return (Array.isArray(song.voidedShotFiles) ? song.voidedShotFiles : [])
+    .map((name) => path.posix.basename(String(name).replace(/\\/g, '/')))
+    .filter(Boolean)
+}
+
+function writeVoidedShotFiles(song, names) {
+  const unique = [...new Set(names)].sort((left, right) => left.localeCompare(right))
+  if (unique.length) song.voidedShotFiles = unique
+  else delete song.voidedShotFiles
+}
+
+function lineEndingOf(source) {
+  return source.includes('\r\n') ? '\r\n' : '\n'
+}
+
+function formatVoidedShotFiles(names, newline) {
+  const entries = names.map((name) => `    ${JSON.stringify(name)}`).join(`,${newline}`)
+  return `  "voidedShotFiles": [${newline}${entries}${newline}  ]`
+}
+
+function patchSongArchive(source, { previousOutput = '', nextOutput = '', voidedNames = [] }) {
+  const newline = lineEndingOf(source)
+  let text = source
+  if (previousOutput && nextOutput && previousOutput !== nextOutput) {
+    const from = `"output": ${JSON.stringify(previousOutput)}`
+    const to = `"output": ${JSON.stringify(nextOutput)}`
+    if (!text.includes(from)) {
+      const error = new Error('找不到分镜输出路径')
+      error.statusCode = 500
+      throw error
+    }
+    text = text.replace(from, to)
+  }
+
+  const blockPattern = /,?\r?\n {2}"voidedShotFiles": \[[\s\S]*?\]/
+  if (!voidedNames.length) {
+    return text.replace(blockPattern, '')
+  }
+  const block = formatVoidedShotFiles(voidedNames, newline)
+  if (blockPattern.test(text)) {
+    return text.replace(blockPattern, `,${newline}${block}`)
+  }
+  const closing = text.match(/\r?\n\}[ \t]*\r?\n?$/)
+  if (!closing) {
+    const error = new Error('歌曲档案格式无法更新')
+    error.statusCode = 500
+    throw error
+  }
+  const head = text.slice(0, closing.index).replace(/[ \t]+$/, '').replace(/,+$/, '')
+  return `${head},${newline}${block}${closing[0]}`
+}
+
+function outputBaseName(shot) {
+  return path.posix.basename(String(shot?.output || '').replace(/\\/g, '/'))
+}
+
+function isVoidedRawShot(song, shot, fileName) {
+  if (!shot) return false
+  return outputBaseName(shot) !== fileName || voidedShotFileNames(song).includes(fileName)
+}
+
+async function setRawShotStatus(studioRoot, request, response, folderName, fileName) {
+  let decodedFolder
+  let decodedFile
+  try {
+    decodedFolder = decodeURIComponent(folderName)
+    decodedFile = decodeURIComponent(fileName)
+  } catch {
+    sendJson(response, 400, { error: '分镜视频路径无效' })
+    return
+  }
+
+  if (!isSafeFolderName(decodedFolder) || !decodedFile || path.basename(decodedFile) !== decodedFile) {
+    sendJson(response, 400, { error: '分镜视频路径无效' })
+    return
+  }
+  if (!/^\.mp4$/i.test(path.extname(decodedFile))) {
+    sendJson(response, 400, { error: '只能操作 MP4 分镜视频' })
+    return
+  }
+
+  const dataPath = path.join(studioRoot, SONGS_DIRECTORY, decodedFolder, 'song.json')
+  const targetPath = path.join(studioRoot, SONGS_DIRECTORY, decodedFolder, 'generated', 'video', 'raw', decodedFile)
+  if (!isInsideStudio(studioRoot, dataPath) || !isInsideStudio(studioRoot, targetPath)) {
+    sendJson(response, 403, { error: '无权访问该文件' })
+    return
+  }
+
+  let source
+  let song
+  try {
+    source = await readFile(dataPath, 'utf8')
+    song = JSON.parse(source)
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      sendJson(response, 404, { error: '歌曲不存在' })
+      return
+    }
+    sendJson(response, 500, { error: '歌曲档案不是有效 JSON' })
+    return
+  }
+
+  try {
+    await stat(targetPath)
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      sendJson(response, 404, { error: '分镜视频不存在' })
+      return
+    }
+    throw error
+  }
+
+  const payload = await readJsonBody(request)
+  const action = payload.action
+  if (action !== 'void' && action !== 'restore') {
+    sendJson(response, 400, { error: '分镜操作无效' })
+    return
+  }
+
+  const shot = findShotByFileName(song, decodedFile)
+  if (!shot) {
+    sendJson(response, 400, { error: '找不到对应分镜' })
+    return
+  }
+
+  const voided = isVoidedRawShot(song, shot, decodedFile)
+  const names = voidedShotFileNames(song)
+  const previousOutput = String(shot.output || '').replace(/\\/g, '/')
+  if (action === 'void') {
+    if (voided) {
+      sendJson(response, 409, { error: '该分镜视频已经作废' })
+      return
+    }
+    writeVoidedShotFiles(song, [...names, decodedFile])
+  } else if (!voided) {
+    sendJson(response, 409, { error: '该分镜视频未作废' })
+    return
+  } else {
+    writeVoidedShotFiles(song, names.filter((name) => name !== decodedFile))
+    shot.output = `generated/video/raw/${decodedFile}`
+  }
+
+  await writeFile(dataPath, patchSongArchive(source, {
+    previousOutput,
+    nextOutput: String(shot.output || '').replace(/\\/g, '/'),
+    voidedNames: voidedShotFileNames(song),
+  }), 'utf8')
+  sendJson(response, 200, { ok: true })
+}
+
+async function deleteUpscaleVideo(studioRoot, response, folderName, fileName) {
+  let decodedFolder
+  let decodedFile
+  try {
+    decodedFolder = decodeURIComponent(folderName)
+    decodedFile = decodeURIComponent(fileName)
+  } catch {
+    sendJson(response, 400, { error: '超分视频路径无效' })
+    return
+  }
+
+  if (!isSafeFolderName(decodedFolder) || !decodedFile || path.basename(decodedFile) !== decodedFile) {
+    sendJson(response, 400, { error: '超分视频路径无效' })
+    return
+  }
+  if (!/^\.mp4$/i.test(path.extname(decodedFile))) {
+    sendJson(response, 400, { error: '只能删除 MP4 超分视频' })
+    return
+  }
+
+  const targetPath = path.join(
+    studioRoot,
+    SONGS_DIRECTORY,
+    decodedFolder,
+    'generated',
+    'video',
+    'intermediate',
+    decodedFile,
+  )
+  if (!isInsideStudio(studioRoot, targetPath)) {
+    sendJson(response, 403, { error: '无权访问该文件' })
+    return
+  }
+
+  try {
+    await unlink(targetPath)
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      sendJson(response, 404, { error: '超分视频不存在' })
+      return
+    }
+    throw error
+  }
+
+  const timingPath = path.join(path.dirname(targetPath), 'upscale-timings.json')
+  try {
+    const timings = JSON.parse(await readFile(timingPath, 'utf8'))
+    if (timings && Object.prototype.hasOwnProperty.call(timings, decodedFile)) {
+      delete timings[decodedFile]
+      await writeFile(timingPath, `${JSON.stringify(timings, null, 2)}\n`, 'utf8')
+    }
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error
+  }
+
   sendJson(response, 200, { ok: true })
 }
 
@@ -567,9 +791,23 @@ function apiMiddleware(studioRoot) {
     }
 
     const voidedShotDeleteMatch = requestUrl.pathname.match(VOIDED_SHOT_DELETE_ROUTE)
-    if (request.method === 'DELETE' && voidedShotDeleteMatch) {
+    if (voidedShotDeleteMatch && (request.method === 'DELETE' || request.method === 'POST')) {
       try {
-        await deleteVoidedShot(studioRoot, response, voidedShotDeleteMatch[1], voidedShotDeleteMatch[2])
+        if (request.method === 'DELETE') {
+          await deleteVoidedShot(studioRoot, response, voidedShotDeleteMatch[1], voidedShotDeleteMatch[2])
+        } else {
+          await setRawShotStatus(studioRoot, request, response, voidedShotDeleteMatch[1], voidedShotDeleteMatch[2])
+        }
+      } catch (error) {
+        sendJson(response, error.statusCode || 500, { error: error.message })
+      }
+      return
+    }
+
+    const upscaleDeleteMatch = requestUrl.pathname.match(UPSCALE_DELETE_ROUTE)
+    if (request.method === 'DELETE' && upscaleDeleteMatch) {
+      try {
+        await deleteUpscaleVideo(studioRoot, response, upscaleDeleteMatch[1], upscaleDeleteMatch[2])
       } catch (error) {
         sendJson(response, error.statusCode || 500, { error: error.message })
       }

@@ -45,6 +45,14 @@ const props = defineProps({
     type: Function,
     default: null,
   },
+  setRawShotStatus: {
+    type: Function,
+    default: null,
+  },
+  deleteUpscaleVideo: {
+    type: Function,
+    default: null,
+  },
   confirmSceneReference: {
     type: Function,
     default: null,
@@ -59,6 +67,8 @@ const selectedImage = ref(null)
 const pendingDelete = ref(null)
 const deleting = ref(false)
 const deleteError = ref('')
+const shotBusy = ref('')
+const shotActionError = ref('')
 const production = computed(() => props.song.production || {})
 const groups = computed(() => production.value.groups || [])
 const characterLooks = computed(() => props.song.characterLooks || [])
@@ -120,11 +130,32 @@ function cancelDelete() {
   deleteError.value = ''
 }
 
+function deleteKindLabel(kind) {
+  if (kind === 'shot') return '作废分镜视频'
+  if (kind === 'upscale') return '超分视频'
+  return '场景图'
+}
+
+async function updateShotStatus(item, action) {
+  if (!props.setRawShotStatus || shotBusy.value || deleting.value || item.missing) return
+  shotBusy.value = item.name
+  shotActionError.value = ''
+  try {
+    await props.setRawShotStatus(props.song.folder, item.name, action)
+  } catch (error) {
+    shotActionError.value = error.message
+  } finally {
+    shotBusy.value = ''
+  }
+}
+
 async function confirmDelete() {
   if (!pendingDelete.value || deleting.value) return
   const remove = pendingDelete.value.kind === 'shot'
     ? props.deleteVoidedShot
-    : props.deleteSceneImage
+    : pendingDelete.value.kind === 'upscale'
+      ? props.deleteUpscaleVideo
+      : props.deleteSceneImage
   if (!remove) return
   deleting.value = true
   deleteError.value = ''
@@ -219,6 +250,8 @@ async function confirmDelete() {
       人物三视图放入 <code>assets/characters/</code>，确认的场景基准图放入 <code>assets/scenes/</code>。
     </p>
 
+    <p v-if="shotActionError" class="confirm-error production-action-error" role="alert">{{ shotActionError }}</p>
+
     <div v-if="hasVisibleMedia" class="production-body">
       <section
         v-if="featured?.items?.length"
@@ -300,15 +333,45 @@ async function confirmDelete() {
               <strong>{{ itemLabel(item) }}</strong>
               <small>{{ itemCaption(item) }}</small>
             </div>
-            <div v-if="group.id === 'raw' && item.voided" class="voided-media-actions">
-              <span class="scene-voided-label">作废</span>
+            <div v-if="group.id === 'raw' && !item.missing && item.shotNumber" class="voided-media-actions">
+              <template v-if="item.voided">
+                <span class="scene-voided-label">作废</span>
+                <button
+                  type="button"
+                  class="shot-restore-button"
+                  :disabled="Boolean(shotBusy) || deleting"
+                  @click="updateShotStatus(item, 'restore')"
+                >
+                  {{ shotBusy === item.name ? '恢复中…' : '恢复' }}
+                </button>
+                <button
+                  type="button"
+                  class="scene-delete-button"
+                  aria-label="删除作废分镜视频"
+                  :disabled="Boolean(shotBusy) || deleting"
+                  @click="askDelete(item, 'shot')"
+                >
+                  <Trash2 :size="14" />
+                </button>
+              </template>
+              <button
+                v-else
+                type="button"
+                class="upscale-delete-button"
+                :disabled="Boolean(shotBusy) || deleting"
+                @click="updateShotStatus(item, 'void')"
+              >
+                {{ shotBusy === item.name ? '作废中…' : '作废' }}
+              </button>
+            </div>
+            <div v-else-if="group.id === 'intermediate' && item.url" class="voided-media-actions">
               <button
                 type="button"
-                class="scene-delete-button"
-                aria-label="删除作废分镜视频"
-                @click="askDelete(item, 'shot')"
+                class="upscale-delete-button"
+                :aria-label="`删除 ${itemLabel(item)}`"
+                @click="askDelete(item, 'upscale')"
               >
-                <Trash2 :size="14" />
+                删除
               </button>
             </div>
           </article>
@@ -344,7 +407,7 @@ async function confirmDelete() {
 
   <div v-if="pendingDelete" class="confirm-backdrop" role="presentation" @click.self="cancelDelete">
     <section class="confirm-dialog" role="alertdialog" aria-modal="true" aria-labelledby="delete-media-title">
-      <h3 id="delete-media-title">确认删除{{ pendingDelete.kind === 'shot' ? '作废分镜视频' : '场景图' }}？</h3>
+      <h3 id="delete-media-title">确认删除{{ deleteKindLabel(pendingDelete.kind) }}？</h3>
       <p>将永久删除“{{ pendingDelete.item.name }}”，此操作无法撤销。</p>
       <p v-if="deleteError" class="confirm-error" role="alert">{{ deleteError }}</p>
       <div class="confirm-actions">

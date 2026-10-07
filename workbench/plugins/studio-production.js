@@ -1,4 +1,4 @@
-import { readdir, stat } from 'node:fs/promises'
+import { readFile, readdir, stat } from 'node:fs/promises'
 import path from 'node:path'
 
 const KIND_EXTENSIONS = {
@@ -53,8 +53,13 @@ function isCurrentShotAsset(item) {
   return isPresentAsset(item) && !item.voided
 }
 
-export function annotateRawShotItems(groups, shots = []) {
+export function annotateRawShotItems(groups, shots = [], voidedShotFiles = []) {
   if (!shots.length) return
+  const voidedNames = new Set(
+    (Array.isArray(voidedShotFiles) ? voidedShotFiles : [])
+      .map((name) => path.posix.basename(String(name).replace(/\\/g, '/')))
+      .filter(Boolean),
+  )
 
   let group = groups.find((item) => item.id === 'raw')
   if (!group) {
@@ -76,13 +81,13 @@ export function annotateRawShotItems(groups, shots = []) {
     const shot = number ? shotByNumber(byId, number) : null
     const isCurrent = currentOutputs.has(item.name)
     item.shotNumber = number
-    item.voided = Boolean(shot && !isCurrent)
+    item.voided = Boolean(shot) && (!isCurrent || voidedNames.has(item.name))
     item.missing = false
     const displayName = shot ? shotDisplayName(shot.shot) : ''
-    if (shot && isCurrent) {
-      item.title = `${padShotNumber(number)} · ${displayName}`
-    } else if (shot) {
+    if (shot && item.voided) {
       item.title = `【作废】${padShotNumber(number)} · ${displayName}`
+    } else if (shot) {
+      item.title = `${padShotNumber(number)} · ${displayName}`
     } else {
       item.title = item.name
     }
@@ -128,6 +133,35 @@ function formatSize(bytes) {
   if (bytes < 1024) return `${bytes} B`
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
+}
+
+function formatElapsed(seconds) {
+  const total = Math.round(Number(seconds))
+  if (!Number.isFinite(total) || total < 0) return ''
+  const minutes = Math.floor(total / 60)
+  const remain = total % 60
+  if (minutes <= 0) return `${remain}秒`
+  if (remain === 0) return `${minutes}分钟`
+  return `${minutes}分${remain}秒`
+}
+
+async function annotateUpscaleTimings(studioRoot, relativeDirectory, groups) {
+  const group = groups.find((item) => item.id === 'intermediate')
+  if (!group) return
+  const timingPath = path.join(studioRoot, relativeDirectory, 'generated/video/intermediate/upscale-timings.json')
+  let timings = {}
+  try {
+    timings = JSON.parse(await readFile(timingPath, 'utf8'))
+  } catch (error) {
+    if (error.code === 'ENOENT') return
+    throw error
+  }
+  for (const item of group.items) {
+    const seconds = Number(timings[item.name])
+    if (!Number.isFinite(seconds) || seconds < 0) continue
+    item.elapsedSeconds = Math.round(seconds)
+    item.sizeLabel = `${item.sizeLabel} · ${formatElapsed(seconds)}`
+  }
 }
 
 async function listGroupFiles(folderPath, group) {
@@ -245,7 +279,7 @@ export function productionSummary(groups) {
   return '尚未生成'
 }
 
-export async function buildProductionRecord(studioRoot, relativeDirectory, expectedShotCount = 0, shots = []) {
+export async function buildProductionRecord(studioRoot, relativeDirectory, expectedShotCount = 0, shots = [], voidedShotFiles = []) {
   if (!relativeDirectory) {
     return {
       directory: '',
@@ -259,7 +293,8 @@ export async function buildProductionRecord(studioRoot, relativeDirectory, expec
   }
 
   const groups = await scanSongAssets(studioRoot, relativeDirectory)
-  annotateRawShotItems(groups, shots)
+  annotateRawShotItems(groups, shots, voidedShotFiles)
+  await annotateUpscaleTimings(studioRoot, relativeDirectory, groups)
   const status = deriveProductionStatus(groups, expectedShotCount)
 
   return {
@@ -292,6 +327,7 @@ export async function attachProductions(studioRoot, songs) {
       relativeDirectory,
       song.shots?.length || 0,
       song.shots || [],
+      song.voidedShotFiles || [],
     )
     return {
       ...song,

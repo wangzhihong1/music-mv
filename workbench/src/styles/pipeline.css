@@ -770,6 +770,47 @@
   border: 0;
 }
 
+.upscale-delete-button {
+  border: 1px solid #e4c8c8;
+  border-radius: 7px;
+  background: #fff;
+  color: #a33f3f;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.upscale-delete-button:hover:not(:disabled) {
+  background: #a33f3f;
+  color: #fff;
+}
+
+.shot-restore-button {
+  border: 1px solid #c9ddd0;
+  border-radius: 7px;
+  background: #fff;
+  color: #2f6948;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.shot-restore-button:hover:not(:disabled) {
+  background: #2f6948;
+  color: #fff;
+}
+
+.shot-restore-button:disabled,
+.upscale-delete-button:disabled,
+.scene-delete-button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.production-action-error {
+  margin: 0 0 12px;
+}
+
 .confirm-backdrop {
   position: fixed;
   inset: 0;

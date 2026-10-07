@@ -32,7 +32,7 @@
 - 场景引用：valley、road、field
 - 出镜人物：无
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_01_h3_v03.mp4`
+- 输出：`generated/video/raw/shot_01_h3_v04.mp4`
 
 ### English H3 prompt
 
@@ -93,7 +93,7 @@ N/A
 - 场景引用：valley、road、field
 - 出镜人物：无
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_02_h3_v01.mp4`
+- 输出：`generated/video/raw/shot_02_h3_v02.mp4`
 
 ### English H3 prompt
 
@@ -154,7 +154,7 @@ N/A
 - 场景引用：valley、road、house
 - 出镜人物：无
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_03_h3_v02.mp4`
+- 输出：`generated/video/raw/shot_03_h3_v03.mp4`
 
 ### English H3 prompt
 
@@ -215,7 +215,7 @@ N/A
 - 场景引用：valley、house
 - 出镜人物：无
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_04_h3_v01.mp4`
+- 输出：`generated/video/raw/shot_04_h3_v02.mp4`
 
 ### English H3 prompt
 
@@ -272,7 +272,7 @@ N/A
 - 场景引用：valley、road
 - 出镜人物：无
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_05_h3_v01.mp4`
+- 输出：`generated/video/raw/shot_05_h3_v02.mp4`
 
 ### English H3 prompt
 
@@ -329,7 +329,7 @@ N/A
 - 场景引用：field
 - 出镜人物：
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_06_h3_v02.mp4`
+- 输出：`generated/video/raw/shot_06_h3_v04.mp4`
 
 ### English H3 prompt
 
@@ -382,7 +382,7 @@ N/A
 - 场景引用：valley、field
 - 出镜人物：无
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_07_h3_v01.mp4`
+- 输出：`generated/video/raw/shot_07_h3_v04.mp4`
 
 ### English H3 prompt
 
@@ -400,7 +400,7 @@ retention_analysis:
 
 detailed_description:
 The target video is photoreal live-action in real time, a working late-summer Chinese farm village seen from a slightly high camera. Natural afternoon light, muted greens, gray-yellow soil, corn and low bean trellises, a rutted dirt track. Clouds hold nearly still. Materials look used. No golden nostalgia grade and no tourism scenery.
-[Shot 1] A lower aerial close view of the same enamel basin pushes in with small amplitude at slow speed. Short thick beans fill it. The two trellises stay readable behind, left sparse and right dense. No hand enters.
+[Shot 1] A lower aerial close view pushes in with small amplitude at slow speed toward the same enamel basin. The basin stays fixed on the bare soil at the west end of the sparse row for the entire shot; it does not rise, tilt, slide, or travel toward the camera. Short thick beans fill it. The two trellises stay readable behind, left sparse and right dense. No hand, finger, or person enters, and nobody holds the basin.
 
 overall_soundscape:
 silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
@@ -425,7 +425,7 @@ N/A
 
 详细描述:
 目标视频为实时真人写实影像。夏末下午，略高的镜头看一个干活的农村：低饱和绿色、灰黄土、玉米和矮豆架、有车辙的土路。云几乎不动。不用金黄怀旧调色。
-[镜头 1] 较低的航拍近景对同一只搪瓷盆小幅度慢速推近。盆里是短粗豆。后方两行架子仍能感到左稀右密。没有手入画。 保持场景几何和材质纹理稳定，不出现活人、画面文字或商标。
+[镜头 1] 较低的航拍近景对同一只搪瓷盆小幅度慢速推近。种盆全程固定在稀疏左行西头的裸土上，不抬起、不倾斜、不滑动，也不朝镜头移近。盆里是短粗豆。后方两行架子仍能感到左稀右密。没有手、手指或人入画，也没有人端盆。 保持场景几何和材质纹理稳定，不出现活人、画面文字或商标。
 
 整体声音环境:
 静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。
