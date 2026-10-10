@@ -17,6 +17,17 @@ export function formatDuration(totalSeconds) {
   return `${minutes}:${String(seconds).padStart(2, '0')}`
 }
 
+export function formatTimecode(totalSeconds) {
+  const safe = Math.max(0, Math.round((Number(totalSeconds) || 0) * 10) / 10)
+  const minutes = Math.floor(safe / 60)
+  const remainder = Math.round((safe - minutes * 60) * 10) / 10
+  if (remainder >= 60) return formatTimecode((minutes + 1) * 60)
+  const whole = Math.floor(remainder)
+  const tenth = Math.round((remainder - whole) * 10)
+  const base = `${String(minutes).padStart(2, '0')}:${String(whole).padStart(2, '0')}`
+  return tenth ? `${base}.${tenth}` : base
+}
+
 export function shotDuration(shot) {
   return Math.max(0, parseDisplayTime(shot?.end) - parseDisplayTime(shot?.start))
 }

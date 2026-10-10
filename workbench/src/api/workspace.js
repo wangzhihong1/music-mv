@@ -21,6 +21,16 @@ export async function saveSongLyrics(folder, sections) {
   return readJson(response, `歌词保存失败（${response.status}）`)
 }
 
+export async function saveSongShorts(folder, shorts) {
+  const response = await fetch(`/api/songs/${encodeURIComponent(folder)}/shorts`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    cache: 'no-store',
+    body: JSON.stringify({ shorts }),
+  })
+  return readJson(response, `短视频保存失败（${response.status}）`)
+}
+
 export async function deleteSceneImage(folder, fileName) {
   const response = await fetch(
     `/api/songs/${encodeURIComponent(folder)}/scenes/${encodeURIComponent(fileName)}`,

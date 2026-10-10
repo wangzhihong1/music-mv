@@ -16,6 +16,7 @@ import ScriptPanel from '@/components/workbench/ScriptPanel.vue'
 import StoryPanel from '@/components/workbench/StoryPanel.vue'
 import StylePanel from '@/components/workbench/StylePanel.vue'
 import ReleaseCopyPanel from '@/components/workbench/ReleaseCopyPanel.vue'
+import ShortsPanel from '@/components/workbench/ShortsPanel.vue'
 import IconButton from '@/components/common/IconButton.vue'
 import { useClipboard } from '@/composables/useClipboard.js'
 import { useLyricsEditor } from '@/composables/useLyricsEditor.js'
@@ -36,6 +37,7 @@ const {
   selectSong,
   setRefreshPaused,
   saveSongLyrics,
+  saveSongShorts,
   deleteSceneImage,
   deleteVoidedShot,
   setRawShotStatus,
@@ -69,7 +71,7 @@ const sidebarOpen = ref(false)
 const stageScroller = ref(null)
 const showingArchive = computed(() => ['inspiration', 'library', 'lyric-bank'].includes(activeNav.value))
 const headerViewMode = computed(() => (
-  ['overview', 'align', 'production'].includes(viewMode.value) ? viewMode.value : ''
+  ['overview', 'align', 'production', 'shorts'].includes(viewMode.value) ? viewMode.value : ''
 ))
 
 const prompts = computed(() => currentSong.value.prompts || [])
@@ -130,7 +132,7 @@ function onSelectStage(stageId) {
 
 function onUpdateViewMode(mode) {
   viewMode.value = mode
-  selectedStage.value = HEADER_STAGE[mode] ?? ''
+  selectedStage.value = mode === 'shorts' ? 'shorts' : (HEADER_STAGE[mode] ?? '')
 }
 
 function selectSection(sectionId) {
@@ -183,6 +185,10 @@ function copyRelease(target) {
     ? [platform.title, platform.description].filter(Boolean).join('\n\n')
     : platform[field] || ''
   copyText(text, `release-${platformId}-${field}`)
+}
+
+function saveCurrentShorts(shorts) {
+  return saveSongShorts(currentSong.value.folder, shorts)
 }
 </script>
 
@@ -347,6 +353,13 @@ function copyRelease(target) {
             :copied-target="copiedTarget"
             @select-shot="selectShot"
             @copy-prompt="copyShotPrompt"
+          />
+          <ShortsPanel
+            v-else-if="viewMode === 'shorts'"
+            :song="currentSong"
+            :copied-target="copiedTarget"
+            :save-shorts="saveCurrentShorts"
+            @copy="(text, id) => copyText(text, `short-${id}`)"
           />
           <ProductionPanel
             v-else

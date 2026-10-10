@@ -40,6 +40,7 @@ export const VIEW_MODES = [
   { id: 'overview', label: '创作总览' },
   { id: 'align', label: 'MV 对齐' },
   { id: 'production', label: '本机成片' },
+  { id: 'shorts', label: 'Shorts' },
 ]
 
 export const ARCHIVE_COPY = {

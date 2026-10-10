@@ -38,6 +38,29 @@ for (const entry of entries) {
     errors.push(`${relativePath}: lifecycle 必须为 in-progress 或 completed`)
   }
 
+  if (song.shorts !== undefined) {
+    if (!Array.isArray(song.shorts)) {
+      errors.push(`${relativePath}: shorts 必须是数组`)
+    } else if (song.shorts.length > 12) {
+      errors.push(`${relativePath}: shorts 最多 12 条`)
+    } else {
+      const shortIds = new Set()
+      for (const [index, item] of song.shorts.entries()) {
+        const label = item?.id || `第 ${index + 1} 条 Shorts`
+        const start = timeToSeconds(item?.start)
+        const end = timeToSeconds(item?.end)
+        const duration = start === null || end === null ? null : Math.round((end - start) * 10) / 10
+        if (!item?.title || !/^[a-z0-9-]{1,40}$/.test(item.id || '') || shortIds.has(item.id)) {
+          errors.push(`${relativePath}: ${label} 缺少有效标题或编号`)
+        }
+        shortIds.add(item?.id)
+        if (duration === null || duration < 1 || duration > 60) {
+          errors.push(`${relativePath}: ${label} 必须是 1–60 秒，时间用 MM:SS`)
+        }
+      }
+    }
+  }
+
   const workflow = song.mvWorkflow || {}
   const newWorkflowFields = ['scriptSkeletonStatus', 'visualReferencesStatus', 'promptStatus']
   const usesNewWorkflow = newWorkflowFields.some((field) => Object.hasOwn(workflow, field))

@@ -1,5 +1,5 @@
 <script setup>
-import { AlignJustify, Check, Film, SlidersHorizontal } from '@lucide/vue'
+import { AlignJustify, Check, Film, RectangleVertical, SlidersHorizontal } from '@lucide/vue'
 import { VIEW_MODES } from '@/constants/navigation.js'
 
 defineProps({
@@ -19,6 +19,7 @@ const viewIcons = {
   overview: SlidersHorizontal,
   align: AlignJustify,
   production: Film,
+  shorts: RectangleVertical,
 }
 </script>
 

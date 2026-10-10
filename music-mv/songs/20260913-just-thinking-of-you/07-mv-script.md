@@ -15,76 +15,58 @@
 - 色彩与光线：暖琥珀棚灯、深色吸音板、自然肤色
 - 拍摄方式：角色参考图直接生成 H3 分镜视频；H3 使用 9:16（约 720×1280 或 672×1216），合格后超至 1080×1920
 - 主要场景：同一录音棚
-- 主要人物：女主（本片只用正面定妆 `femaleLead_front.png`，即 v05；不使用侧面/背面）
-- 表演与口型需求：五镜全程对口型。H3 按闭唇生成，口型由 ComfyUI MuseTalk 贴 `chorus1_first.mp3` 对应人声。不摘耳机、不换棚、不换装。不使用 Wav2Lip / InfiniteTalk。
-- 预算或制作限制：一次只跑一条 H3；耳机是外加配件。H3 三个参考槽都用同一张正面。
+- 主要人物：女主。定妆是用户确认的一张三视图 `assets/characters/femaleLead_three_view_sheet.jpg`（黑色露肩长袖、深灰牛仔裤、黑色长直发）。旧的米白短上衣正面不再使用。
+- 表演与口型需求：口型由 H3 自己完成。把对应片段作为 `<Audio 1>` 送进参考图生视频，不再使用 MuseTalk、Wav2Lip 或 InfiniteTalk。
+- 预算或制作限制：一次只跑一条 H3。先测镜 01。镜 02–05 的旧底片作废，等第一镜通过后再重写并逐镜重跑。
 
 ## 主角图片
 
 | 角色 ID | 角色 | 正面 | 侧面 | 背面 | 其他参考 |
 | --- | --- | --- | --- | --- | --- |
-| femaleLead | 女主 | assets/characters/femaleLead_front.png | 不使用 | 不使用 | 用户确认的 v05 正面；H3 三槽同图 |
+| femaleLead | 女主 | 见三视图左 | 见三视图中 | 见三视图右 | `assets/characters/femaleLead_three_view_sheet.jpg` |
 | maleLead | 男主 | 本片不出镜 |  |  |  |
 
 ## 主角形象提示词
 
-女主定妆提示词已写入 `song.json` 的 `characterLooks.femaleLead`，与确认的正面 v05 一致。H3 分镜只加黑色头戴耳机和棚内麦克风，不改脸和衣服。
+女主定妆以 `femaleLead_three_view_sheet.jpg` 为准，说明写入 `song.json` 的 `characterLooks.femaleLead`。H3 分镜只加黑色头戴耳机和棚内麦克风。
 
 ## 生成约定
 
 - `mvWorkflow.generationMethod`：`characterReferenceVideo`
-- 每镜 `lipSync: true`，`aspectRatio: 9:16`
-- H3 提示词保持闭唇；不要让 H3 张嘴唱
-- 合格 H3 镜头再送 ComfyUI MuseTalk（只替换下半脸），音频用本片副歌文件对应片段
-- H3 输出 `generated/video/raw/shot_XX_h3_v0X.mp4`；口型中间件为 `generated/video/intermediate/shot_XX_musetalk_v01.mp4`
+- 镜 01 `lipSync: h3`，`aspectRatio: 9:16`。音频用 `music/chorus1_shot01.wav`（副歌前 6 秒）
+- H3 提示词要求嘴型跟着 `<Audio 1>` 唱，不再闭唇后贴口型
+- 当前测试输出 `generated/video/raw/shot_01_h3_shorts_v01.mp4`
 
 ## 分镜脚本
 
 | 镜号 | 开始 | 结束 | 时长 | 故事阶段 | 歌曲段落/歌词 | 出镜参考 | 生成类型 | 景别与机位 | 画面与动作 | 运镜 | 场景/道具 | 转场/特效 | 声画重点 | 输出视频 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 01 | 00:00 | 00:06 | 6 秒 | 开场 | 只是想你了 / 在没开灯的房间 | femaleLead | characterVideo | 侧一点看见嘴和麦，唱出第一句 | 女主已戴黑色头戴耳机，站在录音棚里。镜头略偏左侧，轻微三分之二侧面，双唇和银色电容麦同时可见。全程不要挡住嘴。H3 闭唇，口型由后期 MuseTalk 生成。 | 9:16 平视中近景，镜头略偏左侧，holds a static shot。 | 录音棚 | 暖琥珀光，无切镜 | 第一句 Hook「只是想你了」入口型 | generated/video/raw/shot_01_h3_v10.mp4 |
-| 02 | 00:06 | 00:12 | 6 秒 | 发展 | 只是想你了 | femaleLead | characterVideo | 右手轻触耳罩，把想念唱进棚里 | 同一机位略近。她右手轻轻按住右侧耳罩，眼神仍落在麦克风上，唱「只是想你了」。棚内只有她。H3 闭唇，后期 MuseTalk 对口型。 | 9:16 胸口高度中近景，holds a static shot 后极轻横移。 | 录音棚 | 同棚连续，景别略近 | 重复 Hook，动作落到耳机 | generated/video/raw/shot_02_h3_v01.mp4 |
-| 03 | 00:12 | 00:18 | 6 秒 | 转折 | 在这个无声的瞬间 / 想你了 | femaleLead | characterVideo | 无声的瞬间，棚里只剩她和麦 | 镜头更近。她不再碰耳机，只对着麦克风把「在这个无声的瞬间」唱完，眼神持住，像把话留在棚里而不是发给对方。H3 闭唇，后期 MuseTalk 对口型。 | 9:16 近景，pushes in with small amplitude at slow speed。 | 录音棚 | 推近，环境声更空 | 「在这个无声的瞬间」 | generated/video/raw/shot_03_h3_v01.mp4 |
-| 04 | 00:18 | 00:23 | 5 秒 | 高潮 | 不需要任何抱歉 | femaleLead | characterVideo | 不需要任何抱歉 | 最强一句。她仍克制，只把胸腔打开一点，对着麦克风唱「不需要任何抱歉」。不嘶吼、不笑、不哭。H3 闭唇，后期 MuseTalk 对口型。 | 9:16 中近景，holds a static shot。 | 录音棚 | 锁定近景 | 「不需要任何抱歉」 | generated/video/raw/shot_04_h3_v04.mp4 |
-| 05 | 00:23 | 00:28 | 5 秒 | 结尾 | 想你了 | femaleLead | characterVideo | 最后一句想你了，停在麦前 | 唱完最后的「想你了」后她不离开麦克风，也不摘耳机，只把目光停在防喷罩上，像这句话已经说完、不会发到任何人手机里。H3 闭唇，后期 MuseTalk 对口型。 | 9:16 中近景，holds a static shot。 | 录音棚 | 停在麦前，不切出棚 | 最后一句「想你了」后的留白 | generated/video/raw/shot_05_h3_v01.mp4 |
+| 01 | 00:00 | 00:06 | 6 秒 | 开场 | 只是想你了 / 在没开灯的房间 | femaleLead 三视图 | characterVideo | 侧一点看见嘴、麦和防喷罩 | 与镜 02 同一间棚。右侧银色电容麦前有一块圆形黑色防喷罩，不挡嘴。H3 对上前六秒。 | 9:16 平视中近景，镜头略偏左侧，holds a static shot。 | 录音棚 | 暖琥珀光，无切镜 | H3 对上「只是想你了」，防喷罩入画 | generated/video/raw/shot_01_h3_shorts_v02.mp4 |
+| 02 | 00:06 | 00:13.5 | 7.5 秒 | 发展 | 只是想你了 / 在这个无声的瞬间 | femaleLead 三视图 | characterVideo | 同一棚里把这两句唱完 | 还是镜 01 的录音棚、暖光、右侧电容麦和黑色耳机。手搭在近处耳罩上。H3 对上这段音频，两句唱完再切。 | 9:16 平视中近景，镜头仍略偏左侧，holds a static shot。 | 同一录音棚 | 同一光线，无切镜 | 唱完「只是想你了」和「在这个无声的瞬间」 | generated/video/raw/shot_02_h3_shorts_v01.mp4 |
+| 03 | 00:13.5 | 00:19.5 | 6 秒 | 转折 | 想你了 / 想你了 | femaleLead 三视图 | characterVideo | 换到她右侧，麦仍挂在上方 | 同一间棚、同一支麦、同一块防喷罩。机位改到她右侧。麦头和避震架仍在画面上方，只有防喷罩到嘴的高度。 | 9:16 平视中近景，机位略偏她右侧，固定。 | 同一录音棚 | 同一光线，无切镜 | 两声「想你了」唱完 | generated/video/raw/shot_03_h3_shorts_v02.mp4 |
+| 04 | 00:19.5 | 00:23.5 | 4 秒 | 高潮 | 不需要任何抱歉 | femaleLead 三视图 | characterVideo | 回到左侧，这句抱歉唱完 | 同一间棚。机位回到她左侧。麦头仍在画面右上方，防喷罩在嘴前。H3 对上这一句。 | 9:16 平视中近景，机位略偏她左侧，固定。 | 同一录音棚 | 同一光线，无切镜 | 「不需要任何抱歉」唱完 | generated/video/raw/shot_04_h3_shorts_v01.mp4 |
+| 05 | 00:23.5 | 00:28 | 4.5 秒 | 结尾 | 想你了 | femaleLead 三视图 | characterVideo | 换到她右侧，唱完后手指搭上耳罩 | 同一间棚。机位改到她右侧。麦头仍在画面左上方，防喷罩在嘴前。唱完后两指搭上远离麦的耳罩。 | 9:16 平视中近景，机位略偏她右侧，固定。 | 同一录音棚 | 停在麦前，无切镜 | 最后一句「想你了」唱完 | generated/video/raw/shot_05_h3_shorts_v02.mp4 |
 
 ## 逐镜 H3 提示词
 
 ### 01　00:00–00:06　开场
 
-- 出镜参考：女主
-- 生成类型：H3 角色参考图生视频
-- 对口型：是（H3 闭唇生成，后期 MuseTalk）
+- 出镜参考：`assets/characters/femaleLead_three_view_sheet.jpg`
+- 生成类型：H3 角色参考图生视频，并挂 `music/chorus1_shot01.wav`
+- 对口型：H3 自己对口型
 - 画幅：9:16
-- 输出视频：`generated/video/raw/shot_01_h3_v10.mp4`
+- 输出视频：`generated/video/raw/shot_01_h3_shorts_v01.mp4`
 - 景别：侧一点看见嘴和麦，嘴全程无遮挡
 - 运镜：9:16 平视中近景，镜头略偏左侧，holds a static shot。
-- 场景/道具：竖屏录音棚。镜头略偏她左侧。银色电容麦在画面右侧。双唇、人中、下巴全程完全露出；防喷罩如出现只在胸口高度、低于下巴。
-- 人物动作：女主已戴黑色头戴耳机。轻微三分之二侧面，双眼睁开。开始唱「只是想你了」。H3 本镜闭唇，口型由后期 MuseTalk 生成。
+- 场景/道具：竖屏录音棚。镜头略偏她左侧。银色电容麦在画面右侧，不挡嘴。
+- 人物动作：女主已戴黑色头戴耳机。轻微三分之二，双眼睁开，嘴型跟着副歌开头唱「只是想你了」。
 - 转场/特效：暖琥珀光，无切镜
-- 声画重点：第一句 Hook「只是想你了」入口型
+- 声画重点：H3 直接对上「只是想你了」
 - H3 参考图生视频提示词：
 
-```text
-subject_definitions:
-<Subject 1> is the adult woman whose appearance comes from <Picture 1>. <Picture 2> and <Picture 3> are the same front still as <Picture 1>, used only to reinforce identity. Preserve her identity, face, long dark hair worn loose, body proportions, fitted ivory ribbed crop top, denim shorts and white sneakers. Do not invent a side or back view. Do not redesign her appearance with text.
+可执行提示词以 `song.json` 镜 01 的 `prompt` 为准：三视图锁人物，`<Audio 1>` 完全复用副歌前六秒，嘴型跟着唱。
 
-summary:
-[reference generation] one continuous 6-second live-action 9:16 MV shot of <Subject 1> at a slight off-axis booth angle with her mouth fully uncovered and the silver microphone visible, with appearance taken only from <Picture 1>.
-
-retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - her face stays the same person as <Picture 1> in every frame. <Picture 2> and <Picture 3> repeat the same front still and do not provide a side or back view; do not turn her into a hard 90-degree profile or a back view. Hair, body proportions and the exact reference outfit stay identical to <Picture 1>. Black over-ear studio headphones are only an added accessory over her hair. A silver condenser microphone belongs to the booth as a visible prop at her right, never covering her mouth. No second living person. The environment, lighting, action and camera movement are generated from this prompt.
-
-detailed_description:
-The target video is photoreal live-action, a restrained contemporary Chinese recording-booth look, warm amber practical light, dark acoustic panels, 9:16 vertical.
-[Shot 1] A 9:16 medium close-up at eye level. The camera sits slightly to her left, so we see a mild three-quarter of her face and also the silver condenser microphone on her right. Both eyes, eyelids, irises, pupils, nose, philtrum, both lips and chin stay fully readable. Never a 90-degree profile; the far left eye remains visible. Framed from the upper chest to a little space above the headphones. The camera holds a static shot. Her head stays locked: no turn, no nod, no sway, no lean. Exact fitted ivory ribbed crop top, black over-ear headphones added. Warm amber light on her face, especially the mouth. The silver microphone stands on the right side of the frame, clearly visible as a studio condenser, beside her shoulder and chest, not in front of her face. Keep a clear gap of empty air around both lips, the philtrum and the chin in every frame. Nothing touches or covers the mouth: no microphone body, no hand, no hair, no mesh. If a round pop filter appears, it sits low on the stand at chest height, entirely below her chin, never at lip height and never overlapping the face. Both lips stay fully uncovered in clear air. In the first two seconds she is already standing in the booth, shoulders settled, eyelids open, eyes looking toward the microphone. Then only a tiny chest lift, mouth softly closed for this generation pass, at most one slow natural blink. By the final second her gaze still holds on the mic, quiet and unapologetic. Stable faces and hands, smooth skin texture, coherent clothing, eyelids remain open, irises and pupils stay readable. No flickering eyes, no facial warping, no beauty-filter slim face, no extra limbs, no mesh covering the mouth, no pop filter at mouth height, no microphone covering the face, no on-screen text, no logos, no readable lyric sheet text.
-
-overall_soundscape:
-quiet booth room tone, faint headphone cable, no extra voices.
-
-non_diegetic_music:
-N/A
-```
+镜 02–05 旧提示词已停用，不要送进 H3。
 
 ### 02　00:06–00:12　发展
 
@@ -92,7 +74,7 @@ N/A
 - 生成类型：H3 角色参考图生视频
 - 对口型：是（H3 闭唇生成，后期 MuseTalk）
 - 画幅：9:16
-- 输出视频：`generated/video/raw/shot_02_h3_v01.mp4`
+- 输出视频：`generated/video/raw/shot_02_h3_shorts_v01.mp4`
 - 景别：右手轻触耳罩，把想念唱进棚里
 - 运镜：9:16 胸口高度中近景，holds a static shot 后极轻横移。
 - 场景/道具：同一录音棚、同一耳机与麦克风；手指与耳罩的接触是本镜动作。
@@ -128,7 +110,7 @@ N/A
 - 生成类型：H3 角色参考图生视频
 - 对口型：是（H3 闭唇生成，后期 MuseTalk）
 - 画幅：9:16
-- 输出视频：`generated/video/raw/shot_03_h3_v01.mp4`
+- 输出视频：`generated/video/raw/shot_03_h3_shorts_v01.mp4`
 - 景别：无声的瞬间，棚里只剩她和麦
 - 运镜：9:16 近景，pushes in with small amplitude at slow speed。
 - 场景/道具：麦克风与防喷罩占画面下沿，暖光更贴脸，背景吸音板虚成暗色。
@@ -164,7 +146,7 @@ N/A
 - 生成类型：H3 角色参考图生视频
 - 对口型：是（H3 闭唇生成，后期 MuseTalk）
 - 画幅：9:16
-- 输出视频：`generated/video/raw/shot_04_h3_v04.mp4`
+- 输出视频：`generated/video/raw/shot_04_h3_shorts_v01.mp4`
 - 景别：不需要任何抱歉
 - 运镜：9:16 中近景，holds a static shot。
 - 场景/道具：暖光打在脸和麦克风上，耳机轮廓清晰，背景几乎全暗。麦和仅一块防喷罩在画面右下角，与嘴唇留空，双唇全程无遮挡。
@@ -200,7 +182,7 @@ N/A
 - 生成类型：H3 角色参考图生视频
 - 对口型：是（H3 闭唇生成，后期 MuseTalk）
 - 画幅：9:16
-- 输出视频：`generated/video/raw/shot_05_h3_v01.mp4`
+- 输出视频：`generated/video/raw/shot_05_h3_shorts_v01.mp4`
 - 景别：最后一句想你了，停在麦前
 - 运镜：9:16 中近景，holds a static shot。
 - 场景/道具：同一近景略收，暖光仍在，她和麦克风停在最后一帧。

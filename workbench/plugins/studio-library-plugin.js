@@ -3,6 +3,7 @@ import { createReadStream } from 'node:fs'
 import { readFile, readdir, stat, unlink, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { WORKSPACE_CHANGED_EVENT } from '../src/constants/workspace.js'
+import { timeToSeconds } from '../src/lib/time.js'
 import { attachProductions } from './studio-production.js'
 
 const SONGS_DIRECTORY = 'songs'
@@ -146,6 +147,7 @@ function sendJson(response, statusCode, payload) {
 
 const MAX_JSON_BODY_BYTES = 512 * 1024
 const LYRICS_ROUTE = /^\/api\/songs\/([^/]+)\/lyrics$/
+const SHORTS_ROUTE = /^\/api\/songs\/([^/]+)\/shorts$/
 const SCENE_DELETE_ROUTE = /^\/api\/songs\/([^/]+)\/scenes\/([^/]+)$/
 const SCENE_CONFIRM_ROUTE = /^\/api\/songs\/([^/]+)\/scenes\/confirm$/
 const VOIDED_SHOT_DELETE_ROUTE = /^\/api\/songs\/([^/]+)\/raw-shots\/([^/]+)$/
@@ -273,6 +275,126 @@ async function writeSongLyrics(studioRoot, request, response, folderName) {
 
   const payload = await readJsonBody(request)
   applySectionLyrics(song, payload.sections)
+  await writeFile(dataPath, `${JSON.stringify(song, null, 2)}\n`, 'utf8')
+  sendJson(response, 200, { ok: true })
+}
+
+function normalizeShortOutput(value) {
+  const output = String(value || '').replace(/\\/g, '/').trim()
+  if (!output) return ''
+  if (!/^generated\/video\/final\/[A-Za-z0-9._-]+\.mp4$/.test(output)) {
+    const error = new Error('短视频成片路径无效')
+    error.statusCode = 400
+    throw error
+  }
+  return output
+}
+
+function applyShorts(song, shorts) {
+  if (!Array.isArray(shorts)) {
+    const error = new Error('短视频列表无效')
+    error.statusCode = 400
+    throw error
+  }
+  if (shorts.length > 12) {
+    const error = new Error('一首歌最多保留 12 条 Shorts')
+    error.statusCode = 400
+    throw error
+  }
+
+  const seen = new Set()
+  song.shorts = shorts.map((item) => {
+    if (!item || typeof item !== 'object') {
+      const error = new Error('短视频条目无效')
+      error.statusCode = 400
+      throw error
+    }
+    const id = String(item.id || '').trim()
+    if (!/^[a-z0-9-]{1,40}$/.test(id) || seen.has(id)) {
+      const error = new Error('短视频编号无效或重复')
+      error.statusCode = 400
+      throw error
+    }
+    seen.add(id)
+
+    const title = String(item.title || '').replace(/\r/g, '').trim()
+    const start = String(item.start || '').trim()
+    const end = String(item.end || '').trim()
+    const startSeconds = timeToSeconds(start)
+    const endSeconds = timeToSeconds(end)
+    const duration = startSeconds === null || endSeconds === null
+      ? null
+      : Math.round((endSeconds - startSeconds) * 10) / 10
+    if (!title || title.length > 100) {
+      const error = new Error('短视频标题不能为空，且不能超过 100 字')
+      error.statusCode = 400
+      throw error
+    }
+    if (duration === null || duration < 1 || duration > 60) {
+      const error = new Error('短视频时间须为 MM:SS，时长 1–60 秒')
+      error.statusCode = 400
+      throw error
+    }
+
+    const lyricCue = String(item.lyricCue || '').replace(/\r/g, '').trim()
+    const note = String(item.note || '').replace(/\r/g, '').trim()
+    const sectionId = String(item.sectionId || '').trim()
+    if (lyricCue.length > 200 || note.length > 300 || sectionId.length > 80) {
+      const error = new Error('短视频的歌词、备注或段落过长')
+      error.statusCode = 400
+      throw error
+    }
+
+    const saved = {
+      id,
+      title,
+      start,
+      end,
+      sectionId,
+      lyricCue,
+      note,
+      status: item.status === 'ready' ? 'ready' : 'draft',
+    }
+    const output = normalizeShortOutput(item.output)
+    if (output) saved.output = output
+    return saved
+  })
+}
+
+async function writeSongShorts(studioRoot, request, response, folderName) {
+  const decodedFolder = decodeURIComponent(folderName)
+  if (!isSafeFolderName(decodedFolder)) {
+    sendJson(response, 400, { error: '歌曲目录无效' })
+    return
+  }
+
+  const dataPath = path.join(studioRoot, SONGS_DIRECTORY, decodedFolder, 'song.json')
+  if (!isInsideStudio(studioRoot, dataPath)) {
+    sendJson(response, 403, { error: '无权访问该文件' })
+    return
+  }
+
+  let source
+  try {
+    source = await readFile(dataPath, 'utf8')
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      sendJson(response, 404, { error: '歌曲不存在' })
+      return
+    }
+    throw error
+  }
+
+  let song
+  try {
+    song = JSON.parse(source)
+  } catch {
+    sendJson(response, 500, { error: '歌曲档案不是有效 JSON' })
+    return
+  }
+
+  const payload = await readJsonBody(request)
+  applyShorts(song, payload.shorts)
   await writeFile(dataPath, `${JSON.stringify(song, null, 2)}\n`, 'utf8')
   sendJson(response, 200, { ok: true })
 }
@@ -774,6 +896,16 @@ function apiMiddleware(studioRoot) {
     if (request.method === 'POST' && lyricsMatch) {
       try {
         await writeSongLyrics(studioRoot, request, response, lyricsMatch[1])
+      } catch (error) {
+        sendJson(response, error.statusCode || 500, { error: error.message })
+      }
+      return
+    }
+
+    const shortsMatch = requestUrl.pathname.match(SHORTS_ROUTE)
+    if (request.method === 'POST' && shortsMatch) {
+      try {
+        await writeSongShorts(studioRoot, request, response, shortsMatch[1])
       } catch (error) {
         sendJson(response, error.statusCode || 500, { error: error.message })
       }
