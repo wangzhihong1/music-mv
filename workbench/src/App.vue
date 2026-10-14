@@ -6,6 +6,7 @@ import AppSidebar from '@/components/layout/AppSidebar.vue'
 import SongHeader from '@/components/layout/SongHeader.vue'
 import ArchivePanel from '@/components/workbench/ArchivePanel.vue'
 import LyricBankPanel from '@/components/workbench/LyricBankPanel.vue'
+import LyricLinesPanel from '@/components/workbench/LyricLinesPanel.vue'
 import AlignPanel from '@/components/workbench/AlignPanel.vue'
 import BriefPanel from '@/components/workbench/BriefPanel.vue'
 import LyricsPanel from '@/components/workbench/LyricsPanel.vue'
@@ -29,6 +30,7 @@ const {
   songs,
   archives,
   lyricReferences,
+  lyricLines,
   currentSong,
   collectionSongs,
   activeNav,
@@ -43,6 +45,8 @@ const {
   setRawShotStatus,
   deleteUpscaleVideo,
   confirmSceneReference,
+  saveLyricLine,
+  deleteLyricLine,
 } = useWorkspace()
 const { copiedTarget, copyText } = useClipboard()
 const {
@@ -69,7 +73,7 @@ const activeSection = ref('')
 const activeShotId = ref('')
 const sidebarOpen = ref(false)
 const stageScroller = ref(null)
-const showingArchive = computed(() => ['inspiration', 'library', 'lyric-bank'].includes(activeNav.value))
+const showingArchive = computed(() => ['inspiration', 'library', 'lyric-bank', 'lyric-lines'].includes(activeNav.value))
 const headerViewMode = computed(() => (
   ['overview', 'align', 'production', 'shorts'].includes(viewMode.value) ? viewMode.value : ''
 ))
@@ -216,8 +220,15 @@ function saveCurrentShorts(shorts) {
 
     <main class="main-content">
       <div v-if="showingArchive" ref="stageScroller" class="main-stage">
+        <LyricLinesPanel
+          v-if="activeNav === 'lyric-lines'"
+          :lines="lyricLines"
+          :save-line="saveLyricLine"
+          :remove-line="deleteLyricLine"
+          :set-refresh-paused="setRefreshPaused"
+        />
         <LyricBankPanel
-          v-if="activeNav === 'lyric-bank'"
+          v-else-if="activeNav === 'lyric-bank'"
           :entries="lyricReferences"
         />
         <ArchivePanel

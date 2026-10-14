@@ -2,6 +2,7 @@
 import {
   BookOpen,
   Check,
+  Quote,
   FileMusic,
   Library,
   ListMusic,
@@ -44,6 +45,7 @@ const iconMap = {
   'in-progress': ListMusic,
   completed: Check,
   inspiration: Sparkles,
+  'lyric-lines': Quote,
   'lyric-bank': BookOpen,
   library: Library,
 }

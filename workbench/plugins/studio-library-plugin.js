@@ -126,16 +126,144 @@ async function readLyricReferences(studioRoot) {
   }
 }
 
+function lyricLinesPath(studioRoot) {
+  return path.join(studioRoot, LYRIC_LINES_FILE)
+}
+
+function isLyricLine(entry) {
+  return Boolean(entry)
+    && typeof entry.id === 'string'
+    && LYRIC_LINE_ID.test(entry.id)
+    && typeof entry.text === 'string'
+    && entry.text.trim()
+}
+
+async function readLyricLines(studioRoot) {
+  try {
+    const source = await readFile(lyricLinesPath(studioRoot), 'utf8')
+    const entries = JSON.parse(source)
+    if (!Array.isArray(entries)) return []
+    return entries
+      .filter(isLyricLine)
+      .map((entry) => ({
+        id: entry.id,
+        text: entry.text.trim(),
+        note: typeof entry.note === 'string' ? entry.note.trim() : '',
+        createdAt: typeof entry.createdAt === 'string' ? entry.createdAt : '',
+        updatedAt: typeof entry.updatedAt === 'string' ? entry.updatedAt : '',
+      }))
+      .sort((left, right) => String(right.createdAt).localeCompare(String(left.createdAt)))
+  } catch (error) {
+    if (error.code === 'ENOENT') return []
+    throw error
+  }
+}
+
+function cleanLyricLineInput(body) {
+  const text = String(body?.text || '').replace(/\r\n/g, '\n').trim()
+  const note = String(body?.note || '').replace(/\r\n/g, '\n').trim()
+  if (!text) {
+    const error = new Error('句子不能为空')
+    error.statusCode = 400
+    throw error
+  }
+  if (text.length > MAX_LYRIC_LINE_TEXT) {
+    const error = new Error(`句子请控制在 ${MAX_LYRIC_LINE_TEXT} 字以内`)
+    error.statusCode = 400
+    throw error
+  }
+  if (note.length > MAX_LYRIC_LINE_NOTE) {
+    const error = new Error(`备忘请控制在 ${MAX_LYRIC_LINE_NOTE} 字以内`)
+    error.statusCode = 400
+    throw error
+  }
+  return { text, note }
+}
+
+async function writeLyricLines(studioRoot, entries) {
+  const dataPath = lyricLinesPath(studioRoot)
+  if (!isInsideStudio(studioRoot, dataPath)) {
+    const error = new Error('佳句文件路径无效')
+    error.statusCode = 400
+    throw error
+  }
+  await writeFile(dataPath, `${JSON.stringify(entries, null, 2)}\n`, 'utf8')
+}
+
+function assertUniqueLyricLine(entries, text, ignoreId = '') {
+  if (entries.some((entry) => entry.id !== ignoreId && entry.text === text)) {
+    const error = new Error('这句已经记下了')
+    error.statusCode = 409
+    throw error
+  }
+}
+
+async function createLyricLine(studioRoot, request, response) {
+  const { text, note } = cleanLyricLineInput(await readJsonBody(request))
+  const entries = await readLyricLines(studioRoot)
+  assertUniqueLyricLine(entries, text)
+  const now = new Date().toISOString()
+  const line = {
+    id: `line-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`,
+    text,
+    note,
+    createdAt: now,
+    updatedAt: now,
+  }
+  await writeLyricLines(studioRoot, [line, ...entries])
+  sendJson(response, 200, { line })
+}
+
+async function updateLyricLine(studioRoot, request, response, lineId) {
+  const id = decodeURIComponent(lineId)
+  if (!LYRIC_LINE_ID.test(id)) {
+    sendJson(response, 400, { error: '句子编号无效' })
+    return
+  }
+  const { text, note } = cleanLyricLineInput(await readJsonBody(request))
+  const entries = await readLyricLines(studioRoot)
+  const current = entries.find((entry) => entry.id === id)
+  if (!current) {
+    sendJson(response, 404, { error: '没有找到这句' })
+    return
+  }
+  assertUniqueLyricLine(entries, text, id)
+  const now = new Date().toISOString()
+  const next = entries.map((entry) => (
+    entry.id === id
+      ? { ...entry, text, note, updatedAt: now }
+      : entry
+  ))
+  await writeLyricLines(studioRoot, next)
+  sendJson(response, 200, { line: next.find((entry) => entry.id === id) })
+}
+
+async function deleteLyricLine(studioRoot, response, lineId) {
+  const id = decodeURIComponent(lineId)
+  if (!LYRIC_LINE_ID.test(id)) {
+    sendJson(response, 400, { error: '句子编号无效' })
+    return
+  }
+  const entries = await readLyricLines(studioRoot)
+  if (!entries.some((entry) => entry.id === id)) {
+    sendJson(response, 404, { error: '没有找到这句' })
+    return
+  }
+  await writeLyricLines(studioRoot, entries.filter((entry) => entry.id !== id))
+  sendJson(response, 200, { ok: true })
+}
+
 async function buildWorkspace(studioRoot) {
-  const [rawSongs, inspiration, library, lyricReferences] = await Promise.all([
+  const [rawSongs, inspiration, library, lyricReferences, lyricLines] = await Promise.all([
     scanSongs(studioRoot),
     listMarkdownFiles(studioRoot, 'inspiration'),
     listMarkdownFiles(studioRoot, 'library'),
     readLyricReferences(studioRoot),
+    readLyricLines(studioRoot),
   ])
   const songs = await attachProductions(studioRoot, rawSongs)
 
-  return { songs, inspiration, library, lyricReferences }
+  return { songs, inspiration, library, lyricReferences, lyricLines }
 }
 
 function sendJson(response, statusCode, payload) {
@@ -146,6 +274,12 @@ function sendJson(response, statusCode, payload) {
 }
 
 const MAX_JSON_BODY_BYTES = 512 * 1024
+const LYRIC_LINES_FILE = path.join('library', 'lyric-lines.json')
+const LYRIC_LINES_ROUTE = '/api/lyric-lines'
+const LYRIC_LINE_ROUTE = /^\/api\/lyric-lines\/([^/]+)$/
+const LYRIC_LINE_ID = /^line-[a-z0-9]{6,32}$/
+const MAX_LYRIC_LINE_TEXT = 400
+const MAX_LYRIC_LINE_NOTE = 200
 const LYRICS_ROUTE = /^\/api\/songs\/([^/]+)\/lyrics$/
 const SHORTS_ROUTE = /^\/api\/songs\/([^/]+)\/shorts$/
 const SCENE_DELETE_ROUTE = /^\/api\/songs\/([^/]+)\/scenes\/([^/]+)$/
@@ -946,6 +1080,29 @@ function apiMiddleware(studioRoot) {
       return
     }
 
+    if (request.method === 'POST' && requestUrl.pathname === LYRIC_LINES_ROUTE) {
+      try {
+        await createLyricLine(studioRoot, request, response)
+      } catch (error) {
+        sendJson(response, error.statusCode || 500, { error: error.message })
+      }
+      return
+    }
+
+    const lyricLineMatch = requestUrl.pathname.match(LYRIC_LINE_ROUTE)
+    if (lyricLineMatch && (request.method === 'PUT' || request.method === 'DELETE')) {
+      try {
+        if (request.method === 'DELETE') {
+          await deleteLyricLine(studioRoot, response, lyricLineMatch[1])
+        } else {
+          await updateLyricLine(studioRoot, request, response, lyricLineMatch[1])
+        }
+      } catch (error) {
+        sendJson(response, error.statusCode || 500, { error: error.message })
+      }
+      return
+    }
+
     const sceneConfirmMatch = requestUrl.pathname.match(SCENE_CONFIRM_ROUTE)
     if (request.method === 'POST' && sceneConfirmMatch) {
       try {
@@ -991,6 +1148,7 @@ export function songLibraryPlugin() {
       server.watcher.on('all', (eventName, filePath) => {
         const isWatched = filePath.endsWith('song.json')
           || filePath.endsWith('.md')
+          || filePath.endsWith(`${path.sep}library${path.sep}lyric-lines.json`)
           || shouldReloadProduction(filePath)
         if (['add', 'change', 'unlink'].includes(eventName) && isWatched) {
           server.ws.send({ type: 'custom', event: WORKSPACE_CHANGED_EVENT })

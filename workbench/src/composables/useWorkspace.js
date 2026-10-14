@@ -1,5 +1,5 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { confirmSceneReference as persistSceneReference, deleteSceneImage as removeSceneImage, deleteUpscaleVideo as removeUpscaleVideo, deleteVoidedShot as removeVoidedShot, fetchWorkspace, saveSongLyrics as persistSongLyrics, saveSongShorts as persistSongShorts, setRawShotStatus as persistRawShotStatus } from '@/api/workspace'
+import { confirmSceneReference as persistSceneReference, createLyricLine as persistLyricLine, deleteLyricLine as removeLyricLine, deleteSceneImage as removeSceneImage, deleteUpscaleVideo as removeUpscaleVideo, deleteVoidedShot as removeVoidedShot, fetchWorkspace, saveSongLyrics as persistSongLyrics, saveSongShorts as persistSongShorts, setRawShotStatus as persistRawShotStatus, updateLyricLine as replaceLyricLine } from '@/api/workspace'
 import { EMPTY_SONG } from '@/constants/song'
 import { SONG_NAVS } from '@/constants/navigation.js'
 import { WORKSPACE_CHANGED_EVENT } from '@/constants/workspace.js'
@@ -8,6 +8,7 @@ export function useWorkspace() {
   const songs = ref([])
   const archives = ref({ inspiration: [], library: [] })
   const lyricReferences = ref([])
+  const lyricLines = ref([])
   const selectedSongId = ref('')
   const activeNav = ref('in-progress')
   const loadError = ref('')
@@ -37,6 +38,7 @@ export function useWorkspace() {
           library: payload.library || [],
         }
         lyricReferences.value = payload.lyricReferences || []
+        lyricLines.value = payload.lyricLines || []
         snapshot = nextSnapshot
         ensureSelection()
       }
@@ -74,6 +76,17 @@ export function useWorkspace() {
     if (!refreshPaused.value) {
       loadWorkspace({ silent: true })
     }
+  }
+
+  async function saveLyricLine(line) {
+    if (line.id) await replaceLyricLine(line)
+    else await persistLyricLine(line)
+    await loadWorkspace({ silent: true })
+  }
+
+  async function deleteLyricLine(id) {
+    await removeLyricLine(id)
+    await loadWorkspace({ silent: true })
   }
 
   async function saveSongLyrics(folder, sectionUpdates) {
@@ -128,6 +141,7 @@ export function useWorkspace() {
     songs,
     archives,
     lyricReferences,
+    lyricLines,
     selectedSongId,
     activeNav,
     loadError,
@@ -136,6 +150,8 @@ export function useWorkspace() {
     selectNav,
     selectSong,
     setRefreshPaused,
+    saveLyricLine,
+    deleteLyricLine,
     saveSongLyrics,
     saveSongShorts,
     deleteSceneImage,

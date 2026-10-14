@@ -127,7 +127,7 @@
 6. 正式启动时保留用户的原始描述，再提取主题、情绪、音乐风格、演唱语言、人声、场景、必要元素、避免元素和待确认信息。不要因为整理信息而改变用户原意，也不要重复询问已经提供的信息。只有缺失内容会实质改变作品方向时，才提出简短问题。
 7. 歌名确定后，歌曲文件夹位于 `songs/YYYYMMDD-slug/`；显示名写入 `song.json` 的 `title`。暂时没有歌名时可使用 `YYYYMMDD-untitled`，确认歌名后再改名。`lifecycle` 默认为 `in-progress`；完成后改为 `completed`，不要移动文件夹。
 8. 每首歌曲文件夹中的 `song.json` 是 Web 工作台的数据源。创建或修改歌曲企划、歌词、中英文提示词、歌曲参数、状态或 MV 脚本时，必须在同一轮工作中同步更新 `song.json`，确保页面内容与 Markdown 文档一致。工作台可按段落写回 `sections[].lyrics`；Agent 修改歌词或其他字段时仍须同步 `song.json`。
-9. `song.json` 必须保持有效 JSON。歌词按歌曲段落写入 `sections`。风格提示词是给 Mureka AI 音乐生成器的，必须写成一条可直接粘贴进「风格」输入框的 Mureka 专属提示词，不要拆成风格、情绪、乐器等多段。`prompts` 只保留一条 `key` 为 `mureka` 的记录，`zh` 为中文粘贴稿，`en` 为对照译文；`label` 写明字符数。正文用一段话写清：语种与曲风、BPM、拍号、调性、情绪、乐器与律动、人声与唱法、前奏到结尾的段落动态、Hook 怎么唱、避免元素。不写具体歌手或作品名。段落唱法、换气和延音写在这条提示词里；歌词正文只保留段落标签和分句。格式对齐《比永远差一天》与《故乡》的 `04-prompts.md`。男/女主角定妆形象写入 `characterLooks`。`characterLooks.en` 必须是可直接粘贴到 ComfyUI `01_人物三视图` 左上角 Shared Character Prompt 的英文全身共享词：单人、从头顶到鞋底、直立、双臂下垂、暖灰无缝棚拍；不要写正面/侧面/背面或半身裁切。`zh` 为对照译文。负向提示词对齐该工作流的 Front Negative，并补角色专属避免项。MV 分镜单独写入 `shots`。YouTube 与抖音的标题、描述写入 `releaseCopy`。
+9. `song.json` 必须保持有效 JSON。歌词按歌曲段落写入 `sections`。风格提示词是给 Mureka AI 音乐生成器的，必须写成一条可直接粘贴进「风格」输入框的 Mureka 专属提示词，不要拆成风格、情绪、乐器等多段。写之前先读并遵循 [`.cursor/skills/mureka-style-prompt/SKILL.md`](../.cursor/skills/mureka-style-prompt/SKILL.md)。`prompts` 只保留一条 `key` 为 `mureka` 的记录，`zh` 为粘贴稿，`en` 为同一条的完整英文对照；`label` 写明 `zh` 的字符数。不写具体歌手或作品名。歌词正文只保留段落标签和分句。男/女主角定妆形象写入 `characterLooks`。`characterLooks.en` 必须是可直接粘贴到 ComfyUI `01_人物三视图` 左上角 Shared Character Prompt 的英文全身共享词：单人、从头顶到鞋底、直立、双臂下垂、暖灰无缝棚拍；不要写正面/侧面/背面或半身裁切。`zh` 为对照译文。负向提示词对齐该工作流的 Front Negative，并补角色专属避免项。MV 分镜单独写入 `shots`。YouTube 与抖音的标题、描述写入 `releaseCopy`。
 
 ## 歌曲核心原则
 
@@ -137,6 +137,7 @@
 4. 优先级遵循：情绪是灵魂，主题是方向，Hook 是记忆，表达是生命。技术参数和制作手段应服务于这四项，而不能取代它们。
 5. 检查每个新增元素是否强化核心创作句。无关的漂亮句子、炫技段落、音色或情节应删除或调整。
 6. 写词与定曲风遵循 [`docs/creative-principles.md`](docs/creative-principles.md) 的「歌词与曲风」：主歌学周杰伦/方文山的画面留白，副歌学林俊杰能开口唱完的心事句，律动与当代身份学王力宏。只借方法，不复制其成句、旋律或标志性音色。
+7. 写歌词前先读 [`library/lyric-lines.json`](library/lyric-lines.json)。这里只收用户自己记下的句子。贴合当前歌曲时，可以借鉴写法，也可以把原句写进歌词；不贴合就不用，不要为了用满而硬塞。这些句子不受上一条「不复制成句」的限制。
 
 ## 歌词完成后的强制流程
 

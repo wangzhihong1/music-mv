@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 2,
+  "slug": "the-promise",
+  "title": "约定",
+  "date": "20261014",
+  "status": "风格提示词已换成用户给定的空灵女低音",
+  "lifecycle": "in-progress",
+  "coreStatement": "这是一首写给三年后仍会回到约定之处的人、关于不见面的三年被爱留住、再把「我更爱你了」说出口的歌，希望听众感到约定还在、爱比当时更重，并记住「我还记得我们的约定」。",
+  "metadata": {
+    "genre": "华语流行、抒情流行、华语流行乐",
+    "mood": "心碎、情感、忧郁、沉思、激昂、动态渐强、宣泄、苦乐参半、爱情",
+    "tempo": "",
+    "key": "",
+    "vocal": "空灵女低音演唱",
+    "duration": ""
+  },
+  "prompts": [
+    {
+      "key": "mureka",
+      "label": "Mureka 专属风格提示词（54 字符）",
+      "zh": "华语流行、抒情流行、华语流行乐、心碎、情感、忧郁、沉思、激昂、动态渐强、宣泄、苦乐参半、爱情，空灵女低音演唱",
+      "en": "Mandarin pop, lyrical pop, Chinese pop, heartbreak, emotional, melancholy, contemplative, impassioned, dynamic crescendo, catharsis, bittersweet, love, ethereal female low-voice singing."
+    }
+  ],
+  "characterLooks": [
+    {
+      "id": "femaleLead",
+      "label": "女主三视图共享提示词",
+      "zh": "",
+      "en": "",
+      "negativeZh": "",
+      "negativeEn": ""
+    },
+    {
+      "id": "maleLead",
+      "label": "男主三视图共享提示词",
+      "zh": "",
+      "en": "",
+      "negativeZh": "",
+      "negativeEn": ""
+    }
+  ],
+  "mvWorkflow": {
+    "storyStatus": "not_started",
+    "durationConfirmed": false,
+    "durationConfirmedAt": "",
+    "scriptSkeletonStatus": "not_started",
+    "visualReferencesStatus": "not_started",
+    "promptStatus": "not_started",
+    "generationMethod": "characterReferenceVideo"
+  },
+  "mvStory": {
+    "summary": "",
+    "opening": "",
+    "development": "",
+    "turningPoint": "",
+    "climax": "",
+    "ending": ""
+  },
+  "sceneReferences": [],
+  "production": {
+    "characterReferences": "not_started",
+    "shotVideos": "not_started",
+    "post": "not_started",
+    "delivery": "not_started"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "label": "Intro",
+      "time": "",
+      "lyrics": [
+        "说好的三年不见面",
+        "用我们的爱把时间留住",
+        "你笑着说这是我们的考验",
+        "我们的约定"
+      ]
+    },
+    {
+      "id": "verse1",
+      "label": "Verse",
+      "time": "",
+      "lyrics": [
+        "就这样三年又过了",
+        "我还是回到这个地方",
+        "闭上眼等你的出现",
+        "空气中吻你的脸"
+      ]
+    },
+    {
+      "id": "chorus1",
+      "label": "Chorus",
+      "time": "",
+      "lyrics": [
+        "我还记得我们的约定",
+        "一辈子幸福的约定",
+        "为你写的那首歌",
+        "他也偷偷的掉泪了",
+        "我还记得我们的约定",
+        "我比以前还更爱你了",
+        "连那风都笑我了",
+        "我想他会告诉你的",
+        "我更爱你了"
+      ]
+    },
+    {
+      "id": "verse2",
+      "label": "Verse",
+      "time": "",
+      "lyrics": [
+        "就这样三年又过了",
+        "我还是回到这个地方",
+        "闭上眼等你的出现",
+        "空气中吻你的脸"
+      ]
+    },
+    {
+      "id": "chorus2",
+      "label": "Chorus",
+      "time": "",
+      "lyrics": [
+        "我还记得我们的约定",
+        "一辈子幸福的约定",
+        "为你写的那首歌",
+        "它也偷偷的掉泪了",
+        "我还记得我们的约定",
+        "我比以前还更爱你了",
+        "连那风都笑我了",
+        "我想他会告诉你的",
+        "你会记得我们的约定",
+        "一辈子幸福的约定",
+        "为你写的那首歌",
+        "他也偷偷的掉泪了",
+        "你会记得我们的 约定",
+        "我比以前还更爱你了",
+        "迎着风我也笑了",
+        "他一定会告诉你的",
+        "我更爱你了"
+      ]
+    }
+  ],
+  "shots": [],
+  "releaseCopy": {
+    "youtube": {
+      "title": "",
+      "description": ""
+    },
+    "douyin": {
+      "title": "",
+      "description": ""
+    }
+  }
+}
