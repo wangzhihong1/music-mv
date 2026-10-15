@@ -2,7 +2,6 @@
 import { computed, nextTick, ref, watch } from 'vue'
 import { formatDuration, shotDuration } from '@/lib/time.js'
 import ArchivePanel from '@/components/workbench/ArchivePanel.vue'
-import LyricBankPanel from '@/components/workbench/LyricBankPanel.vue'
 import LyricLinesPanel from '@/components/workbench/LyricLinesPanel.vue'
 import AlignPanel from '@/components/workbench/AlignPanel.vue'
 import BriefPanel from '@/components/workbench/BriefPanel.vue'
@@ -21,7 +20,7 @@ import { useWorkspace } from '@/composables/useWorkspace.js'
 import SongHeader from '@/components/layout/SongHeader.vue'
 import { METADATA_FIELDS } from '@/constants/song.js'
 import { HEADER_STAGE, ARCHIVE_NAVS, SONG_NAVS, STAGE_VIEW_MODES } from '@/constants/navigation.js'
-import { joinCharacterLooks, joinLyrics, joinPrompts, metadataFacts, scriptSummary } from '@/utils/song-content.js'
+import { joinLyrics, joinPrompts, metadataFacts, scriptSummary } from '@/utils/song-content.js'
 
 const props = defineProps({
   collectionId: {
@@ -36,7 +35,7 @@ const props = defineProps({
 
 const {
   archives,
-  lyricReferences,
+  characters,
   lyricLines,
   currentSong,
   activeNav,
@@ -85,7 +84,10 @@ const headerViewMode = computed(() => (
 ))
 
 const prompts = computed(() => currentSong.value.prompts || [])
-const characterLooks = computed(() => currentSong.value.characterLooks || [])
+const linkedCharacters = computed(() => characters.value.flatMap((character) => {
+  const linkedWork = (character.works || []).find((work) => work.songId === currentSong.value.id)
+  return linkedWork ? [{ ...character, linkedWork }] : []
+}))
 const sections = computed(() => currentSong.value.sections || [])
 const shots = computed(() => currentSong.value.shots || [])
 const facts = computed(() => metadataFacts(currentSong.value, METADATA_FIELDS))
@@ -178,24 +180,6 @@ function copyShotPrompt(shot, language = 'en') {
   copyText(prompt || fallback, `shot-${shot.id}-${language}`)
 }
 
-function lookText(look, kind) {
-  if (kind === 'negative') {
-    return promptLanguage.value === 'en' ? look.negativeEn || '' : look.negativeZh || ''
-  }
-  return look[promptLanguage.value] || ''
-}
-
-function copyCharacterLook(target) {
-  if (target === 'all') {
-    copyText(joinCharacterLooks(characterLooks.value, promptLanguage.value), 'look-all')
-    return
-  }
-  const negative = target.endsWith('-negative')
-  const id = negative ? target.slice(0, -'-negative'.length) : target
-  const look = characterLooks.value.find((item) => item.id === id)
-  copyText(lookText(look || {}, negative ? 'negative' : 'positive'), `look-${target}`)
-}
-
 function copyRelease(target) {
   const [platformId, field] = String(target).split('-')
   const platform = currentSong.value.releaseCopy?.[platformId] || {}
@@ -220,10 +204,6 @@ function saveCurrentShorts(shorts) {
         :remove-line="deleteLyricLine"
         :set-refresh-paused="setRefreshPaused"
       />
-      <LyricBankPanel
-        v-else-if="activeNav === 'lyric-bank'"
-        :entries="lyricReferences"
-      />
       <ArchivePanel
         v-else
         :nav-id="activeNav"
@@ -242,6 +222,7 @@ function saveCurrentShorts(shorts) {
 
       <PipelineBoard
         :song="currentSong"
+        :has-character-references="linkedCharacters.length > 0"
         :selected-stage="selectedStage"
         @select-stage="onSelectStage"
       />
@@ -368,16 +349,14 @@ function saveCurrentShorts(shorts) {
         <ProductionPanel
           v-else
           :song="currentSong"
+          :characters="linkedCharacters"
           :focus-stage="selectedStage"
-          :prompt-language="promptLanguage"
           :copied-target="copiedTarget"
           :delete-scene-image="deleteSceneImage"
           :delete-voided-shot="deleteVoidedShot"
           :set-raw-shot-status="setRawShotStatus"
           :delete-upscale-video="deleteUpscaleVideo"
           :confirm-scene-reference="confirmSceneReference"
-          @update:prompt-language="promptLanguage = $event"
-          @copy-look="copyCharacterLook"
           @copy-release="copyRelease"
         />
       </div>

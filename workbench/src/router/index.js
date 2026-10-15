@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import WorkbenchView from '@/views/WorkbenchView.vue'
 import CharactersView from '@/views/CharactersView.vue'
 import CharacterDetailView from '@/views/CharacterDetailView.vue'
+import { ARCHIVE_NAVS } from '@/constants/navigation.js'
 
 const routes = [
   {
@@ -26,7 +27,7 @@ const routes = [
     props: true,
   },
   {
-    path: '/archives/:archiveId',
+    path: `/archives/:archiveId(${ARCHIVE_NAVS.join('|')})`,
     name: 'archives',
     component: WorkbenchView,
     props: true,

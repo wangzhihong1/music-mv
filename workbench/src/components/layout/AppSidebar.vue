@@ -1,6 +1,5 @@
 <script setup>
 import {
-  BookOpen,
   Check,
   Quote,
   FileMusic,
@@ -8,10 +7,9 @@ import {
   ListMusic,
   Music2,
   Search,
-  Sparkles,
   User,
 } from '@lucide/vue'
-import { NAV_ITEMS } from '@/constants/navigation.js'
+import { NAV_ITEMS, SONG_NAVS } from '@/constants/navigation.js'
 
 const props = defineProps({
   songs: {
@@ -42,9 +40,7 @@ const iconMap = {
   'in-progress': ListMusic,
   completed: Check,
   characters: User,
-  inspiration: Sparkles,
   'lyric-lines': Quote,
-  'lyric-bank': BookOpen,
   library: Library,
 }
 
@@ -83,30 +79,32 @@ function countFor(item) {
       </button>
     </nav>
 
-    <div class="song-list-heading">
-      <span>{{ listHeading[activeNav] || '最近歌曲' }}</span>
-      <button class="icon-button" type="button" aria-label="搜索歌曲" data-tooltip="搜索歌曲">
-        <Search :size="16" />
-      </button>
-    </div>
+    <template v-if="SONG_NAVS.includes(activeNav)">
+      <div class="song-list-heading">
+        <span>{{ listHeading[activeNav] || '最近歌曲' }}</span>
+        <button class="icon-button" type="button" aria-label="搜索歌曲" data-tooltip="搜索歌曲">
+          <Search :size="16" />
+        </button>
+      </div>
 
-    <div class="song-list">
-      <button
-        v-for="song in visibleSongs"
-        :key="song.id"
-        class="song-item"
-        :class="{ 'is-active': song.id === currentSongId }"
-        type="button"
-        @click="emit('select-song', song.id)"
-      >
-        <span class="song-cover-mini"><FileMusic :size="15" /></span>
-        <span class="song-item-copy">
-          <strong>{{ song.title }}</strong>
-          <small>{{ song.status }}</small>
-        </span>
-      </button>
-      <p v-if="visibleSongs.length === 0" class="song-list-empty">此分类暂无歌曲</p>
-    </div>
+      <div class="song-list">
+        <button
+          v-for="song in visibleSongs"
+          :key="song.id"
+          class="song-item"
+          :class="{ 'is-active': song.id === currentSongId }"
+          type="button"
+          @click="emit('select-song', song.id)"
+        >
+          <span class="song-cover-mini"><FileMusic :size="15" /></span>
+          <span class="song-item-copy">
+            <strong>{{ song.title }}</strong>
+            <small>{{ song.status }}</small>
+          </span>
+        </button>
+        <p v-if="visibleSongs.length === 0" class="song-list-empty">此分类暂无歌曲</p>
+      </div>
+    </template>
 
     <div class="sidebar-footer">
       <span>{{ collectionLabel }}</span>

@@ -11,6 +11,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  hasCharacterReferences: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const emit = defineEmits(['select-stage'])
@@ -23,7 +27,9 @@ const STATUS_LABEL = {
   not_started: '未开始',
 }
 
-const pipeline = computed(() => derivePipeline(props.song))
+const pipeline = computed(() => derivePipeline(props.song, {
+  hasCharacterReferences: props.hasCharacterReferences,
+}))
 const selectedId = computed(() => props.selectedStage || pipeline.value.currentStage)
 </script>
 

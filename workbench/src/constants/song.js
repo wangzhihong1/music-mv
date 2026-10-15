@@ -7,7 +7,6 @@ export const EMPTY_SONG = {
   coreStatement: '使用新建歌曲入口后，作品会显示在这里。',
   metadata: {},
   prompts: [],
-  characterLooks: [],
   sections: [],
   shots: [],
   mvWorkflow: {},

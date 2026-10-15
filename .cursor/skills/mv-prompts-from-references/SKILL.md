@@ -20,16 +20,16 @@ description: >-
 3. `mvWorkflow.scriptSkeletonStatus` 为 `complete`
 4. `mvWorkflow.visualReferencesStatus` 为 `confirmed`
 5. `shots[]` 已形成连续完整时间线
-6. 出镜人物的三视图存在于 `assets/characters/`
+6. 出镜人物已在 `music-mv/characters/` 建档，人物档案 `works[].songId` 关联当前歌曲，且 `look.threeView` 指向已确认的三视图
 7. 每个必需场景都登记在 `sceneReferences[]`，状态为 `confirmed`，路径指向 `assets/scenes/`，并已通过 `sceneReferenceIds[]` 映射到使用它的镜头
 
 任一门槛不满足就停在缺失阶段。不得仅凭文字场景描述把视觉基准视为已确认。
 
 ## 参考图映射
 
-- `subjects[]` 使用 `characterLooks[].id` 中的角色 ID；空景可为空数组。
+- `subjects[]` 使用已关联人物档案的 `character.json.id`；空景可为空数组。
 - `sceneReferenceIds[]` 使用 `sceneReferences[].id`；不需要场景图的镜头使用空数组。
-- 每个镜头按实际上传顺序明确 `<Picture N>`。单人三视图通常占 `<Picture 1/2/3>`，随后场景基准图为 `<Picture 4>`；双人镜的第二人通常占 `<Picture 4/5/6>`，场景图顺延为 `<Picture 7>`。
+- 每个镜头按实际上传顺序明确 `<Picture N>`。`look.threeView` 是正面、侧面、背面合成的一张图，只占一个图片编号；随后的人物或场景基准图依次编号。
 - `subject_definitions` 必须把人物和场景分别绑定到对应图片编号。不得只写“same village”或“same room”而省略已确认场景图的绑定。
 - 同一 `sceneReferenceId` 再出现时，地形、材料、路向、光线、关键道具和左右关系必须沿用，不得在提示词里重画另一处地点。
 

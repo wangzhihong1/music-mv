@@ -28,10 +28,6 @@ const song = {
   prompts: [
     { key: 'mureka', label: 'Mureka 专属风格提示词', zh: '', en: '' },
   ],
-  characterLooks: [
-    { id: 'femaleLead', label: '女主三视图共享提示词', zh: '', en: '', negativeZh: '', negativeEn: '' },
-    { id: 'maleLead', label: '男主三视图共享提示词', zh: '', en: '', negativeZh: '', negativeEn: '' },
-  ],
   mvWorkflow: {
     storyStatus: 'not_started',
     durationConfirmed: false,
@@ -49,6 +45,7 @@ const song = {
     climax: '',
     ending: '',
   },
+  sceneReferencePlans: [],
   sceneReferences: [],
   production: {
     characterReferences: 'not_started',

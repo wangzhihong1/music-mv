@@ -6,7 +6,7 @@
 
 - 一首音乐对应一支 MV。每首歌使用 `songs/YYYYMMDD-slug/` 作为唯一工作目录，例如 `songs/20260823-one-day-short-of-forever/`。
 - 企划、歌词、`song.json`、音频、角色与场景资产、分析缓存、生成文件和成片都放在该目录内，可按需要继续使用 `music/`、`assets/`、`generated/`、`.analysis/` 等子目录。
-- `assets/characters/` 中的主角参考图必须提交到 Git；分镜视频、超分、成片、原曲和分析缓存仍不入库。
+- 人物定妆与三视图统一保存在 `characters/YYYYMMDD-slug/` 人物档案中并提交到 Git，通过 `character.json.works[].songId` 关联歌曲。历史歌曲已有的 `assets/characters/` 可保留，但新流程不再复制人物资产到歌曲目录。分镜视频、超分、成片、原曲和分析缓存仍不入库。
 - 进度写入 `song.json`：`lifecycle` 为 `in-progress` 或 `completed`，`status` 为给人看的说明。完成后只改这两个字段，不要把文件夹搬到其他目录。
 - ComfyUI 文生图/图生图工作流属于公共模板，统一放在 `D:\ComfyUI\ComfyUI_windows_portable\ComfyUI\user\default\workflows\MusicMV\`，不得写入某支 MV 的目录，也不要在文件名和默认路径中绑定具体歌曲。
 - ComfyUI 自定义节点统一放在 `D:\ComfyUI\ComfyUI_windows_portable\ComfyUI\custom_nodes\`；ComfyUI 模型、运行配置、临时输入与输出也由 ComfyUI 自身目录管理，不在本项目中保留同步副本。
@@ -86,7 +86,7 @@
 - 任一镜出现零字节文件、生成进程异常、队列状态不明、显存未释放、系统卡顿或画面未验收时，立即停止后续任务，不得自动重试下一镜或继续排队。
 - 即使用户要求一次性完成整支 MV，也只能逐镜手动推进。此安全规则用于避免电脑再次崩溃，优先级高于制作速度，也适用于后续超分阶段。
 - 未经用户明确要求，禁止自动启动任何视频超分、修复或放大任务。启动超分前必须先列出本机当前可用的超分方式（例如 SeedVR2、其他本地视频超分或仅做普通尺寸转换）及其分辨率、耗时、显存和画质取舍，并询问用户选择哪一种；用户明确选择前不得提交超分任务。即使脚本或工作流默认包含超分节点，也不得绕过这一步。
-- 人物身份以已确认的男女主角参考图（`01_人物三视图` 正面 / 侧面 / 背面）锁定。分镜直接挂对应参考图生成动态视频，不要为每一镜先做一张分镜静帧再图生视频。
+- 人物身份以 `characters/` 人物档案中已确认的 `look.threeView` 锁定。分镜直接挂对应三视图生成动态视频，不要为每一镜先做一张分镜静帧再图生视频。
 - 静帧只用于角色定妆和必要的场景基准，不作为每镜必经工序。推荐交付链路：角色参考图 → H3 中高分辨率参考视频 → 挑选合格镜头 → 人脸/手部局部修复 → 视频超分至 1920×1080（或竖版 1080×1920）→ 剪辑、调色并以原始音乐母带合成。
 - 原生音频只作预览，不用于正式 MV；成片音轨必须使用用户提供或确认的音乐版本。
 - 保存三个版本：原始生成文件、修复/超分中间文件、最终剪辑成片。清理缓存前先确认成片已备份；大文件优先写入 D 盘。
@@ -114,7 +114,7 @@
 ## 歌曲档案范围
 
 - `inspiration/`、`songs/`、`library/`、`templates/song/` 用于歌曲企划、歌词、提示词、结构化 `song.json` 以及该歌的本机成片。
-- 歌曲资料沿用 `YYYYMMDD-slug/` 命名。音频、角色资产、分析、生成文件和成片放入同一歌曲目录，不得放入 `workbench/`。工作台扫描 `songs/` 并按 `lifecycle` 分成「创作中 / 已完成」。主角参考图放在 `assets/characters/` 并纳入 Git；其余媒体文件保持本地。
+- 歌曲资料沿用 `YYYYMMDD-slug/` 命名。音频、场景资产、分析、生成文件和成片放入同一歌曲目录，不得放入 `workbench/`。工作台扫描 `songs/` 并按 `lifecycle` 分成「创作中 / 已完成」。人物提示词与三视图保存在独立 `characters/` 档案，通过 `works[].songId` 关联歌曲；其余媒体文件保持本地。
 - 涉及真人 MV 的视觉、生成、目录和质量要求时，同时遵循本文件前述音乐 MV 创作规范。
 
 ## 音乐创作入口
@@ -127,7 +127,7 @@
 6. 正式启动时保留用户的原始描述，再提取主题、情绪、音乐风格、演唱语言、人声、场景、必要元素、避免元素和待确认信息。不要因为整理信息而改变用户原意，也不要重复询问已经提供的信息。只有缺失内容会实质改变作品方向时，才提出简短问题。
 7. 歌名确定后，歌曲文件夹位于 `songs/YYYYMMDD-slug/`；显示名写入 `song.json` 的 `title`。暂时没有歌名时可使用 `YYYYMMDD-untitled`，确认歌名后再改名。`lifecycle` 默认为 `in-progress`；完成后改为 `completed`，不要移动文件夹。
 8. 每首歌曲文件夹中的 `song.json` 是 Web 工作台的数据源。创建或修改歌曲企划、歌词、中英文提示词、歌曲参数、状态或 MV 脚本时，必须在同一轮工作中同步更新 `song.json`，确保页面内容与 Markdown 文档一致。工作台可按段落写回 `sections[].lyrics`；Agent 修改歌词或其他字段时仍须同步 `song.json`。
-9. `song.json` 必须保持有效 JSON。歌词按歌曲段落写入 `sections`。风格提示词是给 Mureka AI 音乐生成器的，必须写成一条可直接粘贴进「风格」输入框的 Mureka 专属提示词，不要拆成风格、情绪、乐器等多段。写之前先读并遵循 [`.cursor/skills/mureka-style-prompt/SKILL.md`](../.cursor/skills/mureka-style-prompt/SKILL.md)。`prompts` 只保留一条 `key` 为 `mureka` 的记录，`zh` 为粘贴稿，`en` 为同一条的完整英文对照；`label` 写明 `zh` 的字符数。不写具体歌手或作品名。歌词正文只保留段落标签和分句。男/女主角定妆形象写入 `characterLooks`。`characterLooks.en` 必须是可直接粘贴到 ComfyUI `01_人物三视图` 左上角 Shared Character Prompt 的英文全身共享词：单人、从头顶到鞋底、直立、双臂下垂、暖灰无缝棚拍；不要写正面/侧面/背面或半身裁切。`zh` 为对照译文。负向提示词对齐该工作流的 Front Negative，并补角色专属避免项。MV 分镜单独写入 `shots`。YouTube 与抖音的标题、描述写入 `releaseCopy`。
+9. `song.json` 必须保持有效 JSON。歌词按歌曲段落写入 `sections`。风格提示词是给 Mureka AI 音乐生成器的，必须写成一条可直接粘贴进「风格」输入框的 Mureka 专属提示词，不要拆成风格、情绪、乐器等多段。写之前先读并遵循 [`.cursor/skills/mureka-style-prompt/SKILL.md`](../.cursor/skills/mureka-style-prompt/SKILL.md)。`prompts` 只保留一条 `key` 为 `mureka` 的记录，`zh` 为粘贴稿，`en` 为同一条的完整英文对照；`label` 写明 `zh` 的字符数。不写具体歌手或作品名。歌词正文只保留段落标签和分句。人物定妆提示词、负向提示词与三视图只写入 `characters/YYYYMMDD-slug/character.json` 的 `look`；用 `works[].songId` 关联歌曲，歌曲 MV 流程不再保存或展示人物提示词。MV 分镜单独写入 `shots`。YouTube 与抖音的标题、描述写入 `releaseCopy`。
 
 ## 歌曲核心原则
 
@@ -154,7 +154,7 @@
 11. 完整脚本必须从 `00:00` 连续覆盖至用户确认的歌曲结束时间，不留空档、不重叠。所有分镜累计时长必须等于歌曲总时长，因此也不得超过歌曲时长。
 12. 为保证故事完整性，脚本必须覆盖开场、发展、转折、高潮、结尾五个阶段。可以使用非线性、象征或抽象表达，但五个阶段的叙事功能都必须在分镜中得到落实，不得为了满足短镜头限制而删掉关键因果、人物动机、情绪转折或故事结局。
 13. 完成脚本骨架后，将 `mvWorkflow.scriptSkeletonStatus` 设为 `complete`，保持 `mvWorkflow.promptStatus` 为 `not_started` 或 `draft`，并在本目录运行 `npm run validate:songs`。检查通过后才可视为骨架完成。
-14. 脚本骨架完成后进入视觉基准阶段。人物三视图放入 `assets/characters/`；每个需要锁定的地点制作场景基准图并放入 `assets/scenes/`。场景图登记到 `song.json.sceneReferences[]`，至少包含 `id`、`name`、`path`、`status`、`description`；对应镜头用 `sceneReferenceIds[]` 引用。未由用户确认的图片不得写成 `confirmed`。
+14. 脚本骨架完成后进入视觉基准阶段。出镜人物必须已在 `characters/` 建档、通过 `works[].songId` 关联当前歌曲，并具有已确认的 `look.threeView`；每个需要锁定的地点制作场景基准图并放入歌曲的 `assets/scenes/`。场景图登记到 `song.json.sceneReferences[]`，至少包含 `id`、`name`、`path`、`status`、`description`；对应镜头用 `sceneReferenceIds[]` 引用。未由用户确认的图片不得写成 `confirmed`。
 15. 所有出镜人物和必需场景基准图都存在、映射正确并由用户确认后，才将 `mvWorkflow.visualReferencesStatus` 设为 `confirmed`。不得用只有文字描述、没有场景图的状态冒充视觉基准已确认。
 16. 只有 `scriptSkeletonStatus` 为 `complete` 且 `visualReferencesStatus` 为 `confirmed`，才可读并遵循 [`.cursor/skills/mv-prompts-from-references/SKILL.md`](../.cursor/skills/mv-prompts-from-references/SKILL.md) 编写最终分镜提示词。每镜填写 `subjects`、`sceneReferenceIds`、`genMode`、可直接执行的英文 `prompt`、完整中文对照 `promptZh` 与唯一 `output`。人物与场景图片的 `<Picture N>` 位置必须在提示词中明确对应。
 17. 最终提示词写入 `08-mv-prompts.md` 并同步 `song.json`。全部完成后将 `mvWorkflow.promptStatus` 设为 `complete`，再运行 `npm run validate:songs`。`output` 指向每镜最终可用于剪辑的独立视频；剪辑/合成镜也必须导出对应视频。

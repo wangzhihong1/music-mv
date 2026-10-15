@@ -13,11 +13,6 @@ const LIFECYCLE_LABELS = {
   completed: '已完成',
 }
 
-const ARCHIVES = [
-  { id: 'inspiration', directory: 'inspiration' },
-  { id: 'library', directory: 'library' },
-]
-
 const MEDIA_TYPES = {
   '.mp4': 'video/mp4',
   '.mp3': 'audio/mpeg',
@@ -42,12 +37,15 @@ async function listMarkdownFiles(studioRoot, directory) {
 
   try {
     const entries = await readdir(targetPath, { withFileTypes: true })
-    return entries
+    const files = await Promise.all(entries
       .filter((entry) => entry.isFile() && entry.name.toLowerCase().endsWith('.md'))
-      .map((entry) => ({
+      .map(async (entry) => ({
         name: entry.name,
         path: `${directory}/${entry.name}`,
-      }))
+        content: await readFile(path.join(targetPath, entry.name), 'utf8'),
+      })))
+
+    return files
       .sort((left, right) => left.name.localeCompare(right.name))
   } catch (error) {
     if (error.code === 'ENOENT') return []
@@ -157,22 +155,6 @@ async function scanCharacters(studioRoot) {
     if (dateOrder !== 0) return dateOrder
     return right.updatedAt.localeCompare(left.updatedAt)
   })
-}
-
-async function readLyricReferences(studioRoot) {
-  const dataPath = path.join(studioRoot, 'library', 'lyric-references.json')
-
-  try {
-    const source = await readFile(dataPath, 'utf8')
-    const entries = JSON.parse(source)
-    if (!Array.isArray(entries)) return []
-    return entries
-      .filter((entry) => entry && typeof entry.title === 'string')
-      .sort((left, right) => left.title.localeCompare(right.title, 'zh'))
-  } catch (error) {
-    if (error.code === 'ENOENT') return []
-    throw error
-  }
 }
 
 function lyricLinesPath(studioRoot) {
@@ -303,17 +285,15 @@ async function deleteLyricLine(studioRoot, response, lineId) {
 }
 
 async function buildWorkspace(studioRoot) {
-  const [rawSongs, characters, inspiration, library, lyricReferences, lyricLines] = await Promise.all([
+  const [rawSongs, characters, library, lyricLines] = await Promise.all([
     scanSongs(studioRoot),
     scanCharacters(studioRoot),
-    listMarkdownFiles(studioRoot, 'inspiration'),
     listMarkdownFiles(studioRoot, 'library'),
-    readLyricReferences(studioRoot),
     readLyricLines(studioRoot),
   ])
   const songs = await attachProductions(studioRoot, rawSongs)
 
-  return { songs, characters, inspiration, library, lyricReferences, lyricLines }
+  return { songs, characters, library, lyricLines }
 }
 
 function sendJson(response, statusCode, payload) {
@@ -1193,7 +1173,7 @@ export function songLibraryPlugin() {
       const watchRoots = [
         path.join(studioRoot, SONGS_DIRECTORY),
         path.join(studioRoot, CHARACTERS_DIRECTORY),
-        ...ARCHIVES.map(({ directory }) => path.join(studioRoot, directory)),
+        path.join(studioRoot, 'library'),
       ]
       server.watcher.add(watchRoots)
       server.watcher.on('all', (eventName, filePath) => {

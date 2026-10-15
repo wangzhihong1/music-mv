@@ -238,6 +238,14 @@ button:focus-visible {
   margin-right: 0;
 }
 
+.workbench-view {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
 .page-header {
   flex-shrink: 0;
 }

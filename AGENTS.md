@@ -34,7 +34,7 @@
 6. 正式启动时保留用户的原始描述，再提取主题、情绪、音乐风格、演唱语言、人声、场景、必要元素、避免元素和待确认信息。不要因为整理信息而改变用户原意。
 7. 歌名确定后，歌曲文件夹遵循 `music-mv/songs/YYYYMMDD-slug/`；显示名写入 `song.json` 的 `title`。暂时没有歌名时可使用 `YYYYMMDD-untitled`。完成后将 `lifecycle` 设为 `completed`，不要移动文件夹。
 8. 每首歌曲文件夹中的 `song.json` 是工作台数据源。创建或修改歌曲企划、歌词、提示词、歌曲参数、状态或 MV 脚本时，必须在同一轮工作中同步更新 `song.json`。
-9. `song.json` 必须保持有效 JSON。歌词写入 `sections`。风格提示词是给 Mureka 的，只写一条可粘贴进风格框的专属提示词，放在 `prompts` 的 `zh` 和 `en`，不要拆成多段。写之前先读并遵循 [`.cursor/skills/mureka-style-prompt/SKILL.md`](.cursor/skills/mureka-style-prompt/SKILL.md)。男/女主角定妆形象写入 `characterLooks`，英文必须可直接粘贴到 ComfyUI `01_人物三视图` 的 Shared Character Prompt；MV 分镜写入 `shots`。
+9. `song.json` 必须保持有效 JSON。歌词写入 `sections`。风格提示词是给 Mureka 的，只写一条可粘贴进风格框的专属提示词，放在 `prompts` 的 `zh` 和 `en`，不要拆成多段。写之前先读并遵循 [`.cursor/skills/mureka-style-prompt/SKILL.md`](.cursor/skills/mureka-style-prompt/SKILL.md)。人物定妆提示词和三视图统一保存在 `music-mv/characters/` 的人物档案中，通过人物档案 `works[].songId` 关联歌曲；不要再把人物提示词写入歌曲的 MV 流程。MV 分镜写入 `shots`。
 10. 写歌词前先读 `music-mv/library/lyric-lines.json`。这些是用户自己记下的句子。贴合当前歌曲时，可以借鉴写法，也可以使用原句；不贴合就不用，不要为了用满而硬塞。
 
 ## 歌词完成后的强制流程
@@ -51,7 +51,7 @@
 10. 完整脚本必须从 `00:00` 连续覆盖至用户确认的歌曲结束时间，不留空档、不重叠；累计时长必须等于歌曲总时长。
 11. 脚本必须覆盖开场、发展、转折、高潮、结尾五个阶段。
 12. 完成脚本骨架后，将 `mvWorkflow.scriptSkeletonStatus` 设为 `complete`，并在 `music-mv/` 运行 `npm run validate:songs`。
-13. 脚本骨架完成后，先制作和确认人物三视图与必要的场景基准图。场景基准图登记在 `sceneReferences`，每镜通过 `sceneReferenceIds` 引用；未确认的图片不得标记为 `confirmed`。全部必需视觉基准确认后，将 `mvWorkflow.visualReferencesStatus` 设为 `confirmed`。
+13. 脚本骨架完成后，先从 `music-mv/characters/` 关联已确认的人物三视图，再制作和确认必要的场景基准图。场景基准图登记在 `sceneReferences`，每镜通过 `sceneReferenceIds` 引用；未确认的图片不得标记为 `confirmed`。全部必需视觉基准确认后，将 `mvWorkflow.visualReferencesStatus` 设为 `confirmed`。
 14. 只有脚本骨架完成且人物/场景基准图已确认，才可遵循 [`.cursor/skills/mv-prompts-from-references/SKILL.md`](.cursor/skills/mv-prompts-from-references/SKILL.md) 写最终分镜提示词。完成后将 `mvWorkflow.promptStatus` 设为 `complete`，同步 `08-mv-prompts.md` 与 `song.json`，再运行 `npm run validate:songs`。
 15. 正式 MV 流程固定为：MV 故事 → MV 脚本骨架 → 人物/场景基准图 → 最终分镜提示词 → 分镜视频 → 修复超分 → 成片。不得跳过视觉基准阶段直接把脚本草稿当最终生成提示词。
 16. 大部分镜头必须有观众能读懂的镜头语言。全片先锁少数几个相连地点，大部分镜头都在这些地点里；同一场景再次出现时，地形、材料、路向、光线和关键道具保持一致。细则见 `music-mv/AGENTS.md` 的导演要求。

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "wang-xiao-an",
+  "name": "王小安",
+  "date": "20261015",
+  "status": "active",
+  "cover": "assets/cover.png",
+  "profile": {
+    "age": "",
+    "gender": "male",
+    "occupation": ["singer", "actor"],
+    "occupationLabel": "男歌手 / 演员",
+    "region": "",
+    "nationality": "",
+    "language": [],
+    "height": "",
+    "bloodType": "",
+    "zodiac": "",
+    "birthday": ""
+  },
+  "personality": {
+    "core": "",
+    "mbti": "",
+    "catchphrases": [],
+    "habits": [],
+    "values": "",
+    "strengths": [],
+    "weaknesses": []
+  },
+  "look": {
+    "label": "王小安定妆共享提示词",
+    "zh": "成年东亚男性，年轻清冷气质，修长匀称的模特身形，黑色短发蓬松分层，额前碎发自然垂落，深棕色眼睛，冷白自然肤色，轮廓清晰的鹅蛋脸与利落下颌线，五官精致但保留真实皮肤纹理，神情克制平静，黑色圆领短袖T恤，深灰黑色直筒牛仔裤，白色低帮运动鞋，无饰品，极简现代休闲风，冷灰色无缝棚拍背景",
+    "en": "adult East Asian man with a youthful, cool and restrained presence, tall balanced model-like proportions, short layered black hair with loose wispy fringe, dark brown eyes, naturally fair skin, a defined oval face and clean jawline, refined facial features with realistic skin texture, calm restrained expression, black crew-neck short-sleeve T-shirt, dark charcoal straight-leg jeans, white low-top sneakers, no accessories, minimalist modern casual styling, cool gray seamless studio background",
+    "negativeZh": "未成年感, 卡通感, 塑料质感, 过度磨皮, 浓妆, 夸张表情, 张嘴, 胡须, 饰品, 彩色服装, 紧身裤, 多余手指, 肢体变形, 多余人物, 身份漂移",
+    "negativeEn": "underage appearance, cartoon style, plastic texture, over-smoothed skin, heavy makeup, exaggerated expression, open mouth, facial hair, accessories, colorful clothing, skinny trousers, extra fingers, deformed limbs, extra people, identity drift",
+    "cover": "assets/cover.png",
+    "threeView": "assets/characters/three-view.png",
+    "references": [
+      {
+        "id": "three-view",
+        "label": "三视图",
+        "path": "assets/characters/three-view.png"
+      }
+    ]
+  },
+  "voice": {
+    "timbre": "",
+    "range": "",
+    "style": "",
+    "murekaPrompt": "",
+    "signatureTraits": []
+  },
+  "signatures": {
+    "objects": [],
+    "scenes": [],
+    "actions": [],
+    "colors": ["黑", "深灰", "冷白"],
+    "styleKeywords": ["清冷", "极简", "现代", "克制"]
+  },
+  "bio": "王小安，男歌手兼演员。",
+  "works": [
+    {
+      "songId": "songs/20261014-the-promise",
+      "role": "maleLead",
+      "roleLabel": "男主",
+      "note": "《约定》— 三年之约归来的男主"
+    }
+  ],
+  "relations": [],
+  "avoid": [
+    "未成年化呈现",
+    "夸张表情",
+    "浓妆与过度磨皮",
+    "改变黑色短发和清冷气质",
+    "改变参考图中的身形比例",
+    "擅自增加饰品或彩色服装"
+  ]
+}

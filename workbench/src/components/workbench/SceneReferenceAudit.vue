@@ -8,14 +8,12 @@ const props = defineProps({
   confirmSceneReference: { type: Function, default: null },
 })
 
-const PLAN = [
-  { id: 'valley', label: '整体山谷与地理关系', shortLabel: '山谷总览', description: '锁定院子、向东土路、田地和远山的相对位置。', pattern: /homeland_aerial/i },
-  { id: 'house', label: '堂屋门槛与院子', shortLabel: '堂屋门槛', description: '锁定朝南堂屋、压实土院、东侧窄门，以及门内灶和木钉的左右关系。', pattern: /house_threshold/i },
-  { id: 'road', label: '东门外向东土路', shortLabel: '东门土路', description: '锁定家到菜地的唯一土路、向东行进方向和路边环境。', pattern: /road_west_gate/i },
-  { id: 'field', label: '菜地西头与两行豆架', shortLabel: '菜地西头', description: '锁定靠路留种行、靠田饱豆行、种盆、圆竹匾和地头空土。', pattern: /field_west_end/i },
-]
-
 const registered = computed(() => props.song.sceneReferences || [])
+const planned = computed(() => (
+  Array.isArray(props.song.sceneReferencePlans)
+    ? props.song.sceneReferencePlans
+    : registered.value
+))
 const sceneItems = computed(() => props.scenes || [])
 const shots = computed(() => props.song.shots || [])
 const pendingDelete = ref(null)
@@ -23,14 +21,21 @@ const busyKey = ref('')
 const actionError = ref('')
 const selectedImage = ref(null)
 
+function normalizedPath(value) { return String(value || '').replace(/\\/g, '/') }
 function referenceText(reference) { return [reference.id, reference.name, reference.path, reference.description].filter(Boolean).join(' ') }
+function belongsToPlan(plan, item) {
+  const itemPath = normalizedPath(item.path || item.name)
+  const planPath = normalizedPath(plan.path)
+  if (planPath && (itemPath === planPath || itemPath.endsWith('/' + planPath.split('/').pop()))) return true
+  return referenceText(item).toLowerCase().includes(String(plan.id || '').toLowerCase())
+}
 function registeredFor(plan) {
   return registered.value.filter((reference) => {
     const text = referenceText(reference)
-    return text.toLowerCase().includes(plan.id) || plan.pattern.test(text)
+    return text.toLowerCase().includes(String(plan.id || '').toLowerCase())
   })
 }
-function candidatesFor(plan) { return sceneItems.value.filter((item) => plan.pattern.test(item.name || item.path || '')) }
+function candidatesFor(plan) { return sceneItems.value.filter((item) => belongsToPlan(plan, item)) }
 function isConfirmed(plan, item) {
   return registeredFor(plan).some((reference) => {
     const referencePath = String(reference.path || '').replace(/\\/g, '/')
@@ -41,7 +46,14 @@ function mappedShots(plan) {
   const ids = new Set(registeredFor(plan).flatMap((reference) => [reference.id, reference.name, reference.path]))
   return shots.value.filter((shot) => (shot.sceneReferenceIds || []).some((id) => ids.has(id))).length
 }
-const plans = computed(() => PLAN.map((plan) => {
+const plans = computed(() => planned.value.map((source, index) => {
+  const plan = {
+    ...source,
+    id: source.id || `scene-${index + 1}`,
+    label: source.name || source.label || `场景 ${index + 1}`,
+    shortLabel: source.shortLabel || source.name || source.label || `场景 ${index + 1}`,
+    description: source.description || '尚未填写场景基准说明。',
+  }
   const candidates = candidatesFor(plan)
   const active = candidates.filter((item) => !item.voided)
   const references = registeredFor(plan)
@@ -81,7 +93,7 @@ async function deleteCandidate() {
       <span class="scene-audit-state" :class="'is-' + (song.mvWorkflow?.visualReferencesStatus || 'not_started')">{{ song.mvWorkflow?.visualReferencesStatus === 'confirmed' ? '全部场景已确认' : '场景仍在整理' }}</span>
     </div>
     <div class="scene-audit-metrics" aria-label="场景基准统计"><div><strong>{{ plans.length }}</strong><span>计划场景</span></div><div><strong>{{ registeredCount }}</strong><span>已确认</span></div><div><strong>{{ activeImageCount }}</strong><span>有效候选图</span></div><div><strong>{{ voidedImageCount }}</strong><span>作废图</span></div><div><strong>{{ mappedCount }}/{{ shots.length }}</strong><span>镜头已映射</span></div></div>
-    <div class="scene-audit-list">
+    <div v-if="plans.length" class="scene-audit-list">
       <article v-for="plan in plans" :key="plan.id" class="scene-audit-card" :class="'is-' + plan.status">
         <div class="scene-audit-card-head"><div><strong>{{ plan.shortLabel }}</strong><small>{{ plan.label }}</small></div><span class="scene-audit-badge">{{ statusLabel(plan.status) }}</span></div>
         <p>{{ plan.description }}</p>
@@ -95,6 +107,7 @@ async function deleteCandidate() {
         <div v-else class="scene-audit-missing">需要补做有效场景基准图</div>
       </article>
     </div>
+    <div v-else class="scene-audit-missing">尚未制定场景基准计划</div>
     <p v-if="actionError" class="scene-audit-error" role="alert">{{ actionError }}</p><p class="scene-audit-note">场景图片只在这里按类型管理；确认会写入 sceneReferences[]，删除会同步移除对应登记。</p>
   </section>
   <div v-if="pendingDelete" class="confirm-backdrop" role="presentation" @click.self="cancelDelete"><section class="confirm-dialog" role="alertdialog" aria-modal="true" aria-labelledby="scene-delete-title"><h3 id="scene-delete-title">确认删除场景图？</h3><p>将删除“{{ pendingDelete.item.name }}”，并移除它的场景登记。</p><div class="confirm-actions"><button type="button" class="button-secondary" :disabled="Boolean(busyKey)" @click="cancelDelete">取消</button><button type="button" class="button-danger" :disabled="Boolean(busyKey)" @click="deleteCandidate">{{ busyKey ? '删除中…' : '确认删除' }}</button></div></section></div>

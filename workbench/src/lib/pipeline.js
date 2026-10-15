@@ -36,12 +36,11 @@ function hasText(value) {
   return Boolean(String(value || '').trim())
 }
 
-export function derivePipeline(song = {}) {
+export function derivePipeline(song = {}, { hasCharacterReferences = false } = {}) {
   const hasBrief = hasText(song.coreStatement)
   const hasStyle = hasText(song.metadata?.genre)
   const hasLyrics = (song.sections || []).some((section) => (section.lyrics || []).length > 0)
   const hasPrompts = (song.prompts || []).some((item) => hasText(item.zh) || hasText(item.en))
-  const hasCharacterLooks = (song.characterLooks || []).some((item) => hasText(item.zh) || hasText(item.en))
   const hasShotPrompts = (song.shots || []).some((shot) => hasText(shot.prompt) || hasText(shot.promptZh))
   const production = song.production || {}
   const workflow = song.mvWorkflow || {}
@@ -72,7 +71,7 @@ export function derivePipeline(song = {}) {
         status = normalizeStatus(
           workflow.visualReferencesStatus || production.characterReferences || production.keyframes,
         )
-        if (status === 'not_started' && hasCharacterLooks) status = 'in_progress'
+        if (status === 'not_started' && hasCharacterReferences) status = 'in_progress'
         break
       case 'mv-prompts':
         status = normalizeStatus(workflow.promptStatus || legacyScriptStatus)

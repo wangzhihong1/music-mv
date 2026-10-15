@@ -6,8 +6,7 @@ import { WORKSPACE_CHANGED_EVENT } from '@/constants/workspace.js'
 
 const songs = ref([])
 const characters = ref([])
-const archives = ref({ inspiration: [], library: [] })
-const lyricReferences = ref([])
+const archives = ref({ library: [] })
 const lyricLines = ref([])
 const selectedSongId = ref('')
 const activeNav = ref('in-progress')
@@ -35,10 +34,8 @@ async function loadWorkspace({ silent = false } = {}) {
       songs.value = payload.songs || []
       characters.value = payload.characters || []
       archives.value = {
-        inspiration: payload.inspiration || [],
         library: payload.library || [],
       }
-      lyricReferences.value = payload.lyricReferences || []
       lyricLines.value = payload.lyricLines || []
       snapshot = nextSnapshot
       ensureSelection()
@@ -147,7 +144,6 @@ function useWorkspace() {
     songs,
     characters,
     archives,
-    lyricReferences,
     lyricLines,
     selectedSongId,
     activeNav,

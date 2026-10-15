@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { Film, Image as ImageIcon, Music2, Trash2, X } from '@lucide/vue'
-import CharacterLooksPanel from '@/components/workbench/CharacterLooksPanel.vue'
+import CharacterReferencePanel from '@/components/workbench/CharacterReferencePanel.vue'
 import SceneReferenceAudit from '@/components/workbench/SceneReferenceAudit.vue'
 import ReleaseCopyPanel from '@/components/workbench/ReleaseCopyPanel.vue'
 import { PRODUCTION_FOCUS } from '@/constants/navigation.js'
@@ -14,7 +14,7 @@ const STAGE_COPY = {
 }
 
 const EMPTY_COPY = {
-  'visual-references': '人物三视图放入 assets/characters/，确认的场景基准图放入 assets/scenes/。两类图片会共同显示在这里。',
+  'visual-references': '人物三视图从人物档案引用，确认的场景基准图放入 assets/scenes/。',
   'shot-videos': '尚未生成分镜视频。确认主角参考图后，将 H3 输出放入 generated/video/raw/。',
   post: '尚未生成修复超分。合格分镜视频修复后放入 generated/video/intermediate/。',
   delivery: '尚未导出成片。剪辑完成后放入 generated/video/final/。',
@@ -25,13 +25,13 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  characters: {
+    type: Array,
+    default: () => [],
+  },
   focusStage: {
     type: String,
     default: '',
-  },
-  promptLanguage: {
-    type: String,
-    default: 'zh',
   },
   copiedTarget: {
     type: String,
@@ -59,7 +59,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['update:promptLanguage', 'copy-look', 'copy-release'])
+const emit = defineEmits(['copy-release'])
 const releaseCopy = computed(() => props.song.releaseCopy || {})
 const showingRelease = computed(() => props.focusStage === 'delivery')
 
@@ -71,9 +71,7 @@ const shotBusy = ref('')
 const shotActionError = ref('')
 const production = computed(() => props.song.production || {})
 const groups = computed(() => production.value.groups || [])
-const characterLooks = computed(() => props.song.characterLooks || [])
 const sceneItems = computed(() => groups.value.find((group) => group.id === 'scenes')?.items || [])
-const characterItems = computed(() => groups.value.find((group) => group.id === 'characters')?.items || [])
 const showingLooks = computed(() => props.focusStage === 'visual-references')
 const stageCopy = computed(() => STAGE_COPY[props.focusStage] || {
   kicker: 'Local Production',
@@ -96,6 +94,13 @@ const fileCount = computed(() =>
   ),
 )
 const hasVisibleMedia = computed(() => itemCount.value > 0)
+const characterReferenceFileCount = computed(() => props.characters.filter((character) => (
+  character.look?.threeView
+  || character.look?.references?.some((reference) => reference.id === 'three-view' && reference.path)
+)).length)
+const visualReferenceCount = computed(() => characterReferenceFileCount.value + sceneItems.value.length)
+const hasVisualReferenceEntries = computed(() => props.characters.length > 0 || sceneItems.value.length > 0)
+const displayedFileCount = computed(() => showingLooks.value ? visualReferenceCount.value : fileCount.value)
 
 function isFocused(groupId) {
   return focusGroups.value.includes(groupId)
@@ -180,7 +185,7 @@ async function confirmDelete() {
       </div>
       <span class="panel-count">
         {{ production.directory || '歌曲目录' }}
-        · {{ fileCount }} 个文件
+        · {{ displayedFileCount }} 个文件
       </span>
     </div>
 
@@ -196,33 +201,11 @@ async function confirmDelete() {
         <div class="visual-reference-module-heading">
           <div>
             <span class="panel-kicker">Character References</span>
-            <h3>人物主角图</h3>
+            <h3>人物三视图</h3>
           </div>
-          <span>{{ characterItems.length }} 张</span>
+          <span>{{ characters.length }} 位人物</span>
         </div>
-        <CharacterLooksPanel
-          :looks="characterLooks"
-          :language="promptLanguage"
-          :copied-target="copiedTarget"
-          @update:language="emit('update:promptLanguage', $event)"
-          @copy="emit('copy-look', $event)"
-        />
-        <div v-if="characterItems.length" class="character-image-grid">
-          <button
-            v-for="item in characterItems"
-            :key="item.path"
-            class="media-card is-image"
-            type="button"
-            :aria-label="`查看 ${itemLabel(item)}`"
-            @click="openImage(item)"
-          >
-            <img :src="item.url" :alt="itemLabel(item)">
-            <span class="media-meta">
-              <strong>{{ itemLabel(item) }}</strong>
-              <small>{{ itemCaption(item) }}</small>
-            </span>
-          </button>
-        </div>
+        <CharacterReferencePanel :characters="characters" @preview="openImage" />
       </div>
 
       <div class="visual-reference-module scene-module">
@@ -243,11 +226,11 @@ async function confirmDelete() {
     </section>
 
     <div v-if="!hasVisibleMedia && !showingLooks" class="production-empty">
-      <p>{{ EMPTY_COPY[focusStage] || '当前步骤还没有可预览的文件。音频放入 music/，人物图片放入 assets/characters/，场景基准图放入 assets/scenes/，分镜视频放入 generated/video/raw/，成片放入 generated/video/final/。' }}</p>
+      <p>{{ EMPTY_COPY[focusStage] || '当前步骤还没有可预览的文件。人物三视图从人物档案关联，场景基准图放入 assets/scenes/，分镜视频放入 generated/video/raw/，成片放入 generated/video/final/。' }}</p>
     </div>
 
-    <p v-else-if="!hasVisibleMedia && showingLooks" class="production-empty">
-      人物三视图放入 <code>assets/characters/</code>，确认的场景基准图放入 <code>assets/scenes/</code>。
+    <p v-else-if="!hasVisibleMedia && showingLooks && !hasVisualReferenceEntries" class="production-empty">
+      尚未关联人物三视图或场景基准图。
     </p>
 
     <p v-if="shotActionError" class="confirm-error production-action-error" role="alert">{{ shotActionError }}</p>
