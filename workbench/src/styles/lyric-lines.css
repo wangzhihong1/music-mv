@@ -110,8 +110,3 @@
   font-size: 12px;
 }
 
-@media (max-width: 860px) {
-  .lyric-lines-layout {
-    grid-template-columns: 1fr;
-  }
-}

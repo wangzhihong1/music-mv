@@ -7,6 +7,7 @@ import { timeToSeconds } from '../src/lib/time.js'
 import { attachProductions } from './studio-production.js'
 
 const SONGS_DIRECTORY = 'songs'
+const CHARACTERS_DIRECTORY = 'characters'
 const LIFECYCLE_LABELS = {
   'in-progress': '创作中',
   completed: '已完成',
@@ -104,6 +105,54 @@ async function scanSongs(studioRoot) {
   }
 
   return songs.sort((left, right) => {
+    const dateOrder = String(right.date || '').localeCompare(String(left.date || ''))
+    if (dateOrder !== 0) return dateOrder
+    return right.updatedAt.localeCompare(left.updatedAt)
+  })
+}
+
+async function readCharacter(studioRoot, folderName) {
+  const dataPath = path.join(studioRoot, CHARACTERS_DIRECTORY, folderName, 'character.json')
+
+  try {
+    const [source, fileStat] = await Promise.all([
+      readFile(dataPath, 'utf8'),
+      stat(dataPath),
+    ])
+    const character = JSON.parse(source)
+
+    return {
+      ...character,
+      id: `${CHARACTERS_DIRECTORY}/${folderName}`,
+      slug: character.slug || character.id || folderName.replace(/^\d{8}-/, ''),
+      folder: folderName,
+      updatedAt: fileStat.mtime.toISOString(),
+    }
+  } catch (error) {
+    if (error.code === 'ENOENT') return null
+    throw new Error(`${dataPath}: ${error.message}`)
+  }
+}
+
+async function scanCharacters(studioRoot) {
+  const characters = []
+  const charactersPath = path.join(studioRoot, CHARACTERS_DIRECTORY)
+  let entries = []
+
+  try {
+    entries = await readdir(charactersPath, { withFileTypes: true })
+  } catch (error) {
+    if (error.code === 'ENOENT') return characters
+    throw error
+  }
+
+  for (const entry of entries) {
+    if (!entry.isDirectory()) continue
+    const character = await readCharacter(studioRoot, entry.name)
+    if (character) characters.push(character)
+  }
+
+  return characters.sort((left, right) => {
     const dateOrder = String(right.date || '').localeCompare(String(left.date || ''))
     if (dateOrder !== 0) return dateOrder
     return right.updatedAt.localeCompare(left.updatedAt)
@@ -254,8 +303,9 @@ async function deleteLyricLine(studioRoot, response, lineId) {
 }
 
 async function buildWorkspace(studioRoot) {
-  const [rawSongs, inspiration, library, lyricReferences, lyricLines] = await Promise.all([
+  const [rawSongs, characters, inspiration, library, lyricReferences, lyricLines] = await Promise.all([
     scanSongs(studioRoot),
+    scanCharacters(studioRoot),
     listMarkdownFiles(studioRoot, 'inspiration'),
     listMarkdownFiles(studioRoot, 'library'),
     readLyricReferences(studioRoot),
@@ -263,7 +313,7 @@ async function buildWorkspace(studioRoot) {
   ])
   const songs = await attachProductions(studioRoot, rawSongs)
 
-  return { songs, inspiration, library, lyricReferences, lyricLines }
+  return { songs, characters, inspiration, library, lyricReferences, lyricLines }
 }
 
 function sendJson(response, statusCode, payload) {
@@ -1142,11 +1192,13 @@ export function songLibraryPlugin() {
     configureServer(server) {
       const watchRoots = [
         path.join(studioRoot, SONGS_DIRECTORY),
+        path.join(studioRoot, CHARACTERS_DIRECTORY),
         ...ARCHIVES.map(({ directory }) => path.join(studioRoot, directory)),
       ]
       server.watcher.add(watchRoots)
       server.watcher.on('all', (eventName, filePath) => {
         const isWatched = filePath.endsWith('song.json')
+          || filePath.endsWith('character.json')
           || filePath.endsWith('.md')
           || filePath.endsWith(`${path.sep}library${path.sep}lyric-lines.json`)
           || shouldReloadProduction(filePath)

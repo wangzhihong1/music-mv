@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "id": "lin-xi",
+  "name": "林夕",
+  "date": "20261015",
+  "status": "active",
+  "cover": "assets/cover.png",
+  "profile": {
+    "age": 26,
+    "gender": "female",
+    "occupation": ["singer", "actress"],
+    "occupationLabel": "歌手 / 歌演员",
+    "region": "上海",
+    "nationality": "中国",
+    "language": ["中文"],
+    "height": "",
+    "bloodType": "",
+    "zodiac": "",
+    "birthday": ""
+  },
+  "personality": {
+    "core": "外冷内热，克制但深情",
+    "mbti": "",
+    "catchphrases": ["……", "嗯"],
+    "habits": ["紧张时摸左耳", "说话前先低头", "唱到动情处会闭眼"],
+    "values": "相信约定，不善表达但记得每一件小事",
+    "strengths": ["情绪感知力强", "专注力高", "对作品有执念"],
+    "weaknesses": ["不擅长主动沟通", "容易陷在回忆里", "对亲密关系缺乏安全感"]
+  },
+  "look": {
+    "label": "林夕定妆共享提示词",
+    "zh": "年轻东亚女性，约26岁，长直黑发自然垂落至腰际，中分微偏，肤色冷白细腻，五官精致柔和，眉眼清冷带疏离感，唇形饱满，日常淡妆，黑色露肩针织上衣，深色高腰牛仔裤，极简都市风格，暖灰无缝棚拍背景",
+    "en": "young East Asian woman, around 26 years old, long straight black hair falling naturally to waist, center-parted slightly off-center, cool fair smooth skin, delicate soft facial features, cold distant eyes, full lips, light daily makeup, black off-shoulder knit top, dark high-waisted jeans, minimalist urban style, warm gray seamless studio background",
+    "negativeZh": "卡通感, 塑料质感, 过度磨皮, 浓妆, 夸张表情, 张嘴, 多余手指, 变形, 多余人物",
+    "negativeEn": "cartoon style, plastic texture, over-smoothed skin, heavy makeup, exaggerated expression, open mouth, extra fingers, deformed, extra people",
+    "cover": "assets/cover.png",
+    "threeView": "assets/characters/three-view.png",
+    "references": [
+      { "id": "three-view", "label": "三视图", "path": "assets/characters/three-view.png" }
+    ]
+  },
+  "voice": {
+    "timbre": "空灵女低音",
+    "range": "",
+    "style": "气声多、尾音轻收、克制不炫技",
+    "murekaPrompt": "华语流行、抒情流行、华语流行乐、心碎、情感、忧郁、沉思、激昂、动态渐强、宣泄、苦乐参半、爱情，空灵女低音演唱",
+    "signatureTraits": ["气声开头", "副歌轻收尾音", "不飙高音，用情绪压过技巧"]
+  },
+  "signatures": {
+    "objects": ["银色耳钉"],
+    "scenes": ["深夜天台", "录音棚", "雨天街道"],
+    "actions": ["低头沉默", "望向窗外", "手指摩挲杯沿"],
+    "colors": ["黑", "灰", "冷白"],
+    "styleKeywords": ["极简", "清冷", "都市", "克制"]
+  },
+  "bio": "林夕，26岁，独立歌手兼歌演员。她习惯把情绪藏进旋律里，舞台上克制疏离，私下却会为一段旧旋律反复循环。出道以来始终坚持自己写词，相信每一首歌都是一次与过去的自己对话。她不擅长在镜头前微笑，但唱到动情处闭眼的那一秒，比任何表演都动人。",
+  "works": [
+    {
+      "songId": "songs/20261014-the-promise",
+      "role": "vocalist",
+      "roleLabel": "主唱",
+      "note": "《约定》— 关于三年约定的抒情主打"
+    }
+  ],
+  "relations": [],
+  "avoid": [
+    "夸张大笑",
+    "浓妆艳抹",
+    "过于活泼的表演",
+    "甜美可爱路线",
+    "暴露穿搭"
+  ]
+}

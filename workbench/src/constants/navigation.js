@@ -1,6 +1,7 @@
 export const NAV_ITEMS = [
   { id: 'in-progress', label: '创作中', kind: 'collection' },
   { id: 'completed', label: '已完成', kind: 'collection' },
+  { id: 'characters', label: '人物', kind: 'characters' },
   { id: 'inspiration', label: '灵感池', kind: 'archive' },
   { id: 'lyric-lines', label: '佳句', kind: 'archive' },
   { id: 'lyric-bank', label: '词库', kind: 'archive' },
@@ -8,6 +9,8 @@ export const NAV_ITEMS = [
 ]
 
 export const SONG_NAVS = ['in-progress', 'completed']
+export const ARCHIVE_NAVS = ['inspiration', 'lyric-lines', 'lyric-bank', 'library']
+export const CHARACTER_NAV = 'characters'
 
 export const PRODUCTION_STAGES = ['visual-references', 'shot-videos', 'post', 'delivery']
 

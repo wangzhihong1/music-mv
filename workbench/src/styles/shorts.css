@@ -184,8 +184,3 @@
   font-size: 12px;
 }
 
-@media (max-width: 860px) {
-  .shorts-layout {
-    grid-template-columns: 1fr;
-  }
-}

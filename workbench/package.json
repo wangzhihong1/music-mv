@@ -13,7 +13,8 @@
     "@lucide/vue": "latest",
     "@vitejs/plugin-vue": "latest",
     "vite": "latest",
-    "vue": "^3.5.0"
+    "vue": "^3.5.0",
+    "vue-router": "^4.6.4"
   },
   "devDependencies": {
     "eslint": "^9.35.0",

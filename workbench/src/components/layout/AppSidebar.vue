@@ -9,6 +9,7 @@ import {
   Music2,
   Search,
   Sparkles,
+  User,
 } from '@lucide/vue'
 import { NAV_ITEMS } from '@/constants/navigation.js'
 
@@ -33,10 +34,6 @@ const props = defineProps({
     type: String,
     default: '本地歌曲库',
   },
-  open: {
-    type: Boolean,
-    default: false,
-  },
 })
 
 const emit = defineEmits(['select-nav', 'select-song'])
@@ -44,6 +41,7 @@ const emit = defineEmits(['select-nav', 'select-song'])
 const iconMap = {
   'in-progress': ListMusic,
   completed: Check,
+  characters: User,
   inspiration: Sparkles,
   'lyric-lines': Quote,
   'lyric-bank': BookOpen,
@@ -61,7 +59,7 @@ function countFor(item) {
 </script>
 
 <template>
-  <aside class="sidebar" :class="{ 'is-open': open }">
+  <aside class="sidebar">
     <div class="brand">
       <div class="brand-mark"><Music2 :size="18" /></div>
       <div>
