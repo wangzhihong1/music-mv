@@ -6,52 +6,11 @@ import { timeToSeconds } from '../shared/time.js'
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const songsRoot = path.join(projectRoot, PATHS.songs)
-const charactersRoot = path.join(projectRoot, 'characters')
 const allowedLifecycles = new Set(SONG_LIFECYCLES.map((item) => item.id))
 const errors = []
 let checkedSongs = 0
 const storyBeats = ['opening', 'development', 'turningPoint', 'climax', 'ending']
 const stagedStatuses = new Set(['not_started', 'draft', 'in_progress', 'complete'])
-
-async function loadCharacterLinks() {
-  const links = new Map()
-  let characterEntries = []
-  try {
-    characterEntries = await readdir(charactersRoot, { withFileTypes: true })
-  } catch (error) {
-    if (error.code === 'ENOENT') return links
-    throw error
-  }
-
-  for (const entry of characterEntries) {
-    if (!entry.isDirectory()) continue
-    const dataPath = path.join(charactersRoot, entry.name, 'character.json')
-    let character
-    try {
-      character = JSON.parse(await readFile(dataPath, 'utf8'))
-    } catch (error) {
-      if (error.code === 'ENOENT') continue
-      errors.push(`characters/${entry.name}/character.json: JSON 无效，${error.message}`)
-      continue
-    }
-
-    for (const work of character.works || []) {
-      if (!String(work?.songId || '').trim()) continue
-      const linked = links.get(work.songId) || []
-      linked.push({
-        id: character.id,
-        folder: entry.name,
-        name: character.name || character.id || entry.name,
-        threeView: character.look?.threeView || '',
-      })
-      links.set(work.songId, linked)
-    }
-  }
-
-  return links
-}
-
-const characterLinks = await loadCharacterLinks()
 
 let entries = []
 try {
@@ -229,26 +188,7 @@ for (const entry of entries) {
         errors.push(`${relativePath}: 最终分镜提示词完成前，人物/场景基准图必须确认`)
       }
 
-      const linkedCharacters = characterLinks.get(`songs/${entry.name}`) || []
-      const characterIds = new Set([
-        ...(song.characterLooks || []).map((item) => item.id),
-        ...linkedCharacters.map((character) => character.id),
-      ])
-      for (const character of linkedCharacters) {
-        const threeViewPath = String(character.threeView || '').replace(/\\/g, '/')
-        if (!character.id) {
-          errors.push(`${relativePath}: 关联人物 ${character.name} 缺少 character.json.id`)
-        }
-        if (!threeViewPath) {
-          errors.push(`${relativePath}: 关联人物 ${character.name} 缺少 look.threeView`)
-          continue
-        }
-        try {
-          await access(path.join(charactersRoot, character.folder, threeViewPath))
-        } catch {
-          errors.push(`${relativePath}: 关联人物 ${character.name} 的三视图不存在：${threeViewPath}`)
-        }
-      }
+      const characterIds = new Set((song.characterLooks || []).map((item) => item.id))
       const sceneReferences = Array.isArray(song.sceneReferences) ? song.sceneReferences : []
       const sceneReferenceIds = new Set()
       if (usesNewWorkflow && !Array.isArray(song.sceneReferences)) {

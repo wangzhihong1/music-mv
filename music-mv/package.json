@@ -5,6 +5,9 @@
   "type": "module",
   "scripts": {
     "create-song": "node scripts/create-song.mjs",
+    "inspect:song": "node scripts/inspect-song.mjs",
+    "render:mv-prompts": "node scripts/render-mv-prompts.mjs",
+    "test": "node --test",
     "validate:songs": "node scripts/validate-songs.mjs"
   }
 }

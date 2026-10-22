@@ -11,34 +11,6 @@ export async function fetchWorkspace() {
   return readJson(response, `工作台数据读取失败（${response.status}）`)
 }
 
-export async function createLyricLine(line) {
-  const response = await fetch('/api/lyric-lines', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    cache: 'no-store',
-    body: JSON.stringify({ text: line.text, note: line.note }),
-  })
-  return readJson(response, `佳句保存失败（${response.status}）`)
-}
-
-export async function updateLyricLine(line) {
-  const response = await fetch(`/api/lyric-lines/${encodeURIComponent(line.id)}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    cache: 'no-store',
-    body: JSON.stringify({ text: line.text, note: line.note }),
-  })
-  return readJson(response, `佳句保存失败（${response.status}）`)
-}
-
-export async function deleteLyricLine(id) {
-  const response = await fetch(`/api/lyric-lines/${encodeURIComponent(id)}`, {
-    method: 'DELETE',
-    cache: 'no-store',
-  })
-  return readJson(response, `佳句删除失败（${response.status}）`)
-}
-
 export async function saveSongLyrics(folder, sections) {
   const response = await fetch(`/api/songs/${encodeURIComponent(folder)}/lyrics`, {
     method: 'POST',

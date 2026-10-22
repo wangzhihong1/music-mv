@@ -142,45 +142,8 @@
   gap: 4px;
 }
 
-.shorts-final {
-  margin: 4px 0 0;
+@media (max-width: 860px) {
+  .shorts-layout {
+    grid-template-columns: 1fr;
+  }
 }
-
-.shorts-final video {
-  display: block;
-  width: min(280px, 100%);
-  max-height: 498px;
-  border-radius: 6px;
-  background: #1c1f1c;
-}
-
-.shorts-final figcaption {
-  margin-top: 4px;
-  color: #33704d;
-  font-size: 12px;
-}
-
-.shorts-clips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.shorts-clips figure {
-  margin: 0;
-}
-
-.shorts-clips video {
-  display: block;
-  width: min(220px, 100%);
-  max-height: 392px;
-  border-radius: 6px;
-  background: #1c1f1c;
-}
-
-.shorts-clips figcaption {
-  margin-top: 4px;
-  color: #787f77;
-  font-size: 12px;
-}
-

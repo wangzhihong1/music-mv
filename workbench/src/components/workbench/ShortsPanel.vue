@@ -2,7 +2,7 @@
 import { computed, reactive, ref, watch } from 'vue'
 import { ClipboardCheck, Copy } from '@lucide/vue'
 import CopyFeedback from '@/components/common/CopyFeedback.vue'
-import { formatDuration, timeToSeconds } from '@/lib/time.js'
+import { formatDuration } from '@/lib/time.js'
 import { clampEnd, shortDuration, shortIssue, youtubeShortText } from '@/lib/shorts.js'
 
 const props = defineProps({
@@ -89,8 +89,7 @@ function editShort(item) {
 }
 
 function buildItem() {
-  const current = shorts.value.find((entry) => entry.id === editingId.value)
-  const item = {
+  return {
     id: editingId.value || `short-${Date.now().toString(36)}`,
     title: form.title.trim(),
     start: form.start.trim(),
@@ -100,8 +99,6 @@ function buildItem() {
     note: form.note.trim(),
     status: form.status === 'ready' ? 'ready' : 'draft',
   }
-  if (current?.output) item.output = current.output
-  return item
 }
 
 async function persist(next) {
@@ -153,49 +150,6 @@ async function toggleReady(item) {
 
 function copyShort(item) {
   emit('copy', youtubeShortText(props.song, item), item.id)
-}
-
-function rangesOverlap(leftStart, leftEnd, rightStart, rightEnd) {
-  return leftStart < rightEnd && rightStart < leftEnd
-}
-
-function finalFor(item) {
-  const name = String(item.output || '').split('/').pop()
-  if (!name) return null
-  const finals = (props.song.production?.groups || [])
-    .find((group) => group.id === 'final')?.items || []
-  const media = finals.find((entry) => entry.name === name && entry.url && !entry.missing)
-  if (!media) return null
-  return {
-    url: media.url,
-    caption: `成片 ${item.start}–${item.end}`,
-  }
-}
-
-function clipsFor(item) {
-  const start = timeToSeconds(item.start)
-  const end = timeToSeconds(item.end)
-  if (start === null || end === null) return []
-  const rawItems = (props.song.production?.groups || [])
-    .find((group) => group.id === 'raw')?.items || []
-  return (props.song.shots || [])
-    .filter((shot) => {
-      const shotStart = timeToSeconds(shot.start)
-      const shotEnd = timeToSeconds(shot.end)
-      return shotStart !== null && shotEnd !== null && rangesOverlap(start, end, shotStart, shotEnd)
-    })
-    .map((shot) => {
-      const name = String(shot.output || '').split('/').pop()
-      const media = rawItems.find((entry) => entry.name === name && entry.url && !entry.missing && !entry.voided)
-      return {
-        id: shot.id,
-        name,
-        url: media?.url || '',
-        caption: media
-          ? `${shot.start}–${shot.end} ${shot.shot || name}`
-          : `${shot.start}–${shot.end} 还没有新的测试视频`,
-      }
-    })
 }
 </script>
 
@@ -280,23 +234,6 @@ function clipsFor(item) {
         </header>
         <p v-if="item.lyricCue">{{ item.lyricCue }}</p>
         <p v-if="item.note" class="shorts-muted">{{ item.note }}</p>
-        <figure v-if="finalFor(item)" class="shorts-final">
-          <video :src="finalFor(item).url" controls playsinline preload="metadata"></video>
-          <figcaption>{{ finalFor(item).caption }}</figcaption>
-        </figure>
-        <div v-if="clipsFor(item).some((clip) => clip.url)" class="shorts-clips">
-          <figure v-for="clip in clipsFor(item).filter((clip) => clip.url)" :key="clip.id">
-            <video :src="clip.url" controls playsinline preload="metadata"></video>
-            <figcaption>{{ clip.caption }}</figcaption>
-          </figure>
-        </div>
-        <p v-if="clipsFor(item).some((clip) => !clip.url)" class="shorts-muted">
-          {{
-            clipsFor(item).some((clip) => clip.url)
-              ? `${clipsFor(item).filter((clip) => clip.url).length} 镜已能播放，其余镜头还没有新的测试视频。`
-              : '测试视频生成后会出现在这里。'
-          }}
-        </p>
         <div class="shorts-card-actions">
           <button class="text-button" type="button" :disabled="saving" @click="editShort(item)">编辑</button>
           <button class="text-button" type="button" :disabled="saving" @click="toggleReady(item)">

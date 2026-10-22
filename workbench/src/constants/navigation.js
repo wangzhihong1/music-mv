@@ -1,14 +1,12 @@
 export const NAV_ITEMS = [
   { id: 'in-progress', label: '创作中', kind: 'collection' },
   { id: 'completed', label: '已完成', kind: 'collection' },
-  { id: 'characters', label: '人物', kind: 'characters' },
-  { id: 'lyric-lines', label: '佳句', kind: 'archive' },
+  { id: 'inspiration', label: '灵感池', kind: 'archive' },
+  { id: 'lyric-bank', label: '词库', kind: 'archive' },
   { id: 'library', label: '公共素材', kind: 'archive' },
 ]
 
 export const SONG_NAVS = ['in-progress', 'completed']
-export const ARCHIVE_NAVS = ['lyric-lines', 'library']
-export const CHARACTER_NAV = 'characters'
 
 export const PRODUCTION_STAGES = ['visual-references', 'shot-videos', 'post', 'delivery']
 
@@ -46,6 +44,11 @@ export const VIEW_MODES = [
 ]
 
 export const ARCHIVE_COPY = {
+  inspiration: {
+    kicker: 'Inspiration',
+    title: '灵感池',
+    description: '记录尚未立项的主题、句子、故事和声音想法。确定创作后，再建立歌曲文件夹。',
+  },
   library: {
     kicker: 'Library',
     title: '公共素材',

@@ -1017,25 +1017,25 @@ N/A
 - 场景引用：field
 - 出镜人物：maleLead
 - 生成类型：characterVideo
-- 输出：`generated/video/raw/shot_17_h3_v02.mp4`
+- 输出：`generated/video/raw/shot_17_h3_v03.mp4`
 
 ### English H3 prompt
 
 ```text
 subject_definitions:
-<Subject 1> is the adult Chinese man whose appearance comes from <Picture 1> (front), <Picture 2> (side), and <Picture 3> (back). Keep the same clean-shaven youthful face, voluminous layered medium-short black hair, slim build, ivory-white short-sleeve collared shirt worn open over a plain white crew-neck T-shirt, loose light-blue full-length jeans, white-and-light-gray low-top sneakers, silver rectangular pendant, black watch on the left wrist, and thin bracelet on the right wrist.
-<Subject 2> is the environment anchored by <Picture 4> from assets/scenes/field_west_end_v11_candidate.png. The confirmed west-end bean-field reference, loaded as <Picture 4>. Preserve the two parallel bean rows, green bamboo stakes, dark open soil furrow, tree line and distant low ridge. The basin, round bamboo tray and the later sparse-versus-dense harvest state are shot-specific props and must be added only where the shot action calls for them.
+<Subject 1> is the adult Chinese man whose identity and appearance come from the single three-view sheet in <Picture 1>. Keep the same clean-shaven youthful face, voluminous layered medium-short black hair, slim build, ivory-white short-sleeve collared shirt worn open over a plain white crew-neck T-shirt, loose light-blue full-length jeans, white-and-light-gray low-top sneakers, silver rectangular pendant, black watch on the left wrist, and thin bracelet on the right wrist.
+<Subject 2> is the confirmed west-end bean field anchored by <Picture 2> from assets/scenes/field_west_end_v11_candidate.png. Preserve its two parallel bean rows, green bamboo stakes, dark open soil furrow, tree line, distant low ridge, and natural afternoon light. Keep the sparse seed row on screen-left and the denser meal row on screen-right from the established west-end viewpoint. The small pale enamel seed basin is a shot-specific prop, fixed on the soil at the west end of the sparse row.
 
 summary:
-[reference generation] one continuous 3.5-second photoreal live-action 16:9 MV shot of <Subject 1> and <Subject 2> at the established location, following the single action described below.
+[reference generation] one continuous 3.5-second photoreal live-action 16:9 reverse-angle MV shot of <Subject 1> at the same west-end bean-field position addressed by the woman in the preceding shot.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing and identity from the three character references.
-<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed spatial anchor, visible materials, camera-side relationships and light from <Picture 4>; add only the shot-specific action props described below.
+<Subject 1> (appears in [Shot 1]): fully_preserved - keep the same face, hair, body, clothing, and identity from the single three-view sheet.
+<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the confirmed field layout, camera-side relationships, materials, and light from <Picture 2>; add only the fixed seed basin required by this shot.
 
 detailed_description:
-The target video is photoreal live-action in real time, a restrained late-summer Chinese-village MV with natural afternoon light, muted greens, gray-yellow packed soil, plain brick and simple low roof. Materials look used. No golden nostalgia grade and no tourism scenery.
-[Shot 1] An eye-level medium close-up holds the same framing for the entire clip, allowing only a very small slow push of a few centimeters. <Subject 1> remains chest-up with a little bean trellis and the pale enamel basin at lower screen-left still recognizable. He withdraws his right hand once from the vine, then moves his gaze once down-left to the basin and holds it. The camera must not zoom from full body to close-up, must not rush forward, and must not change to a wide shot. Brows gathered, lips closed, breath shallow, mild three-quarter view. Eyelids remain open, irises and pupils stay readable, with at most one slow natural blink. Stable face and hands, coherent clothing, no flickering eyes, no facial warping, no extra limbs, no on-screen text, no logos.
+The target video is photoreal live-action in real time, a restrained late-summer Chinese-village MV with natural afternoon light and muted greens. The camera is on the reverse side of the same west-end field position established by the preceding locked shot; this is the same place, not a new part of the field.
+[Shot 1] At eye level, hold a chest-up medium close-up of <Subject 1> in a mild three-quarter view. The frame stays chest-up throughout; a small section of the sparse bean trellis remains behind him, and the rim of the pale enamel seed basin is recognizable at lower screen-left. The woman from the preceding shot remains offscreen. At the opening, his right fingertips are still beside the same sparse vine he was about to pick in shot 15. He withdraws that right hand once and lets it settle, then moves his gaze once down-left to the fixed seed basin and holds it. His feet and position do not change, and he does not turn toward another row or begin picking. The camera makes only a very small, slow push of a few centimeters; no zoom, no rush forward, and no change to a wide or extreme close-up. Brows gently gathered, lips closed, shallow breath; eyelids stay open with readable irises and pupils, with at most one slow natural blink. Stable face and hands, coherent clothing, no flickering eyes, no facial warping, no extra limbs, no on-screen text, no logos.
 
 overall_soundscape:
 silence. No dialogue, singing, or location sound is generated for this shot; the confirmed song master is added only in the final edit.
@@ -1048,19 +1048,19 @@ N/A
 
 ```text
 主体定义:
-<主体 1> 是成年中国男性小王，外观来自<图片 1>（正面）、<图片 2>（侧面）、<图片 3>（背面）。保持清秀无胡须的脸、蓬松有层次的中短黑发、瘦高身材、敞开的乳白色短袖翻领衬衫、纯白圆领T恤、浅蓝色宽松长牛仔裤、白灰低帮运动鞋、银色矩形吊坠、左腕黑表和右腕细手链。
-<主体 2> 是由<图片 4>（assets/scenes/field_west_end_v11_candidate.png）锁定的环境。已确认的“菜地西头与两行豆架”场景基准图，作为<图片 4>载入。保持两行平行豆架、绿色竹竿、深色裸土沟、树线和远处低山脊。搪瓷盆、圆竹匾以及后续“稀疏与浓密”的收获状态属于镜头道具，只在动作明确要求时加入。
+<主体 1> 是<图片 1>中单张正、侧、背三视图合成图所示的成年中国男性小王。保持同一张清秀无胡须的脸、蓬松有层次的中短黑发、瘦高身材、敞开的乳白色短袖翻领衬衫、纯白圆领T恤、浅蓝色宽松长牛仔裤、白灰低帮运动鞋、银色矩形吊坠、左腕黑表和右腕细手链。
+<主体 2> 是由<图片 2>（assets/scenes/field_west_end_v11_candidate.png）锁定的菜地西头。保持同一块地的两行豆架、绿色竹竿、深色裸土沟、树线、远处低山脊和自然下午光；从既定菜地西头视点看，画面左侧是稀疏留种行，右侧是较密的晚饭行。小号浅色搪瓷种盆是本镜道具，固定放在留种行西头的土上。
 
 摘要:
-一条连续 3.5 秒、真人写实、16:9 的参考图生成 MV 镜头，<主体 1>和<主体 2>位于已锁定场景中，执行下述单一动作。
+一条连续3.5秒、真人写实、16:9的反打镜头。<主体 1>仍在上一镜嫂子喊停时所指向的同一处菜地西头位置。
 
 保留分析:
-<主体 1>（出现在[镜头 1]）：完全保留——保持三张人物参考图中的脸、头发、身体、服装和身份。
-<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 4>确认的空间锚点、可见材质、镜头侧关系和光线；只加入下方动作明确要求的镜头道具。
+<主体 1>（出现在[镜头 1]）：完全保留——保持单张三视图合成图中的同一张脸、头发、身体、服装和身份。
+<主体 2>（出现在[镜头 1]）：完全保留——保持<图片 2>确认的豆行布局、镜头侧关系、材质和光线；只加入本镜需要且固定不动的种盆。
 
 详细描述:
-目标视频为实时真人写实影像。自然下午光，低饱和绿色和灰黄土，不用金黄怀旧调色。
-[镜头 1] 平视中近景小幅度慢速推近。<主体 1>把手抽回。目光移到种盆一次并停住。眉收着，闭唇，呼吸浅。轻微三分之二。 眼皮若在画内则保持睁开，虹膜与瞳孔可读，最多一次慢眨眼。不得脸部变形、多余肢体、画面文字或商标。
+目标视频为实时真人写实影像，克制的晚夏乡村 MV，自然下午光，绿色低饱和。机位位于上一镜固定机位的反打侧，仍是同一片菜地西头，不换到另一处菜地。
+[镜头 1] 平视中近景，<主体 1>保持轻微三分之二侧身，始终胸口以上入画。身后只留一小段稀疏留种豆架；浅色搪瓷种盆的盆沿在画面左下方清楚可辨。上一镜的嫂子留在画外。开头，小王右手指仍停在镜15那根将要摘下的同一根短豆旁；他只把右手从藤边收回一次并停住，随后视线只向左下方移一次，落到固定在留种行西头土上的种盆并停住。脚步和站位不变，不转向另一行，也不开始摘豆。镜头只做几厘米幅度的极慢推进，不变焦、不突然冲近、不切成大全景或大特写。眉头微收、闭唇、呼吸浅；眼皮保持睁开，虹膜和瞳孔清晰，最多一次自然慢眨眼。脸和手稳定，服装连续；不闪烁、不变形、不增加肢体、文字或商标。
 
 整体声音环境:
 静音。该镜不生成对白、演唱或现场环境声；成片仅在最终剪辑中使用已确认的歌曲母带。

@@ -1,10 +1,12 @@
 <script setup>
 import { computed, ref } from 'vue'
+import { Upload } from '@lucide/vue'
 
 const props = defineProps({
   song: { type: Object, required: true },
   scenes: { type: Array, default: () => [] },
   deleteSceneImage: { type: Function, default: null },
+  uploadSceneImage: { type: Function, default: null },
   confirmSceneReference: { type: Function, default: null },
 })
 
@@ -23,10 +25,18 @@ const selectedImage = ref(null)
 
 function normalizedPath(value) { return String(value || '').replace(/\\/g, '/') }
 function referenceText(reference) { return [reference.id, reference.name, reference.path, reference.description].filter(Boolean).join(' ') }
-function belongsToPlan(plan, item) {
+function matchesReferencePath(item, referencePath) {
   const itemPath = normalizedPath(item.path || item.name)
+  const targetPath = normalizedPath(referencePath)
+  if (!targetPath) return false
+  return itemPath === targetPath
+    || itemPath.endsWith('/' + targetPath)
+    || normalizedPath(item.name) === targetPath.split('/').pop()
+}
+function belongsToPlan(plan, item) {
   const planPath = normalizedPath(plan.path)
-  if (planPath && (itemPath === planPath || itemPath.endsWith('/' + planPath.split('/').pop()))) return true
+  if (registeredFor(plan).some((reference) => matchesReferencePath(item, reference.path))) return true
+  if (planPath && matchesReferencePath(item, planPath)) return true
   return referenceText(item).toLowerCase().includes(String(plan.id || '').toLowerCase())
 }
 function registeredFor(plan) {
@@ -35,12 +45,12 @@ function registeredFor(plan) {
     return text.toLowerCase().includes(String(plan.id || '').toLowerCase())
   })
 }
+function confirmedFor(plan) {
+  return registeredFor(plan).filter((reference) => !reference.status || reference.status === 'confirmed')
+}
 function candidatesFor(plan) { return sceneItems.value.filter((item) => belongsToPlan(plan, item)) }
 function isConfirmed(plan, item) {
-  return registeredFor(plan).some((reference) => {
-    const referencePath = String(reference.path || '').replace(/\\/g, '/')
-    return referencePath === item.path || referencePath.endsWith('/' + item.name)
-  })
+  return confirmedFor(plan).some((reference) => matchesReferencePath(item, reference.path))
 }
 function mappedShots(plan) {
   const ids = new Set(registeredFor(plan).flatMap((reference) => [reference.id, reference.name, reference.path]))
@@ -57,9 +67,10 @@ const plans = computed(() => planned.value.map((source, index) => {
   const candidates = candidatesFor(plan)
   const active = candidates.filter((item) => !item.voided)
   const references = registeredFor(plan)
-  return { ...plan, candidates, activeCount: active.length, voidedCount: candidates.length - active.length, registeredCount: references.length, mappedCount: mappedShots(plan), status: references.length ? 'registered' : active.length ? 'candidate' : 'missing' }
+  const confirmed = confirmedFor(plan)
+  return { ...plan, candidates, activeCount: active.length, voidedCount: candidates.length - active.length, registeredCount: confirmed.length, mappedCount: mappedShots(plan), status: confirmed.length ? 'registered' : active.length || references.length ? 'candidate' : 'missing' }
 }))
-const registeredCount = computed(() => registered.value.length)
+const registeredCount = computed(() => registered.value.filter((reference) => !reference.status || reference.status === 'confirmed').length)
 const mappedCount = computed(() => shots.value.filter((shot) => (shot.sceneReferenceIds || []).length > 0).length)
 const activeImageCount = computed(() => sceneItems.value.filter((item) => !item.voided).length)
 const voidedImageCount = computed(() => sceneItems.value.filter((item) => item.voided).length)
@@ -72,6 +83,21 @@ async function confirmCandidate(plan, item) {
   try {
     await props.confirmSceneReference(props.song.folder, { planId: plan.id, fileName: item.name, name: plan.label, description: plan.description })
   } catch (error) { actionError.value = error.message } finally { busyKey.value = '' }
+}
+async function uploadCandidate(plan, event) {
+  const input = event.currentTarget
+  const file = input.files?.[0]
+  input.value = ''
+  if (!file || !props.uploadSceneImage || busyKey.value) return
+  busyKey.value = 'upload:' + plan.id
+  actionError.value = ''
+  try {
+    await props.uploadSceneImage(props.song.folder, plan.id, file)
+  } catch (error) {
+    actionError.value = error.message
+  } finally {
+    busyKey.value = ''
+  }
 }
 function askDelete(plan, item) { pendingDelete.value = { plan, item }; actionError.value = '' }
 function cancelDelete() { if (!busyKey.value) pendingDelete.value = null }
@@ -95,7 +121,17 @@ async function deleteCandidate() {
     <div class="scene-audit-metrics" aria-label="场景基准统计"><div><strong>{{ plans.length }}</strong><span>计划场景</span></div><div><strong>{{ registeredCount }}</strong><span>已确认</span></div><div><strong>{{ activeImageCount }}</strong><span>有效候选图</span></div><div><strong>{{ voidedImageCount }}</strong><span>作废图</span></div><div><strong>{{ mappedCount }}/{{ shots.length }}</strong><span>镜头已映射</span></div></div>
     <div v-if="plans.length" class="scene-audit-list">
       <article v-for="plan in plans" :key="plan.id" class="scene-audit-card" :class="'is-' + plan.status">
-        <div class="scene-audit-card-head"><div><strong>{{ plan.shortLabel }}</strong><small>{{ plan.label }}</small></div><span class="scene-audit-badge">{{ statusLabel(plan.status) }}</span></div>
+        <div class="scene-audit-card-head">
+          <div><strong>{{ plan.shortLabel }}</strong><small>{{ plan.label }}</small></div>
+          <div class="scene-audit-card-tools">
+            <label class="scene-upload-button" :class="{ 'is-disabled': Boolean(busyKey) }" :title="`上传${plan.shortLabel}候选图`">
+              <Upload :size="14" aria-hidden="true" />
+              <span>{{ busyKey === ('upload:' + plan.id) ? '上传中…' : '上传图片' }}</span>
+              <input type="file" accept="image/png,image/jpeg,image/webp" :disabled="Boolean(busyKey)" @change="uploadCandidate(plan, $event)">
+            </label>
+            <span class="scene-audit-badge">{{ statusLabel(plan.status) }}</span>
+          </div>
+        </div>
         <p>{{ plan.description }}</p>
         <div class="scene-audit-facts"><span>候选 {{ plan.activeCount }}</span><span v-if="plan.voidedCount">作废 {{ plan.voidedCount }}</span><span>确认 {{ plan.registeredCount }}</span><span>映射镜头 {{ plan.mappedCount }}</span></div>
         <div v-if="plan.candidates.length" class="scene-candidate-list">
@@ -108,7 +144,7 @@ async function deleteCandidate() {
       </article>
     </div>
     <div v-else class="scene-audit-missing">尚未制定场景基准计划</div>
-    <p v-if="actionError" class="scene-audit-error" role="alert">{{ actionError }}</p><p class="scene-audit-note">场景图片只在这里按类型管理；确认会写入 sceneReferences[]，删除会同步移除对应登记。</p>
+    <p v-if="actionError" class="scene-audit-error" role="alert">{{ actionError }}</p><p class="scene-audit-note">支持上传 PNG、JPG、WebP，单张不超过 20 MB；上传后先作为候选图，确认会写入 sceneReferences[]，删除会同步移除对应登记。</p>
   </section>
   <div v-if="pendingDelete" class="confirm-backdrop" role="presentation" @click.self="cancelDelete"><section class="confirm-dialog" role="alertdialog" aria-modal="true" aria-labelledby="scene-delete-title"><h3 id="scene-delete-title">确认删除场景图？</h3><p>将删除“{{ pendingDelete.item.name }}”，并移除它的场景登记。</p><div class="confirm-actions"><button type="button" class="button-secondary" :disabled="Boolean(busyKey)" @click="cancelDelete">取消</button><button type="button" class="button-danger" :disabled="Boolean(busyKey)" @click="deleteCandidate">{{ busyKey ? '删除中…' : '确认删除' }}</button></div></section></div>
   <div v-if="selectedImage" class="image-lightbox" role="dialog" aria-modal="true" :aria-label="selectedImage.name" @click="closeImage"><button class="lightbox-close" type="button" aria-label="关闭预览" @click="closeImage">×</button><img :src="selectedImage.url" :alt="selectedImage.name" @click.stop><p>{{ selectedImage.name }}</p></div>

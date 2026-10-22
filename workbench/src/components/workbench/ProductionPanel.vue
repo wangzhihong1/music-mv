@@ -41,6 +41,10 @@ const props = defineProps({
     type: Function,
     default: null,
   },
+  uploadSceneImage: {
+    type: Function,
+    default: null,
+  },
   deleteVoidedShot: {
     type: Function,
     default: null,
@@ -114,6 +118,33 @@ function itemCaption(item) {
   if (item.missing) return item.sizeLabel
   if (item.title && item.title !== item.name) return `${item.name} · ${item.sizeLabel}`
   return item.sizeLabel
+}
+
+function captureFirstFramePoster(event) {
+  const video = event.currentTarget
+  if (!video || video.dataset.firstFramePoster === 'ready') return
+
+  const capture = () => {
+    if (!video.videoWidth || !video.videoHeight) return
+    const canvas = document.createElement('canvas')
+    canvas.width = video.videoWidth
+    canvas.height = video.videoHeight
+    const context = canvas.getContext('2d')
+    if (!context) return
+
+    context.drawImage(video, 0, 0, canvas.width, canvas.height)
+    video.poster = canvas.toDataURL('image/jpeg', 0.86)
+    video.dataset.firstFramePoster = 'ready'
+    video.currentTime = 0
+  }
+
+  if (video.readyState >= 2) {
+    capture()
+    return
+  }
+
+  video.addEventListener('seeked', capture, { once: true })
+  video.currentTime = 0.001
 }
 
 function openImage(item) {
@@ -220,6 +251,7 @@ async function confirmDelete() {
           :song="song"
           :scenes="sceneItems"
           :delete-scene-image="deleteSceneImage"
+          :upload-scene-image="uploadSceneImage"
           :confirm-scene-reference="confirmSceneReference"
         />
       </div>
@@ -249,7 +281,7 @@ async function confirmDelete() {
         </header>
         <div class="production-grid is-final">
           <article v-for="item in featured.items" :key="item.path" class="media-card is-featured">
-            <video :src="item.url" controls preload="metadata"></video>
+            <video :src="item.url" controls preload="metadata" @loadedmetadata="captureFirstFramePoster"></video>
             <div class="media-meta">
               <strong>{{ itemLabel(item) }}</strong>
               <small>{{ itemCaption(item) }}</small>
@@ -310,7 +342,7 @@ async function confirmDelete() {
             class="media-card"
             :class="{ 'is-voided': item.voided, 'is-missing': item.missing }"
           >
-            <video v-if="item.url" :src="item.url" controls preload="metadata"></video>
+            <video v-if="item.url" :src="item.url" controls preload="metadata" @loadedmetadata="captureFirstFramePoster"></video>
             <div v-else class="media-placeholder">{{ item.sizeLabel }}</div>
             <div class="media-meta">
               <strong>{{ itemLabel(item) }}</strong>

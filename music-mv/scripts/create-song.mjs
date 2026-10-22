@@ -183,6 +183,11 @@ try {
     throw new Error('未能写入 song.json')
   }
 
+  await runNode(path.join(projectRoot, 'scripts/render-mv-prompts.mjs'), [
+    '--slug',
+    folderName,
+  ])
+
   process.stdout.write(`已创建：${path.relative(projectRoot, targetDir)}\n`)
 } catch (error) {
   process.stderr.write(`${error.message}\n`)

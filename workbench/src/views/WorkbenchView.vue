@@ -45,6 +45,7 @@ const {
   saveSongLyrics,
   saveSongShorts,
   deleteSceneImage,
+  uploadSceneImage,
   deleteVoidedShot,
   setRawShotStatus,
   deleteUpscaleVideo,
@@ -353,6 +354,7 @@ function saveCurrentShorts(shorts) {
           :focus-stage="selectedStage"
           :copied-target="copiedTarget"
           :delete-scene-image="deleteSceneImage"
+          :upload-scene-image="uploadSceneImage"
           :delete-voided-shot="deleteVoidedShot"
           :set-raw-shot-status="setRawShotStatus"
           :delete-upscale-video="deleteUpscaleVideo"

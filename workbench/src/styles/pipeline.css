@@ -433,6 +433,50 @@
   gap: 8px;
 }
 
+.scene-audit-card-tools {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+  flex: 0 0 auto;
+}
+
+.scene-upload-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 28px;
+  padding: 4px 9px;
+  border: 1px solid #cbd8cf;
+  border-radius: 5px;
+  color: #356149;
+  background: #ffffff;
+  font-size: 11px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.scene-upload-button:hover:not(.is-disabled) {
+  border-color: #7fa18b;
+  background: #f2f7f3;
+}
+
+.scene-upload-button.is-disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.scene-upload-button input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .scene-audit-card-head strong,
 .scene-audit-card-head small {
   display: block;
