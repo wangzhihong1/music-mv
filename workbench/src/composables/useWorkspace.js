@@ -1,19 +1,59 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { confirmSceneReference as persistSceneReference, deleteSceneImage as removeSceneImage, deleteUpscaleVideo as removeUpscaleVideo, deleteVoidedShot as removeVoidedShot, fetchWorkspace, saveSongLyrics as persistSongLyrics, saveSongShorts as persistSongShorts, setRawShotStatus as persistRawShotStatus } from '@/api/workspace'
+import { confirmSceneReference as persistSceneReference, createLyricLine as persistLyricLine, deleteLyricLine as removeLyricLine, deleteSceneImage as removeSceneImage, deleteUpscaleVideo as removeUpscaleVideo, deleteVoidedShot as removeVoidedShot, fetchWorkspace, saveSongLyrics as persistSongLyrics, saveSongShorts as persistSongShorts, setRawShotStatus as persistRawShotStatus, updateLyricLine as replaceLyricLine } from '@/api/workspace'
 import { EMPTY_SONG } from '@/constants/song'
 import { SONG_NAVS } from '@/constants/navigation.js'
 import { WORKSPACE_CHANGED_EVENT } from '@/constants/workspace.js'
 
-export function useWorkspace() {
-  const songs = ref([])
-  const archives = ref({ inspiration: [], library: [] })
-  const lyricReferences = ref([])
-  const selectedSongId = ref('')
-  const activeNav = ref('in-progress')
-  const loadError = ref('')
-  const refreshPaused = ref(false)
-  let snapshot = ''
+const songs = ref([])
+const characters = ref([])
+const archives = ref({ library: [] })
+const lyricLines = ref([])
+const selectedSongId = ref('')
+const activeNav = ref('in-progress')
+const loadError = ref('')
+const refreshPaused = ref(false)
+let snapshot = ''
+let initialized = false
 
+function ensureSelection() {
+  const visible = SONG_NAVS.includes(activeNav.value)
+    ? songs.value.filter((song) => song.collectionId === activeNav.value)
+    : songs.value
+
+  if (!visible.some((song) => song.id === selectedSongId.value)) {
+    selectedSongId.value = visible[0]?.id || ''
+  }
+}
+
+async function loadWorkspace({ silent = false } = {}) {
+  try {
+    const payload = await fetchWorkspace()
+    const nextSnapshot = JSON.stringify(payload)
+
+    if (nextSnapshot !== snapshot) {
+      songs.value = payload.songs || []
+      characters.value = payload.characters || []
+      archives.value = {
+        library: payload.library || [],
+      }
+      lyricLines.value = payload.lyricLines || []
+      snapshot = nextSnapshot
+      ensureSelection()
+    }
+
+    loadError.value = ''
+  } catch (error) {
+    if (!silent) loadError.value = error.message
+  }
+}
+
+function onWorkspaceChanged() {
+  if (!refreshPaused.value) {
+    loadWorkspace({ silent: true })
+  }
+}
+
+function useWorkspace() {
   const collectionSongs = computed(() =>
     songs.value.filter((song) => song.collectionId === activeNav.value),
   )
@@ -24,38 +64,6 @@ export function useWorkspace() {
       : songs.value
     return pool.find((song) => song.id === selectedSongId.value) || pool[0] || EMPTY_SONG
   })
-
-  async function loadWorkspace({ silent = false } = {}) {
-    try {
-      const payload = await fetchWorkspace()
-      const nextSnapshot = JSON.stringify(payload)
-
-      if (nextSnapshot !== snapshot) {
-        songs.value = payload.songs || []
-        archives.value = {
-          inspiration: payload.inspiration || [],
-          library: payload.library || [],
-        }
-        lyricReferences.value = payload.lyricReferences || []
-        snapshot = nextSnapshot
-        ensureSelection()
-      }
-
-      loadError.value = ''
-    } catch (error) {
-      if (!silent) loadError.value = error.message
-    }
-  }
-
-  function ensureSelection() {
-    const visible = SONG_NAVS.includes(activeNav.value)
-      ? songs.value.filter((song) => song.collectionId === activeNav.value)
-      : songs.value
-
-    if (!visible.some((song) => song.id === selectedSongId.value)) {
-      selectedSongId.value = visible[0]?.id || ''
-    }
-  }
 
   function selectNav(navId) {
     activeNav.value = navId
@@ -70,10 +78,15 @@ export function useWorkspace() {
     refreshPaused.value = paused
   }
 
-  function onWorkspaceChanged() {
-    if (!refreshPaused.value) {
-      loadWorkspace({ silent: true })
-    }
+  async function saveLyricLine(line) {
+    if (line.id) await replaceLyricLine(line)
+    else await persistLyricLine(line)
+    await loadWorkspace({ silent: true })
+  }
+
+  async function deleteLyricLine(id) {
+    await removeLyricLine(id)
+    await loadWorkspace({ silent: true })
   }
 
   async function saveSongLyrics(folder, sectionUpdates) {
@@ -112,7 +125,10 @@ export function useWorkspace() {
   }
 
   onMounted(() => {
-    loadWorkspace()
+    if (!initialized) {
+      initialized = true
+      loadWorkspace()
+    }
     if (import.meta.hot) {
       import.meta.hot.on(WORKSPACE_CHANGED_EVENT, onWorkspaceChanged)
     }
@@ -126,8 +142,9 @@ export function useWorkspace() {
 
   return {
     songs,
+    characters,
     archives,
-    lyricReferences,
+    lyricLines,
     selectedSongId,
     activeNav,
     loadError,
@@ -136,6 +153,8 @@ export function useWorkspace() {
     selectNav,
     selectSong,
     setRefreshPaused,
+    saveLyricLine,
+    deleteLyricLine,
     saveSongLyrics,
     saveSongShorts,
     deleteSceneImage,
@@ -146,3 +165,5 @@ export function useWorkspace() {
     loadWorkspace,
   }
 }
+
+export { useWorkspace }
