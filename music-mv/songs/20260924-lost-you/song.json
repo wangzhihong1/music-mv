@@ -3,23 +3,23 @@
   "slug": "lost-you",
   "title": "失去了你",
   "date": "20260924",
-  "status": "提示词 v27，空灵女声，已精简，待再生成",
+  "status": "歌词 v11，72 BPM，三分钟内，无第三遍副歌，待审阅",
   "lifecycle": "in-progress",
   "coreStatement": "这是一首写给分手时装得很稳的人、关于人已经不在之后流星、梦和爱的传说都失效的歌，希望听众感到剩下的都不算数，并记住「失去了你」。",
   "metadata": {
-    "genre": "原声吉他与簧风琴的华语忧伤情歌",
-    "mood": "忧郁、低落、慢。副歌不转欢快",
+    "genre": "华语吉他伤心情歌",
+    "mood": "忧郁、忧伤。人已经不在，剩下的都不算数",
     "tempo": "72 BPM",
     "key": "B Minor",
-    "vocal": "空灵女声，近距离，吐字清楚，声音轻、浮在气息上。主歌更轻。副歌高音仍然空灵，到顶就轻轻落下",
+    "vocal": "空灵女声，带破碎感。声音轻，浮在气息上，边缘发虚。长音和换气时轻轻裂开一下再浮回去。第一段更空，第二段更易碎",
     "duration": ""
   },
   "prompts": [
     {
       "key": "mureka",
-      "label": "Mureka 专属风格提示词（278 字符）",
-      "zh": "慢速华语忧郁情歌，B小调。原声吉他指弹，发闷，很少的下行低音。情绪低、暗，旋律到高点就往下落。72 BPM，4/4，拍子拖着走，留大空，没有弹跳。空灵女声，近距离，吐字清楚，声音轻、浮在气息上，无人声和声。主歌更轻。副歌高音仍然空灵，唱到顶点就轻轻落下，仍在同一小调。只用三件：吉他承担动机；簧风琴按住悬着的低和弦，不落回安稳的终点；小提琴只在副歌拉低而闷的下行长音。主歌只有吉他。预副歌簧风琴进入，更暗。副歌小提琴才进入。桥段只留簧风琴。最后一遍更沉，不加快。结尾吉他留一个悬着的低音。混音近，人声在中间，低频收着。避免欢快律动、明亮大调，以及突然转调。",
-      "en": "A slow melancholy Mandarin ballad in B minor. Fingerpicked acoustic guitar, muffled, with very few low descending notes. The mood stays low and dark, and the melody falls once it reaches a high point. 72 BPM, 4/4, the beat drags, with wide space between notes and no bounce. An ethereal female voice, close-miked, with clear diction; the tone is light and floats on the breath, with no harmony vocals. The verse is even lighter. Chorus high notes stay ethereal and fall gently from the peak, remaining in the same minor key. Only three instruments: guitar carries the motif; harmonium holds a suspended low chord and does not settle back to the stable home chord; violin plays a low, muted, descending long tone only in the chorus. The verse is guitar only. The pre-chorus brings in the harmonium and turns darker. The violin enters only in the chorus. The bridge keeps only the harmonium. The final chorus is heavier, without speeding up. At the end the guitar leaves one suspended low note. Close mix, vocal in the center, restrained low end. Avoid a cheerful groove, a bright major key, and a sudden key change."
+      "label": "Mureka 专属风格提示词（742 字符）",
+      "zh": "Mandarin melancholic guitar ballad，72 BPM，4/4拍，B小调，忧郁忧伤华语情歌。只要原声吉他和空灵女声。全程只许指弹，禁止拍弦、扫弦和闷拍。悲伤来自单音下行、音间留空，以及小三和弦停住不解决；低音弦只在每小节第一拍轻轻落一下。不要八分音符节奏，不要高把位跑句，不要钢琴、鼓、贝斯、弦乐、垫音、和声、失真。第二段同一把吉他更沉，仍只指弹，不加速不升调，副歌不转大调。女声空灵，带破碎感。声音轻，浮在气息上，头腔多，边缘发虚。长音和换气时气息变薄，轻轻裂开一下再浮回。不沙哑，不哭喊，不甜美，不换厚实真声，全程同一个女声。一句约四小节，一字接近一拍，一行一气口，行尾留白，空行表示这句唱完。顿号、逗号和空格只停半拍。整首不要超过三分钟。主歌第一段两句，各三行。第一段预副歌四行一句。副歌只唱两句。第二段主歌四行一句。第二段预副歌三行。桥段四行一句。第二遍副歌后结束，不要第三遍副歌。「失去了你」四字各近一拍，再停一口气。长音只在「数」「空」「灭」「不在」「不算」「留」上轻轻裂开，含在这一句里，不要再拖出新的一小节。只有「人已经不在了」可多出约一小节。第一段更空更轻，第二段更贴更易碎。高音轻轻送上去，薄而悬着，不要唱亮。句尾变薄，长音后半可加很窄的颤。四小节慢吉他前奏，单音下行带出副歌轮廓，不唱标题。桥段只留吉他，四行一句，唱「分手那一下」「我以为撑得住」「人一消失」「那些都灭了」，「灭」轻轻裂开再浮回。全曲在第二遍副歌「你不在，它们就不算」结束，「不算」裂开后只留两小节吉他。不要另起尾段，不要第三遍副歌，不要再单独唱「失去了你」。避免男声、厚实真声、甜美、嘶吼、哭喊、拍弦、扫弦、大编制、升调、赶词、念白、密集转音、EDM、说唱、四连问。",
+      "en": "Mandarin melancholic guitar ballad, 72 BPM, 4/4, B minor. A sorrowful, melancholy Mandarin love song. Keep the arrangement simple: acoustic guitar and voice only. Fingerstyle only for the entire song. No percussive slap, no strumming, no muted chop. Sadness comes from a single-note descending line that follows the voice, space between notes, and minor chords left unresolved. The low string touches once, gently, on beat 1. No eighth-note rhythm, no sparkling high-position runs. No piano, no drums, no bass, no strings, no pad, no harmony vocals. The second half keeps this same guitar and the same sorrowful harmony, only heavier. Do not speed up, do not change key, do not add instruments, and do not turn the chorus into a bright major key. Female voice, ethereal, with a broken fragility. The tone is light and floats on the breath, with more head resonance and a hazy edge, as if coming from a little distance. The broken feeling appears only on long notes and breaths: the air suddenly thins, the voice cracks open gently once, then floats back. Not raspy, not sobbing, not sweet. The same female voice throughout. Sing in four-bar phrases: about one character per beat, one breath per line, space at the line end. A blank line means that four-bar phrase is finished. Commas are only a half-beat pause, not a breath. Keep the whole song under three minutes. Verse 1 is two sentences of three lines each. 分开那天装得很稳 is eight characters, slightly tighter, still about two bars. The first pre-chorus is four short lines in one phrase. Each chorus has only two phrases. Verse 2 is four short lines in one phrase. The second pre-chorus is three lines. Every chorus phrase starts with 失去了你, four characters each near one beat, then a breath, then the rest. Holds on 数, 空, 灭, 不在, 不算, and 留 stay inside that phrase. Do not add another bar for a hold. Only 人已经不在了 may run about one bar longer. Do not hold the other words. The whole song must rise and fall. The first half is airier and lighter. The second half stays this same ethereal female voice, closer and more fragile, on the lost contact and 人已经不在了. Do not switch to a thick chest voice. Send the high notes up gently, keep them ethereal, do not sing bright, do not scream. On 失去了你, 剩下的都不算数, and 流星划过也是空的, the voice stays thin and suspended, with a feeling that it might crack. Chorus 1 is already ethereal. Chorus 2 is the same melody, more fragile, the guitar a little deeper, still no harmony vocals, and it is the last chorus. No third chorus, no key change. Phrase endings thin out; the second half of a long note cracks open gently, with a very narrow vibrato. A light slide once on 你, 空, 灭, and 不算. Technique should sound musical, not a dense run, not spoken, not rushed. 4-bar slow guitar intro: a descending single-note line outlines the chorus, the low string does not resolve, no sung title. Bridge is guitar only, four lines in one phrase: 分手那一下, 我以为撑得住, 人一消失, and 那些都灭了, even quieter; while holding 灭 the voice cracks open gently, then floats back. On 你不在，它们就不算, let 不算 crack inside a thinning breath, then release. The song ends on the second chorus, on 你不在，它们就不算. After 不算 cracks, only two bars of guitar remain. Do not add an outro, do not add a third chorus, and do not sing 失去了你 again by itself. Avoid male voice, a thick chest voice, sweet and cute tone, raspy shouting, sobbing, drums, bass, strings, pads, harmony vocals, a large arrangement, piano, bright strumming, eighth-note guitar strumming, high-position guitar runs, distorted guitar, a major-key chorus, distorted guitar, modulation, chopping short lines into smaller pieces, dense runs, EDM, rap, and a chain of questions."
     }
   ],
   "characterLooks": [
@@ -73,11 +73,13 @@
       "label": "Verse 1",
       "time": "",
       "lyrics": [
-        "窗帘把风拦住",
-        "一下午不说话",
+        "分开那天装得很稳",
+        "想它就会过去",
+        "心也跟着静",
         "",
-        "空着的椅子",
-        "让安静在旁边坐下"
+        "我还以为静几天",
+        "爱还是完整的",
+        "就在原地等"
       ]
     },
     {
@@ -86,7 +88,7 @@
       "time": "",
       "lyrics": [
         "静着静着",
-        "变成了冷战",
+        "变成冷战",
         "话断在一半",
         "谁也不肯先说"
       ]
@@ -96,9 +98,11 @@
       "label": "Chorus",
       "time": "",
       "lyrics": [
-        "失去了你，剩下的都不算数",
-        "失去了你，流星划过也是空的",
-        "剩下的都不算数"
+        "失去了你",
+        "剩下的都不算数",
+        "",
+        "失去了你",
+        "流星划过也是空的"
       ]
     },
     {
@@ -106,11 +110,10 @@
       "label": "Verse 2",
       "time": "",
       "lyrics": [
-        "屏幕上的名字",
-        "亮了一夜不答话",
-        "",
-        "听筒贴到耳边",
-        "静静的占满了那头"
+        "消息不再回",
+        "名字还亮着",
+        "我拨出去",
+        "那头已经空了"
       ]
     },
     {
@@ -139,9 +142,12 @@
       "label": "Chorus",
       "time": "",
       "lyrics": [
-        "失去了你，剩下的都不算数",
-        "失去了你，梦和传说也空了",
-        "剩下的都不算数"
+        "失去了你",
+        "流星 梦 传说",
+        "都要你在才算",
+        "",
+        "失去了你",
+        "你不在，它们就不算"
       ]
     }
   ],
