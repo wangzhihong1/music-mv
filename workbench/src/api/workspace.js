@@ -49,6 +49,14 @@ export async function saveSongLyrics(folder, sections) {
   return readJson(response, `歌词保存失败（${response.status}）`)
 }
 
+export async function deleteVlogShot(folder, entryId, shotId) {
+  const response = await fetch(
+    `/api/characters/${encodeURIComponent(folder)}/vlog/${encodeURIComponent(entryId)}/shots/${encodeURIComponent(shotId)}`,
+    { method: 'DELETE', cache: 'no-store' },
+  )
+  return readJson(response, `分镜视频删除失败（${response.status}）`)
+}
+
 export async function saveSongShorts(folder, shorts) {
   const response = await fetch(`/api/songs/${encodeURIComponent(folder)}/shorts`, {
     method: 'POST',

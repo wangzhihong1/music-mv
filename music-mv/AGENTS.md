@@ -32,7 +32,7 @@
 ## 项目位置
 
 - `songs/`：每首歌的企划、歌词、`song.json`、分析和本地成片数据。
-- `characters/`：共享人物档案；通过 `works[].songId` 关联歌曲。新流程不在歌曲目录复制人物定妆提示词或人物图。
+- `characters/`：共享人物档案；通过 `works[].songId` 关联歌曲。日常 vlog 由 Agent 写入 `character.json` 的 `vlog`：一条 15 到 30 秒，含拍摄主题、对镜头独白、分镜（每镜 1 到 12 秒，含机位和这一镜要说的话）和合成视频。工作台以合成视频列表进入详情，只允许删除分镜视频。新流程不在歌曲目录复制人物定妆提示词或人物图。
 - `library/`、`templates/`、`docs/`：公共参考、模板和创作原则。
 - ComfyUI 工作流、模型、运行时及临时输入/输出由 ComfyUI 自身目录管理；独立视频运行时仍放在其既定 D 盘目录，不在本项目创建 `.tools/` 或 `.models/`。
 - 读取大型歌曲档案时先用 `npm run inspect:song -- --slug <song-folder>` 看摘要；按需用 `--section`、`--shot` 或 `--field` 查询。编辑单个段落/镜头的少数字段时，用 `--only field1,field2` 限定输出；只有需要查看提示词时才对指定镜头加 `--prompts`。

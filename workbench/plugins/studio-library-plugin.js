@@ -4,6 +4,7 @@ import { readFile, readdir, stat, unlink, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { WORKSPACE_CHANGED_EVENT } from '../src/constants/workspace.js'
 import { timeToSeconds } from '../src/lib/time.js'
+import { VLOG_MAX_SECONDS, VLOG_MIN_SECONDS, normalizeVlog, shotSecondsTotal } from '../src/lib/vlog.js'
 import { attachProductions } from './studio-production.js'
 
 const SONGS_DIRECTORY = 'songs'
@@ -117,7 +118,11 @@ async function readCharacter(studioRoot, folderName) {
       readFile(dataPath, 'utf8'),
       stat(dataPath),
     ])
-    const character = JSON.parse(source)
+    const character = await attachVlogMediaTimes(
+      studioRoot,
+      folderName,
+      JSON.parse(source),
+    )
 
     return {
       ...character,
@@ -312,6 +317,60 @@ const MAX_LYRIC_LINE_TEXT = 400
 const MAX_LYRIC_LINE_NOTE = 200
 const LYRICS_ROUTE = /^\/api\/songs\/([^/]+)\/lyrics$/
 const SHORTS_ROUTE = /^\/api\/songs\/([^/]+)\/shorts$/
+const VLOG_SHOT_ROUTE = /^\/api\/characters\/([^/]+)\/vlog\/([^/]+)\/shots\/([^/]+)$/
+const VLOG_ID_PATTERN = /^[a-z0-9-]{1,40}$/
+const VLOG_VIDEO_PATTERN = /^vlog\/[a-z0-9-]+\/[A-Za-z0-9._-]+\.mp4$/
+
+async function videoStamp(characterDir, relativePath) {
+  const video = String(relativePath || '').replace(/\\/g, '/').trim()
+  if (!VLOG_VIDEO_PATTERN.test(video)) return {}
+  const targetPath = path.resolve(characterDir, ...video.split('/'))
+  const vlogRoot = path.resolve(characterDir, 'vlog')
+  if (!targetPath.startsWith(`${vlogRoot}${path.sep}`)) return {}
+  try {
+    const fileStat = await stat(targetPath)
+    return { videoUpdatedAt: fileStat.mtime.toISOString() }
+  } catch (error) {
+    if (error.code === 'ENOENT') return {}
+    throw error
+  }
+}
+
+async function attachVlogMediaTimes(studioRoot, folderName, character) {
+  const entries = character.vlog?.entries
+  if (!Array.isArray(entries)) return character
+  const characterDir = path.join(studioRoot, CHARACTERS_DIRECTORY, folderName)
+  const nextEntries = []
+  for (const entry of entries) {
+    const shots = Array.isArray(entry?.shots) ? entry.shots : []
+    const nextShots = []
+    for (const shot of shots) {
+      nextShots.push({
+        ...shot,
+        ...await videoStamp(characterDir, shot?.video),
+      })
+    }
+    nextEntries.push({
+      ...entry,
+      shots: nextShots,
+      ...await videoStamp(characterDir, entry?.video),
+    })
+  }
+  return {
+    ...character,
+    vlog: {
+      ...character.vlog,
+      entries: nextEntries,
+    },
+  }
+}
+
+function isCharacterVlogVideo(filePath) {
+  return filePath.includes(`${path.sep}${CHARACTERS_DIRECTORY}${path.sep}`)
+    && filePath.includes(`${path.sep}vlog${path.sep}`)
+    && filePath.toLowerCase().endsWith('.mp4')
+}
+
 const SCENE_DELETE_ROUTE = /^\/api\/songs\/([^/]+)\/scenes\/([^/]+)$/
 const SCENE_CONFIRM_ROUTE = /^\/api\/songs\/([^/]+)\/scenes\/confirm$/
 const VOIDED_SHOT_DELETE_ROUTE = /^\/api\/songs\/([^/]+)\/raw-shots\/([^/]+)$/
@@ -560,6 +619,95 @@ async function writeSongShorts(studioRoot, request, response, folderName) {
   const payload = await readJsonBody(request)
   applyShorts(song, payload.shorts)
   await writeFile(dataPath, `${JSON.stringify(song, null, 2)}\n`, 'utf8')
+  sendJson(response, 200, { ok: true })
+}
+
+async function deleteVlogShot(studioRoot, response, folderName, entryId, shotId) {
+  let decodedFolder
+  let decodedEntryId
+  let decodedShotId
+  try {
+    decodedFolder = decodeURIComponent(folderName)
+    decodedEntryId = decodeURIComponent(entryId)
+    decodedShotId = decodeURIComponent(shotId)
+  } catch {
+    sendJson(response, 400, { error: '分镜视频路径无效' })
+    return
+  }
+
+  if (!isSafeFolderName(decodedFolder) || !VLOG_ID_PATTERN.test(decodedEntryId) || !VLOG_ID_PATTERN.test(decodedShotId)) {
+    sendJson(response, 400, { error: '分镜视频路径无效' })
+    return
+  }
+
+  const dataPath = path.join(studioRoot, CHARACTERS_DIRECTORY, decodedFolder, 'character.json')
+  if (!isInsideStudio(studioRoot, dataPath)) {
+    sendJson(response, 403, { error: '无权访问该文件' })
+    return
+  }
+
+  let character
+  try {
+    character = JSON.parse(await readFile(dataPath, 'utf8'))
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      sendJson(response, 404, { error: '人物不存在' })
+      return
+    }
+    sendJson(response, 500, { error: '人物档案不是有效 JSON' })
+    return
+  }
+
+  const entries = Array.isArray(character.vlog?.entries) ? character.vlog.entries : null
+  const entry = entries?.find((item) => item?.id === decodedEntryId)
+  const shot = entry?.shots?.find((item) => item?.id === decodedShotId)
+  if (!entry || !shot) {
+    sendJson(response, 404, { error: '这一镜不存在' })
+    return
+  }
+
+  const nextEntry = {
+    ...entry,
+    shots: entry.shots.filter((item) => item?.id !== decodedShotId),
+  }
+  const remaining = shotSecondsTotal(nextEntry.shots)
+  if (nextEntry.status === 'ready' && (nextEntry.shots.length === 0 || remaining < VLOG_MIN_SECONDS || remaining > VLOG_MAX_SECONDS)) {
+    nextEntry.status = 'draft'
+  }
+
+  let cleaned
+  try {
+    cleaned = normalizeVlog({
+      ...character.vlog,
+      entries: entries.map((item) => (item?.id === decodedEntryId ? nextEntry : item)),
+    })
+  } catch (error) {
+    sendJson(response, error.statusCode || 400, { error: error.message })
+    return
+  }
+
+  const video = String(shot.video || '').replace(/\\/g, '/').trim()
+  if (video) {
+    if (!VLOG_VIDEO_PATTERN.test(video)) {
+      sendJson(response, 400, { error: '分镜视频路径无效' })
+      return
+    }
+    const characterDir = path.join(studioRoot, CHARACTERS_DIRECTORY, decodedFolder)
+    const targetPath = path.resolve(characterDir, ...video.split('/'))
+    const vlogRoot = path.resolve(characterDir, 'vlog')
+    if (!targetPath.startsWith(`${vlogRoot}${path.sep}`) || !isInsideStudio(studioRoot, targetPath)) {
+      sendJson(response, 403, { error: '无权删除该文件' })
+      return
+    }
+    try {
+      await unlink(targetPath)
+    } catch (error) {
+      if (error.code !== 'ENOENT') throw error
+    }
+  }
+
+  character.vlog = cleaned
+  await writeFile(dataPath, `${JSON.stringify(character, null, 2)}\n`, 'utf8')
   sendJson(response, 200, { ok: true })
 }
 
@@ -1076,6 +1224,16 @@ function apiMiddleware(studioRoot) {
       return
     }
 
+    const vlogShotMatch = requestUrl.pathname.match(VLOG_SHOT_ROUTE)
+    if (request.method === 'DELETE' && vlogShotMatch) {
+      try {
+        await deleteVlogShot(studioRoot, response, vlogShotMatch[1], vlogShotMatch[2], vlogShotMatch[3])
+      } catch (error) {
+        sendJson(response, error.statusCode || 500, { error: error.message })
+      }
+      return
+    }
+
     const sceneDeleteMatch = requestUrl.pathname.match(SCENE_DELETE_ROUTE)
     if (request.method === 'DELETE' && sceneDeleteMatch) {
       try {
@@ -1181,6 +1339,7 @@ export function songLibraryPlugin() {
           || filePath.endsWith('character.json')
           || filePath.endsWith('.md')
           || filePath.endsWith(`${path.sep}library${path.sep}lyric-lines.json`)
+          || isCharacterVlogVideo(filePath)
           || shouldReloadProduction(filePath)
         if (['add', 'change', 'unlink'].includes(eventName) && isWatched) {
           server.ws.send({ type: 'custom', event: WORKSPACE_CHANGED_EVENT })

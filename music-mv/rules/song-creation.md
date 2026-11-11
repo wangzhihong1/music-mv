@@ -18,6 +18,7 @@
 - 歌曲围绕核心创作句和 Hook 展开。情绪是灵魂、主题是方向、Hook 是记忆、表达是生命；无关的漂亮句子、炫技或情节应删改。
 - 歌词与曲风方法见创作原则文档；借鉴方法，不复制他人作品的成句、旋律或标志性音色。用户自存佳句不受“不复制成句”限制。
 - Mureka 风格提示词必须先读并遵循 [`.cursor/skills/mureka-style-prompt/SKILL.md`](../../.cursor/skills/mureka-style-prompt/SKILL.md)。只写一条可直接粘贴进风格框的专属提示词，不拆段；`prompts` 保留一条 `key: mureka`，`zh` 为粘贴稿、`en` 为完整英文对照，`label` 标明中文字符数，不写具体歌手或作品名。
+- 人声音色按该技能的「音色词」写：音域、质感、距离各一个主词。空灵写 `airy`，需要空间再加 `spacious vocal with gentle reverb`。偏低写 `mid-low register` 或 `warm low register`，不写 `bass`、`baritone`。
 - 人物定妆/负向提示词和三视图只写入 `characters/YYYYMMDD-slug/character.json` 的 `look`，用 `works[].songId` 关联歌曲；不要写入歌曲 MV 流程。分镜写入 `song.json.shots`，发行文案写入 `releaseCopy`。
 
 ## 歌词交付后的交接

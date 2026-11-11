@@ -34,7 +34,7 @@ function characterOccupation(character) {
     </header>
 
     <p class="view-description">
-      虚拟艺人与角色库。每位人物拥有独立的性格、职业、视觉定妆、声音身份与作品集，可跨歌曲复用。
+      虚拟艺人与角色库。每位人物拥有独立的性格、职业、视觉定妆、声音身份、作品集和自己的日常 vlog，可跨歌曲复用。
     </p>
 
     <div v-if="characters.length" class="character-grid">

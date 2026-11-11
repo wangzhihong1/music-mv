@@ -29,3 +29,6 @@ wav2lip_input.png
 *_tmp/
 **/__pycache__/
 **/.discarded_*/
+
+# WorkBuddy project-local data
+.workbuddy/

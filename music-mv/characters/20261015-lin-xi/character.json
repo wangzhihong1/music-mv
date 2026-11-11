@@ -8,11 +8,16 @@
   "profile": {
     "age": 26,
     "gender": "female",
-    "occupation": ["singer", "actress"],
+    "occupation": [
+      "singer",
+      "actress"
+    ],
     "occupationLabel": "歌手 / 歌演员",
     "region": "上海",
     "nationality": "中国",
-    "language": ["中文"],
+    "language": [
+      "中文"
+    ],
     "height": "",
     "bloodType": "",
     "zodiac": "",
@@ -21,11 +26,26 @@
   "personality": {
     "core": "外冷内热，克制但深情",
     "mbti": "",
-    "catchphrases": ["……", "嗯"],
-    "habits": ["紧张时摸左耳", "说话前先低头", "唱到动情处会闭眼"],
+    "catchphrases": [
+      "……",
+      "嗯"
+    ],
+    "habits": [
+      "紧张时摸左耳",
+      "说话前先低头",
+      "唱到动情处会闭眼"
+    ],
     "values": "相信约定，不善表达但记得每一件小事",
-    "strengths": ["情绪感知力强", "专注力高", "对作品有执念"],
-    "weaknesses": ["不擅长主动沟通", "容易陷在回忆里", "对亲密关系缺乏安全感"]
+    "strengths": [
+      "情绪感知力强",
+      "专注力高",
+      "对作品有执念"
+    ],
+    "weaknesses": [
+      "不擅长主动沟通",
+      "容易陷在回忆里",
+      "对亲密关系缺乏安全感"
+    ]
   },
   "look": {
     "label": "林夕定妆共享提示词",
@@ -36,7 +56,11 @@
     "cover": "assets/cover.png",
     "threeView": "assets/characters/three-view.png",
     "references": [
-      { "id": "three-view", "label": "三视图", "path": "assets/characters/three-view.png" }
+      {
+        "id": "three-view",
+        "label": "三视图",
+        "path": "assets/characters/three-view.png"
+      }
     ]
   },
   "voice": {
@@ -44,14 +68,37 @@
     "range": "",
     "style": "气声多、尾音轻收、克制不炫技",
     "murekaPrompt": "华语流行、抒情流行、华语流行乐、心碎、情感、忧郁、沉思、激昂、动态渐强、宣泄、苦乐参半、爱情，空灵女低音演唱",
-    "signatureTraits": ["气声开头", "副歌轻收尾音", "不飙高音，用情绪压过技巧"]
+    "signatureTraits": [
+      "气声开头",
+      "副歌轻收尾音",
+      "不飙高音，用情绪压过技巧"
+    ]
   },
   "signatures": {
-    "objects": ["银色耳钉"],
-    "scenes": ["深夜天台", "录音棚", "雨天街道"],
-    "actions": ["低头沉默", "望向窗外", "手指摩挲杯沿"],
-    "colors": ["黑", "灰", "冷白"],
-    "styleKeywords": ["极简", "清冷", "都市", "克制"]
+    "objects": [
+      "银色耳钉"
+    ],
+    "scenes": [
+      "深夜天台",
+      "录音棚",
+      "雨天街道"
+    ],
+    "actions": [
+      "低头沉默",
+      "望向窗外",
+      "手指摩挲杯沿"
+    ],
+    "colors": [
+      "黑",
+      "灰",
+      "冷白"
+    ],
+    "styleKeywords": [
+      "极简",
+      "清冷",
+      "都市",
+      "克制"
+    ]
   },
   "bio": "林夕，26岁，独立歌手兼歌演员。她习惯把情绪藏进旋律里，舞台上克制疏离，私下却会为一段旧旋律反复循环。出道以来始终坚持自己写词，相信每一首歌都是一次与过去的自己对话。她不擅长在镜头前微笑，但唱到动情处闭眼的那一秒，比任何表演都动人。",
   "works": [
@@ -69,5 +116,84 @@
     "过于活泼的表演",
     "甜美可爱路线",
     "暴露穿搭"
-  ]
+  ],
+  "vlog": {
+    "douyin": {
+      "handle": "",
+      "bio": ""
+    },
+    "youtube": {
+      "handle": "",
+      "bio": ""
+    },
+    "entries": [
+      {
+        "id": "vlog-late-studio",
+        "title": "凌晨三点的棚里只剩她",
+        "theme": "凌晨三点的录音棚只剩她一个人，一句没说出口的日常",
+        "status": "ready",
+        "completedAt": "2026-11-10",
+        "video": "vlog/late-studio/late-studio.mp4",
+        "monologue": "……还亮着。……凌晨三点了。今天整层就我一个人。这支麦我用了四年。声音有点闷，但我习惯了。……录完这首就回家。",
+        "shots": [
+          {
+            "id": "shot-push",
+            "angle": "声卡俯拍特写",
+            "seconds": 5,
+            "line": "……还亮着。",
+            "video": "vlog/late-studio/shot-push.mp4",
+            "promptZh": "这一镜只拍声卡，不出现脸，也不出现话筒。同一间深夜录音棚，浅色木桌上放着黑色声卡，俯拍近景，画面几乎只有声卡和桌面，左边压过来一片暖灯光，右下露出一点桌沿。声卡上沿是一排旋钮，下面是一排短推子。她的右手从画面下方入画，食指落在推子那一排的第二格上，向下按到底后停一瞬，再把推子缓缓推回一半，接着手指轻轻擦过上沿的一排旋钮、用指腹碰一下其中一个旋钮，最后手慢慢从画面下方移出。整段动作缓慢、连贯、放松，不要长时间静止冻结。镜头外她用气声、音量很小地说一句「……还亮着。」，像自言自语，画面里不出现她的脸。镜头带极轻微的呼吸式晃动，不完全锁死。整段只有这一句轻声人声、推子到位的一声轻咔哒，以及安静的房间底噪。",
+            "prompt": "subject_definitions:\n<Subject 1> is a black audio interface sitting on a light wooden desk in a late-night recording studio. No living person appears in frame; only one hand enters and leaves.\n\nsummary:\n[reference generation] one continuous 5-second live-action 9:16 vertical vlog shot of <Subject 1>: a close top-down view of the audio interface, a hand pressing one fader, and a soft off-screen whisper.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - the same black audio interface, the same light wooden desk surface, the same warm key light from the left and the same quiet room stay consistent in every frame. No living person in frame.\n\ndetailed_description:\nThe target video is photoreal live-action in real time, a restrained Chinese-city late-night recording studio, one warm tungsten lamp glowing off to the left, the rest of the room dark.\n[Shot 1] A vertical 9:16 top-down close-up keeps the black audio interface large in frame on a light wooden desk, with a row of small knobs on the upper edge and a row of short faders below. A faint warm light spills in from the left side; the right lower corner shows only a sliver of the desk edge. A woman's right hand enters from the bottom of frame, her index finger lands on the second fader from the left and presses it down to the bottom, holds for a brief moment, then slowly pushes the fader back up halfway. Her fingers then trail lightly across the row of small knobs above, brushing one knob with the pad of her finger, and finally the hand withdraws slowly out of the bottom of frame. The motion is slow, continuous and relaxed, with no long freeze; the hand never stays completely still for more than a moment. Off screen, a soft breathy female whisper says the exact line \"还亮着。\" in Mandarin Chinese, saying it exactly once as if talking to herself. The camera has a very faint handheld breathing drift throughout, never fully locked off. Stable hands, smooth skin texture on the hand, coherent desk and device surface, no flicker, no facial features in frame, no on-screen text, no logos, no readable characters.\n\noverall_soundscape:\nVery quiet room tone, one soft breathy female whisper speaking one short line off screen, exactly once: \"还亮着。\" in Mandarin Chinese, and one small click as the fader reaches the bottom. No music.\n\nnon_diegetic_music:\nN/A"
+          },
+          {
+            "id": "shot-alone",
+            "angle": "中近景 手持对镜头",
+            "seconds": 6,
+            "line": "……凌晨三点了。今天整层就我一个人。",
+            "video": "vlog/late-studio/shot-alone.mp4",
+            "promptZh": "从声卡回到她的脸，仍在同一间棚、同一把黑色椅子、同一盏左侧暖灯、同一浅色木地板，画面左下角露出黑色声卡的一截桌沿，交代她刚才按的设备还在原位。中近景，机位和她眼睛差不多高，轻微手持晃动，像手机立在桌上拍。暖灯在左侧，她的左脸偏暖、右脸偏冷；倒挂话筒只在画面右侧边缘露一小段网罩，不抢主体。她原本低着头看桌面，抬眼对上镜头，用正常说话的音量、平静清楚地说一遍「……凌晨三点了。今天整层就我一个人。」说完嘴唇合上，眼睛向下垂半秒，右手抬起来碰了一下左耳再放下。同一间房的低电平底噪和清晰的近距离人声。镜头不推不摇。",
+            "prompt": "subject_definitions:\n<Subject 1> is the adult woman whose appearance comes from <Picture 1>, a single sheet showing her front, side and rear views arranged left-to-right. Keep the same face, long dark hair, body proportions and the exact reference outfit from the sheet.\n\nsummary:\n[reference generation] one continuous 6-second live-action 9:16 vertical vlog shot of <Subject 1> sitting alone in a late-night recording studio, speaking one specific Chinese line to camera at a normal conversational volume, with the speech audio and lip movement generated together in the same sample, appearance taken only from <Picture 1>.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - the same face, hair, body and reference outfit are retained in every frame. No second living person in the room.\n\ndetailed_description:\nThe target video is photoreal live-action, a restrained Chinese-city late-night recording studio, one warm tungsten lamp glowing off to the left, the rest of the room dark, a shallow light wooden floor.\n[Shot 1] A vertical 9:16 medium close-up at eye level keeps <Subject 1> large enough in frame that both eyes, eyelids, irises and pupils stay sharp. She sits in the same black chair; a warm lamp is on her left, so the left side of her face is slightly warmer than the right. The lower-left corner shows a sliver of the black audio interface on the light wooden desk; the upside-down condenser microphone appears only as a short segment at the right edge and does not dominate. The camera holds a nearly static shot with the faintest handheld drift, as if a phone is propped on the desk. She starts with her head lowered toward the desk, then lifts her eyes to meet the lens and speaks the exact line \"凌晨三点了。今天整层就我一个人。\" in Mandarin Chinese, saying it exactly once, and her lips move to pronounce precisely these syllables as the voice is produced in the same sample. After the line ends, her lips close, her eyes drop for half a second, and her right hand rises to briefly touch her left ear and lowers again. Her gaze holds the camera with a mild three-quarter turn, never a hard profile or back view; at most one slow blink. Brows stay level, breath is small. Stable faces and hands, smooth skin texture, coherent clothing, eyelids remain open, irises and pupils stay readable, no flickering eyes, no facial warping, no beauty-filter slim face, no extra limbs, no on-screen text, no logos.\n\noverall_soundscape:\nA quiet room tone mixed with the voice of <Subject 1> speaking one line in Mandarin Chinese at a normal conversational speaking volume, exactly once: \"凌晨三点了。今天整层就我一个人。\" Her speech is calm, clear and steady, not whispered or breathy, and her lip movement is produced together with these exact words in the same sample. No music, no other speech, no extra dialogue.\n\nnon_diegetic_music:\nN/A"
+          },
+          {
+            "id": "shot-mic-close",
+            "angle": "话筒侧前 45° 近景",
+            "seconds": 7,
+            "line": "这支麦我用了四年。声音有点闷，但我习惯了。",
+            "video": "vlog/late-studio/shot-mic-close.mp4",
+            "promptZh": "同一支裸电容麦（银色网罩，挂在弹性防震架里，没有防喷罩，与第2、4镜一致）作为背景道具在她身侧，人物正对镜头、居中、两侧留足余白，浅色桌沿在画面上缘，暖灯从左边来。她整张脸正对镜头、双眼直视镜头，用正常说话的音量、平静清楚地说一遍「这支麦我用了四年。声音有点闷，但我习惯了。」全程眼睛锁定镜头不游移，说完下巴轻轻收回、保持看着镜头。整个过程她的手自然放松地垂在身侧或搭在腿上，不去碰话筒。镜头几乎静止，只极小幅漂移。声场与上一镜一致。",
+            "prompt": "subject_definitions:\n<Subject 1> is the adult woman whose appearance comes from <Picture 1>, a single sheet showing her front, side and rear views arranged left-to-right. Keep the same face, long dark hair, body proportions and the exact reference outfit from the sheet.\n<Subject 2> is the same bare condenser microphone from the previous shots: a silver metal mesh grille microphone body held by an elastic shock mount, hanging from above with the grille pointing down, with no pop filter. Keep the same microphone identity and position as in the earlier shots.\n\nsummary:\n[reference generation] one continuous 7-second live-action 9:16 vertical vlog shot of <Subject 1> facing the camera directly with <Subject 2> visible beside her, speaking one specific Chinese line to camera at a normal conversational volume, with the speech audio and lip movement generated together in the same sample, appearance taken only from <Picture 1>.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - the same face, hair, body and reference outfit are retained in every frame. <Subject 2> (appears in [Shot 1]): fully_preserved - the same bare condenser microphone with silver mesh grille in its elastic shock mount, hanging from above with no pop filter, stays identical throughout. No second living person in the room.\n\ndetailed_description:\nThe target video is photoreal live-action, a restrained Chinese-city late-night recording studio, one warm tungsten lamp glowing off to the left, the rest of the room dark, a shallow light wooden desk surface near the top edge of frame.\n[Shot 1] A vertical 9:16 medium close-up facing <Subject 1> straight on, keeps her face centered in frame with comfortable breathing room on both sides, and the bare condenser microphone <Subject 2> visible on one side of the frame without crowding it. Her whole face and both eyes are clearly visible and she looks directly into the camera, her gaze locked on the lens the entire time she speaks the exact line \"这支麦我用了四年。声音有点闷，但我习惯了。\" in Mandarin Chinese at a normal conversational volume, saying it exactly once, and her lips move to pronounce precisely these syllables as the voice is produced in the same sample. Her eyes stay on the lens from start to finish. After the line ends, her chin draws back slightly and she holds the look. Her hands remain relaxed and still at her side or in her lap throughout; she does not touch or grasp the microphone. The camera stays nearly static with only the smallest drift. Brows stay level, breath is small. Stable face and hands, smooth skin texture, coherent clothing, no flickering eyes, no facial warping, no beauty-filter slim face, no extra limbs, no on-screen text, no logos.\n\noverall_soundscape:\nA quiet room tone matching the previous shot, mixed with the voice of <Subject 1> speaking one line in Mandarin Chinese at a normal conversational speaking volume, exactly once: \"这支麦我用了四年。声音有点闷，但我习惯了。\" Her speech is calm, clear and steady, not whispered or breathy, and her lip movement is produced together with these exact words in the same sample. No music, no other speech, no extra dialogue.\n\nnon_diegetic_music:\nN/A"
+          },
+          {
+            "id": "shot-end",
+            "angle": "对镜头 固定",
+            "seconds": 7,
+            "line": "……录完这首就回家。",
+            "video": "vlog/late-studio/shot-end.mp4",
+            "promptZh": "接着上一镜的机位回到她的脸，比上一镜更近半格，仍坐在同一把黑色椅子里。暖灯在左侧，倒挂话筒在画面右侧，嘴前留空，浅色木地板在下缘虚化。她不马上说话，先抬眼看了一下镜头，又转头看了一眼话筒，再转回镜头，嘴角轻轻提起来笑了一下，说一遍「……录完这首就回家。」说完就停在这个笑上，嘴唇闭合，肩膀随呼吸起伏一次。镜头完全固定，不推不摇。房间底噪与前三镜一致。",
+            "prompt": "subject_definitions:\n<Subject 1> is the adult woman whose appearance comes from <Picture 1>, a single sheet showing her front, side and rear views arranged left-to-right. Keep the same face, long dark hair, body proportions and the exact reference outfit from the sheet.\n\nsummary:\n[reference generation] one continuous 7-second live-action 9:16 vertical vlog shot of <Subject 1> seated facing the camera, speaking one specific Chinese line to camera at a normal conversational volume, with the speech audio and lip movement generated together in the same sample, appearance taken only from <Picture 1>.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - the same face, hair, body and reference outfit are retained in every frame. No second living person in the room.\n\ndetailed_description:\nThe target video is photoreal live-action, a restrained Chinese-city late-night recording studio, one warm tungsten lamp glowing off to the left, the rest of the room dark, a shallow light wooden floor blurred at the bottom edge.\n[Shot 1] A vertical 9:16 medium close-up, slightly tighter than the earlier face shot, keeps <Subject 1> seated in the same black chair, both eyes, eyelids, irises and pupils sharp. The warm lamp is on her left; the upside-down condenser microphone is at the right side of frame with clear space left in front of her mouth. She does not speak immediately: first she lifts her eyes to glance at the lens, then turns her head to glance at the microphone, then turns back to the lens, the corner of her mouth lifts into a soft smile, and she speaks the exact line \"录完这首就回家。\" in Mandarin Chinese, saying it exactly once, her lips moving to pronounce precisely these syllables as the voice is produced in the same sample. After the line ends she holds the soft smile, her lips close, and her shoulders rise and fall once with a breath. The camera holds completely static, no push, no pan, no tilt. Her gaze holds the camera with a mild three-quarter turn, never a hard profile or back view. Brows stay level, breath is small. Stable faces and hands, smooth skin texture, coherent clothing, eyelids remain open, irises and pupils stay readable, no flickering eyes, no facial warping, no beauty-filter slim face, no extra limbs, no on-screen text, no logos.\n\noverall_soundscape:\nThe same quiet room tone as the previous shots, mixed with the voice of <Subject 1> speaking one line in Mandarin Chinese at a normal conversational speaking volume, exactly once: \"录完这首就回家。\" Her speech is calm, clear and steady, not whispered or breathy, and her lip movement is produced together with these exact words in the same sample. No music, no other speech, no extra dialogue.\n\nnon_diegetic_music:\nN/A"
+          }
+        ],
+        "douyin": {
+          "title": "凌晨三点，棚里只剩我和这支麦",
+          "description": "整层楼都黑了，只有这一间还亮着。\n这支麦用了四年，声音有点闷，但我习惯了。",
+          "tags": [
+            "深夜vlog",
+            "录音棚",
+            "歌手日常",
+            "林夕"
+          ]
+        },
+        "youtube": {
+          "title": "凌晨三点的录音棚｜一个人的深夜日常",
+          "description": "凌晨三点的录音棚，整层楼只剩这一间还亮着。\n她用一支用了四年的麦，说了一句深夜的日常。",
+          "tags": [
+            "深夜vlog",
+            "录音棚",
+            "歌手日常",
+            "林夕"
+          ]
+        }
+      }
+    ]
+  }
 }

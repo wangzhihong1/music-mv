@@ -64,15 +64,41 @@ description: >-
 
 ### 人声：从声音写到演唱方式
 
-人声描述的常用维度：
+同一条主唱按这个顺序写，每项一个主词：音域、质感、距离、唱法。性别写成 `female vocal` 或 `male vocal`。已经用参考音频或 Character 锁音色时，风格框不再写性别，只写唱法和距离。
 
-- 音色与音域：`warm low register`、`clear bright tone`、`soft breathy texture`
+距离、唱法、咬字、和声各写一个能听见的结果：
+
 - 距离感：`close and intimate vocal`、`spacious vocal with gentle reverb`
 - 演唱方式：`conversational phrasing`、`restrained vocal runs`、`confident sustained notes`
 - 歌词表达：`clear diction`、`emphasize the central phrase`、`keep the verse conversational`
 - 和声安排：`close harmonies in the chorus`、`stacked backing vocals in the final section`
 
-气声、长音裂开、窄颤写在演唱方式里，写成可听见的唱法。不写某个字占几拍。不堆一长串互相冲突的形容词。不写歌手名。发音特殊的词可以单独写 pronunciation，歌词正文保持干净。
+气声、长音裂开、窄颤写在演唱方式里，写成可听见的唱法。不写某个字占几拍。不写歌手名。发音特殊的词可以单独写 pronunciation，歌词正文保持干净。
+
+#### 音色词
+
+风格框里的音色用下面这些词。左列是要的听感，右列是写进提示词的英文。这些词来自官网《如何写 AI 音乐提示词？》的人声维度和四条完整案例。
+
+| 听感 | 写入风格框 |
+| --- | --- |
+| 低、暖 | `warm low register` |
+| 偏低的唱法 | `lower-register phrasing`；女声进入可用 `low female pickup` |
+| 中音、发烟 | `smoky midrange` |
+| 中音、像在说话 | `smooth midrange talk-singing` |
+| 清亮 | `clear bright tone` |
+| 高音区、轻 | `airy upper-register` |
+| 假声 | `soft falsetto`；只点一下写 `soft falsetto touches` |
+| 沙 | `raspy`；更轻写 `slightly raspy` |
+| 哑、厚 | `husky`；更轻写 `lightly husky` |
+| 唱裂 | `cracked singing` |
+| 气声 | `soft breathy texture`；收着写 `controlled breathiness` |
+| 空、带空间 | `airy`，再加 `spacious vocal with gentle reverb` |
+
+空灵写成 `airy`。声音要远、要有混响时，后面接 `spacious vocal with gentle reverb`。不把 `ethereal` 当人声词。
+
+不要太低的男声写 `mid-low register`，质感再加 `husky` 或 `slightly raspy`，距离写 `dry and close`。不写 `bass`、`baritone`、`tenor`。
+
+同一个人只留一个主音域和一个主质感。沙和空要同时出现，就写成两个声部或两个段落。不写 `soft vocals`、`powerful vocals`、`emotional vocal`。
 
 ### 乐器：写角色，不写名单
 
@@ -194,11 +220,13 @@ UK garage × deep house：
 
 - 歌词正文、行数、气口和哪个字拉长。这些留在歌词框。
 - 互相冲突的一长串声音形容词。
+- `ethereal vocal`、`bass`、`baritone`、`tenor`、`soft vocals`、`powerful vocals`、`emotional vocal`。音色用「音色词」表里的写法。
 - 生成偏了就继续加长。先删掉不必要的句子，确认最重要的三到五个特征还在。
 
 ## 写完核对
 
 - 七要素都在，而且曲风、情绪、人声在前。
+- 人声的音域和质感来自「音色词」，同一个人没有把沙和空叠在一起。
 - 每件乐器都有角色，不是名单。
 - 主歌、副歌、桥段的疏密不一样。
 - 否定指令不超过三个。

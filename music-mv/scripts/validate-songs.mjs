@@ -93,8 +93,8 @@ for (const entry of entries) {
       }
 
       const duration = Math.round((end - start) * 10) / 10
-      if (duration < 0.5 || duration > 8) {
-        errors.push(`${relativePath}: ${label} 时长为 ${duration} 秒，必须在 0.5–8 秒内`)
+      if (duration < 0.5 || duration > 12) {
+        errors.push(`${relativePath}: ${label} 时长为 ${duration} 秒，必须在 0.5–12 秒内`)
       }
       if (end > songDuration) {
         errors.push(`${relativePath}: ${label} 结束于 ${shot.end}，超过歌曲时长 ${song.metadata.duration}`)

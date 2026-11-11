@@ -135,7 +135,7 @@ non_diegetic_music:
 例：`The camera pans right with small amplitude at slow speed, revealing the tiled roofs along the fields.`
 例：`The camera holds a static shot as the boy runs through and exits.`
 
-6. 生成任务官方建议 350–500 英文词。人脸连续镜、空景单切镜，单段 5–8 秒写 **250–400 词** 即可：构图、环境、光、一个动作（人脸再加一个表情持住）、运镜或一次切、声音。不要为凑字数堆 `cinematic` / `beautiful`。
+6. 生成任务官方建议 350–500 英文词。人脸连续镜、空景单切镜，单段 5–12 秒写 **250–400 词** 即可：构图、环境、光、一个动作（人脸再加一个表情持住）、运镜或一次切、声音。不要为凑字数堆 `cinematic` / `beautiful`。
 7. 主体第一次清楚入画时，用标签复述身份特征；之后只复用 `<Subject 1>`，不要每句重写五官。
 8. 质量约束写具体可见物，不要写抽象情绪词。社区有效短语：
 
@@ -186,7 +186,7 @@ Her gaze holds on the two empty chairs inside the window. Brows stay level, lips
 
 ## 本机成片参数（RTX 3060 12GB）
 
-- 脚本里的单镜时长是剪辑时长，由导演定在 0.5–8 秒，不要为了好生成改成同一种秒数。H3 一次生成的长度可以和剪辑时长不同：短镜头可以生成后再剪到 0.5 秒或 1 秒。
+- 脚本里的单镜时长是剪辑时长，由导演定在 0.5–12 秒，不要为了好生成改成同一种秒数。H3 一次生成的长度可以和剪辑时长不同：短镜头可以生成后再剪到 0.5 秒或 1 秒。
 - 脸重要的镜头：约 0.8–1.0MP。需要先跑通时可以从 4–6 秒试，再按该镜的剪辑时长加长或剪短。横版参考 1216×672 或 1280×720。
 - 冒烟可用 0.5MP，但不要把 0.5MP 4-step 当正式成片。
 - 一次只跑一条 H3。显存不够先减时长，再减分辨率；不要先摘掉参考图。

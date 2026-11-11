@@ -1,5 +1,5 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { confirmSceneReference as persistSceneReference, createLyricLine as persistLyricLine, deleteLyricLine as removeLyricLine, deleteSceneImage as removeSceneImage, deleteUpscaleVideo as removeUpscaleVideo, deleteVoidedShot as removeVoidedShot, fetchWorkspace, saveSongLyrics as persistSongLyrics, saveSongShorts as persistSongShorts, setRawShotStatus as persistRawShotStatus, updateLyricLine as replaceLyricLine } from '@/api/workspace'
+import { confirmSceneReference as persistSceneReference, createLyricLine as persistLyricLine, deleteLyricLine as removeLyricLine, deleteSceneImage as removeSceneImage, deleteUpscaleVideo as removeUpscaleVideo, deleteVlogShot as removeVlogShot, deleteVoidedShot as removeVoidedShot, fetchWorkspace, saveSongLyrics as persistSongLyrics, saveSongShorts as persistSongShorts, setRawShotStatus as persistRawShotStatus, updateLyricLine as replaceLyricLine } from '@/api/workspace'
 import { EMPTY_SONG } from '@/constants/song'
 import { SONG_NAVS } from '@/constants/navigation.js'
 import { WORKSPACE_CHANGED_EVENT } from '@/constants/workspace.js'
@@ -94,6 +94,11 @@ function useWorkspace() {
     await loadWorkspace({ silent: true })
   }
 
+  async function deleteVlogShot(folder, entryId, shotId) {
+    await removeVlogShot(folder, entryId, shotId)
+    await loadWorkspace({ silent: true })
+  }
+
   async function saveSongShorts(folder, shorts) {
     await persistSongShorts(folder, shorts)
     await loadWorkspace({ silent: true })
@@ -157,6 +162,7 @@ function useWorkspace() {
     deleteLyricLine,
     saveSongLyrics,
     saveSongShorts,
+    deleteVlogShot,
     deleteSceneImage,
     deleteVoidedShot,
     setRawShotStatus,
